@@ -1,5 +1,6 @@
 import { readFile } from "fs";
 var request = require('request-promise-native');
+var sha256 = require("sha256");
 import * as decompress from "decompress";
 import { extname } from "path";
 import * as SharpModule from "sharp";
@@ -90,6 +91,8 @@ async function getRepositoryCatalogs() {
 
         packageJson.download =
             downloadUrl;
+
+        packageJson.sha256 = sha256(extensionZipFileData);
 
         repositoryCatalogs.push(packageJson);
     }
