@@ -61,3 +61,5 @@ typings/
 .next
 
 build/*.js
+
+*.eez-project-ui-state
