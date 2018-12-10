@@ -1,0 +1,32 @@
+{
+  "name": "studio-extensions",
+  "version": "0.9.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd build && tsc && node build-catalog.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eez-open/studio-extensions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/eez-open/studio-extensions/issues"
+  },
+  "homepage": "https://github.com/eez-open/studio-extensions#readme",
+  "dependencies": {
+    "@types/archiver": "^2.1.2",
+    "@types/decompress": "^4.2.3",
+    "@types/request": "^2.48.1",
+    "@types/request-promise-native": "^1.0.15",
+    "@types/sharp": "^0.21.0",
+    "archiver": "^3.0.0",
+    "decompress": "^4.2.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5",
+    "sharp": "^0.21.1"
+  }
+}

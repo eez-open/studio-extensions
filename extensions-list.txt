@@ -1,0 +1,26 @@
+# EEZ
+./org/eez/advanced-measurements/advanced-measurements-1.0.0.zip
+./org/eez/advanced-measurements/advanced-measurements-1.1.0.zip
+./org/eez/advanced-measurements/advanced-measurements-1.2.0.zip
+./org/eez/generic_scpi/generic_scpi-1.0.0.zip
+https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_r3b4-1.1.1.zip
+https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_r5b12-1.1.1.zip
+https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_simulator-1.1.1.zip
+
+# RIGOL
+./org/rigol/rigol_ds1000b/rigol_ds1074b-1.0.0.zip
+./org/rigol/rigol_ds1000b/rigol_ds1104b-1.0.0.zip
+./org/rigol/rigol_ds1000b/rigol_ds1204b-1.0.0.zip
+./org/rigol/rigol_ds1000d_e/rigol_ds1052d-1.0.0.zip
+./org/rigol/rigol_ds1000d_e/rigol_ds1052e-1.0.0.zip
+./org/rigol/rigol_ds1000d_e/rigol_ds1102d-1.0.0.zip
+./org/rigol/rigol_ds1000d_e/rigol_ds1102e-1.0.0.zip
+./org/rigol/rigol_ds_mso_1000/rigol_ds1054z-1.0.0.zip
+./org/rigol/rigol_ds_mso_1000/rigol_ds1074z-1.0.0.zip
+./org/rigol/rigol_ds_mso_1000/rigol_ds1074zs-1.0.0.zip
+./org/rigol/rigol_ds_mso_1000/rigol_ds1104z-1.0.0.zip
+./org/rigol/rigol_ds_mso_1000/rigol_ds1104zs-1.0.0.zip
+./org/rigol/rigol_ds_mso_1000/rigol_mso1074z-1.0.0.zip
+./org/rigol/rigol_ds_mso_1000/rigol_mso1074zs-1.0.0.zip
+./org/rigol/rigol_ds_mso_1000/rigol_mso1104z-1.0.0.zip
+./org/rigol/rigol_ds_mso_1000/rigol_mso1104zs-1.0.0.zip

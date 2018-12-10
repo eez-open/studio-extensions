@@ -1,0 +1,18 @@
+{
+  "viewOptions": {
+    "navigationVisible": true,
+    "outputVisible": true,
+    "propertiesVisible": true,
+    "debugVisible": false
+  },
+  "navigationMap": {
+    "/settings": {},
+    "/": "/extensionDefinitions",
+    "/extensionDefinitions": "/extensionDefinitions/2"
+  },
+  "editors": [],
+  "selectedBuildConfiguration": "Default",
+  "splitters": {},
+  "features": {},
+  "objects": {}
+}
