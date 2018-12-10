@@ -1,24 +1,9 @@
-import { readFile } from "fs";
+import { readFile, writeFile } from "fs";
 var request = require('request-promise-native');
 var sha256 = require("sha256");
 import * as decompress from "decompress";
 import { extname } from "path";
 import * as SharpModule from "sharp";
-
-// const EXTENSION_REPOSITORIES = [
-//     {
-//         local: __dirname + "/../extensions",
-//         remote: "https://github.com/eez-open/studio/raw/master/extensions"
-//     },
-//     {
-//         local: __dirname + "/../instruments",
-//         remote: "https://github.com/eez-open/studio/raw/master/instruments"
-//     },
-//     {
-//         local: __dirname + "/../../psu-firmware/build/extensions",
-//         remote: "https://github.com/eez-open/psu-firmware/raw/stm32/build/extensions"
-//     }
-// ];
 
 async function getExtensionsList() {
     return new Promise<string[]>((resolve, reject) => {
@@ -34,13 +19,26 @@ async function getExtensionsList() {
     });
 }
 
+async function getExtensionHashes() {
+    return new Promise<any>((resolve, reject) => {
+        readFile(__dirname + "/extension-hashes.json", "utf8", (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(JSON.parse(data));
+            }
+        });
+    });
+}
+
 async function getRepositoryCatalogs() {
     const extensions = await getExtensionsList();
+    const extensionHashes = await getExtensionHashes();
 
     const repositoryCatalogs = [];
 
     for (const extension of extensions) {
-        let downloadUrl;
+        let downloadUrl: string;
         let extensionZipFileData;
         if (extension.startsWith('.')) {
             // local
@@ -92,10 +90,29 @@ async function getRepositoryCatalogs() {
         packageJson.download =
             downloadUrl;
 
-        packageJson.sha256 = sha256(extensionZipFileData);
+        let extensionHash = extensionHashes.find((extensionHash: any) => extensionHash.downloadUrl === downloadUrl);
+        if (!extensionHash) {
+            console.log("New SHA256 hash generated for download url: ", downloadUrl);
+            extensionHash = {
+                downloadUrl,
+                sha256: sha256(extensionZipFileData)
+            };
+            extensionHashes.push(extensionHash);
+        }
+        packageJson.sha256 = extensionHash.sha256;
 
         repositoryCatalogs.push(packageJson);
     }
+
+    await new Promise((resolve, reject) => {
+        writeFile(__dirname + "/extension-hashes.json", JSON.stringify(extensionHashes, undefined, 4), "utf8", err => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
 
     return repositoryCatalogs;
 }
