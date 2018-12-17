@@ -1,6 +1,4 @@
-import { IExtensionDefinition } from "eez-studio-shared/extensions/extension";
-
-const extension: IExtensionDefinition = {
+const extension: any = {
     measurementFunctions: [
         {
             id: "rms",

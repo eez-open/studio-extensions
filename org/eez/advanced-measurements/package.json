@@ -8,5 +8,8 @@
     "image": "image.png",
     "eez-studio": {
         "main": "advanced-measurements-extension.js"
+    },
+    "scripts": {
+        "build": "cd src && tsc"
     }
 }

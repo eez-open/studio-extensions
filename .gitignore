@@ -63,3 +63,5 @@ typings/
 build/*.js
 
 *.eez-project-ui-state
+
+org/eez/advanced-measurements/*.js

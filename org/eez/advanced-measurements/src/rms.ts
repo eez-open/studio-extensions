@@ -1,4 +1,4 @@
-import { IMeasureTask } from "eez-studio-shared/extensions/extension";
+import { IMeasureTask } from "./task";
 
 export default function(task: IMeasureTask) {
     let sum = 0;
