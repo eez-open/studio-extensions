@@ -90,5 +90,17 @@
     {
         "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1104zs-1.0.0.zip",
         "sha256": "e98c077f71a206574cc772712ca7e0602c1c62beb6a78503257d385251d89586"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_r3b4-1.1.2.zip",
+        "sha256": "cb0cb079c169fc21e8c7c9b8c4509f370f81192ea0ded187238ca9c6db3f3dcc"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_r5b12-1.1.2.zip",
+        "sha256": "71c458c5bc0e957165a6bf65f905a639715631826383fe01f690da65184cd5f6"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_simulator-1.1.2.zip",
+        "sha256": "ce623739af48b08ad2b6431487c207f06bc439e41b90c990ddd2be973e8f681a"
     }
 ]
