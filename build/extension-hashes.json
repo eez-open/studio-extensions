@@ -102,5 +102,53 @@
     {
         "downloadUrl": "https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_simulator-1.1.2.zip",
         "sha256": "ce623739af48b08ad2b6431487c207f06bc439e41b90c990ddd2be973e8f681a"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000b/rigol_ds1074b-1.0.1.zip",
+        "sha256": "9c106b795a9051a2251392e4a9d9dfc950ddd2b8b1984e58917d77d4c2aa6da9"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000b/rigol_ds1104b-1.0.1.zip",
+        "sha256": "b4be7a0452602ffad0954975c3fe2c16439abc461091c799aa54dd98dfc5765a"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000b/rigol_ds1204b-1.0.1.zip",
+        "sha256": "5469be4886045f6d7d112dbf35deab4231d7080229f18b260b26e08e554ffb31"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1054z-1.0.1.zip",
+        "sha256": "995c1e10142c86aadf3acfb51aef5ea5cf4693b5c901903b3456783817119b57"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1074z-1.0.1.zip",
+        "sha256": "feeb4e1ad41ba46b53ba2a41c0627948062e22ba8cabd50fd231003288ac2855"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1074zs-1.0.1.zip",
+        "sha256": "778d71227c8fb2bfdda13f6814a39b474c55cbd84b3fe36677760372c5f5ff3d"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1104z-1.0.1.zip",
+        "sha256": "921a46c04a963fcad02a0ef5e54b9ce83b903af6765edc63a7820809a66d5f5d"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1104zs-1.0.1.zip",
+        "sha256": "97dbfac6ecbbf0edecc5db9aab25ce92820717b4e015aae2b3f5ee5d98c14338"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1074z-1.0.1.zip",
+        "sha256": "79b255d95569d7f1761265595c8c9d65f2ac2d251ebf27930cb11b44922ba7fb"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1074zs-1.0.1.zip",
+        "sha256": "27735d3c5d7b32e34fb8180c0b5c98dfb07092e06fa98f877469124d52df63d2"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1104z-1.0.1.zip",
+        "sha256": "b7e0fc4350ea86be83a6d1d568ca667bebabe9e853cc7c5a6ebf232c05af66cd"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1104zs-1.0.1.zip",
+        "sha256": "cdbd02b1a6a725cfd41360694f8971a7a730c245b601e42b752b381bd3536ad1"
     }
 ]

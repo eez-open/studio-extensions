@@ -65,3 +65,8 @@ build/*.js
 *.eez-project-ui-state
 
 org/eez/advanced-measurements/*.js
+
+# Openoffice temp files
+
+*/.~lock.*
+

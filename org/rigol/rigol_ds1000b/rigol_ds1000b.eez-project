@@ -28,7 +28,7 @@
       "idfShortName": "DS1074B",
       "idfFirmwareVersion": "(unknown)",
       "idfGuid": "71303c17-99a9-4107-f086-a8c6f4b66a29",
-      "idfRevisionNumber": "1.0.0",
+      "idfRevisionNumber": "1.0.1",
       "idfDescription": "70 MHz Digital Oscilloscope",
       "idfSupportedModels": "DS1074B",
       "idfRevisionComments": "No comment",
@@ -46,7 +46,7 @@
       "idfShortName": "DS1104B",
       "idfFirmwareVersion": "(unknown)",
       "idfGuid": "3438aeba-103a-49aa-aa5d-d36e66872423",
-      "idfRevisionNumber": "1.0.0",
+      "idfRevisionNumber": "1.0.1",
       "idfDescription": "100 MHz Digital Oscilloscope",
       "idfSupportedModels": "DS1104B",
       "idfRevisionComments": "No comment",
@@ -64,7 +64,7 @@
       "idfShortName": "DS1204B",
       "idfFirmwareVersion": "(unknown)",
       "idfGuid": "96bb98ad-7545-4d76-96db-28c61869d5c6",
-      "idfRevisionNumber": "1.0.0",
+      "idfRevisionNumber": "1.0.1",
       "idfDescription": "200 MHz Digital Oscilloscope",
       "idfSupportedModels": "DS1204B",
       "idfRevisionComments": "No comment",
@@ -80,131 +80,33 @@
         "commands": [
           {
             "name": "*IDN?",
-            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_idn"
+            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_idn",
+            "parameters": [],
+            "response": {
+              "type": "quoted-string"
+            }
           },
           {
             "name": "*OPC?",
-            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_opc"
+            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_opc",
+            "parameters": [],
+            "response": {
+              "type": "boolean"
+            }
           },
           {
             "name": "*RST",
-            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_rst"
+            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_rst",
+            "parameters": [],
+            "response": {}
           },
           {
-            "name": "*SRE?",
-            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_lrn"
-          }
-        ]
-      },
-      {
-        "name": "ACQuire Commands",
-        "helpLink": "3 - Rigol-DS1000B-ACQuire.html",
-        "commands": [
-          {
-            "name": ":ACQuire:AVERages",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_aver"
-          },
-          {
-            "name": ":ACQuire:AVERages?",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_aver2"
-          },
-          {
-            "name": ":ACQuire:MODE",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_mode"
-          },
-          {
-            "name": ":ACQuire:MODE?",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_mode2"
-          },
-          {
-            "name": ":ACQuire:SRATe?[{<CHANnel<n>}]",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_srat"
-          },
-          {
-            "name": ":ACQuire:TYPE",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_type"
-          },
-          {
-            "name": ":ACQuire:TYPE?",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_type2"
-          }
-        ]
-      },
-      {
-        "name": "DISPlay Commands",
-        "helpLink": "4 - Rigol-DS1000B-DISPlay.html",
-        "commands": [
-          {
-            "name": ":DISPlay:BRIGhtness",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_brig"
-          },
-          {
-            "name": ":DISPlay:BRIGhtness?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_brig2"
-          },
-          {
-            "name": ":DISPlay:CLEar",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_cle"
-          },
-          {
-            "name": ":DISPlay:DATA?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_data"
-          },
-          {
-            "name": ":DISPlay:GRID",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_grid"
-          },
-          {
-            "name": ":DISPlay:GRID?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_grid2"
-          },
-          {
-            "name": ":DISPlay:INTensity",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_int"
-          },
-          {
-            "name": ":DISPlay:INTensity?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_int2"
-          },
-          {
-            "name": ":DISPlay:MNUDisplay",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnud"
-          },
-          {
-            "name": ":DISPlay:MNUDisplay?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnud2"
-          },
-          {
-            "name": ":DISPlay:MNUStatus",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnus"
-          },
-          {
-            "name": ":DISPlay:MNUStatus?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnus2"
-          },
-          {
-            "name": ":DISPlay:PERSist",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_pers"
-          },
-          {
-            "name": ":DISPlay:PERSist?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_pers2"
-          },
-          {
-            "name": ":DISPlay:SCReen",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_scr"
-          },
-          {
-            "name": ":DISPlay:SCReen?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_scr2"
-          },
-          {
-            "name": ":DISPlay:TYPE",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_type"
-          },
-          {
-            "name": ":DISPlay:TYPE?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_type2"
+            "name": "*LRN?",
+            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_lrn",
+            "parameters": [],
+            "response": {
+              "type": "quoted-string"
+            }
           }
         ]
       },
@@ -214,31 +116,308 @@
         "commands": [
           {
             "name": ":AUTO",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_auto"
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_auto",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": ":RUN",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_run"
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_run",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": ":STOP",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_stop"
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_stop",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": ":SYSTem:ERRor",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_err"
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_err",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": ":SYSTem:ERRor?",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_err"
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_err",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": ":SYSTem:SETup",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_set"
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_set",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": ":SYSTem:SETup?",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_set"
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_set",
+            "parameters": [],
+            "response": {
+              "type": "data-block"
+            }
+          }
+        ]
+      },
+      {
+        "name": "ACQuire Commands",
+        "helpLink": "3 - Rigol-DS1000B-ACQuire.html",
+        "commands": [
+          {
+            "name": ":ACQuire:AVERages",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_aver",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":ACQuire:AVERages?",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_aver2",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
+          },
+          {
+            "name": ":ACQuire:MODE",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_mode",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":ACQuire:MODE?",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_mode2",
+            "parameters": [],
+            "response": {
+              "type": "discrete",
+              "enumeration": "acq_mode"
+            }
+          },
+          {
+            "name": ":ACQuire:SRATe?[{<CHANnel<n>}]",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_srat",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":ACQuire:TYPE",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_type",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":ACQuire:TYPE?",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_type2",
+            "parameters": [],
+            "response": {
+              "type": "discrete",
+              "enumeration": "acq_type"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DISPlay Commands",
+        "helpLink": "4 - Rigol-DS1000B-DISPlay.html",
+        "commands": [
+          {
+            "name": ":DISPlay:BRIGhtness",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_brig",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":DISPlay:BRIGhtness?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_brig2",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
+          },
+          {
+            "name": ":DISPlay:CLEar",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_cle",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":DISPlay:DATA?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_data",
+            "parameters": [],
+            "response": {
+              "type": "data-block"
+            }
+          },
+          {
+            "name": ":DISPlay:GRID",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_grid",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":DISPlay:GRID?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_grid2",
+            "parameters": [],
+            "response": {
+              "type": "discrete",
+              "enumeration": "disp_grid"
+            }
+          },
+          {
+            "name": ":DISPlay:INTensity",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_int",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":DISPlay:INTensity?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_int2",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
+          },
+          {
+            "name": ":DISPlay:MNUDisplay",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnud",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":DISPlay:MNUDisplay?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnud2",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
+          },
+          {
+            "name": ":DISPlay:MNUStatus",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnus",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":DISPlay:MNUStatus?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnus2",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
+          },
+          {
+            "name": ":DISPlay:PERSist",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_pers",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":DISPlay:PERSist?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_pers2",
+            "parameters": [],
+            "response": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": ":DISPlay:SCReen",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_scr",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":DISPlay:SCReen?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_scr2",
+            "parameters": [],
+            "response": {
+              "type": "discrete",
+              "enumeration": "disp_scr"
+            }
+          },
+          {
+            "name": ":DISPlay:TYPE",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_type",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":DISPlay:TYPE?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_type2",
+            "parameters": [],
+            "response": {
+              "type": "discrete",
+              "enumeration": "disp_type"
+            }
+          }
+        ]
+      }
+    ],
+    "enums": [
+      {
+        "name": "acq_mode",
+        "members": [
+          {
+            "name": "RTIM",
+            "value": ""
+          },
+          {
+            "name": "ETIM",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "name": "acq_type",
+        "members": [
+          {
+            "name": "NORM",
+            "value": ""
+          },
+          {
+            "name": "AVER",
+            "value": ""
+          },
+          {
+            "name": "PEAK",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "name": "disp_grid",
+        "members": [
+          {
+            "name": "NONE"
+          },
+          {
+            "name": "HALF"
+          },
+          {
+            "name": "FULL"
+          }
+        ]
+      },
+      {
+        "name": "disp_scr",
+        "members": [
+          {
+            "name": "NORM"
+          },
+          {
+            "name": "INV"
+          }
+        ]
+      },
+      {
+        "name": "disp_type",
+        "members": [
+          {
+            "name": "DOTS"
+          },
+          {
+            "name": "VECT"
           }
         ]
       }

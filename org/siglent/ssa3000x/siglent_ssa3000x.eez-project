@@ -1,0 +1,345 @@
+{
+  "settings": {
+    "general": {
+      "scpiDocFolder": "doc"
+    },
+    "build": {
+      "configurations": [
+        {
+          "name": "SSA3000X",
+          "description": "SSA3000X series spectrum analyzer has a frequency range from 9 kHz up to 3.2 GHz, it is light\nweight and small size, with an user friendly interface, concise style of display, reliable measurement\nprecision and plenty of RF measurement functions. Applicable to research and development, education,\nproduction, maintenance and other related fields, that meets a wider range of application requirements."
+        }
+      ],
+      "files": [],
+      "destinationFolder": "."
+    }
+  },
+  "extensionDefinitions": [
+    {
+      "name": "SSA3031X",
+      "description": "The Siglent SSA3021X is a compact and light weight Spectrum Analyzer with premium performance for portable applications. The use of digital IF (intermediate frequency) technology guarantees reliability and performance to meet the most demanding RF applications.\n\nThe very large display (25.65 cm / 10.1\") of the Siglent SSA3021X Spectrum Analyzer provides a resolution of 1024x600 pixels allowing a very good overview of all its comfortable functions like measurements, marker and peak table, auto tune and coupling. These functions enable the analyzer to acquire signals and match parameters automatically, compared to the manual process necessary with a traditional analyzer.\n\nThe Siglent Spectrum Analyzers have a sophisticated and easy to use user interface offering multiple functions for all tasks. The menu navigation is very intuitive and all functions and parameters are easy to locate thanks to the graphical interface.",
+      "buildConfiguration": "SSA3000X",
+      "image": "ssa3021x.jpg",
+      "extensionName": "siglent_ssa3031x",
+      "idn": "Siglent Technologies,SSA3031X",
+      "idfName": "Siglent SSA3031X",
+      "idfShortName": "SSA3031X",
+      "idfFirmwareVersion": "(unknown)",
+      "idfGuid": "845dca00-af2b-4ed8-d535-fe8f2192b108",
+      "idfRevisionNumber": "0",
+      "idfDescription": "Spectrum analyzer from 9 kHz to 2.1 GHz",
+      "idfSupportedModels": "SSA3031X",
+      "idfRevisionComments": "No comment",
+      "idfAuthor": "Envox",
+      "sdlFriendlyName": "SIGLENT SSA3031X"
+    },
+    {
+      "name": "SSA3032X",
+      "description": "The Siglent SSA3032X is a compact and light weight Spectrum Analyzer with premium performance for portable applications. The use of digital IF (intermediate frequency) technology guarantees reliability and performance to meet the most demanding RF applications.\n\nThe very large display (25.65 cm / 10.1\") of the Siglent SSA3032X Spectrum Analyzer provides a resolution of 1024x600 pixels allowing a very good overview of all its comfortable functions like measurements, marker and peak table, auto tune and coupling. These functions enable the analyzer to acquire signals and match parameters automatically, compared to the manual process necessary with a traditional analyzer.\n\nThe Siglent Spectrum Analyzers have a sophisticated and easy to use user interface offering multiple functions for all tasks. The menu navigation is very intuitive and all functions and parameters are easy to locate thanks to the graphical interface.",
+      "buildConfiguration": "SSA3000X",
+      "image": "ssa3022x.png",
+      "extensionName": "siglent_ssa3032x",
+      "idn": "Siglent Technologies,SSA3032X",
+      "idfName": "Siglent SSA3032X",
+      "idfShortName": "SSA3032X",
+      "idfFirmwareVersion": "1.2.9.1",
+      "idfGuid": "59fad881-ba8b-4565-b2e4-ea672ff833a7",
+      "idfRevisionNumber": "0",
+      "idfDescription": "Spectrum analyzer from 9 kHz to 2.1 GHz",
+      "idfSupportedModels": "SSA3032X",
+      "idfRevisionComments": "No comment",
+      "idfAuthor": "Envox",
+      "sdlFriendlyName": "SIGLENT SSA3032X"
+    }
+  ],
+  "scpi": {
+    "subsystems": [
+      {
+        "name": "IEEE Common Commands",
+        "helpLink": "01-SSA3000X Common commands.html",
+        "commands": [
+          {
+            "name": "*CLS",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_CLS",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*ESE",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_ESE",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*ESE?",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_ESE2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*ESR?",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_ESR",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*IDN?",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_IDN",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*OPC",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_OPC",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*OPC?",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_OPC2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*RST",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_RST",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*SRE",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_SRE",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*SRE?",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_SRE2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*STB",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_STB",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": "*WAI",
+            "helpLink": "01-SSA3000X Common commands.html#_scpi_WAI",
+            "parameters": [],
+            "response": {}
+          }
+        ]
+      },
+      {
+        "name": "System Subsystem",
+        "helpLink": "02-SSA3000X System commands.html",
+        "commands": [
+          {
+            "name": ":HCOPy:SDUMp:DATA?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_HCOP_SDUM",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:COMMunicate:LAN:GATeway",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_GAT",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:COMMunicate:LAN:GATeway?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_GAT2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:COMMunicate:LAN:IPADdress",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_IPAD",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:COMMunicate:LAN:IPADdress?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_IPAD2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:COMMunicate:LAN:SMASk",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_SMAS",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:COMMunicate:LAN:SMASk?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_SMAS2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:COMMunicate:LAN:TYPE",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_TYPE",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:COMMunicate:LAN:TYPE?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_TYPE2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:CONFigure:SYSTem?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_CON",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:DATE",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_DATE",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:DATE?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_DATE2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:FDEFault",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_FDEF",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:LANGuage",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_LANG",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:LKEY",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_LKEY",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:OPTions?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_OPT",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:PON:TYPE",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_PON",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:PON:TYPE?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_PON2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:PRESet",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_PRES",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:PRESet:TYPE",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_PRES_TYPE",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:PRESet:TYPE?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_PRES_TYPE2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:RESTart",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_REST",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:TIME",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_TIME",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":SYSTem:TIME?",
+            "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_TIME2",
+            "parameters": [],
+            "response": {}
+          }
+        ]
+      },
+      {
+        "name": "Instrument Subsystem",
+        "helpLink": "03-SSA3000X Instrument Subsystem.html",
+        "commands": [
+          {
+            "name": ":INSTrument:MEASure",
+            "helpLink": "03-SSA3000X Instrument Subsystem.html#_scpi_INST_MEA",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":INSTrument:MEASure?",
+            "helpLink": "03-SSA3000X Instrument Subsystem.html#_scpi_INST_MEA2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":INSTrument[:SELect]",
+            "helpLink": "03-SSA3000X Instrument Subsystem.html#_scpi_INST_SEL",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":INSTrument[:SELect]?",
+            "helpLink": "03-SSA3000X Instrument Subsystem.html#_scpi_INST_SEL2",
+            "parameters": [],
+            "response": {}
+          }
+        ]
+      },
+      {
+        "name": "Initiate Subsystem",
+        "helpLink": "04-SSA3000X Initiate Subsystem.html",
+        "commands": [
+          {
+            "name": ":INITiate:CONTinuous",
+            "helpLink": "04-SSA3000X Initiate Subsystem.html#_scpi_INIT_CON",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":INITiate:CONTinuous?",
+            "helpLink": "04-SSA3000X Initiate Subsystem.html#_scpi_INIT_CON2",
+            "parameters": [],
+            "response": {}
+          },
+          {
+            "name": ":INITiate[:IMMediate]",
+            "helpLink": "04-SSA3000X Initiate Subsystem.html#_scpi_INIT_IMM",
+            "parameters": [],
+            "response": {}
+          }
+        ]
+      }
+    ],
+    "enums": []
+  },
+  "shortcuts": {
+    "shortcuts": []
+  }
+}

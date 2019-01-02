@@ -1,0 +1,78 @@
+<!-- First, specify sybsystem name -->
+
+...
+<p><a name="_scpi_subsys_name_of_subsystem>"></a>:DISPlay Commands </p>
+...
+
+
+<!-- Than, specify any number of commands and queries -->
+
+...
+
+<!-- 1st command and query -->
+<table>
+    ...
+    <tr>
+        ...
+        <td>
+            <p><a name="_scpi_disp_type"></a>:DISPlay:TYPE &lt;param1&gt;, &lt;param2&gt;</p>
+            <p><a name="_scpi_disp_type_q>"></a>:DISPlay:TYPE? </p>
+        </td>
+        ...
+    </tr>
+    ...
+    <tr>
+        ...
+        <!-- param1 specification -->
+        <td>
+            <p>&lt;param1&gt; </p>
+        </td>
+        <td>
+            <p>Integer</p>
+        </td>
+        ...
+        <!-- param2 specification -->
+        <td>
+            <p>&lt;param2&gt; </p>
+        </td>
+        <td>
+            <p>Discrete</p>
+        </td>
+        <td>
+            <p>Option1|Option2|Option3</p>
+        </td>
+        ...
+    </tr>
+    ...
+</table>
+
+...
+<!-- 2nd command (this time only command, no query) -->
+<table>
+    ...
+
+    <tr>
+        ...
+        <td>
+            <p><a name="_scpi_syst_time"></a>:SYSTem:TIME &lt;param1&gt;</p>
+        </td>
+        ...
+    </tr>
+
+    ...
+
+    <tr>
+        ...
+        <td>
+            <p class="Normal" style="margin-bottom: 0; text-indent: 0;">&lt;param1&gt; </p>
+        </td>
+        <td>
+            <p class="Normal" style="margin-bottom: 0; text-indent: 0;">Boolean</p>
+        </td>
+        ...
+    </tr>
+
+    ...
+
+</table>
+...
