@@ -11731,7 +11731,8 @@
         "showInToolbar": true,
         "toolbarButtonPosition": 2,
         "toolbarButtonColor": "#7BC3D4",
-        "requiresConfirmation": true
+        "requiresConfirmation": true,
+        "selected": false
       },
       {
         "id": "5c0286bf-de91-4953-92db-9ceb46fc5b08",
@@ -11744,7 +11745,8 @@
         "showInToolbar": true,
         "toolbarButtonPosition": 1,
         "toolbarButtonColor": "#7BC3D4",
-        "requiresConfirmation": false
+        "requiresConfirmation": false,
+        "selected": true
       },
       {
         "id": "a8bf8f4a-dc9d-4672-d6a9-40615e68102a",
@@ -11771,6 +11773,24 @@
         "toolbarButtonPosition": 4,
         "toolbarButtonColor": "#E665A0",
         "requiresConfirmation": false
+      },
+      {
+        "id": "bb605756-bf43-44ec-dea0-50db9eba195f",
+        "name": "MSO test",
+        "usedIn": [
+          "MSO1000Z",
+          "MSO1000Z-S"
+        ],
+        "action": {
+          "type": "scpi-commands",
+          "data": "*TST?"
+        },
+        "keybinding": "f9",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 1,
+        "toolbarButtonColor": "#EE8C3E",
+        "requiresConfirmation": false,
+        "selected": false
       }
     ]
   }

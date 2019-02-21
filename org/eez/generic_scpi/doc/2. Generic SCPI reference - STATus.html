@@ -34,7 +34,7 @@
 		</style>
 	</head>
 	<body>
-		<p class="Heading_2"><a name="_status"></a>STATus </p>
+		<p class="Heading_2"><a name="_scpi_subsys_status"></a>STATus </p>
 		<p class="Heading_3"><a name="stat_oper"></a>STATus:OPERation[:EVENt]?</p>
 		<table style="border-collapse: collapse; background: transparent; width: 169.92mm;">
 			<tr style="background: transparent;">
@@ -42,7 +42,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:OPERation[:EVENt]?</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_even"></a>STATus:OPERation[:EVENt]?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -58,7 +58,7 @@
 					<p>Return</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p>The value returned is the binary-weighted sum of all bits set in the register. For example, if bit 9 (decimal value = 512) and bit 13 (decimal value = 8192) are set, this command will return 8704. </p>
+					<p>The value returned is the binary-weighted sum of all bits set in the register. For example, if bit 9 (decimal value = 512) and bit 13 (decimal value = 8192) are set, this command will return 8704.</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -88,7 +88,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:OPERation:CONDition?</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_cond"></a>STATus:OPERation:CONDition?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -132,8 +132,8 @@
 					<p>Syntax</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:OPERation:ENABle {&lt;value&gt;}</p>
-					<p class="cmd_root">STATus:OPERation:ENABle?</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_enab"></a>STATus:OPERation:ENABle {&lt;value&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_enab2"></a>STATus:OPERation:ENABle?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -174,13 +174,13 @@
 					<p>&lt;value&gt;</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">Numeric</p>
+					<p style="text-align: center;">NR1</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
 					<p style="text-align: left;">A decimal value which corresponds to the binary-weighted sum of the bits in the register.</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">PREset=0</p>
+					<p style="text-align: center;">0</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -210,7 +210,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:OPERation:INSTrument[:EVENt]?</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_inst_cond"></a><a name="_scpi_stat_oper_inst_even"></a>STATus:OPERation:INSTrument[:EVENt]?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -301,8 +301,8 @@
 					<p>Syntax</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:OPERation:INSTrument:ENABle {&lt;value&gt;}</p>
-					<p class="cmd_root">STATus:OPERation:INSTrument:ENABle?</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_inst_enab"></a>STATus:OPERation:INSTrument:ENABle {&lt;value&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_inst_enab2"></a>STATus:OPERation:INSTrument:ENABle?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -343,7 +343,7 @@
 					<p>&lt;value&gt;</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">Numeric</p>
+					<p style="text-align: center;">NR1</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
 					<p style="text-align: left;">A decimal value which corresponds to the binary-weighted sum of the bits in the register.</p>
@@ -377,7 +377,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:OPERation:INSTrument:ISUMmary[&lt;n&gt;][:EVENt]?</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_inst_isum_even"></a>STATus:OPERation:INSTrument:ISUMmary[&lt;n&gt;][:EVENt]?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -422,7 +422,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:OPERation:INSTrument:ISUMmary[&lt;n&gt;]:CONDition?</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_inst_isum_cond"></a>STATus:OPERation:INSTrument:ISUMmary[&lt;n&gt;]:CONDition?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -459,8 +459,8 @@
 					<p>Syntax</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:OPERation:INSTrument:ISUMmary[&lt;n&gt;]:ENABle {&lt;value&gt;}</p>
-					<p class="cmd_root">STATus:OPERation:INSTrument:ISUMmary[&lt;n&gt;]:ENABle?</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_inst_isum_enab"></a>STATus:OPERation:INSTrument:ISUMmary[&lt;n&gt;]:ENABle {&lt;value&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_stat_oper_inst_isum_enab2"></a>STATus:OPERation:INSTrument:ISUMmary[&lt;n&gt;]:ENABle?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -503,13 +503,13 @@
 					<p>&lt;value&gt;</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">Numeric</p>
+					<p style="text-align: center;">NR1</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
 					<p style="text-align: left;">A decimal value which corresponds to the binary-weighted sum of the bits in the register.</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">PREset=0</p>
+					<p style="text-align: center;">0</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -539,7 +539,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:PREset</p>
+					<p class="cmd_root"><a name="_scpi_stat_pre"></a>STATus:PREset</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -582,7 +582,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:QUEStionable[:EVENt]? </p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_even"></a>STATus:QUEStionable[:EVENt]? </p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -626,7 +626,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:QUEStionable:CONDition? </p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_cond"></a>STATus:QUEStionable:CONDition? </p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -662,8 +662,8 @@
 					<p>Syntax</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:QUEStionable:ENABle {&lt;value&gt;}</p>
-					<p class="cmd_root">STATus:QUEStionable:ENABle? </p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_enab"></a>STATus:QUEStionable:ENABle {&lt;value&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_enab2"></a>STATus:QUEStionable:ENABle? </p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -705,13 +705,13 @@
 					<p>&lt;value&gt;</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">Numeric</p>
+					<p style="text-align: center;">NR1</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
 					<p style="text-align: left;">A decimal value which corresponds to the binary-weighted sum of the bits in the register.</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">PREset=0</p>
+					<p style="text-align: center;">0</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -741,7 +741,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:QUEStionable:INSTrument[:EVENt]? </p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_inst_even"></a>STATus:QUEStionable:INSTrument[:EVENt]? </p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -786,7 +786,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:QUEStionable:INSTrument:CONDition? </p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_inst_cond"></a>STATus:QUEStionable:INSTrument:CONDition? </p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -823,8 +823,8 @@
 					<p>Syntax</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:QUEStionable:INSTrument:ENABle {&lt;value&gt;}</p>
-					<p class="cmd_root">STATus:QUEStionable:INSTrument:ENABle?</p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_inst_enab"></a>STATus:QUEStionable:INSTrument:ENABle {&lt;value&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_inst_enab2"></a>STATus:QUEStionable:INSTrument:ENABle?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -865,13 +865,13 @@
 					<p>&lt;value&gt;</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">Numeric</p>
+					<p style="text-align: center;">NR1</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
 					<p style="text-align: left;">A decimal value which corresponds to the binary-weighted sum of the bits in the register</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">PREset=0</p>
+					<p style="text-align: center;">0</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -899,7 +899,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:QUEStionable:INSTrument:ISUMmary[&lt;n&gt;][:EVENt]?</p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_inst_isum_even"></a>STATus:QUEStionable:INSTrument:ISUMmary[&lt;n&gt;][:EVENt]?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -943,7 +943,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:QUEStionable:INSTrument:ISUMmary[&lt;n&gt;]:CONDition?</p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_inst_isum_cond"></a>STATus:QUEStionable:INSTrument:ISUMmary[&lt;n&gt;]:CONDition?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -979,8 +979,8 @@
 					<p>Syntax</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 87%;">
-					<p class="cmd_root">STATus:QUEStionable:INSTrument:ISUMmary[&lt;n&gt;]:ENABle {&lt;value&gt;}</p>
-					<p class="cmd_root">STATus:QUEStionable:INSTrument:ISUMmary[&lt;n&gt;]:ENABle?</p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_inst_isum_enab"></a>STATus:QUEStionable:INSTrument:ISUMmary[&lt;n&gt;]:ENABle {&lt;value&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_stat_ques_inst_isum_enab2"></a>STATus:QUEStionable:INSTrument:ISUMmary[&lt;n&gt;]:ENABle?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -1023,13 +1023,13 @@
 					<p>&lt;value&gt;</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">Numeric</p>
+					<p style="text-align: center;">NR1</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
 					<p style="text-align: left;">A decimal value which corresponds to the binary-weighted sum of the bits in the register </p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 22%;">
-					<p style="text-align: center;">PREset=0</p>
+					<p style="text-align: center;">0</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">

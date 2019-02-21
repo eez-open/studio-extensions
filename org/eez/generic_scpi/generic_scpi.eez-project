@@ -21,14 +21,14 @@
       "description": "An example instrument with serial and Ethernet connection",
       "buildConfiguration": "Generic SCPI instrument",
       "buildFolder": "",
-      "image": "image.png",
+      "image": "doc/images/generic_scpi.png",
       "extensionName": "generic_scpi",
       "idn": "\"SCPI\"",
       "idfName": "Generic SCPI",
       "idfShortName": "Generic SCPI",
       "idfFirmwareVersion": "1.0",
       "idfGuid": "12ef0990-36b6-4282-8048-ddb88039f7e9",
-      "idfRevisionNumber": "1.0.0",
+      "idfRevisionNumber": "1.0.1",
       "idfDescription": "Generic SCPI instrument",
       "idfSupportedModels": "Any",
       "idfRevisionComments": "No comment",
@@ -44,67 +44,153 @@
         "commands": [
           {
             "name": "*CLS",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#cls"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#cls",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": "*ESE",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#ese"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#ese",
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "*ESE?",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#ese"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#ese",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "*ESR?",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#esr"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#esr",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "*IDN?",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#idn"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#idn",
+            "parameters": [],
+            "response": {
+              "type": "quoted-string"
+            }
           },
           {
             "name": "*OPC",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#opc"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#opc",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": "*OPC?",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#opc"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#opc",
+            "parameters": [],
+            "response": {
+              "type": "boolean"
+            }
           },
           {
             "name": "*RCL",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#rcl"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#rcl",
+            "parameters": [
+              {
+                "name": "profile",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "*RST",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#rst"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#rst",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": "*SAV",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#sav"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#sav",
+            "parameters": [
+              {
+                "name": "profile",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "*SRE",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#sre"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#sre",
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "*SRE?",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#sre"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#sre",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "*STB?",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#stb"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#stb",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "*TRG",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#trg"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#trg",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": "*TST?",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#tst"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#tst",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "*WAI",
-            "helpLink": "1. Generic SCPI reference - common comand reference.html#wai"
+            "helpLink": "1. Generic SCPI reference - common comand reference.html#wai",
+            "parameters": [],
+            "response": {}
           }
         ]
       },
@@ -114,103 +200,241 @@
         "commands": [
           {
             "name": "STATus:OPERation:CONDition?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_cond"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_cond",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:OPERation:ENABle",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_enab",
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "STATus:OPERation:ENABle?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_enab"
-          },
-          {
-            "name": "STATus:OPERation:INSTrument:CONDition?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_cond"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_enab",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:OPERation:INSTrument:ENABle",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_enab",
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "STATus:OPERation:INSTrument:ENABle?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_enab",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:OPERation:INSTrument:ISUMmary[<n>]:CONDition?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum_cond"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum_cond",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:OPERation:INSTrument:ISUMmary[<n>]:ENABle",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum_enab",
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "STATus:OPERation:INSTrument:ISUMmary[<n>]:ENABle?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum_enab",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:OPERation:INSTrument:ISUMmary[<n>][:EVENt]?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:OPERation:INSTrument[:EVENt]?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:OPERation[:EVENt]?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:PREset",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_pre"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_pre",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": "STATus:QUEStionable:CONDition?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_cond"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_cond",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:QUEStionable:ENABle",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_enab",
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "STATus:QUEStionable:ENABle?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_enab",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:QUEStionable:INSTrument:CONDition?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_cond"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_cond",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:QUEStionable:INSTrument:ENABle",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_enab",
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "STATus:QUEStionable:INSTrument:ENABle?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_enab",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:QUEStionable:INSTrument:ISUMmary[<n>]:CONDition?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum_cond"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum_cond",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:QUEStionable:INSTrument:ISUMmary[<n>]:ENABle",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum_enab",
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
+            "response": {}
           },
           {
             "name": "STATus:QUEStionable:INSTrument:ISUMmary[<n>]:ENABle?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum_enab"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum_enab",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:QUEStionable:INSTrument:ISUMmary[<n>][:EVENt]?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:QUEStionable:INSTrument[:EVENt]?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "STATus:QUEStionable[:EVENt]?",
-            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques"
+            "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           }
         ]
       },
@@ -220,35 +444,56 @@
         "commands": [
           {
             "name": "SYSTem:CAPability?",
-            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_cap"
+            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_cap",
+            "parameters": [],
+            "response": {
+              "type": "arbitrary-ascii"
+            }
           },
           {
             "name": "SYSTem:ERRor:COUNt?",
-            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_err_coun"
+            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_err_coun",
+            "parameters": [],
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "SYSTem:KLOCk",
-            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_kloc"
+            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_kloc",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": "SYSTem:LOCal",
-            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_loc"
+            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_loc",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": "SYSTem:REMote",
-            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_rem"
+            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_rem",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": "SYSTem:RWLock",
-            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_rwl"
+            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_rwl",
+            "parameters": [],
+            "response": {}
           },
           {
             "name": "SYSTem:VERSion?",
-            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_vers"
+            "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_vers",
+            "parameters": [],
+            "response": {
+              "type": "arbitrary-ascii"
+            }
           }
         ]
       }
-    ]
+    ],
+    "enums": []
   },
   "shortcuts": {
     "shortcuts": [

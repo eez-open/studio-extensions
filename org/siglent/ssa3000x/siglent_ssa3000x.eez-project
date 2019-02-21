@@ -19,7 +19,7 @@
       "name": "SSA3031X",
       "description": "The Siglent SSA3021X is a compact and light weight Spectrum Analyzer with premium performance for portable applications. The use of digital IF (intermediate frequency) technology guarantees reliability and performance to meet the most demanding RF applications.\n\nThe very large display (25.65 cm / 10.1\") of the Siglent SSA3021X Spectrum Analyzer provides a resolution of 1024x600 pixels allowing a very good overview of all its comfortable functions like measurements, marker and peak table, auto tune and coupling. These functions enable the analyzer to acquire signals and match parameters automatically, compared to the manual process necessary with a traditional analyzer.\n\nThe Siglent Spectrum Analyzers have a sophisticated and easy to use user interface offering multiple functions for all tasks. The menu navigation is very intuitive and all functions and parameters are easy to locate thanks to the graphical interface.",
       "buildConfiguration": "SSA3000X",
-      "image": "ssa3021x.jpg",
+      "image": "doc/images/ssa3021x.jpg",
       "extensionName": "siglent_ssa3031x",
       "idn": "Siglent Technologies,SSA3031X",
       "idfName": "Siglent SSA3031X",
@@ -37,7 +37,7 @@
       "name": "SSA3032X",
       "description": "The Siglent SSA3032X is a compact and light weight Spectrum Analyzer with premium performance for portable applications. The use of digital IF (intermediate frequency) technology guarantees reliability and performance to meet the most demanding RF applications.\n\nThe very large display (25.65 cm / 10.1\") of the Siglent SSA3032X Spectrum Analyzer provides a resolution of 1024x600 pixels allowing a very good overview of all its comfortable functions like measurements, marker and peak table, auto tune and coupling. These functions enable the analyzer to acquire signals and match parameters automatically, compared to the manual process necessary with a traditional analyzer.\n\nThe Siglent Spectrum Analyzers have a sophisticated and easy to use user interface offering multiple functions for all tasks. The menu navigation is very intuitive and all functions and parameters are easy to locate thanks to the graphical interface.",
       "buildConfiguration": "SSA3000X",
-      "image": "ssa3022x.png",
+      "image": "doc/images/ssa3022x.png",
       "extensionName": "siglent_ssa3032x",
       "idn": "Siglent Technologies,SSA3032X",
       "idfName": "Siglent SSA3032X",
@@ -67,26 +67,42 @@
           {
             "name": "*ESE",
             "helpLink": "01-SSA3000X Common commands.html#_scpi_ESE",
-            "parameters": [],
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
             "response": {}
           },
           {
             "name": "*ESE?",
             "helpLink": "01-SSA3000X Common commands.html#_scpi_ESE2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "*ESR?",
             "helpLink": "01-SSA3000X Common commands.html#_scpi_ESR",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "*IDN?",
             "helpLink": "01-SSA3000X Common commands.html#_scpi_IDN",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "quoted-string"
+            }
           },
           {
             "name": "*OPC",
@@ -98,7 +114,9 @@
             "name": "*OPC?",
             "helpLink": "01-SSA3000X Common commands.html#_scpi_OPC2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "boolean"
+            }
           },
           {
             "name": "*RST",
@@ -109,14 +127,26 @@
           {
             "name": "*SRE",
             "helpLink": "01-SSA3000X Common commands.html#_scpi_SRE",
-            "parameters": [],
+            "parameters": [
+              {
+                "name": "value",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
             "response": {}
           },
           {
             "name": "*SRE?",
             "helpLink": "01-SSA3000X Common commands.html#_scpi_SRE2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "nr1"
+            }
           },
           {
             "name": "*STB",
@@ -140,43 +170,81 @@
             "name": ":HCOPy:SDUMp:DATA?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_HCOP_SDUM",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "non-standard-data-block"
+            }
           },
           {
             "name": ":SYSTem:COMMunicate:LAN:GATeway",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_GAT",
-            "parameters": [],
+            "parameters": [
+              {
+                "name": "gateway",
+                "type": [
+                  {
+                    "type": "quoted-string"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
             "response": {}
           },
           {
             "name": ":SYSTem:COMMunicate:LAN:GATeway?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_GAT2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "quoted-string"
+            }
           },
           {
             "name": ":SYSTem:COMMunicate:LAN:IPADdress",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_IPAD",
-            "parameters": [],
+            "parameters": [
+              {
+                "name": "address",
+                "type": [
+                  {
+                    "type": "quoted-string"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
             "response": {}
           },
           {
             "name": ":SYSTem:COMMunicate:LAN:IPADdress?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_IPAD2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "quoted-string"
+            }
           },
           {
             "name": ":SYSTem:COMMunicate:LAN:SMASk",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_SMAS",
-            "parameters": [],
+            "parameters": [
+              {
+                "name": "mask",
+                "type": [
+                  {
+                    "type": "quoted-string"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
             "response": {}
           },
           {
             "name": ":SYSTem:COMMunicate:LAN:SMASk?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_SMAS2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "quoted-string"
+            }
           },
           {
             "name": ":SYSTem:COMMunicate:LAN:TYPE",
@@ -188,25 +256,42 @@
             "name": ":SYSTem:COMMunicate:LAN:TYPE?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_COMM_LAN_TYPE2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "discrete",
+              "enumeration": "lan_type"
+            }
           },
           {
             "name": ":SYSTem:CONFigure:SYSTem?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_CON",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "arbitrary-ascii"
+            }
           },
           {
             "name": ":SYSTem:DATE",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_DATE",
-            "parameters": [],
+            "parameters": [
+              {
+                "name": "date",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
             "response": {}
           },
           {
             "name": ":SYSTem:DATE?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_DATE2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "arbitrary-ascii"
+            }
           },
           {
             "name": ":SYSTem:FDEFault",
@@ -223,14 +308,37 @@
           {
             "name": ":SYSTem:LKEY",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_LKEY",
-            "parameters": [],
+            "parameters": [
+              {
+                "name": "license key",
+                "type": [
+                  {
+                    "type": "quoted-string"
+                  }
+                ],
+                "isOptional": false
+              },
+              {
+                "name": "option",
+                "type": [
+                  {
+                    "type": "discrete",
+                    "enumeration": "system_options"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
             "response": {}
           },
           {
             "name": ":SYSTem:OPTions?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_OPT",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "discrete",
+              "enumeration": "system_options"
+            }
           },
           {
             "name": ":SYSTem:PON:TYPE",
@@ -242,7 +350,10 @@
             "name": ":SYSTem:PON:TYPE?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_PON2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "discrete",
+              "enumeration": "pon_type"
+            }
           },
           {
             "name": ":SYSTem:PRESet",
@@ -260,7 +371,10 @@
             "name": ":SYSTem:PRESet:TYPE?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_PRES_TYPE2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "discrete",
+              "enumeration": "pon_type"
+            }
           },
           {
             "name": ":SYSTem:RESTart",
@@ -271,14 +385,26 @@
           {
             "name": ":SYSTem:TIME",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_TIME",
-            "parameters": [],
+            "parameters": [
+              {
+                "name": "time",
+                "type": [
+                  {
+                    "type": "nr1"
+                  }
+                ],
+                "isOptional": false
+              }
+            ],
             "response": {}
           },
           {
             "name": ":SYSTem:TIME?",
             "helpLink": "02-SSA3000X System commands.html#_scpi_SYST_TIME2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "arbitrary-ascii"
+            }
           }
         ]
       },
@@ -296,7 +422,10 @@
             "name": ":INSTrument:MEASure?",
             "helpLink": "03-SSA3000X Instrument Subsystem.html#_scpi_INST_MEA2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "discrete",
+              "enumeration": "inst_mode"
+            }
           },
           {
             "name": ":INSTrument[:SELect]",
@@ -308,7 +437,10 @@
             "name": ":INSTrument[:SELect]?",
             "helpLink": "03-SSA3000X Instrument Subsystem.html#_scpi_INST_SEL2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "discrete",
+              "enumeration": "inst_select"
+            }
           }
         ]
       },
@@ -326,7 +458,9 @@
             "name": ":INITiate:CONTinuous?",
             "helpLink": "04-SSA3000X Initiate Subsystem.html#_scpi_INIT_CON2",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": "boolean"
+            }
           },
           {
             "name": ":INITiate[:IMMediate]",
@@ -337,7 +471,87 @@
         ]
       }
     ],
-    "enums": []
+    "enums": [
+      {
+        "name": "lan_type",
+        "members": [
+          {
+            "name": "STATIC"
+          },
+          {
+            "name": "DHCP"
+          }
+        ]
+      },
+      {
+        "name": "pon_type",
+        "members": [
+          {
+            "name": "DTF"
+          },
+          {
+            "name": "Last"
+          },
+          {
+            "name": "User"
+          }
+        ]
+      },
+      {
+        "name": "inst_mode",
+        "members": [
+          {
+            "name": "ACPR"
+          },
+          {
+            "name": "CHPower"
+          },
+          {
+            "name": "OBW"
+          },
+          {
+            "name": "OFF"
+          },
+          {
+            "name": "SPECtrogram"
+          },
+          {
+            "name": "TOI"
+          },
+          {
+            "name": "TPOWer"
+          }
+        ]
+      },
+      {
+        "name": "inst_select",
+        "members": [
+          {
+            "name": "CAT"
+          },
+          {
+            "name": "SA"
+          }
+        ]
+      },
+      {
+        "name": "system_options",
+        "members": [
+          {
+            "name": "CAT"
+          },
+          {
+            "name": "EMI"
+          },
+          {
+            "name": "Meas"
+          },
+          {
+            "name": "TG"
+          }
+        ]
+      }
+    ]
   },
   "shortcuts": {
     "shortcuts": []

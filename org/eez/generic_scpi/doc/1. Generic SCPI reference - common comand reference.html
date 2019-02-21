@@ -39,7 +39,7 @@
 		</style>
 	</head>
 	<body>
-		<p class="Heading_1"><a name="__RefHeading__6099_1338916529"></a><a name="_ieee488"></a>Common command reference<a name="__RefHeading__6099_1338916529"></a></p>
+		<p class="Heading_1"><a name="_scpi_subsys_ieee488"></a>Common command reference</p>
 		<p class="Heading_2"><a name="cls"></a>*CLS</p>
 		<table style="border-collapse: collapse; background: transparent; width: 169.92mm;">
 			<tr style="background: transparent;">
@@ -47,7 +47,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*CLS</p>
+					<p class="cmd_root"><a name="_scpi_cls"></a>*CLS</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -96,8 +96,8 @@
 					<p class="Default_ntt">Syntax</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*ESE {&lt;value&gt;}</p>
-					<p class="cmd_root">*ESE?</p>
+					<p class="cmd_root"><a name="_scpi_ese"></a>*ESE {&lt;value&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_ese2"></a>*ESE?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -105,7 +105,7 @@
 					<p class="Default_ntt">Description</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p>Standard Event Status Enable Command. This command sets the Standard Event Status Enable register bits in the PSU. Those settings determine which events of the Standard Event Status Event register (see <a href="http://www.envox.hr/eez/bench-power-supply/psu-scpi-reference-manual/psu-scpi-common-command-reference.html#esr"><span style="text-decoration: underline;">*ESR?</span></a>) are allowed to set the ESB (Event Summary Bit) of the Status Byte register. A 1 in the bit position enables the corresponding event. All of the enabled events of the Standard Event Status Event Register are logically ORed sets the Event Summary Bit (ESB) of the Status Byte Register.</p>
+					<p>Standard Event Status Enable Command. This command sets the Standard Event Status Enable register bits in the PSU. Those settings determine which events of the Standard Event Status Event register (see *ESR?) are allowed to set the ESB (Event Summary Bit) of the Status Byte register. A 1 in the bit position enables the corresponding event. All of the enabled events of the Standard Event Status Event Register are logically ORed sets the Event Summary Bit (ESB) of the Status Byte Register.</p>
 					<p>A STATus:PRESet command does not clear the bits in the Status Byte register.</p>
 				</td>
 			</tr>
@@ -134,7 +134,7 @@
 					<p>&lt;value&gt;</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 20%;">
-					<p style="text-align: center;">Numeric</p>
+					<p style="text-align: center;">NR1</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 36%;">
 					<p>0 – 255 (A decimal value which corresponds to the binary-weighted sum of the bits in the register)</p>
@@ -182,7 +182,7 @@
 					<p class="Default_ntt">Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*ESR?</p>
+					<p class="cmd_root"><a name="_scpi_esr"></a>*ESR?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -219,7 +219,7 @@
 					<p class="Default_ntt">Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*IDN?</p>
+					<p class="cmd_root"><a name="_scpi_idn"></a>*IDN?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -255,8 +255,8 @@
 					<p class="Default_ntt">Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*OPC</p>
-					<p class="cmd_root">*OPC?</p>
+					<p class="cmd_root"><a name="_scpi_opc"></a>*OPC</p>
+					<p class="cmd_root"><a name="_scpi_opc2"></a>*OPC?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -301,7 +301,7 @@
 					<p class="Default_ntt">Syntax</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*RCL {&lt;profile&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_rcl"></a>*RCL {&lt;profile&gt;}</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -338,7 +338,7 @@
 					<p>&lt;profile&gt;</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 21%;">
-					<p style="text-align: center;">Numeric</p>
+					<p style="text-align: center;">NR1</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 24%;">
 					<p style="text-align: center;">0 – 9 </p>
@@ -379,7 +379,7 @@
 					<p class="Default_ntt">Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*RST</p>
+					<p class="cmd_root"><a name="_scpi_rst"></a>*RST</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -424,7 +424,7 @@
 					<p class="Default_ntt">Syntax</p>
 				</td>
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*SAV {&lt;profile&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_sav"></a>*SAV {&lt;profile&gt;}</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -434,7 +434,7 @@
 				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
 					<p class="Default_ntt">This command stores the current instrument state in the specified storage location. Any state previously stored in the same location is overwritten without generating any errors. </p>
 					<p class="Default_ntt">&#160;</p>
-					<p class="Default_ntt">A reset (<a href="http://www.envox.hr/eez/bench-power-supply/psu-scpi-reference-manual/psu-scpi-common-command-reference.html#rst"><span style="text-decoration: underline;">*RST</span></a> command) does not affect the configurations stored in memory. Once a state is stored, it remains constant until it is overwritten using this command. </p>
+					<p class="Default_ntt">A reset (*RST command) does not affect the configurations stored in memory. Once a state is stored, it remains constant until it is overwritten using this command. </p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -459,7 +459,7 @@
 					<p>&lt;profile&gt;</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 21%;">
-					<p style="text-align: center;">Numeric</p>
+					<p style="text-align: center;">NR1</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 21%;">
 					<p style="text-align: center;">1 – 9 </p>
@@ -500,24 +500,55 @@
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 16%;">
 					<p class="Default_ntt">Syntax</p>
 				</td>
-				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*SRE {&lt;value&gt;}</p>
-					<p class="cmd_root">*SRE?</p>
+				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
+					<p class="cmd_root"><a name="_scpi_sre"></a>*SRE {&lt;value&gt;}</p>
+					<p class="cmd_root"><a name="_scpi_sre2"></a>*SRE?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 16%;">
 					<p class="Default_ntt">Description</p>
 				</td>
-				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
+				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
 					<p>Enable bits in the Status Byte enable register.</p>
+				</td>
+			</tr>
+			<tr style="background: transparent;">
+				<td rowspan="2" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 16%;">
+					<p class="Default_ntt">Parameters</p>
+				</td>
+				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 1px solid #000000; vertical-align: top; background: transparent; width: 21%;">
+					<p style="text-align: center;">Name</p>
+				</td>
+				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 1px solid #000000; vertical-align: top; background: transparent; width: 21%;">
+					<p style="text-align: center;">Type</p>
+				</td>
+				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 1px solid #000000; vertical-align: top; background: transparent; width: 21%;">
+					<p style="text-align: center;">Range</p>
+				</td>
+				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 1px solid #000000; vertical-align: top; background: transparent; width: 21%;">
+					<p style="text-align: center;">Default</p>
+				</td>
+			</tr>
+			<tr style="background: transparent;">
+				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 21%;">
+					<p>&lt;value&gt;</p>
+				</td>
+				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 21%;">
+					<p style="text-align: center;">NR1</p>
+				</td>
+				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 21%;">
+					<p style="text-align: center;">0 – 255</p>
+				</td>
+				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 21%;">
+					<p style="text-align: center;">None</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 16%;">
 					<p class="Default_ntt">Return</p>
 				</td>
-				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
+				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
 					<p>Query the Status Byte enable register. The instrument returns a decimal value which corresponds to the binary-weighted sum of all bits set in the enable register.</p>
 				</td>
 			</tr>
@@ -525,7 +556,7 @@
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 16%;">
 					<p class="Default_ntt">Usage<span style="font-style: italic;"> </span>example</p>
 				</td>
-				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
+				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
 					<p class="cmd_code">*SRE 32</p>
 				</td>
 			</tr>
@@ -533,7 +564,7 @@
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 16%;">
 					<p class="Default_ntt">Related Commands</p>
 				</td>
-				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
+				<td colspan="4" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
 					<p>*STB</p>
 				</td>
 			</tr>
@@ -545,7 +576,7 @@
 					<p class="Default_ntt">Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*STB?</p>
+					<p class="cmd_root"><a name="_scpi_stb"></a>*STB?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -592,7 +623,7 @@
 					<p class="Default_ntt">Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*TRG</p>
+					<p class="cmd_root"><a name="_scpi_trg"></a>*TRG</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -640,7 +671,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*TST?</p>
+					<p class="cmd_root"><a name="_scpi_tst"></a>*TST?</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -680,7 +711,7 @@
 					<p>Syntax</p>
 				</td>
 				<td style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 0; vertical-align: top; background: transparent; width: 85%;">
-					<p class="cmd_root">*WAI</p>
+					<p class="cmd_root"><a name="_scpi_wai"></a>*WAI</p>
 				</td>
 			</tr>
 			<tr style="background: transparent;">
@@ -719,6 +750,7 @@
 				</td>
 			</tr>
 		</table>
+		<p>&#160;</p>
 		<p>&#160;</p>
 	</body>
 </html>
