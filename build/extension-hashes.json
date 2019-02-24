@@ -150,5 +150,81 @@
     {
         "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1104zs-1.0.1.zip",
         "sha256": "cdbd02b1a6a725cfd41360694f8971a7a730c245b601e42b752b381bd3536ad1"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000b/rigol_ds1074b-1.0.2.zip",
+        "sha256": "9590b5f63f8eda1f78dee5672941018c07ede67e3770e4f38f5a07c3ce00ce0f"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000b/rigol_ds1104b-1.0.2.zip",
+        "sha256": "0553592b2734749d694a21015d8d166bbd07709d8198856349635aaa3df88299"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000b/rigol_ds1204b-1.0.2.zip",
+        "sha256": "a2ae4c291dd888b5f96b10a5daf8758c2a70424601cd19ee89143b25d13bb1cc"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000d_e/rigol_ds1052d-1.0.2.zip",
+        "sha256": "d12403dc95191feb19535b311bd8248965391656e16190c116ba267af4f7472d"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000d_e/rigol_ds1052e-1.0.2.zip",
+        "sha256": "077c024eb61d0b5413c31aaea32b7b3a89be8127be214f2e19c9911da446ac9c"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000d_e/rigol_ds1102d-1.0.2.zip",
+        "sha256": "b49ca518c82187c734306b434d7cddbfbccf067b4df491e1b1c738670a343798"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds1000d_e/rigol_ds1102e-1.0.2.zip",
+        "sha256": "ab4181c8ca6c5b1302eead2e4e780ec932bb04e3f26d2cdc0b6929e9063a048f"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1054z-1.0.2.zip",
+        "sha256": "8fb95c4dfc55a137121849cc8679ce57deb2ac8e96fc52d25c41c46ca3c63e0d"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1074z-1.0.2.zip",
+        "sha256": "06da8058f0ec581a5ebd4bf3a489767b85c0af67c628a9af713086c34fa620f7"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1074zs-1.0.2.zip",
+        "sha256": "b754caab4d23bec3017a56c1543a02fa691c0e0db5c878ba408bf93f2ac8f874"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1104z-1.0.2.zip",
+        "sha256": "a73687d6694812c14197c52aaa3f36b4cf5308568955c0fc2781cb7b37c07355"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_ds1104zs-1.0.2.zip",
+        "sha256": "c8eb9f04119d6387d3f5270d38939df6cd2c953934169f625cf5251b786fe490"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1074z-1.0.2.zip",
+        "sha256": "506b2f6efe2d5f1a28c504546a0a0236f204bc4b2a05cfbb56e542bda3e4adde"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1074zs-1.0.2.zip",
+        "sha256": "4926910f8adab2e7665f42b77f7030e769dbf54b8dc1669327805fd854b5a323"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1104z-1.0.2.zip",
+        "sha256": "65506f14efea359bd84bb73fc0ab3eb41d8b7bf31caff1126089fe6a3dfc1a02"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1104zs-1.0.2.zip",
+        "sha256": "6513dc34fbf3984b155d195c3a7aa6f6783937548430a6e096536af59f4f6841"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/eez/generic_scpi/generic_scpi-1.0.1.zip",
+        "sha256": "f8db2386094601dcdb7728eed7ab552870bc140f5862dc507a540484e4bf9910"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/siglent/ssa3000x/siglent_ssa3031x-0.1.0.zip",
+        "sha256": "7378355cc58f0d5d233456d658bb8175a3a4fe8f70b09964439091418de5acd0"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/siglent/ssa3000x/siglent_ssa3032x-0.1.0.zip",
+        "sha256": "7357aab4ba2c46a22bbf6515a16c2702a49d84c0d4e734a1d6b3de3f71a44ecc"
     }
 ]
