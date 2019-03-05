@@ -221,10 +221,10 @@
     },
     {
         "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/siglent/ssa3000x/siglent_ssa3031x-0.1.0.zip",
-        "sha256": "7378355cc58f0d5d233456d658bb8175a3a4fe8f70b09964439091418de5acd0"
+        "sha256": "22cc7d8258276ae12c56ce49c2700c6f908c84c71838dcb2d46ed62200da3e2c"
     },
     {
         "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/siglent/ssa3000x/siglent_ssa3032x-0.1.0.zip",
-        "sha256": "7357aab4ba2c46a22bbf6515a16c2702a49d84c0d4e734a1d6b3de3f71a44ecc"
+        "sha256": "45f55ec3136382dd399bf682fcde240cc8eb88189f8e5b118b2055955f428938"
     }
 ]
