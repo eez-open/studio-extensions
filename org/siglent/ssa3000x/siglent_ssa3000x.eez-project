@@ -560,7 +560,7 @@
         "name": "Fcenter",
         "action": {
           "type": "javascript",
-          "data": "var defaultValues = {\n    centerFrequency: '1e6'\n};\n\nvar values = await input({\n    title: \"Enter Center Frequency\",\n    fields: [\n        { \n            name: \"centerFrequency\",\n            displayName: \"Center frequency\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || (values.centerFrequency !== values.centerFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:CENTer ${values.centerFrequency}`);\nconnection.release();\n\nconsole.log(values);"
+          "data": "var defaultValues = {\n    centerFrequency: '1e6'\n};\n\nvar values = await input({\n    title: \"Enter Center Frequency\",\n    fields: [\n        { \n            name: \"centerFrequency\",\n            displayName: \"Center frequency\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.centerFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:CENTer ${values.centerFrequency}`);\nconnection.release();\n\nconsole.log(values);"
         },
         "keybinding": "",
         "showInToolbar": true,
@@ -573,7 +573,7 @@
         "name": "Fspan",
         "action": {
           "type": "javascript",
-          "data": "var defaultValues = {\n    spanFrequency: '1e6'\n};\n\nvar values = await input({\n    title: \"Enter Frequency Span\",\n    fields: [\n        { \n            name: \"spanFrequency\",\n            displayName: \"Frequency Span\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || (values.spanFrequency !== values.spanFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:SPAN ${values.spanFrequency}`);\nconnection.release();\n\nconsole.log(values);"
+          "data": "var defaultValues = {\n    spanFrequency: '1e6'\n};\n\nvar values = await input({\n    title: \"Enter Frequency Span\",\n    fields: [\n        { \n            name: \"spanFrequency\",\n            displayName: \"Frequency Span\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.spanFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:SPAN ${values.spanFrequency}`);\nconnection.release();\n\nconsole.log(values);"
         },
         "keybinding": "",
         "showInToolbar": true,
@@ -586,7 +586,7 @@
         "name": "Fstart",
         "action": {
           "type": "javascript",
-          "data": "var defaultValues = {\n    startFrequency: '0'\n};\n\nvar values = await input({\n    title: \"Enter Start Frequency\",\n    fields: [\n        { \n            name: \"startFrequency\",\n            displayName: \"Start frequency\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || (values.startFrequency !== values.startFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:STARt ${values.startFrequency}`);\nconnection.release();\n\nconsole.log(values);"
+          "data": "var defaultValues = {\n    startFrequency: '0'\n};\n\nvar values = await input({\n    title: \"Enter Start Frequency\",\n    fields: [\n        { \n            name: \"startFrequency\",\n            displayName: \"Start frequency\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.startFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:STARt ${values.startFrequency}`);\nconnection.release();\n\nconsole.log(values);"
         },
         "keybinding": "",
         "showInToolbar": true,
@@ -599,7 +599,7 @@
         "name": "Fstop",
         "action": {
           "type": "javascript",
-          "data": "var defaultValues = {\n    stopFrequency: '3.2e9'\n};\n\nvar values = await input({\n    title: \"Enter Stop Frequency\",\n    fields: [\n        { \n            name: \"stopFrequency\",\n            displayName: \"Stop frequency\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || (values.stopFrequency !== values.stopFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:STOP ${values.stopFrequency}`);\nconnection.release();\n\nconsole.log(values);"
+          "data": "var defaultValues = {\n    stopFrequency: '3.2e9'\n};\n\nvar values = await input({\n    title: \"Enter Stop Frequency\",\n    fields: [\n        { \n            name: \"stopFrequency\",\n            displayName: \"Stop frequency\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.stopFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:STOP ${values.stopFrequency}`);\nconnection.release();\n\nconsole.log(values);"
         },
         "keybinding": "",
         "showInToolbar": true,
@@ -625,7 +625,7 @@
         "name": "Att",
         "action": {
           "type": "javascript",
-          "data": "var defaultValues = {\n    att: '20'\n};\n\nvar values = await input({\n    title: \"Enter Attenuation in dB\",\n    fields: [\n        { \n            name: \"att\",\n            displayName: \"Attenuator\",\n            type: \"number\",\n            validators: [validators.rangeInclusive(0, 51)]            \n        }\n    ]\n}, defaultValues);\n\nif (!values || (values.att !== values.att)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:SENSe:POWer:ATTenuation ${values.att}`);\nconnection.release();\n\nconsole.log(values);"
+          "data": "var defaultValues = {\n    att: '20'\n};\n\nvar values = await input({\n    title: \"Enter Attenuation in dB\",\n    fields: [\n        { \n            name: \"att\",\n            displayName: \"Attenuator\",\n            type: \"number\",\n            validators: [validators.rangeInclusive(0, 51)]            \n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.att)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:SENSe:POWer:ATTenuation ${values.att}`);\nconnection.release();\n\nconsole.log(values);"
         },
         "keybinding": "",
         "showInToolbar": true,
