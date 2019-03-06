@@ -554,6 +554,111 @@
     ]
   },
   "shortcuts": {
-    "shortcuts": []
+    "shortcuts": [
+      {
+        "id": "761518c3-f42d-414b-eae7-648b78a25a59",
+        "name": "Fcenter",
+        "action": {
+          "type": "javascript",
+          "data": "var defaultValues = {\n    centerFrequency: '1e6'\n};\n\nvar values = await input({\n    title: \"Enter Center Frequency\",\n    fields: [\n        { \n            name: \"centerFrequency\",\n            displayName: \"Center frequency\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.centerFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:CENTer ${values.centerFrequency}`);\nconnection.release();\n\nconsole.log(values);"
+        },
+        "keybinding": "",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 4,
+        "toolbarButtonColor": "#727b84",
+        "requiresConfirmation": false
+      },
+      {
+        "id": "bcaf826c-d401-4494-8fe4-0c54702cd700",
+        "name": "Fspan",
+        "action": {
+          "type": "javascript",
+          "data": "var defaultValues = {\n    spanFrequency: '1e6'\n};\n\nvar values = await input({\n    title: \"Enter Frequency Span\",\n    fields: [\n        { \n            name: \"spanFrequency\",\n            displayName: \"Frequency Span\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.spanFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:SPAN ${values.spanFrequency}`);\nconnection.release();\n\nconsole.log(values);"
+        },
+        "keybinding": "",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 5,
+        "toolbarButtonColor": "#727b84",
+        "requiresConfirmation": false
+      },
+      {
+        "id": "c7f80a5f-33b8-4536-f7a8-cc09c308a679",
+        "name": "Fstart",
+        "action": {
+          "type": "javascript",
+          "data": "var defaultValues = {\n    startFrequency: '0'\n};\n\nvar values = await input({\n    title: \"Enter Start Frequency\",\n    fields: [\n        { \n            name: \"startFrequency\",\n            displayName: \"Start frequency\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.startFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:STARt ${values.startFrequency}`);\nconnection.release();\n\nconsole.log(values);"
+        },
+        "keybinding": "",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 2,
+        "toolbarButtonColor": "#727b84",
+        "requiresConfirmation": false
+      },
+      {
+        "id": "479473e5-fdb3-4b27-9c0b-5245374af4e8",
+        "name": "Fstop",
+        "action": {
+          "type": "javascript",
+          "data": "var defaultValues = {\n    stopFrequency: '3.2e9'\n};\n\nvar values = await input({\n    title: \"Enter Stop Frequency\",\n    fields: [\n        { \n            name: \"stopFrequency\",\n            displayName: \"Stop frequency\",\n            type: \"number\"\n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.stopFrequency)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:FREQuency:STOP ${values.stopFrequency}`);\nconnection.release();\n\nconsole.log(values);"
+        },
+        "keybinding": "",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 3,
+        "toolbarButtonColor": "#727b84",
+        "requiresConfirmation": false
+      },
+      {
+        "id": "e817f022-82ef-4933-9813-84454e09c6e8",
+        "name": "RBW",
+        "action": {
+          "type": "javascript",
+          "data": "var defaultValues = {\r\n    RBW: \"1KHz\"\r\n};\r\n\r\nvar values = await input({\r\n    title: \"Enter Resolution Band Width\",\r\n    fields: [\r\n        { \r\n            name: \"RBW\",\r\n            type: \"enum\",\r\n            enumItems: [\r\n                {\r\n                    id: \"10Hz\",\r\n                    label: \"10 Hz\"\r\n                },\r\n                {\r\n                    id: \"30Hz\",\r\n                    label: \"30 Hz\"\r\n                },\r\n                {\r\n                    id: \"100Hz\",\r\n                    label: \"100 Hz\"\r\n                },\r\n                {\r\n                    id: \"300Hz\",\r\n                    label: \"300 Hz\"\r\n                },\r\n                {\r\n                    id: \"1KHz\",\r\n                    label: \"1 KHz\"\r\n                },\r\n                {\r\n                    id: \"3KHz\",\r\n                    label: \"3 KHz\"\r\n                },\r\n                {\r\n                    id: \"10KHz\",\r\n                    label: \"10 KHz\"\r\n                },\r\n                {\r\n                    id: \"30KHz\",\r\n                    label: \"30 KHz\"\r\n                },                \r\n                {\r\n                    id: \"100KHz\",\r\n                    label: \"100 KHz\"\r\n                },\r\n                {\r\n                    id: \"300KHz\",\r\n                    label: \"300 KHz\"\r\n                },                \r\n                {\r\n                    id: \"1MHz\",\r\n                    label: \"1 MHz\"\r\n                }                \r\n            ]\r\n        }\r\n    ]\r\n}, defaultValues);\r\n\r\nif (!values) {\r\n    return;\r\n}\r\n    \r\nconnection.acquire();    \r\nconnection.command(`:SENSe:BWIDth ${values.RBW}`);\r\nconnection.release();\r\n\r\nconsole.log(values);"
+        },
+        "keybinding": "",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 6,
+        "toolbarButtonColor": "#7BC3D4",
+        "requiresConfirmation": false
+      },
+      {
+        "id": "bad65c4e-a761-46d4-a0d4-87fdb7ab7f6b",
+        "name": "Att",
+        "action": {
+          "type": "javascript",
+          "data": "var defaultValues = {\n    att: '20'\n};\n\nvar values = await input({\n    title: \"Enter Attenuation in dB\",\n    fields: [\n        { \n            name: \"att\",\n            displayName: \"Attenuator\",\n            type: \"number\",\n            validators: [validators.rangeInclusive(0, 51)]            \n        }\n    ]\n}, defaultValues);\n\nif (!values || isNaN(values.att)) {\n    return;\n}\n    \nconnection.acquire();    \nconnection.command(`:SENSe:POWer:ATTenuation ${values.att}`);\nconnection.release();\n\nconsole.log(values);"
+        },
+        "keybinding": "",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 7,
+        "toolbarButtonColor": "#C1D751",
+        "requiresConfirmation": false
+      },
+      {
+        "id": "1e5c57be-ffa8-4cfd-b9c2-0876a448ede4",
+        "name": "Detector",
+        "action": {
+          "type": "javascript",
+          "data": "var defaultValues = {\r\n    detector: \"Positive\"\r\n};\r\n\r\nvar values = await input({\r\n    title: \"Select the Detector\",\r\n    fields: [\r\n        { \r\n            name: \"detector\",\r\n            type: \"enum\",\r\n            enumItems: [\r\n                {\r\n                    id: \"Positive\",\r\n                    label: \"Pos Peak\"\r\n                },\r\n                {\r\n                    id: \"Negative\",\r\n                    label: \"Neg Peak\"\r\n                },\r\n                {\r\n                    id: \"Sample\",\r\n                    label: \"Sample\"\r\n                },\r\n                {\r\n                    id: \"Normal\",\r\n                    label: \"Normal\"\r\n                },\r\n                {\r\n                    id: \"Average\",\r\n                    label: \"Average\"\r\n                },\r\n             \r\n            ]\r\n        }\r\n    ]\r\n}, defaultValues);\r\n\r\nif (!values) {\r\n    return;\r\n}\r\n    \r\nconnection.acquire();    \r\nconnection.command(`:SENSe:DETector:TRACe1 ${values.detector}`);\r\nconnection.release();\r\n\r\nconsole.log(values);"
+        },
+        "keybinding": "",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 8,
+        "toolbarButtonColor": "#EE8C3E",
+        "requiresConfirmation": false
+      },
+      {
+        "id": "79a1559c-a7fb-4c9a-eaa1-4e6a9cec5bf9",
+        "name": "Screenshot",
+        "action": {
+          "type": "scpi-commands",
+          "data": "HCOPy:SDUMp:DATA?"
+        },
+        "keybinding": "",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 1,
+        "toolbarButtonColor": "#E665A0",
+        "requiresConfirmation": false
+      }
+    ]
   }
 }
