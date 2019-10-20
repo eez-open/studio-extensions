@@ -9,6 +9,8 @@ https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_
 https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_r3b4-1.1.2.zip
 https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_r5b12-1.1.2.zip
 https://github.com/eez-open/psu-firmware/raw/master/build/extensions/eez_h24005_simulator-1.1.2.zip
+https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3-1.0.0.zip
+https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.0.0.zip
 
 # RIGOL
 ./org/rigol/rigol_ds1000b/rigol_ds1074b-1.0.0.zip

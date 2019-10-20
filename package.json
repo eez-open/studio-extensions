@@ -20,6 +20,7 @@
   "dependencies": {
     "@types/archiver": "^2.1.2",
     "@types/decompress": "^4.2.3",
+    "@types/node": "^12.11.1",
     "@types/request": "^2.48.1",
     "@types/request-promise-native": "^1.0.15",
     "@types/sha256": "^0.2.0",

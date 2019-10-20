@@ -226,5 +226,13 @@
     {
         "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/siglent/ssa3000x/siglent_ssa3032x-0.1.0.zip",
         "sha256": "45f55ec3136382dd399bf682fcde240cc8eb88189f8e5b118b2055955f428938"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3-1.0.0.zip",
+        "sha256": "19f81946aad66c6786f7e3c4716f131e946229b14482d218d1892dc062d97856"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.0.0.zip",
+        "sha256": "3480817a51354e7f2df45cd34621c6a36f675a1e48e14398c3d02e79f2e2729b"
     }
 ]
