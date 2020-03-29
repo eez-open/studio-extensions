@@ -266,5 +266,13 @@
     {
         "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.0.4.zip",
         "sha256": "c42a50443b6d18cb66c4ceb044e49d303e5058da301f9ebd9386f075540a9d2b"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3-1.0.5.zip",
+        "sha256": "dd3638f3d6c02c6b953f9a73c1717fac718ea26f78555bc03d79da057d63974b"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.0.5.zip",
+        "sha256": "180dd0adcc361a75877716f311aa0bf8171d7c2bf34f4d2ce325b74813084025"
     }
 ]
