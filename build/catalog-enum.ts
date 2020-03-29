@@ -2,8 +2,7 @@ import { readFile, writeFile } from "fs";
 var request = require('request-promise-native');
 var sha256 = require("sha256");
 import * as decompress from "decompress";
-import { extname } from "path";
-import * as SharpModule from "sharp";
+import * as Jimp from "jimp";
 
 async function getExtensionsList() {
     return new Promise<string[]>((resolve, reject) => {
@@ -78,13 +77,8 @@ async function getRepositoryCatalogs() {
         const imagePath = packageJson.image || "image.png";
         const imageFile = files.find(file => file.path === imagePath);
         if (imageFile) {
-            const ext = extname(imagePath).substr(1);
-            const sharp = require("sharp") as typeof SharpModule;
-            const imageData = await sharp(imageFile.data)
-                .resize(256)
-                .toBuffer();
-            const base64 = imageData.toString("base64");
-            packageJson.image = `data:image/${ext};base64,${base64}`;
+            const image = (await Jimp.read(imageFile.data));
+            packageJson.image = await image.resize(256, image.getHeight() * 256 / image.getWidth()).getBase64Async(image.getMIME());
         }
 
         packageJson.download =
