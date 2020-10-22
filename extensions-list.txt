@@ -33,6 +33,8 @@ https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez
 https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.1.0.zip
 https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3-1.3.0.zip
 https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.3.0.zip
+https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3-1.4.0.zip
+https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.4.0.zip
 
 # RIGOL
 ./org/rigol/rigol_ds1000b/rigol_ds1074b-1.0.0.zip
