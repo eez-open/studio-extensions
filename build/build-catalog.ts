@@ -4,7 +4,7 @@ import * as archiver from "archiver";
 import { getCatalog } from "./catalog-enum";
 
 function writeCatalog(catalog: any) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
         writeFile("catalog.json", JSON.stringify(catalog, undefined, 4), "utf8", err => {
             if (err) {
                 reject(err);
@@ -16,7 +16,7 @@ function writeCatalog(catalog: any) {
 }
 
 function zipCatalog() {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
         var output = createWriteStream("catalog.zip");
 
         var archive = archiver("zip", {
@@ -48,7 +48,7 @@ function zipCatalog() {
 }
 
 function writeCatalogVersion(catalogVersion: any) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
         writeFile(
             "catalog-version.json",
             JSON.stringify(catalogVersion, undefined, 4),

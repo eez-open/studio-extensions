@@ -98,7 +98,7 @@ async function getRepositoryCatalogs() {
         repositoryCatalogs.push(packageJson);
     }
 
-    await new Promise((resolve, reject) => {
+    await new Promise<void>((resolve, reject) => {
         writeFile(__dirname + "/extension-hashes.json", JSON.stringify(extensionHashes, undefined, 4), "utf8", err => {
             if (err) {
                 reject(err);
