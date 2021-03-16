@@ -346,5 +346,13 @@
     {
         "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.6.1.zip",
         "sha256": "68e69388b4f8b207ff69c5875e3dcd77ea937cc8d97d432fd9810bc691c88d07"
+    },
+    {
+        "downloadUrl": "https://github.com/lexbrugman/my-eez-studio-extensions/raw/master/siglent-spd1000x/siglent_spd1168x-1.zip",
+        "sha256": "abe85d28f10bdcbdaa0f5fcd53ced4a4fc33d81279049ddfc8970c28a2ff08a5"
+    },
+    {
+        "downloadUrl": "https://github.com/lexbrugman/my-eez-studio-extensions/raw/master/siglent-spd1000x/siglent_spd1305x-1.zip",
+        "sha256": "45044a9dbe415e7f9fb6ca9660b745866eae04a08664e4b8c5d7cf964a4ceff8"
     }
 ]
