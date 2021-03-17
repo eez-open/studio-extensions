@@ -1,6 +1,6 @@
 # studio-extensions
 
-Instruction guide how to create an instrument extension (IEXT) is available [here](http://www.envox.hr/eez/studio/create-an-instrument-extension/introduction.html).
+Instruction guide how to create an instrument extension (IEXT) is available [here](https://www.envox.eu/studio/create-an-instrument-extension/introduction/).
 
 A pull request for adding a new IEXT should modify only `./extensions-list.txt`. The new IEXT can be hosted: 
 
@@ -9,7 +9,7 @@ A pull request for adding a new IEXT should modify only `./extensions-list.txt`.
     
 All locally hosted IEXT should be placed into `/org/<manufacturer>/<instrument_folder>`. 
 
-_IMPORTANT: Please ensure that your pull request includes IEXT's .zip file with version suffix that is higher then the latest listed in the IEXT catalog (i.e. this repository). Do not increase the .zip version suffix manually, define it in the project file that the Build procedure can add it automatically (see [Extension definitions](https://www.envox.hr/eez/studio/create-an-instrument-extension/project-items/extension-definitions.html))._
+_IMPORTANT: Please ensure that your pull request includes IEXT's .zip file with version suffix that is higher then the latest listed in the IEXT catalog (i.e. this repository). Do not increase the .zip version suffix manually, define it in the project file that the Build procedure can add it automatically (see [Extension definitions](https://www.envox.eu/studio/create-an-instrument-extension/project-items/extension-definitions/))._
 
 The pull request has to be approved by the EEZ team, and only files into the newly added folder will be checked. The IEXT is also subject to a comprehensive inspection to ensure that it does not contain malicious code.
 
