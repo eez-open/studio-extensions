@@ -1,0 +1,336 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>VISA COM Example in Python</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="visacom_examples.htm" title="VISA COM Examples"><link rel="prev" href="visacom_example_vbnet.htm" title="VISA COM Example in Visual Basic .NET"><link rel="next" href="visa_examples.htm" title="VISA Examples"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="visacom_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>VISA COM Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="visacom_example_python"></a>VISA COM Example in Python<a name="d0e52635"></a><a name="d0e52638"></a><a name="d0e52641"></a></h3></div></div></div><p>You can use the Python programming language with the "comtypes" package to control Agilent oscilloscopes.</p><p>The Python language and "comtypes" package can be downloaded from the web at <a href="http://www.python.org/" target="_top">http://www.python.org/</a> and <a href="http://starship.python.net/crew/theller/comtypes/" target="_top">http://starship.python.net/crew/theller/comtypes/</a>, respectively.</p><p>To run this example with Python and "comtypes":</p><div class="orderedlist"><ol type="1"><li><p>Cut-and-paste the code that follows into a file named "example.py".</p></li><li><p>Edit the program to use the VISA address of your oscilloscope.</p></li><li><p>If "python.exe" can be found via your PATH environment variable, open a Command Prompt window; then, change to the folder that contains the "example.py" file, and enter:</p><div class="literallayout"><p>python&nbsp;example.py</p></div></li></ol></div><pre class="programlisting">#
+# Agilent VISA COM Example in Python using "comtypes"
+# *********************************************************
+# This program illustrates a few commonly used programming
+# features of your Agilent oscilloscope.
+# *********************************************************
+
+# Import Python modules.
+# ---------------------------------------------------------
+import string
+import time
+import sys
+import array
+
+from comtypes.client import GetModule
+from comtypes.client import CreateObject
+
+# Run GetModule once to generate comtypes.gen.VisaComLib.
+if not hasattr(sys, "frozen"):
+ GetModule("C:\Program Files (x86)\IVI Foundation\VISA\VisaCom\GlobMgr.dll")
+
+import comtypes.gen.VisaComLib as VisaComLib
+
+
+# Global variables (booleans: 0 = False, 1 = True).
+# ---------------------------------------------------------
+
+
+# =========================================================
+# Initialize:
+# =========================================================
+def initialize():
+ # Get and display the device's *IDN? string.
+ idn_string = do_query_string("*IDN?")
+ print "Identification string '%s'" % idn_string
+
+ # Clear status and load the default setup.
+ do_command("*CLS")
+ do_command("*RST")
+
+
+# =========================================================
+# Capture:
+# =========================================================
+def capture():
+
+ # Use auto-scale to automatically set up oscilloscope.
+ print "Autoscale."
+ do_command(":AUToscale")
+
+ # Set trigger mode.
+ do_command(":TRIGger:MODE EDGE")
+ qresult = do_query_string(":TRIGger:MODE?")
+ print "Trigger mode: %s" % qresult
+
+ # Set EDGE trigger parameters.
+ do_command(":TRIGger:EDGE:SOURCe CHANnel1")
+ qresult = do_query_string(":TRIGger:EDGE:SOURce?")
+ print "Trigger edge source: %s" % qresult
+
+ do_command(":TRIGger:EDGE:LEVel 1.5")
+ qresult = do_query_string(":TRIGger:EDGE:LEVel?")
+ print "Trigger edge level: %s" % qresult
+
+ do_command(":TRIGger:EDGE:SLOPe POSitive")
+ qresult = do_query_string(":TRIGger:EDGE:SLOPe?")
+ print "Trigger edge slope: %s" % qresult
+
+ # Save oscilloscope setup.
+ setup_bytes = do_query_ieee_block(":SYSTem:SETup?")
+ nLength = len(setup_bytes)
+ f = open("c:\scope\config\setup.stp", "wb")
+ f.write(bytearray(setup_bytes))
+ f.close()
+ print "Setup bytes saved: %d" % nLength
+
+ # Change oscilloscope settings with individual commands:
+  
+ # Set vertical scale and offset.
+ do_command(":CHANnel1:SCALe 0.05")
+ qresult = do_query_number(":CHANnel1:SCALe?")
+ print "Channel 1 vertical scale: %f" % qresult
+
+ do_command(":CHANnel1:OFFSet -1.5")
+ qresult = do_query_number(":CHANnel1:OFFSet?")
+ print "Channel 1 offset: %f" % qresult
+
+ # Set horizontal scale and offset.
+ do_command(":TIMebase:SCALe 0.0002")
+ qresult = do_query_string(":TIMebase:SCALe?")
+ print "Timebase scale: %s" % qresult
+
+ do_command(":TIMebase:POSition 0.0")
+ qresult = do_query_string(":TIMebase:POSition?")
+ print "Timebase position: %s" % qresult
+
+ # Set the acquisition type.
+ do_command(":ACQuire:TYPE NORMal")
+ qresult = do_query_string(":ACQuire:TYPE?")
+ print "Acquire type: %s" % qresult
+
+ # Or, configure by loading a previously saved setup.
+ f = open("c:\scope\config\setup.stp", "rb")
+ setup_bytes = f.read()
+ f.close()
+ do_command_ieee_block(":SYSTem:SETup", array.array('B', setup_bytes))
+ print "Setup bytes restored: %d" % len(setup_bytes)
+
+ # Capture an acquisition using :DIGitize.
+ do_command(":DIGitize CHANnel1")
+
+
+# =========================================================
+# Analyze:
+# =========================================================
+def analyze():
+
+ # Make measurements.
+ # --------------------------------------------------------
+ do_command(":MEASure:SOURce CHANnel1")
+ qresult = do_query_string(":MEASure:SOURce?")
+ print "Measure source: %s" % qresult
+
+ do_command(":MEASure:FREQuency")
+ qresult = do_query_string(":MEASure:FREQuency?")
+ print "Measured frequency on channel 1: %s" % qresult
+
+ do_command(":MEASure:VAMPlitude")
+ qresult = do_query_string(":MEASure:VAMPlitude?")
+ print "Measured vertical amplitude on channel 1: %s" % qresult
+
+ # Download the screen image.
+ # --------------------------------------------------------
+ do_command(":HARDcopy:INKSaver OFF")
+
+ image_bytes = do_query_ieee_block(":DISPlay:DATA? PNG, COLor")
+ nLength = len(image_bytes)
+ f = open("c:\scope\data\screen.bmp", "wb")
+ f.write(bytearray(image_bytes))
+ f.close()
+ print "Screen image written to c:\scope\data\screen.bmp."
+
+ # Download waveform data.
+ # --------------------------------------------------------
+
+ # Set the waveform points mode.
+ do_command(":WAVeform:POINts:MODE RAW")
+ qresult = do_query_string(":WAVeform:POINts:MODE?")
+ print "Waveform points mode: %s" % qresult
+
+ # Get the number of waveform points available.
+ do_command(":WAVeform:POINts 10240")
+ qresult = do_query_string(":WAVeform:POINts?")
+ print "Waveform points available: %s" % qresult
+
+ # Set the waveform source.
+ do_command(":WAVeform:SOURce CHANnel1")
+ qresult = do_query_string(":WAVeform:SOURce?")
+ print "Waveform source: %s" % qresult
+
+ # Choose the format of the data returned:
+ do_command(":WAVeform:FORMat BYTE")
+ print "Waveform format: %s" % do_query_string(":WAVeform:FORMat?")
+
+ # Display the waveform settings from preamble:
+ wav_form_dict = {
+  0 : "BYTE",
+  1 : "WORD",
+  4 : "ASCii",
+ }
+ acq_type_dict = {
+  0 : "NORMal",
+  1 : "PEAK",
+  2 : "AVERage",
+  3 : "HRESolution",
+ }
+
+ (
+  wav_form,
+  acq_type,
+  wfmpts,
+  avgcnt,
+  x_increment,
+  x_origin,
+  x_reference,
+  y_increment,
+  y_origin,
+  y_reference
+ ) = do_query_numbers(":WAVeform:PREamble?")
+
+ print "Waveform format: %s" % wav_form_dict[wav_form]
+ print "Acquire type: %s" % acq_type_dict[acq_type]
+ print "Waveform points desired: %d" % wfmpts
+ print "Waveform average count: %d" % avgcnt
+ print "Waveform X increment: %1.12f" % x_increment
+ print "Waveform X origin: %1.9f" % x_origin
+ print "Waveform X reference: %d" % x_reference   # Always 0.
+ print "Waveform Y increment: %f" % y_increment
+ print "Waveform Y origin: %f" % y_origin
+ print "Waveform Y reference: %d" % y_reference   # Always 125.
+
+ # Get numeric values for later calculations.
+ x_increment = do_query_number(":WAVeform:XINCrement?")
+ x_origin = do_query_number(":WAVeform:XORigin?")
+ y_increment = do_query_number(":WAVeform:YINCrement?")
+ y_origin = do_query_number(":WAVeform:YORigin?")
+ y_reference = do_query_number(":WAVeform:YREFerence?")
+
+ # Get the waveform data.
+ data_bytes = do_query_ieee_block(":WAVeform:DATA?")
+ nLength = len(data_bytes)
+ print "Number of data values: %d" % nLength
+
+ # Open file for output.
+ strPath = "c:\scope\data\waveform_data.csv"
+ f = open(strPath, "w")
+
+ # Output waveform data in CSV format.
+ for i in xrange(0, nLength - 1):
+  time_val = x_origin + (i * x_increment)
+  voltage = (data_bytes[i] - y_reference) * y_increment + y_origin
+  f.write("%E, %f\n" % (time_val, voltage))
+  
+ # Close output file.
+ f.close()
+ print "Waveform format BYTE data written to %s." % strPath
+ 
+
+# =========================================================
+# Send a command and check for errors:
+# =========================================================
+def do_command(command):
+ myScope.WriteString("%s" % command, True)
+ check_instrument_errors(command)
+
+
+# =========================================================
+# Send a command and check for errors:
+# =========================================================
+def do_command_ieee_block(command, data):
+ myScope.WriteIEEEBlock(command, data, True)
+ check_instrument_errors(command)
+
+
+# =========================================================
+# Send a query, check for errors, return string:
+# =========================================================
+def do_query_string(query):
+ myScope.WriteString("%s" % query, True)
+ result = myScope.ReadString()
+ check_instrument_errors(query)
+ return result
+
+
+# =========================================================
+# Send a query, check for errors, return string:
+# =========================================================
+def do_query_ieee_block(query):
+ myScope.WriteString("%s" % query, True)
+ result = myScope.ReadIEEEBlock(VisaComLib.BinaryType_UI1, \
+   False, True)
+ check_instrument_errors(query)
+ return result
+
+
+# =========================================================
+# Send a query, check for errors, return values:
+# =========================================================
+def do_query_number(query):
+ myScope.WriteString("%s" % query, True)
+ result = myScope.ReadNumber(VisaComLib.ASCIIType_R8, True)
+ check_instrument_errors(query)
+ return result
+
+
+# =========================================================
+# Send a query, check for errors, return values:
+# =========================================================
+def do_query_numbers(query):
+ myScope.WriteString("%s" % query, True)
+ result = myScope.ReadList(VisaComLib.ASCIIType_R8, ",;")
+ check_instrument_errors(query)
+ return result
+
+
+# =========================================================
+# Check for instrument errors:
+# =========================================================
+def check_instrument_errors(command):
+
+ while True:
+  myScope.WriteString(":SYSTem:ERRor?", True)
+  error_string = myScope.ReadString()
+  if error_string:   # If there is an error string value.
+
+   if error_string.find("+0,", 0, 3) == -1:   # Not "No error".
+    print "ERROR: %s, command: '%s'" % (error_string, command)
+    print "Exited because of error."
+    sys.exit(1)
+
+   else:   # "No error"
+    break
+
+  else:   # :SYSTem:ERRor? should always return string.
+   print "ERROR: :SYSTem:ERRor? returned nothing, command: '%s'" \
+     % command
+   print "Exited because of error."
+   sys.exit(1)
+
+
+# =========================================================
+# Main program:
+# =========================================================
+rm = CreateObject("VISA.GlobalRM", \
+ interface=VisaComLib.IResourceManager)
+myScope = CreateObject("VISA.BasicFormattedIO", \
+ interface=VisaComLib.IFormattedIO488)
+myScope.IO = \
+ rm.Open("TCPIP0::a-mx3104a-90028.cos.agilent.com::inst0::INSTR")
+
+# Clear the interface.
+myScope.IO.Clear
+print "Interface cleared."
+
+# Set the Timeout to 15 seconds.
+myScope.IO.Timeout = 15000   # 15 seconds.
+print "Timeout set to 15000 milliseconds."
+
+# Initialize the oscilloscope, capture data, and analyze.
+initialize()
+capture()
+analyze()
+
+print "End of program"</pre></div></body></html>

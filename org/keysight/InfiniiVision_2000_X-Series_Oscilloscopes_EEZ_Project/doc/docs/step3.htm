@@ -1,0 +1,26 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Step 3. Verify the oscilloscope connection</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Setting_Up.htm" title="Setting Up"><link rel="prev" href="gpib_interface.htm" title="Using the GPIB Interface"><link rel="next" href="Getting_Started.htm" title="Getting Started"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Setting_Up.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Setting Up </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="step3"></a>Step 3. Verify the oscilloscope connection<a name="d0e1602"></a></h2></div></div></div><div class="orderedlist"><ol type="1"><li><p>On the controller PC, click on the <a name="d0e1609"></a>Agilent IO Control icon in the taskbar and choose
+      <a name="d0e1613"></a><span class="guimenuitem">Agilent Connection Expert</span> from
+      the popup menu.</p><div><img src="images/../images/ace_launch.png"></div></li><li><p>In the Agilent Connection Expert application, instruments
+      connected to the controller's USB and GPIB interfaces should
+      automatically appear. (You can click Refresh All to update the list of
+      instruments on these interfaces.)</p><div><img src="images/../images/ace_window.png"></div><p><a name="d0e1627"></a>You must manually add instruments on LAN
+      interfaces:</p><div class="orderedlist"><ol type="a"><li><p>Right-click on the LAN interface, choose <span class="guimenu">Add
+          Instrument</span> from the popup menu</p><div class="mediaobject"><img src="images/../images/ACE_Add_Instrument_1.png"></div></li><li><p>If the oscilloscope is on the same subnet, select it, and
+          click <span class="guibutton">OK</span>.</p><div class="mediaobject"><img src="images/../images/ACE_Add_Instrument_2.png"></div><p>Otherwise, if the instrument is not on the same subnet, click
+          <span class="guibutton">Add Address</span>.</p><div class="orderedlist"><ol type="i"><li><p>In the next dialog, select either
+              <span class="guilabel">Hostname</span> or <span class="guilabel">IP
+              address</span>, and enter the oscilloscope's hostname or IP
+              address.</p></li><li><p>Click <span class="guibutton">Test Connection</span>.</p><div class="mediaobject"><img src="images/../images/ACE_LAN_Instrument.png"></div></li><li><p>If the instrument is successfully opened, click
+              <span class="guibutton">OK</span> to close the dialog. If the instrument
+              is not opened successfully, go back and verify the LAN
+              connections and the oscilloscope setup.</p></li></ol></div></li></ol></div></li><li><p>Test some commands on the instrument:</p><div class="orderedlist"><ol type="a"><li><p>Right-click on the instrument and choose <span class="guimenuitem">Send
+          Commands To This Instrument</span> from the popup
+          menu.</p><div class="mediaobject"><img src="images/../images/ACE_Send_Commands.png"></div></li><li><p>In the <a name="d0e1696"></a>Agilent Interactive IO application, enter commands in
+          the <span class="guilabel">Command</span> field and press <span class="guibutton">Send
+          Command</span>, <span class="guibutton">Read Response</span>, or
+          <span class="guibutton">Send&amp;Read</span>.</p><div><img src="images/../images/interactive_io.png"></div></li><li><p>Choose <span class="guimenu">Connect&gt;Exit</span> from the menu to
+          exit the Agilent Interactive IO application.</p></li></ol></div></li><li><p>In the Agilent Connection Expert application, choose
+      <span class="guimenu">File&gt;Exit</span> from the menu to exit the
+      application.</p></li></ol></div></div></body></html>

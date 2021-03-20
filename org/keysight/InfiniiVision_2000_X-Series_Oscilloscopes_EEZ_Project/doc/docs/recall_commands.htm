@@ -1,0 +1,26 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:RECall Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_pod_n_threshold.htm" title=":POD<n&gt;:THReshold"><link rel="next" href="_recall_filename.htm" title=":RECall:FILename"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="recall_commands"></a>:RECall Commands<a name="d0e29543"></a></h2></div></div></div><p>Recall previously saved oscilloscope setups, reference waveforms, and
+  masks.</p><div class="table"><a name="d0e29548"></a><p class="title"><b>:RECall Commands Summary:</b></p><div class="table-contents"><table summary=":RECall Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_recall_filename.htm#_recall_filename_command" title="Command Syntax">:RECall:FILename
+        &lt;base_name&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_recall_filename.htm#_recall_filename_query" title="Query Syntax">:RECall:FILename?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;base_name&gt; ::= quoted ASCII
+        string</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_recall_mask_start.htm#_recall_mask_start_command" title="Command Syntax">:RECall:MASK[:STARt]
+        [&lt;file_spec&gt;]</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><p><strong class="userinput"><code>&lt;file_spec&gt; ::= {&lt;internal_loc&gt; |
+        &lt;file_name&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;internal_loc&gt;
+        ::= 0-3; an integer in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;file_name&gt; ::= quoted
+        ASCII string</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_recall_pwd.htm#_recall_pwd_command" title="Command Syntax">:RECall:PWD
+        &lt;path_name&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_recall_pwd.htm#_recall_pwd_query" title="Query Syntax">:RECall:PWD?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;path_name&gt; ::= quoted ASCII
+        string</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_recall_setup_start.htm#_recall_setup_start_command" title="Command Syntax">:RECall:SETup[:STARt]
+        [&lt;file_spec&gt;]</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><p><strong class="userinput"><code>&lt;file_spec&gt; ::= {&lt;internal_loc&gt; |
+        &lt;file_name&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;internal_loc&gt;
+        ::= 0-9; an integer in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;file_name&gt; ::= quoted
+        ASCII string</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_recall_wmemory_start.htm#_recall_wmemory_start_command" title="Command Syntax">:RECall:WMEMory&lt;r&gt;[:STARt]
+        [&lt;file_name&gt;]</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;file_name&gt; ::= quoted
+        ASCII string</code></strong></p><p><strong class="userinput"><code>If extension included
+        in file name, it must be ".h5".</code></strong></p></td></tr></tbody></table></div></div><br class="table-break"><h2><a name="recall_commands_overview"></a>Introduction to :RECall
+  Commands</h2><p><a name="d0e29647"></a><a name="d0e29650"></a>The :RECall subsystem provides commands to recall previously
+  saved oscilloscope setups, reference waveforms, and masks.</p><p><b>Reporting the Setup.&nbsp;</b>Use :RECall? to query setup information for the RECall
+    subsystem.</p><p><b>Return Format.&nbsp;</b>The following is a sample response from the :RECall? query. In this
+    case, the query was issued following the *RST command.</p><pre class="programlisting">:REC:FIL "scope_0"</pre></div></body></html>

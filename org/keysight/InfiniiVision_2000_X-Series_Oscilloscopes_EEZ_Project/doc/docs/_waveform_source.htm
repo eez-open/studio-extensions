@@ -1,0 +1,147 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:WAVeform:SOURce</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="waveform_commands.htm" title=":WAVeform Commands"><link rel="prev" href="_waveform_segmented_ttag.htm" title=":WAVeform:SEGMented:TTAG"><link rel="next" href="_waveform_source_subsource.htm" title=":WAVeform:SOURce:SUBSource"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="waveform_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:WAVeform Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="refentry" lang="en"><a name="_waveform_source"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>:WAVeform:SOURce — <a href="core_commands.htm" title="Core Commands"><img src="images/../images/core.gif"></a></p></div><div class="refsection" lang="en"><a name="_waveform_source_command"></a><h2>Command Syntax<a name="d0e44157"></a><a name="d0e44160"></a></h2><pre class="synopsis">:WAVeform:SOURce &lt;source&gt;</pre><pre class="synopsis">&lt;source&gt; ::= {CHANnel&lt;n&gt; | FUNCtion | MATH | WMEMory&lt;r&gt; | SBUS1}
+             for DSO models</pre><pre class="synopsis">&lt;source&gt; ::= {CHANnel&lt;n&gt; | POD{1 | 2} | BUS{1 | 2} | FUNCtion 
+             | MATH | WMEMory&lt;r&gt; | SBUS1}
+             for MSO models</pre><pre class="synopsis">&lt;n&gt; ::= 1 to (# analog channels) in NR1 format</pre><pre class="synopsis">&lt;r&gt; ::= {1 | 2}</pre><p>The :WAVeform:SOURce command selects the analog channel, function, digital pod, digital bus, reference waveform, or serial decode bus to be used as the source for the :WAVeform commands.</p><p>Function<a name="d0e44177"></a> capabilities include add<a name="d0e44181"></a>, subtract<a name="d0e44185"></a>, multiply<a name="d0e44189"></a>, and FFT (Fast Fourier Transform)<a name="d0e44193"></a> operations.</p><p>When the :WAVeform:SOURce is the serial decode bus (SBUS1), ASCii is the only waveform format allowed, and the :WAVeform:DATA? query returns a string with timestamps and associated bus decode information.</p><p>With MSO oscilloscope models, you can choose a POD<a name="d0e44201"></a> or BUS as the waveform source. There are some differences between POD and BUS when formatting and getting data from the oscilloscope:</p><div class="itemizedlist"><ul type="disc"><li><p>When POD1 or POD2 is selected as the waveform source, you can choose the BYTE, WORD, or ASCii formats (see <a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat</a>).</p><p>When the WORD format is chosen, every other data byte will be 0. The setting of :WAVeform:BYTeorder controls which byte is 0.</p><p>When the ASCii format is chosen, the :WAVeform:DATA? query returns a string with unsigned decimal values separated by commas.</p></li><li><p>When BUS1 or BUS2 is selected as the waveform source, you can choose the WORD or ASCii formats (but not BYTE because bus values are always returned as 16-bit values).</p><p>When the ASCii format is chosen, the :WAVeform:DATA? query returns a string with hexadecimal bus values, for example: 0x1938,0xff38,...</p></li></ul></div></div><div class="refsection" lang="en"><a name="_waveform_source_query"></a><h2>Query Syntax</h2><pre class="synopsis">:WAVeform:SOURce?</pre><p>The :WAVeform:SOURce? query returns the currently selected source for the WAVeform commands.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>MATH is an alias for FUNCtion. The :WAVeform:SOURce? Query returns FUNC if the source is FUNCtion or MATH.</p></td></tr></table></div></div><div class="refsection" lang="en"><a name="d0e44230"></a><h2>Return Format</h2><pre class="synopsis">&lt;source&gt;&lt;NL&gt;</pre><pre class="synopsis">&lt;source&gt; ::= {CHAN&lt;n&gt; | FUNC | WMEM&lt;r&gt; | SBUS1} for DSO models</pre><pre class="synopsis">&lt;source&gt; ::= {CHAN&lt;n&gt; | POD{1 | 2} | BUS{1 | 2} | FUNC
+             | WMEM&lt;r&gt; | SBUS1} for MSO models</pre><pre class="synopsis">&lt;n&gt; ::= 1 to (# analog channels) in NR1 format</pre><pre class="synopsis">&lt;r&gt; ::= {1 | 2}</pre></div><div class="refsection" lang="en"><a name="d0e44243"></a><h2>See Also</h2><div class="itemizedlist"><ul type="disc"><li><p><a href="waveform_commands.htm#waveform_commands_overview">Introduction to :WAVeform
+  Commands</a></p></li><li><p><a href="_digitize.htm" title=":DIGitize">:DIGitize</a></p></li><li><p><a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat</a></p></li><li><p><a href="_waveform_byteorder.htm" title=":WAVeform:BYTeorder">:WAVeform:BYTeorder</a></p></li><li><p><a href="_waveform_data.htm" title=":WAVeform:DATA">:WAVeform:DATA</a></p></li><li><p><a href="_waveform_preamble.htm" title=":WAVeform:PREamble">:WAVeform:PREamble</a></p></li></ul></div></div><div class="refsection" lang="en"><a name="waveform_code"></a><h2>Example Code<a name="d0e44268"></a><a name="d0e44271"></a></h2><pre class="programlisting">   ' WAVEFORM_DATA - To obtain waveform data, you must specify the
+   ' WAVEFORM parameters for the waveform data prior to sending the
+   ' ":WAVEFORM:DATA?" query.  Once these parameters have been sent,
+   ' the waveform data and the preamble can be read.
+   '
+   ' WAVE_SOURCE - Selects the channel to be used as the source for
+   ' the waveform commands.
+   myScope.WriteString ":WAVEFORM:SOURCE CHAN1"
+
+   ' WAVE_POINTS - Specifies the number of points to be transferred
+   ' using the ":WAVEFORM:DATA?" query.
+   myScope.WriteString ":WAVEFORM:POINTS 1000"
+
+   ' WAVE_FORMAT - Sets the data transmission mode for the waveform
+   ' data output.  This command controls whether data is formatted in
+   ' a word or byte format when sent from the oscilloscope.
+   Dim lngVSteps As Long
+   Dim intBytesPerData As Integer
+
+   ' Data in range 0 to 65535.
+   myScope.WriteString ":WAVEFORM:FORMAT WORD"
+   lngVSteps = 65536
+   intBytesPerData = 2
+
+   ' Data in range 0 to 255.
+   'myScope.WriteString ":WAVEFORM:FORMAT BYTE"
+   'lngVSteps = 256
+   'intBytesPerData = 1
+
+   ' GET_PREAMBLE - The preamble block contains all of the current
+   ' WAVEFORM settings.  It is returned in the form &lt;preamble_block&gt;&lt;NL&gt;
+   ' where &lt;preamble_block&gt; is:
+   '    FORMAT        : int16 - 0 = BYTE, 1 = WORD, 4 = ASCII.
+   '    TYPE          : int16 - 0 = NORMAL, 1 = PEAK DETECT, 2 = AVERAGE
+   '    POINTS        : int32 - number of data points transferred.
+   '    COUNT         : int32 - 1 and is always 1.
+   '    XINCREMENT    : float64 - time difference between data points.
+   '    XORIGIN       : float64 - always the first data point in memory.
+   '    XREFERENCE    : int32 - specifies the data point associated with
+   '                            x-origin.
+   '    YINCREMENT    : float32 - voltage diff between data points.
+   '    YORIGIN       : float32 - value is the voltage at center screen.
+   '    YREFERENCE    : int32 - specifies the data point where y-origin
+   '                            occurs.
+   Dim Preamble()
+   Dim intFormat As Integer
+   Dim intType As Integer
+   Dim lngPoints As Long
+   Dim lngCount As Long
+   Dim dblXIncrement As Double
+   Dim dblXOrigin As Double
+   Dim lngXReference As Long
+   Dim sngYIncrement As Single
+   Dim sngYOrigin As Single
+   Dim lngYReference As Long
+   Dim strOutput As String
+
+   myScope.WriteString ":WAVEFORM:PREAMBLE?"   ' Query for the preamble.
+   Preamble() = myScope.ReadList   ' Read preamble information.
+   intFormat = Preamble(0)
+   intType = Preamble(1)
+   lngPoints = Preamble(2)
+   lngCount = Preamble(3)
+   dblXIncrement = Preamble(4)
+   dblXOrigin = Preamble(5)
+   lngXReference = Preamble(6)
+   sngYIncrement = Preamble(7)
+   sngYOrigin = Preamble(8)
+   lngYReference = Preamble(9)
+   strOutput = ""
+   'strOutput = strOutput + "Format = " + CStr(intFormat) + vbCrLf
+   'strOutput = strOutput + "Type = " + CStr(intType) + vbCrLf
+   'strOutput = strOutput + "Points = " + CStr(lngPoints) + vbCrLf
+   'strOutput = strOutput + "Count = " + CStr(lngCount) + vbCrLf
+   'strOutput = strOutput + "X increment = " + _
+   '            FormatNumber(dblXIncrement * 1000000) + " us" + vbCrLf
+   'strOutput = strOutput + "X origin = " + _
+   '            FormatNumber(dblXOrigin * 1000000) + " us" + vbCrLf
+   'strOutput = strOutput + "X reference = " + _
+   '            CStr(lngXReference) + vbCrLf
+   'strOutput = strOutput + "Y increment = " + _
+   '            FormatNumber(sngYIncrement * 1000) + " mV" + vbCrLf
+   'strOutput = strOutput + "Y origin = " + _
+   '            FormatNumber(sngYOrigin) + " V" + vbCrLf
+   'strOutput = strOutput + "Y reference = " + _
+   '            CStr(lngYReference) + vbCrLf
+   strOutput = strOutput + "Volts/Div = " + _
+               FormatNumber(lngVSteps * sngYIncrement / 8) + _
+               " V" + vbCrLf
+   strOutput = strOutput + "Offset = " + _
+               FormatNumber((lngVSteps / 2 - lngYReference) * _
+               sngYIncrement + sngYOrigin) + " V" + vbCrLf
+   strOutput = strOutput + "Sec/Div = " + _
+               FormatNumber(lngPoints * dblXIncrement / 10 * _
+               1000000) + " us" + vbCrLf
+   strOutput = strOutput + "Delay = " + _
+               FormatNumber(((lngPoints / 2 - lngXReference) * _
+               dblXIncrement + dblXOrigin) * 1000000) + " us" + vbCrLf
+
+   ' QUERY_WAVE_DATA - Outputs waveform data that is stored in a buffer.
+
+   ' Query the oscilloscope for the waveform data.
+   myScope.WriteString ":WAV:DATA?"
+
+   ' READ_WAVE_DATA - The wave data consists of two parts: the header,
+   ' and the actual waveform data followed by a new line (NL) character.
+   ' The query data has the following format:
+   '
+   '    &lt;header&gt;&lt;waveform_data&gt;&lt;NL&gt;
+   '
+   ' Where:
+   '    &lt;header&gt; = #800001000 (This is an example header)
+   ' The "#8" may be stripped off of the header and the remaining
+   ' numbers are the size, in bytes, of the waveform data block.  The
+   ' size can vary depending on the number of points acquired for the
+   ' waveform.  You can then read that number of bytes from the
+   ' oscilloscope and the terminating NL character.
+   '
+   Dim lngI As Long
+   Dim lngDataValue As Long
+
+   ' Unsigned integer bytes.
+   varQueryResult = myScope.ReadIEEEBlock(BinaryType_UI1)
+
+   For lngI = 0 To UBound(varQueryResult) _
+       Step (UBound(varQueryResult) / 20)   ' 20 points.
+     If intBytesPerData = 2 Then
+       lngDataValue = varQueryResult(lngI) * 256 _
+           + varQueryResult(lngI + 1)   ' 16-bit value.
+     Else
+       lngDataValue = varQueryResult(lngI)   ' 8-bit value.
+     End If
+     strOutput = strOutput + "Data point " + _
+       CStr(lngI / intBytesPerData) + ", " + _
+       FormatNumber((lngDataValue - lngYReference) _
+           * sngYIncrement + sngYOrigin) + " V, " + _
+       FormatNumber(((lngI / intBytesPerData - lngXReference) _
+           * sngXIncrement + dblXOrigin) * 1000000) + " us" + vbCrLf
+   Next lngI
+   MsgBox "Waveform data:" + vbCrLf + strOutput</pre><p>See complete example programs at: <a href="Examples.htm" title="Programming Examples"><i>Programming Examples</i></a></p></div></div></body></html>

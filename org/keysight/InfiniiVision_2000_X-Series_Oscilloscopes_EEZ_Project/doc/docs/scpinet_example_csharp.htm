@@ -1,0 +1,330 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>SCPI.NET Example in C#</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="scpinet_examples.htm" title="SCPI.NET Examples"><link rel="prev" href="scpinet_examples.htm" title="SCPI.NET Examples"><link rel="next" href="scpinet_example_vbnet.htm" title="SCPI.NET Example in Visual Basic .NET"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="scpinet_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>SCPI.NET Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="scpinet_example_csharp"></a>SCPI.NET Example in C#<a name="d0e53252"></a><a name="d0e53255"></a><a name="d0e53258"></a></h3></div></div></div><p>To compile and run this example in Microsoft Visual Studio
+    2008:</p><div class="orderedlist"><ol type="1"><li><p>Install the Agilent Command Expert software and the command set
+        for the oscilloscope.</p></li><li><p>Open Visual Studio.</p></li><li><p>Create a new Visual C#, Windows, Console Application
+        project.</p></li><li><p>Cut-and-paste the code that follows into the C# source
+        file.</p></li><li><p>Edit the program to use the address of your oscilloscope.</p></li><li><p>Add a reference to the SCPI.NET driver:</p><div class="orderedlist"><ol type="a"><li><p>Right-click the project you wish to modify (not the
+            solution) in the Solution Explorer window of the Microsoft Visual
+            Studio environment.</p></li><li><p>Choose <span class="guimenu">Add Reference...</span>.</p></li><li><p>In the Add Reference dialog, select the
+            <span class="guilabel">Browse</span> tab, and navigate to the
+            ScpiNetDrivers folder.</p><div class="itemizedlist"><ul type="disc"><li><p>Windows XP: C:\Documents and Settings\All
+                Users\Agilent\Command Expert\ScpiNetDrivers</p></li><li><p>Windows 7: C:\ProgramData\Agilent\Command
+                Expert\ScpiNetDrivers</p></li></ul></div></li><li><p>Select the .dll file for your oscilloscope, for example
+            <span class="guilabel">AgInfiniiVision2000X_01_20.dll</span>; then, click
+            <span class="guibutton">OK</span>.</p></li></ol></div></li><li><p>Build and run the program.</p></li></ol></div><p>For more information, see the SCPI.NET driver help that comes with
+    Agilent Command Expert.</p><pre class="programlisting">/*
+ * Agilent SCPI.NET Example in C#
+ * -------------------------------------------------------------------
+ * This program illustrates a few commonly used programming
+ * features of your Agilent oscilloscope.
+ * -------------------------------------------------------------------
+ */
+
+using System;
+using System.IO;
+using System.Text;
+using Agilent.CommandExpert.ScpiNet.AgInfiniiVision2000X_01_20;
+
+namespace InfiniiVision
+{
+  class ScpiNetInstrumentApp
+  {
+    private static AgInfiniiVision2000X myScope;
+
+    static void Main(string[] args)
+    {
+      try
+      {
+        string strScopeAddress;
+        //strScopeAddress = "a-mx3054a-60028.cos.agilent.com";
+        strScopeAddress = 
+          "TCPIP0::a-mx3054a-60028.cos.agilent.com::inst0::INSTR";
+        Console.WriteLine("Connecting to oscilloscope...");
+        Console.WriteLine();
+        myScope = new AgInfiniiVision2000X(strScopeAddress);
+        myScope.Transport.DefaultTimeout.Set(10000);
+
+        // Initialize - start from a known state.
+        Initialize();
+
+        // Capture data.
+        Capture();
+
+        // Analyze the captured waveform.
+        Analyze();
+
+        Console.WriteLine("Press any key to exit");
+        Console.ReadKey();
+      }
+      catch (System.ApplicationException err)
+      {
+        Console.WriteLine("*** SCPI.NET Error : " + err.Message);
+      }
+      catch (System.SystemException err)
+      {
+        Console.WriteLine("*** System Error Message : " + err.Message);
+      }
+      catch (System.Exception err)
+      {
+        System.Diagnostics.Debug.Fail("Unexpected Error");
+        Console.WriteLine("*** Unexpected Error : " + err.Message);
+      }
+      finally
+      {
+        //myScope.Dispose();
+      }
+
+    }
+
+    /*
+     * Initialize the oscilloscope to a known state.
+     * --------------------------------------------------------------
+     */
+    private static void Initialize()
+    {
+      string strResults;
+
+      // Get and display the device's *IDN? string.
+      myScope.SCPI.IDN.Query(out strResults);
+      Console.WriteLine("*IDN? result is: {0}", strResults);
+
+      // Clear status and load the default setup.
+      myScope.SCPI.CLS.Command();
+      myScope.SCPI.RST.Command();
+    }
+
+    /*
+     * Capture the waveform.
+     * --------------------------------------------------------------
+     */
+    private static void Capture()
+    {
+      string strResults;
+      double fResult;
+
+      // Use auto-scale to automatically configure oscilloscope.
+      myScope.SCPI.AUToscale.Command(null, null, null, null, null);
+
+      // Set trigger mode.
+      myScope.SCPI.TRIGger.MODE.Command("EDGE");
+      myScope.SCPI.TRIGger.MODE.Query(out strResults);
+      Console.WriteLine("Trigger mode: {0}", strResults);
+
+      // Set EDGE trigger parameters.
+      myScope.SCPI.TRIGger.EDGE.SOURce.Command("CHANnel1");
+      myScope.SCPI.TRIGger.EDGE.SOURce.Query(out strResults);
+      Console.WriteLine("Trigger edge source: {0}", strResults);
+
+      myScope.SCPI.TRIGger.EDGE.LEVel.Command(1.5, "CHANnel1");
+      myScope.SCPI.TRIGger.EDGE.LEVel.Query("CHANnel1", out fResult);
+      Console.WriteLine("Trigger edge level: {0:F2}", fResult);
+
+      myScope.SCPI.TRIGger.EDGE.SLOPe.Command("POSitive");
+      myScope.SCPI.TRIGger.EDGE.SLOPe.Query(out strResults);
+      Console.WriteLine("Trigger edge slope: {0}", strResults);
+
+      // Save oscilloscope configuration.
+      string[] strResultsArray;   // Results array.
+      int nLength;   // Number of bytes returned from instrument.
+      string strPath;
+
+      // Query and read setup string.
+      myScope.SCPI.SYSTem.SETup.Query(out strResultsArray);
+      nLength = strResultsArray.Length;
+
+      // Write setup string to file.
+      strPath = "c:\\scope\\config\\setup.stp";
+      File.WriteAllLines(strPath, strResultsArray);
+      Console.WriteLine("Setup bytes saved: {0}", nLength);
+
+
+      // Change settings with individual commands:
+
+      // Set vertical scale and offset.
+      myScope.SCPI.CHANnel.SCALe.Command(1, 0.05);
+      myScope.SCPI.CHANnel.SCALe.Query(1, out fResult);
+      Console.WriteLine("Channel 1 vertical scale: {0:F4}", fResult);
+
+      myScope.SCPI.CHANnel.OFFSet.Command(1, -1.5);
+      myScope.SCPI.CHANnel.OFFSet.Query(1, out fResult);
+      Console.WriteLine("Channel 1 vertical offset: {0:F4}", fResult);
+
+      // Set horizontal scale and offset.
+      myScope.SCPI.TIMebase.SCALe.Command(0.0002);
+      myScope.SCPI.TIMebase.SCALe.Query(out fResult);
+      Console.WriteLine("Timebase scale: {0:F4}", fResult);
+
+      myScope.SCPI.TIMebase.POSition.Command(0.0);
+      myScope.SCPI.TIMebase.POSition.Query(out fResult);
+      Console.WriteLine("Timebase position: {0:F2}", fResult);
+
+      // Set the acquisition type.
+      myScope.SCPI.ACQuire.TYPE.Command("NORMal");
+      myScope.SCPI.ACQuire.TYPE.Query(out strResults);
+      Console.WriteLine("Acquire type: {0}", strResults);
+
+      // Or, configure by loading a previously saved setup.
+      int nBytesWritten;
+
+      strPath = "c:\\scope\\config\\setup.stp";
+      strResultsArray = File.ReadAllLines(strPath);
+      nBytesWritten = strResultsArray.Length;
+
+      // Restore setup string.
+      myScope.SCPI.SYSTem.SETup.Command(strResultsArray);
+      Console.WriteLine("Setup bytes restored: {0}", nBytesWritten);
+
+      // Capture an acquisition using :DIGitize.
+      myScope.SCPI.DIGitize.Command("CHANnel1", null, null, null, null);
+    }
+
+    /*
+     * Analyze the captured waveform.
+     * --------------------------------------------------------------
+     */
+    private static void Analyze()
+    {
+      string strResults, source1, source2;
+      double fResult;
+
+      // Make a couple of measurements.
+      // -----------------------------------------------------------
+      myScope.SCPI.MEASure.SOURce.Command("CHANnel1", null);
+      myScope.SCPI.MEASure.SOURce.Query(out source1, out source2);
+      Console.WriteLine("Measure source: {0}", source1);
+
+      myScope.SCPI.MEASure.FREQuency.Command("CHANnel1");
+      myScope.SCPI.MEASure.FREQuency.Query("CHANnel1", out fResult);
+      Console.WriteLine("Frequency: {0:F4} kHz", fResult / 1000);
+
+      // Use direct command/query when commands not in command set.
+      myScope.Transport.Command.Invoke(":MEASure:VAMPlitude CHANnel1");
+      myScope.Transport.Query.Invoke(":MEASure:VAMPlitude? CHANnel1",
+        out strResults);
+      Console.WriteLine("Vertial amplitude: {0} V", strResults);
+
+      // Download the screen image.
+      // -----------------------------------------------------------
+      myScope.SCPI.HARDcopy.INKSaver.Command(false);
+
+      // Get the screen data.
+      byte[] byteResultsArray;   // Results array.
+      myScope.SCPI.DISPlay.DATA.Query("PNG", "COLor",
+        out byteResultsArray);
+      int nLength;   // Number of bytes returned from instrument.
+      nLength = byteResultsArray.Length;
+
+      // Store the screen data to a file.
+      string strPath;
+      strPath = "c:\\scope\\data\\screen.png";
+      FileStream fStream = File.Open(strPath, FileMode.Create);
+      fStream.Write(byteResultsArray, 0, nLength);
+      fStream.Close();
+      Console.WriteLine("Screen image ({0} bytes) written to {1}",
+          nLength, strPath);
+
+      // Download waveform data.
+      // -----------------------------------------------------------
+
+      // Set the waveform points mode.
+      myScope.SCPI.WAVeform.POINts.MODE.Command("RAW");
+      myScope.SCPI.WAVeform.POINts.MODE.Query(out strResults);
+      Console.WriteLine("Waveform points mode: {0}", strResults);
+
+      // Get the number of waveform points available.
+      myScope.SCPI.WAVeform.POINts.CommandPoints(10240);
+      int nPointsAvail;
+      myScope.SCPI.WAVeform.POINts.Query1(out nPointsAvail);
+      Console.WriteLine("Waveform points available: {0}", nPointsAvail);
+
+      // Set the waveform source.
+      myScope.SCPI.WAVeform.SOURce.Command("CHANnel1");
+      myScope.SCPI.WAVeform.SOURce.Query(out strResults);
+      Console.WriteLine("Waveform source: {0}", strResults);
+
+      // Choose the format of the data returned (WORD, BYTE, ASCII):
+      myScope.SCPI.WAVeform.FORMat.Command("BYTE");
+      myScope.SCPI.WAVeform.FORMat.Query(out strResults);
+      Console.WriteLine("Waveform format: {0}", strResults);
+
+      // Display the waveform settings:
+      int nFormat, nType, nPoints, nCount, nXreference, nYreference;
+      double dblXincrement, dblXorigin, dblYincrement, dblYorigin;
+      myScope.SCPI.WAVeform.PREamble.Query(
+        out nFormat,
+        out nType,
+        out nPoints,
+        out nCount,
+        out dblXincrement,
+        out dblXorigin,
+        out nXreference,
+        out dblYincrement,
+        out dblYorigin,
+        out nYreference);
+
+      if (nFormat == 0)
+      {
+        Console.WriteLine("Waveform format: BYTE");
+      }
+      else if (nFormat == 1)
+      {
+        Console.WriteLine("Waveform format: WORD");
+      }
+      else if (nFormat == 2)
+      {
+        Console.WriteLine("Waveform format: ASCii");
+      }
+
+      if (nType == 0)
+      {
+        Console.WriteLine("Acquire type: NORMal");
+      }
+      else if (nType == 1)
+      {
+        Console.WriteLine("Acquire type: PEAK");
+      }
+      else if (nType == 2)
+      {
+        Console.WriteLine("Acquire type: AVERage");
+      }
+      else if (nType == 3)
+      {
+        Console.WriteLine("Acquire type: HRESolution");
+      }
+
+      Console.WriteLine("Waveform points: {0:e}", nPoints);
+      Console.WriteLine("Waveform average count: {0:e}", nCount);
+      Console.WriteLine("Waveform X increment: {0:e}", dblXincrement);
+      Console.WriteLine("Waveform X origin: {0:e}", dblXorigin);
+      Console.WriteLine("Waveform X reference: {0:e}", nXreference);
+      Console.WriteLine("Waveform Y increment: {0:e}", dblYincrement);
+      Console.WriteLine("Waveform Y origin: {0:e}", dblYorigin);
+      Console.WriteLine("Waveform Y reference: {0:e}", nYreference);
+
+      // Read waveform data.
+      myScope.SCPI.WAVeform.DATA.QueryBYTE(out byteResultsArray);
+      nLength = byteResultsArray.Length;
+      Console.WriteLine("Number of data values: {0}", nLength);
+
+      // Set up output file:
+      strPath = "c:\\scope\\data\\waveform_data.csv";
+      if (File.Exists(strPath)) File.Delete(strPath);
+
+      // Open file for output.
+      StreamWriter writer = File.CreateText(strPath);
+
+      // Output waveform data in CSV format.
+      for (int i = 0; i &lt; nLength - 1; i++)
+        writer.WriteLine("{0:f9}, {1:f6}",
+            dblXorigin + ((float)i * dblXincrement),
+            (((float)byteResultsArray[i] - nYreference)
+            * dblYincrement) + dblYorigin);
+
+      // Close output file.
+      writer.Close();
+      Console.WriteLine("Waveform format BYTE data written to {0}",
+          strPath);
+    }
+  }
+}</pre></div></body></html>

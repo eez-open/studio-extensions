@@ -1,0 +1,35 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Example Oscilloscope Setup Code</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="other_setup_commands.htm" title="Using Other Oscilloscope Setup Commands"><link rel="prev" href="other_setup_commands.htm" title="Using Other Oscilloscope Setup Commands"><link rel="next" href="capture_with_digitize.htm" title="Capturing Data with the :DIGitize Command"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="other_setup_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Using Other Oscilloscope Setup Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="setup_code"></a>Example Oscilloscope Setup Code</h4></div></div></div><p>This program demonstrates the basic command structure used to
+      program the oscilloscope.</p><pre class="programlisting">' Initialize the instrument interface to a known state.
+myScope.IO.Clear
+myScope.IO.Timeout = 10000   ' Set interface timeout to 10 seconds.
+
+' Initialize the instrument to a preset state.
+myScope.WriteString "*RST"
+
+' Set the time base mode to normal with the horizontal time at
+' 50 ms/div with 0 s of delay referenced at the center of the
+' graticule.
+myScope.WriteString ":TIMebase:RANGe 5E-4"   ' Time base to 50 us/div.
+myScope.WriteString ":TIMebase:DELay 0"      ' Delay to zero.
+myScope.WriteString ":TIMebase:REFerence CENTer"   ' Display ref. at
+                                                   ' center.
+
+' Set the vertical range to 1.6 volts full scale with center screen
+' at -0.4 volts with 10:1 probe attenuation and DC coupling.
+myScope.WriteString ":CHANnel1:PROBe 10"     ' Probe attenuation
+                                             ' to 10:1.
+myScope.WriteString ":CHANnel1:RANGe 1.6"    ' Vertical range
+                                             ' 1.6 V full scale.
+myScope.WriteString ":CHANnel1:OFFSet -0.4"  ' Offset to -0.4.
+myScope.WriteString ":CHANnel1:COUPling DC"  ' Coupling to DC.
+
+' Configure the instrument to trigger at -0.4 volts with normal
+' triggering.
+myScope.WriteString ":TRIGger:SWEep NORMal"   ' Normal triggering.
+myScope.WriteString ":TRIGger:LEVel -0.4"     ' Trigger level to -0.4.
+myScope.WriteString ":TRIGger:SLOPe POSitive" ' Trigger on pos. slope.
+
+' Configure the instrument for normal acquisition.
+myScope.WriteString ":ACQuire:TYPE NORMal"   ' Normal acquisition.</pre></div></body></html>

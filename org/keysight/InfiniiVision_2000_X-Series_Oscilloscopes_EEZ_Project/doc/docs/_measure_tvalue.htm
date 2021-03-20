@@ -1,0 +1,28 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:MEASure:TVALue</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="measure_commands.htm" title=":MEASure Commands"><link rel="prev" href="_measure_tedge.htm" title=":MEASure:TEDGe"><link rel="next" href="_measure_vamplitude.htm" title=":MEASure:VAMPlitude"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="measure_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:MEASure Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="refentry" lang="en"><a name="_measure_tvalue"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>:MEASure:TVALue — <a href="core_commands.htm" title="Core Commands"><img src="images/../images/core.gif"></a></p></div><div class="refsection" lang="en"><a name="_measure_tvalue_query"></a><h2>Query Syntax</h2><pre class="synopsis">:MEASure:TVALue? &lt;value&gt;, [&lt;slope&gt;]&lt;occurrence&gt;[,&lt;source&gt;]</pre><pre class="synopsis">&lt;value&gt; ::= the vertical value that the waveform must cross.  The
+            value can be volts or a math function value such as dB,
+            Vs, or V/s.</pre><pre class="synopsis">&lt;slope&gt; ::= direction of the waveform.  A rising slope is indicated
+            by a plus sign (+).  A falling edge is indicated by a
+            minus sign (-).</pre><pre class="synopsis">&lt;occurrence&gt; ::= the transition to be reported. If the occurrence
+                 number is one, the first crossing is reported.  If
+                 the number is two, the second crossing is reported,
+                 etc.</pre><pre class="synopsis">&lt;source&gt; ::= {CHANnel&lt;n&gt; | FUNCtion | MATH | WMEMory&lt;r&gt;}</pre><pre class="synopsis">&lt;n&gt; ::= 1 to (# analog channels) in NR1 format</pre><pre class="synopsis">&lt;r&gt; ::= 1-2 in NR1 format</pre><p><a name="d0e26518"></a><a name="d0e26521"></a><a name="d0e26524"></a><a name="d0e26527"></a><a name="d0e26530"></a>When the :MEASure:TVALue? query is sent, the displayed
+    signal is searched for the specified value level and transition. The time
+    interval between the trigger event and this defined occurrence is returned
+    as the response to the query.</p><p>The specified value can be negative or positive. To specify a
+    negative value, use a minus sign (-). The sign of the slope selects a
+    rising (+) or falling (-) edge. If no sign is specified for the slope, it
+    is assumed to be the rising edge.</p><p>The magnitude of the occurrence defines the occurrence to be
+    reported. For example, +3 returns the time for the third time the waveform
+    crosses the specified value level in the positive direction. Once this
+    value crossing is found, the oscilloscope reports the time at that
+    crossing in seconds, with the trigger point (time zero) as the
+    reference.</p><p>If the specified crossing cannot be found, the oscilloscope reports
+    +9.9E+37. This value is returned if the waveform does not cross the
+    specified value, or if the waveform does not cross the specified value for
+    the specified number of times in the direction specified.</p><p>If the optional source parameter is specified, the current source is
+    modified.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>This query is not available if the source is FFT (Fast Fourier
+      Transform).</p></td></tr></table></div></div><div class="refsection" lang="en"><a name="d0e26545"></a><h2>Return Format</h2><pre class="synopsis">&lt;value&gt;&lt;NL&gt;</pre><pre class="synopsis">&lt;value&gt; ::= time in seconds of the specified value crossing in
+            NR3 format</pre></div><div class="refsection" lang="en"><a name="d0e26552"></a><h2>See Also</h2><div class="itemizedlist"><ul type="disc"><li><p><a href="measure_commands.htm#measure_commands_overview">Introduction to :MEASure
+  Commands</a></p></li><li><p><a href="_measure_tedge.htm" title=":MEASure:TEDGe">:MEASure:TEDGe</a></p></li><li><p><a href="_measure_vtime.htm" title=":MEASure:VTIMe">:MEASure:VTIMe</a></p></li></ul></div></div></div></body></html>

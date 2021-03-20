@@ -1,0 +1,39 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:TRIGger:GLITch Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="trigger_commands.htm" title=":TRIGger Commands"><link rel="prev" href="_trigger_edge_source.htm" title=":TRIGger[:EDGE]:SOURce"><link rel="next" href="_trigger_glitch_greaterthan.htm" title=":TRIGger:GLITch:GREaterthan"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="trigger_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:TRIGger Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sub_trigger_glitch"></a>:TRIGger:GLITch Commands<a name="d0e41237"></a><a name="d0e41240"></a></h2></div></div></div><div class="table"><a name="d0e41243"></a><p class="title"><b>:TRIGger:GLITch Commands Summary:</b></p><div class="table-contents"><table summary=":TRIGger:GLITch Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_trigger_glitch_greaterthan.htm#_trigger_glitch_greaterthan_command" title="Command Syntax">:TRIGger:GLITch:GREaterthan
+        &lt;greater_than_time&gt;[suffix]</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_glitch_greaterthan.htm#_trigger_glitch_greaterthan_query" title="Query Syntax">:TRIGger:GLITch:GREaterthan?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;greater_than_time&gt; ::= floating-point
+        number in NR3 format</code></strong></p><p><strong class="userinput"><code>[suffix] ::=
+        {s | ms | us | ns | ps}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_glitch_lessthan.htm#_trigger_glitch_lessthan_command" title="Command Syntax">:TRIGger:GLITch:LESSthan
+        &lt;less_than_time&gt;[suffix]</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_glitch_lessthan.htm#_trigger_glitch_lessthan_query" title="Query Syntax">:TRIGger:GLITch:LESSthan?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;less_than_time&gt; ::= floating-point
+        number in NR3 format</code></strong></p><p><strong class="userinput"><code>[suffix] ::=
+        {s | ms | us | ns | ps}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_glitch_level.htm#_trigger_glitch_level_command" title="Command Syntax">:TRIGger:GLITch:LEVel
+        &lt;level&gt; [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_glitch_level.htm#_trigger_glitch_level_query" title="Query Syntax">:TRIGger:GLITch:LEVel?</a></code></strong></td><td><p><strong class="userinput"><code>For internal triggers, &lt;level&gt; ::= .75 x
+        full-scale voltage from center screen in NR3
+        format.</code></strong></p><p><strong class="userinput"><code>For external triggers (DSO
+        models), &lt;level&gt; ::= ±(external range setting) in NR3
+        format.</code></strong></p><p><strong class="userinput"><code>For digital channels (MSO
+        models), &lt;level&gt; ::= ±8
+        V.</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | EXTernal} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt;
+        ::= 0 to (# digital channels - 1) in NR1
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_glitch_polarity.htm#_trigger_glitch_polarity_command" title="Command Syntax">:TRIGger:GLITch:POLarity
+        &lt;polarity&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_glitch_polarity.htm#_trigger_glitch_polarity_query" title="Query Syntax">:TRIGger:GLITch:POLarity?</a></code></strong></td><td><strong class="userinput"><code>&lt;polarity&gt; ::= {POSitive |
+        NEGative}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_glitch_qualifier.htm#_trigger_glitch_qualifier_command" title="Command Syntax">:TRIGger:GLITch:QUALifier
+        &lt;qualifier&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_glitch_qualifier.htm#_trigger_glitch_qualifier_query" title="Query Syntax">:TRIGger:GLITch:QUALifier?</a></code></strong></td><td><strong class="userinput"><code>&lt;qualifier&gt; ::= {GREaterthan | LESSthan |
+        RANGe}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_glitch_range.htm#_trigger_glitch_range_command" title="Command Syntax">:TRIGger:GLITch:RANGe
+        &lt;less_than_time&gt;[suffix],
+        &lt;greater_than_time&gt;[suffix]</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_glitch_range.htm#_trigger_glitch_range_query" title="Query Syntax">:TRIGger:GLITch:RANGe?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;less_than_time&gt; ::= 15&nbsp;ns to
+        10&nbsp;seconds in NR3
+        format</code></strong></p><p><strong class="userinput"><code>&lt;greater_than_time&gt;
+        ::= 10&nbsp;ns to 9.99&nbsp;seconds in NR3
+        format</code></strong></p><p><strong class="userinput"><code>[suffix] ::= {s | ms | us |
+        ns | ps}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_glitch_source.htm#_trigger_glitch_source_command" title="Command Syntax">:TRIGger:GLITch:SOURce
+        &lt;source&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_glitch_source.htm#_trigger_glitch_source_query" title="Query Syntax">:TRIGger:GLITch:SOURce?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        DIGital&lt;d&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::= 0 to (#
+        digital channels - 1) in NR1 format</code></strong></p></td></tr></tbody></table></div></div><br class="table-break"></div></body></html>

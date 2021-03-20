@@ -1,0 +1,556 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>SICL Example in Visual Basic</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="sicl_examples.htm" title="SICL Examples"><link rel="prev" href="sicl_example_c.htm" title="SICL Example in C"><link rel="next" href="scpinet_examples.htm" title="SCPI.NET Examples"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="sicl_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>SICL Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sicl_example_vb"></a>SICL Example in Visual Basic<a name="d0e53153"></a><a name="d0e53156"></a><a name="d0e53159"></a></h3></div></div></div><p>To run this example in Visual Basic for Applications:</p><div class="orderedlist"><ol type="1"><li><p>Start the application that provides Visual Basic for
+          Applications (for example, Microsoft Excel).</p></li><li><p>Press ALT+F11 to launch the Visual Basic editor.</p></li><li><p>Add the sicl32.bas file to your project:</p><div class="orderedlist"><ol type="a"><li><p>Choose <span class="guimenuitem">File&gt;Import
+              File...</span>.</p></li><li><p>Navigate to the header file, sicl32.bas (installed with
+              Agilent IO Libraries Suite and found in the Program
+              Files\Agilent\IO Libraries Suite\include directory), select it,
+              and click <span class="guibutton">Open</span>.</p></li></ol></div></li><li><p>Choose <span class="guimenuitem">Insert&gt;Module</span>.</p></li><li><p>Cut-and-paste the code that follows into the editor.</p></li><li><p>Edit the program to use the SICL address of your oscilloscope,
+          and save the changes.</p></li><li><p>Run the program.</p></li></ol></div><pre class="programlisting">'
+' Agilent SICL Example in Visual Basic
+' -------------------------------------------------------------------
+' This program illustrates a few commonly-used programming
+' features of your Agilent oscilloscope.
+' -------------------------------------------------------------------
+
+Option Explicit
+
+Public id As Integer   ' Session to instrument.
+
+' Declare variables to hold numeric values returned by
+' ivscanf/ifread.
+Public dblQueryResult As Double
+Public Const ByteArraySize = 5000000
+Public retCount As Long
+Public byteArray(ByteArraySize) As Byte
+
+' Declare fixed length string variable to hold string value returned
+' by ivscanf.
+Public strQueryResult As String * 200
+
+' For Sleep subroutine.
+Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+'
+' Main Program
+' -------------------------------------------------------------------
+
+Sub Main()
+
+  On Error GoTo ErrorHandler
+  
+  ' Open a device session using the SICL_ADDRESS.
+  id = iopen("usb0[2391::6054::US50210029::0]")
+  Call itimeout(id, 5000)
+
+  ' Initialize - start from a known state.
+  Initialize
+  
+  ' Capture data.
+  Capture
+  
+  ' Analyze the captured waveform.
+  Analyze
+  
+  ' Close the vi session and the resource manager session.
+  Call iclose(id)
+  
+  Exit Sub
+  
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Sub
+
+'
+' Initialize the oscilloscope to a known state.
+' -------------------------------------------------------------------
+
+Private Sub Initialize()
+
+  On Error GoTo ErrorHandler
+  
+  ' Clear the interface.
+  Call iclear(id)
+  
+  ' Get and display the device's *IDN? string.
+  strQueryResult = DoQueryString("*IDN?")
+  MsgBox "Result is: " + RTrim(strQueryResult), vbOKOnly, "*IDN? Result"
+
+  ' Clear status and load the default setup.
+  DoCommand "*CLS"
+  DoCommand "*RST"
+  
+  Exit Sub
+  
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Sub
+
+'
+' Capture the waveform.
+' -------------------------------------------------------------------
+
+Private Sub Capture()
+
+  On Error GoTo ErrorHandler
+  
+  ' Use auto-scale to automatically configure oscilloscope.
+  ' -----------------------------------------------------------------
+  DoCommand ":AUToscale"
+  
+  ' Set trigger mode (EDGE, PULSe, PATTern, etc., and input source.
+  DoCommand ":TRIGger:MODE EDGE"
+  Debug.Print "Trigger mode: " + _
+      DoQueryString(":TRIGger:MODE?")
+
+  ' Set EDGE trigger parameters.
+  DoCommand ":TRIGger:EDGE:SOURCe CHANnel1"
+  Debug.Print "Trigger edge source: " + _
+      DoQueryString(":TRIGger:EDGE:SOURce?")
+
+  DoCommand ":TRIGger:EDGE:LEVel 1.5"
+  Debug.Print "Trigger edge level: " + _
+      DoQueryString(":TRIGger:EDGE:LEVel?")
+
+  DoCommand ":TRIGger:EDGE:SLOPe POSitive"
+  Debug.Print "Trigger edge slope: " + _
+      DoQueryString(":TRIGger:EDGE:SLOPe?")
+
+  ' Save oscilloscope configuration.
+  ' -----------------------------------------------------------------
+  Dim lngSetupStringSize As Long
+  lngSetupStringSize = DoQueryIEEEBlock_Bytes(":SYSTem:SETup?")
+  Debug.Print "Setup bytes saved: " + CStr(lngSetupStringSize)
+
+  ' Output setup string to a file:
+  Dim strPath As String
+  strPath = "c:\scope\config\setup.dat"
+  If Len(Dir(strPath)) Then
+    Kill strPath   ' Remove file if it exists.
+  End If
+
+  ' Open file for output.
+  Dim hFile As Long
+  hFile = FreeFile
+  Open strPath For Binary Access Write Lock Write As hFile
+  Dim lngI As Long
+  For lngI = 0 To lngSetupStringSize - 1
+    Put hFile, , byteArray(lngI)   ' Write data.
+  Next lngI
+  Close hFile   ' Close file.
+  
+  ' Change settings with individual commands:
+  ' -----------------------------------------------------------------
+  
+  ' Set vertical scale and offset.
+  DoCommand ":CHANnel1:SCALe 0.05"
+  Debug.Print "Channel 1 vertical scale: " + _
+      DoQueryString(":CHANnel1:SCALe?")
+
+  DoCommand ":CHANnel1:OFFSet -1.5"
+  Debug.Print "Channel 1 vertical offset: " + _
+      DoQueryString(":CHANnel1:OFFSet?")
+
+  ' Set horizontal scale and position.
+  DoCommand ":TIMebase:SCALe 0.0002"
+  Debug.Print "Timebase scale: " + _
+      DoQueryString(":TIMebase:SCALe?")
+
+  DoCommand ":TIMebase:POSition 0.0"
+  Debug.Print "Timebase position: " + _
+      DoQueryString(":TIMebase:POSition?")
+
+  ' Set the acquisition type (NORMal, PEAK, AVERage, or HRESolution).
+  DoCommand ":ACQuire:TYPE NORMal"
+  Debug.Print "Acquire type: " + _
+      DoQueryString(":ACQuire:TYPE?")
+      
+  ' Or, configure by loading a previously saved setup.
+  ' -----------------------------------------------------------------
+  strPath = "c:\scope\config\setup.dat"
+  Open strPath For Binary Access Read As hFile   ' Open file for input.
+  Dim lngSetupFileSize As Long
+  lngSetupFileSize = LOF(hFile)  ' Length of file.
+  Get hFile, , byteArray   ' Read data.
+  Close hFile   ' Close file.
+  ' Write setup string back to oscilloscope using ":SYSTem:SETup"
+  ' command:
+  Dim lngRestored As Long
+  lngRestored = DoCommandIEEEBlock(":SYSTem:SETup", lngSetupFileSize)
+  Debug.Print "Setup bytes restored: " + CStr(lngRestored)
+
+  ' Capture an acquisition using :DIGitize.
+  ' -----------------------------------------------------------------
+  DoCommand ":DIGitize CHANnel1"
+  
+  Exit Sub
+
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Sub
+
+'
+' Analyze the captured waveform.
+' -------------------------------------------------------------------
+
+Private Sub Analyze()
+
+  On Error GoTo ErrorHandler
+  
+  ' Make a couple of measurements.
+  ' -----------------------------------------------------------------
+  DoCommand ":MEASure:SOURce CHANnel1"
+  Debug.Print "Measure source: " + _
+      DoQueryString(":MEASure:SOURce?")
+
+  DoCommand ":MEASure:FREQuency"
+  dblQueryResult = DoQueryNumber(":MEASure:FREQuency?")
+  MsgBox "Frequency:" + vbCrLf + _
+      FormatNumber(dblQueryResult / 1000, 4) + " kHz"
+
+  DoCommand ":MEASure:VAMPlitude"
+  dblQueryResult = DoQueryNumber(":MEASure:VAMPlitude?")
+  MsgBox "Vertial amplitude:" + vbCrLf + _
+      FormatNumber(dblQueryResult, 4) + " V"
+
+  ' Download the screen image.
+  ' -----------------------------------------------------------------
+  DoCommand ":HARDcopy:INKSaver OFF"
+  
+  ' Get screen image.
+  Dim lngBlockSize As Long
+  lngBlockSize = DoQueryIEEEBlock_Bytes(":DISPlay:DATA? PNG, COLor")
+  Debug.Print "Screen image bytes: " + CStr(lngBlockSize)
+
+  ' Save screen image to a file:
+  Dim strPath As String
+  strPath = "c:\scope\data\screen.png"
+  If Len(Dir(strPath)) Then
+    Kill strPath   ' Remove file if it exists.
+  End If
+  Dim hFile As Long
+  hFile = FreeFile
+  Open strPath For Binary Access Write Lock Write As hFile
+  Dim lngI As Long
+  ' Skip past header.
+  For lngI = CInt(Chr(byteArray(1))) + 2 To lngBlockSize - 1
+    Put hFile, , byteArray(lngI)   ' Write data.
+  Next lngI
+  Close hFile   ' Close file.
+  MsgBox "Screen image written to " + strPath
+  
+  ' Download waveform data.
+  ' -----------------------------------------------------------------
+  
+  ' Set the waveform points mode.
+  DoCommand ":WAVeform:POINts:MODE RAW"
+  Debug.Print "Waveform points mode: " + _
+      DoQueryString(":WAVeform:POINts:MODE?")
+
+  ' Get the number of waveform points available.
+  DoCommand ":WAVeform:POINts 10240"
+  Debug.Print "Waveform points available: " + _
+      DoQueryString(":WAVeform:POINts?")
+
+  ' Set the waveform source.
+  DoCommand ":WAVeform:SOURce CHANnel1"
+  Debug.Print "Waveform source: " + _
+      DoQueryString(":WAVeform:SOURce?")
+
+  ' Choose the format of the data returned (WORD, BYTE, ASCII):
+  DoCommand ":WAVeform:FORMat BYTE"
+  Debug.Print "Waveform format: " + _
+      DoQueryString(":WAVeform:FORMat?")
+
+  ' Display the waveform settings:
+  Dim Preamble() As Double
+  Dim intFormat As Integer
+  Dim intType As Integer
+  Dim lngPoints As Long
+  Dim lngCount As Long
+  Dim dblXIncrement As Double
+  Dim dblXOrigin As Double
+  Dim lngXReference As Long
+  Dim sngYIncrement As Single
+  Dim sngYOrigin As Single
+  Dim lngYReference As Long
+  
+  Preamble() = DoQueryNumbers(":WAVeform:PREamble?")
+  
+  intFormat = Preamble(0)
+  intType = Preamble(1)
+  lngPoints = Preamble(2)
+  lngCount = Preamble(3)
+  dblXIncrement = Preamble(4)
+  dblXOrigin = Preamble(5)
+  lngXReference = Preamble(6)
+  sngYIncrement = Preamble(7)
+  sngYOrigin = Preamble(8)
+  lngYReference = Preamble(9)
+  
+  If intFormat = 0 Then
+    Debug.Print "Waveform format: BYTE"
+  ElseIf intFormat = 1 Then
+    Debug.Print "Waveform format: WORD"
+  ElseIf intFormat = 2 Then
+    Debug.Print "Waveform format: ASCii"
+  End If
+  
+  If intType = 0 Then
+    Debug.Print "Acquisition type: NORMal"
+  ElseIf intType = 1 Then
+    Debug.Print "Acquisition type: PEAK"
+  ElseIf intType = 2 Then
+    Debug.Print "Acquisition type: AVERage"
+  ElseIf intType = 3 Then
+    Debug.Print "Acquisition type: HRESolution"
+  End If
+  
+  Debug.Print "Waveform points: " + _
+      FormatNumber(lngPoints, 0)
+      
+  Debug.Print "Waveform average count: " + _
+      FormatNumber(lngCount, 0)
+      
+  Debug.Print "Waveform X increment: " + _
+      Format(dblXIncrement, "Scientific")
+  
+  Debug.Print "Waveform X origin: " + _
+      Format(dblXOrigin, "Scientific")
+  
+  Debug.Print "Waveform X reference: " + _
+      FormatNumber(lngXReference, 0)
+      
+  Debug.Print "Waveform Y increment: " + _
+      Format(sngYIncrement, "Scientific")
+  
+  Debug.Print "Waveform Y origin: " + _
+      FormatNumber(sngYOrigin, 0)
+  
+  Debug.Print "Waveform Y reference: " + _
+      FormatNumber(lngYReference, 0)
+      
+  ' Get the waveform data
+  Dim lngNumBytes As Long
+  lngNumBytes = DoQueryIEEEBlock_Bytes(":WAVeform:DATA?")
+  Debug.Print "Number of data values: " + _
+      CStr(lngNumBytes - CInt(Chr(byteArray(1))) - 2)
+  
+  ' Set up output file:
+  strPath = "c:\scope\data\waveform_data.csv"
+
+  ' Open file for output.
+  Open strPath For Output Access Write Lock Write As hFile
+  
+  ' Output waveform data in CSV format.
+  Dim lngDataValue As Long
+  
+  ' Skip past header.
+  For lngI = CInt(Chr(byteArray(1))) + 2 To lngNumBytes - 2
+    lngDataValue = CLng(byteArray(lngI))
+    
+    ' Write time value, voltage value.
+    Print #hFile, _
+        FormatNumber(dblXOrigin + (lngI * dblXIncrement), 9) + _
+        ", " + _
+        FormatNumber(((lngDataValue - lngYReference) * _
+        sngYIncrement) + sngYOrigin)
+        
+  Next lngI
+  
+  ' Close output file.
+  Close hFile   ' Close file.
+  MsgBox "Waveform format BYTE data written to " + _
+      "c:\scope\data\waveform_data.csv."
+      
+  Exit Sub
+
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Sub
+
+Private Sub DoCommand(command As String)
+
+  On Error GoTo ErrorHandler
+  
+  Call ivprintf(id, command + vbLf)
+  
+  CheckInstrumentErrors
+  
+  Exit Sub
+
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Sub
+
+Private Function DoCommandIEEEBlock(command As String, _
+    lngBlockSize As Long)
+
+  On Error GoTo ErrorHandler
+  
+  ' Send command part.
+  Call ivprintf(id, command + " ")
+  
+  ' Write definite-length block bytes.
+  Call ifwrite(id, byteArray(), lngBlockSize, vbNull, retCount)
+  
+  ' retCount is now actual number of bytes written.
+  DoCommandIEEEBlock = retCount
+  
+  CheckInstrumentErrors
+  
+  Exit Function
+
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Function
+
+Private Function DoQueryString(query As String) As String
+
+  Dim actual As Long
+
+  On Error GoTo ErrorHandler
+  
+  Dim strResult As String * 200
+  
+  Call ivprintf(id, query + vbLf)
+  Call ivscanf(id, "%200t", strResult)
+  DoQueryString = strResult
+  
+  CheckInstrumentErrors
+  
+  Exit Function
+  
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Function
+
+Private Function DoQueryNumber(query As String) As Double
+
+  On Error GoTo ErrorHandler
+  
+  Dim dblResult As Double
+  
+  Call ivprintf(id, query + vbLf)
+  Call ivscanf(id, "%lf" + vbLf, dblResult)
+  DoQueryNumber = dblResult
+  
+  CheckInstrumentErrors
+  
+  Exit Function
+  
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Function
+
+Private Function DoQueryNumbers(query As String) As Double()
+
+  On Error GoTo ErrorHandler
+  
+  Dim dblResults(10) As Double
+  
+  Call ivprintf(id, query + vbLf)
+  Call ivscanf(id, "%,10lf" + vbLf, dblResults)
+  DoQueryNumbers = dblResults
+  
+  CheckInstrumentErrors
+  
+  Exit Function
+  
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Function
+
+Private Function DoQueryIEEEBlock_Bytes(query As String) As Long
+
+  On Error GoTo ErrorHandler
+  
+  ' Send query.
+  Call ivprintf(id, query + vbLf)
+  
+  ' Read definite-length block bytes.
+  Sleep 2000   ' Delay before reading data.
+  Call ifread(id, byteArray(), ByteArraySize, vbNull, retCount)
+  
+  ' Get number of block length digits.
+  Dim intLengthDigits As Integer
+  intLengthDigits = CInt(Chr(byteArray(1)))
+  
+  ' Get block length from those digits.
+  Dim strBlockLength As String
+  strBlockLength = ""
+  Dim i As Integer
+  For i = 2 To intLengthDigits + 1
+    strBlockLength = strBlockLength + Chr(byteArray(i))
+  Next
+  
+  ' Return number of bytes in block plus header.
+  DoQueryIEEEBlock_Bytes = CLng(strBlockLength) + intLengthDigits + 2
+  
+  CheckInstrumentErrors
+  
+  Exit Function
+    
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Function
+
+Private Sub CheckInstrumentErrors()
+  
+  On Error GoTo ErrorHandler
+  
+  Dim strErrVal As String * 200
+  Dim strOut As String
+    
+  Call ivprintf(id, ":SYSTem:ERRor?" + vbLf)   ' Query any errors data.
+  Call ivscanf(id, "%200t", strErrVal)   ' Read: Errnum,"Error String".
+  While Val(strErrVal) &lt;&gt; 0             ' End if find: +0,"No Error".
+    strOut = strOut + "INST Error: " + strErrVal
+    Call ivprintf(id, ":SYSTem:ERRor?" + vbLf)   ' Request error message.
+    Call ivscanf(id, "%200t", strErrVal)   ' Read error message.
+  Wend
+  
+  If Not strOut = "" Then
+    MsgBox strOut, vbExclamation, "INST Error Messages"
+    Call iflush(id, I_BUF_READ Or I_BUF_WRITE)
+    
+  End If
+    
+  Exit Sub
+
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Sub</pre></div></body></html>

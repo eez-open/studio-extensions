@@ -1,0 +1,534 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>VISA Example in Visual Basic</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="visa_examples.htm" title="VISA Examples"><link rel="prev" href="visa_example_c.htm" title="VISA Example in C"><link rel="next" href="visa_example_csharp.htm" title="VISA Example in C#"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="visa_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>VISA Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="visa_example_vb"></a>VISA Example in Visual Basic<a name="d0e52801"></a><a name="d0e52804"></a><a name="d0e52807"></a></h3></div></div></div><p>To run this example in Visual Basic for Applications:</p><div class="orderedlist"><ol type="1"><li><p>Start the application that provides Visual Basic for
+          Applications (for example, Microsoft Excel).</p></li><li><p>Press ALT+F11 to launch the Visual Basic editor.</p></li><li><p>Add the visa32.bas file to your project:</p><div class="orderedlist"><ol type="a"><li><p>Choose <span class="guimenuitem">File&gt;Import
+              File...</span>.</p></li><li><p>Navigate to the header file, visa32.bas (installed with
+              Agilent IO Libraries Suite and found in the Program Files\IVI
+              Foundation\VISA\WinNT\include), select it, and click
+              <span class="guibutton">Open</span>.</p></li></ol></div></li><li><p>Choose <span class="guimenuitem">Insert&gt;Module</span>.</p></li><li><p>Cut-and-paste the code that follows into the editor.</p></li><li><p>Edit the program to use the VISA address of your oscilloscope,
+          and save the changes.</p></li><li><p>Run the program.</p></li></ol></div><pre class="programlisting">'
+' Agilent VISA Example in Visual Basic
+' -------------------------------------------------------------------
+' This program illustrates a few commonly-used programming
+' features of your Agilent oscilloscope.
+' -------------------------------------------------------------------
+
+Option Explicit
+
+Public err As Long   ' Error returned by VISA function calls.
+Public drm As Long   ' Session to Default Resource Manager.
+Public vi As Long    ' Session to instrument.
+
+' Declare variables to hold numeric values returned by
+' viVScanf/viVQueryf.
+Public dblQueryResult As Double
+Public Const ByteArraySize = 5000000
+Public retCount As Long
+Public byteArray(ByteArraySize) As Byte
+Public paramsArray(2) As Long
+Public Const DblArraySize = 20
+Public dblArray(DblArraySize) As Double
+
+' Declare fixed length string variable to hold string value returned
+' by viVScanf/viVQueryf.
+Public strQueryResult As String * 200
+
+' For Sleep subroutine.
+Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+'
+' Main Program
+' -------------------------------------------------------------------
+
+Sub Main()
+
+  ' Open the default resource manager session.
+  err = viOpenDefaultRM(drm)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError drm
+
+  ' Open the session using the oscilloscope's VISA address.
+  err = viOpen(drm, _
+      "USB0::0x0957::0x17A6::US50210029::0::INSTR", 0, 15000, vi)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError drm
+  
+  ' Set the I/O timeout to ten seconds.
+  err = viSetAttribute(vi, VI_ATTR_TMO_VALUE, 10000)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+
+  ' Initialize - start from a known state.
+  Initialize
+  
+  ' Capture data.
+  Capture
+  
+  ' Analyze the captured waveform.
+  Analyze
+  
+  ' Close the vi session and the resource manager session.
+  err = viClose(vi)
+  err = viClose(drm)
+
+End Sub
+
+'
+' Initialize the oscilloscope to a known state.
+' -------------------------------------------------------------------
+
+Private Sub Initialize()
+
+  ' Clear the interface.
+  err = viClear(vi)
+  If Not (err = VI_SUCCESS) Then HandleVISAError vi
+  
+  ' Get and display the device's *IDN? string.
+  strQueryResult = DoQueryString("*IDN?")
+  MsgBox "*IDN? string: " + strQueryResult, vbOKOnly, "*IDN? Result"
+
+  ' Clear status and load the default setup.
+  DoCommand "*CLS"
+  DoCommand "*RST"
+  
+End Sub
+
+'
+' Capture the waveform.
+' -------------------------------------------------------------------
+
+Private Sub Capture()
+
+  ' Use auto-scale to automatically configure oscilloscope.
+  ' -----------------------------------------------------------------
+  DoCommand ":AUToscale"
+  
+  ' Set trigger mode (EDGE, PULSe, PATTern, etc., and input source.
+  DoCommand ":TRIGger:MODE EDGE"
+  Debug.Print "Trigger mode: " + _
+      DoQueryString(":TRIGger:MODE?")
+
+  ' Set EDGE trigger parameters.
+  DoCommand ":TRIGger:EDGE:SOURCe CHANnel1"
+  Debug.Print "Trigger edge source: " + _
+      DoQueryString(":TRIGger:EDGE:SOURce?")
+
+  DoCommand ":TRIGger:EDGE:LEVel 1.5"
+  Debug.Print "Trigger edge level: " + _
+      DoQueryString(":TRIGger:EDGE:LEVel?")
+
+  DoCommand ":TRIGger:EDGE:SLOPe POSitive"
+  Debug.Print "Trigger edge slope: " + _
+      DoQueryString(":TRIGger:EDGE:SLOPe?")
+
+  ' Save oscilloscope configuration.
+  ' -----------------------------------------------------------------
+  Dim lngSetupStringSize As Long
+  lngSetupStringSize = DoQueryIEEEBlock_Bytes(":SYSTem:SETup?")
+  Debug.Print "Setup bytes saved: " + CStr(lngSetupStringSize)
+
+  ' Output setup string to a file:
+  Dim strPath As String
+  strPath = "c:\scope\config\setup.dat"
+  If Len(Dir(strPath)) Then
+    Kill strPath   ' Remove file if it exists.
+  End If
+
+  ' Open file for output.
+  Dim hFile As Long
+  hFile = FreeFile
+  Open strPath For Binary Access Write Lock Write As hFile
+  Dim lngI As Long
+  For lngI = 0 To lngSetupStringSize - 1
+    Put hFile, , byteArray(lngI)   ' Write data.
+  Next lngI
+  Close hFile   ' Close file.
+  
+  ' Change settings with individual commands:
+  ' -----------------------------------------------------------------
+  
+  ' Set vertical scale and offset.
+  DoCommand ":CHANnel1:SCALe 0.05"
+  Debug.Print "Channel 1 vertical scale: " + _
+      DoQueryString(":CHANnel1:SCALe?")
+
+  DoCommand ":CHANnel1:OFFSet -1.5"
+  Debug.Print "Channel 1 vertical offset: " + _
+      DoQueryString(":CHANnel1:OFFSet?")
+
+  ' Set horizontal scale and position.
+  DoCommand ":TIMebase:SCALe 0.0002"
+  Debug.Print "Timebase scale: " + _
+      DoQueryString(":TIMebase:SCALe?")
+
+  DoCommand ":TIMebase:POSition 0.0"
+  Debug.Print "Timebase position: " + _
+      DoQueryString(":TIMebase:POSition?")
+
+  ' Set the acquisition type (NORMal, PEAK, AVERage, or HRESolution).
+  DoCommand ":ACQuire:TYPE NORMal"
+  Debug.Print "Acquire type: " + _
+      DoQueryString(":ACQuire:TYPE?")
+      
+  ' Or, configure by loading a previously saved setup.
+  ' -----------------------------------------------------------------
+  strPath = "c:\scope\config\setup.dat"
+  Open strPath For Binary Access Read As hFile   ' Open file for input.
+  Dim lngSetupFileSize As Long
+  lngSetupFileSize = LOF(hFile)  ' Length of file.
+  Get hFile, , byteArray   ' Read data.
+  Close hFile   ' Close file.
+  ' Write learn string back to oscilloscope using ":SYSTem:SETup"
+  ' command:
+  Dim lngRestored As Long
+  lngRestored = DoCommandIEEEBlock(":SYSTem:SETup", lngSetupFileSize)
+  Debug.Print "Setup bytes restored: " + CStr(lngRestored)
+  
+  ' Capture an acquisition using :DIGitize.
+  ' -----------------------------------------------------------------
+  DoCommand ":DIGitize CHANnel1"
+
+End Sub
+
+'
+' Analyze the captured waveform.
+' -------------------------------------------------------------------
+
+Private Sub Analyze()
+
+  ' Make a couple of measurements.
+  ' -----------------------------------------------------------------
+  DoCommand ":MEASure:SOURce CHANnel1"
+  Debug.Print "Measure source: " + _
+      DoQueryString(":MEASure:SOURce?")
+
+  DoCommand ":MEASure:FREQuency"
+  dblQueryResult = DoQueryNumber(":MEASure:FREQuency?")
+  MsgBox "Frequency:" + vbCrLf + _
+      FormatNumber(dblQueryResult / 1000, 4) + " kHz"
+  
+  DoCommand ":MEASure:VAMPlitude"
+  dblQueryResult = DoQueryNumber(":MEASure:VAMPlitude?")
+  MsgBox "Vertial amplitude:" + vbCrLf + _
+      FormatNumber(dblQueryResult, 4) + " V"
+
+
+  ' Download the screen image.
+  ' -----------------------------------------------------------------
+  DoCommand ":HARDcopy:INKSaver OFF"
+  
+  ' Get screen image.
+  Dim lngBlockSize As Long
+  lngBlockSize = DoQueryIEEEBlock_Bytes(":DISPlay:DATA? PNG, COLor")
+  Debug.Print "Screen image bytes: " + CStr(lngBlockSize)
+
+  ' Save screen image to a file:
+  Dim strPath As String
+  strPath = "c:\scope\data\screen.png"
+  If Len(Dir(strPath)) Then
+    Kill strPath   ' Remove file if it exists.
+  End If
+  Dim hFile As Long
+  hFile = FreeFile
+  Open strPath For Binary Access Write Lock Write As hFile
+  Dim lngI As Long
+  For lngI = 0 To lngBlockSize - 1
+    Put hFile, , byteArray(lngI)   ' Write data.
+  Next lngI
+  Close hFile   ' Close file.
+  MsgBox "Screen image written to " + strPath
+  
+
+  ' Download waveform data.
+  ' -----------------------------------------------------------------
+  
+  ' Set the waveform points mode.
+  DoCommand ":WAVeform:POINts:MODE RAW"
+  Debug.Print "Waveform points mode: " + _
+      DoQueryString(":WAVeform:POINts:MODE?")
+
+  ' Get the number of waveform points available.
+  Debug.Print "Waveform points available: " + _
+      DoQueryString(":WAVeform:POINts?")
+
+  ' Set the waveform source.
+  DoCommand ":WAVeform:SOURce CHANnel1"
+  Debug.Print "Waveform source: " + _
+      DoQueryString(":WAVeform:SOURce?")
+
+  ' Choose the format of the data returned (WORD, BYTE, ASCII):
+  DoCommand ":WAVeform:FORMat BYTE"
+  Debug.Print "Waveform format: " + _
+      DoQueryString(":WAVeform:FORMat?")
+
+  ' Display the waveform settings:
+  Dim intFormat As Integer
+  Dim intType As Integer
+  Dim lngPoints As Long
+  Dim lngCount As Long
+  Dim dblXIncrement As Double
+  Dim dblXOrigin As Double
+  Dim lngXReference As Long
+  Dim sngYIncrement As Single
+  Dim lngYOrigin As Long
+  Dim lngYReference As Long
+  Dim strOutput As String
+
+  Dim lngNumNumbers As Long
+  lngNumNumbers = DoQueryNumbers(":WAVeform:PREamble?")
+
+  intFormat = dblArray(0)
+  intType = dblArray(1)
+  lngPoints = dblArray(2)
+  lngCount = dblArray(3)
+  dblXIncrement = dblArray(4)
+  dblXOrigin = dblArray(5)
+  lngXReference = dblArray(6)
+  sngYIncrement = dblArray(7)
+  lngYOrigin = dblArray(8)
+  lngYReference = dblArray(9)
+  
+  If intFormat = 0 Then
+    Debug.Print "Waveform format: BYTE"
+  ElseIf intFormat = 1 Then
+    Debug.Print "Waveform format: WORD"
+  ElseIf intFormat = 2 Then
+    Debug.Print "Waveform format: ASCii"
+  End If
+  
+  If intType = 0 Then
+    Debug.Print "Acquisition type: NORMal"
+  ElseIf intType = 1 Then
+    Debug.Print "Acquisition type: PEAK"
+  ElseIf intType = 2 Then
+    Debug.Print "Acquisition type: AVERage"
+  ElseIf intType = 3 Then
+    Debug.Print "Acquisition type: HRESolution"
+  End If
+  
+  Debug.Print "Waveform points: " + _
+      FormatNumber(lngPoints, 0)
+      
+  Debug.Print "Waveform average count: " + _
+      FormatNumber(lngCount, 0)
+      
+  Debug.Print "Waveform X increment: " + _
+      Format(dblXIncrement, "Scientific")
+  
+  Debug.Print "Waveform X origin: " + _
+      Format(dblXOrigin, "Scientific")
+  
+  Debug.Print "Waveform X reference: " + _
+      FormatNumber(lngXReference, 0)
+      
+  Debug.Print "Waveform Y increment: " + _
+      Format(sngYIncrement, "Scientific")
+  
+  Debug.Print "Waveform Y origin: " + _
+      FormatNumber(lngYOrigin, 0)
+  
+  Debug.Print "Waveform Y reference: " + _
+      FormatNumber(lngYReference, 0)
+      
+  ' Get the waveform data
+  Dim lngNumBytes As Long
+  lngNumBytes = DoQueryIEEEBlock_Bytes(":WAVeform:DATA?")
+  Debug.Print "Number of data values: " + CStr(lngNumBytes)
+  
+  ' Set up output file:
+  strPath = "c:\scope\data\waveform_data.csv"
+
+  ' Open file for output.
+  Open strPath For Output Access Write Lock Write As hFile
+  
+  ' Output waveform data in CSV format.
+  Dim lngDataValue As Long
+  
+  For lngI = 0 To lngNumBytes - 1
+    lngDataValue = CLng(byteArray(lngI))
+    
+    ' Write time value, voltage value.
+    Print #hFile, _
+        FormatNumber(dblXOrigin + (lngI * dblXIncrement), 9) + _
+        ", " + _
+        FormatNumber(((lngDataValue - lngYReference) _
+        * sngYIncrement) + lngYOrigin)
+        
+  Next lngI
+  
+  ' Close output file.
+  Close hFile   ' Close file.
+  MsgBox "Waveform format BYTE data written to " + _
+      "c:\scope\data\waveform_data.csv."
+
+End Sub
+
+Private Sub DoCommand(command As String)
+
+  err = viVPrintf(vi, command + vbLf, 0)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  CheckInstrumentErrors
+  
+End Sub
+
+Private Function DoCommandIEEEBlock(command As String, _
+    lngBlockSize As Long)
+  
+  retCount = lngBlockSize
+  
+  Dim strCommandAndLength As String
+  strCommandAndLength = command + " %#" + _
+      Format(lngBlockSize) + "b"
+  
+  err = viVPrintf(vi, strCommandAndLength + vbLf, paramsArray(1))
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  DoCommandIEEEBlock = retCount
+  
+  CheckInstrumentErrors
+  
+End Function
+
+Private Function DoQueryString(query As String) As String
+
+  Dim strResult As String * 200
+  
+  err = viVPrintf(vi, query + vbLf, 0)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  err = viVScanf(vi, "%t", strResult)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  DoQueryString = strResult
+  
+  CheckInstrumentErrors
+  
+End Function
+
+Private Function DoQueryNumber(query As String) As Variant
+
+  Dim dblResult As Double
+  
+  err = viVPrintf(vi, query + vbLf, 0)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  err = viVScanf(vi, "%lf" + vbLf, VarPtr(dblResult))
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  DoQueryNumber = dblResult
+  
+  CheckInstrumentErrors
+  
+End Function
+
+Private Function DoQueryNumbers(query As String) As Long
+
+  Dim dblResult As Double
+  
+  ' Send query.
+  err = viVPrintf(vi, query + vbLf, 0)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  ' Set up paramsArray for multiple parameter query returning array.
+  paramsArray(0) = VarPtr(retCount)
+  paramsArray(1) = VarPtr(dblArray(0))
+  
+  ' Set retCount to max number of elements array can hold.
+  retCount = DblArraySize
+
+  ' Read numbers.
+  err = viVScanf(vi, "%,#lf" + vbLf, paramsArray(0))
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  ' retCount is now actual number of values returned by query.
+  DoQueryNumbers = retCount
+  
+  CheckInstrumentErrors
+  
+End Function
+
+Private Function DoQueryIEEEBlock_Bytes(query As String) As Long
+
+  ' Send query.
+  err = viVPrintf(vi, query + vbLf, 0)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  ' Set up paramsArray for multiple parameter query returning array.
+  paramsArray(0) = VarPtr(retCount)
+  paramsArray(1) = VarPtr(byteArray(0))
+  
+  ' Set retCount to max number of elements array can hold.
+  retCount = ByteArraySize
+  
+  ' Get unsigned integer bytes.
+  err = viVScanf(vi, "%#b" + vbLf, paramsArray(0))
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  err = viFlush(vi, VI_READ_BUF)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+    
+  err = viFlush(vi, VI_WRITE_BUF)
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+    
+  ' retCount is now actual number of bytes returned by query.
+  DoQueryIEEEBlock_Bytes = retCount
+    
+  CheckInstrumentErrors
+  
+End Function
+
+Private Sub CheckInstrumentErrors()
+  
+  On Error GoTo ErrorHandler
+  
+  Dim strErrVal As String * 200
+  Dim strOut As String
+    
+  err = viVPrintf(vi, ":SYSTem:ERRor?" + vbLf, 0)   ' Query any errors.
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+  err = viVScanf(vi, "%t", strErrVal)   ' Read: Errnum,"Error String".
+  If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+    
+  While Val(strErrVal) &lt;&gt; 0             ' End if find: 0,"No Error".
+    strOut = strOut + "INST Error: " + strErrVal
+    
+    err = viVPrintf(vi, ":SYSTem:ERRor?" + vbLf, 0)   ' Request error.
+    If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+  
+    err = viVScanf(vi, "%t", strErrVal)   ' Read error message.
+    If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+    
+  Wend
+  
+  If Not strOut = "" Then
+    MsgBox strOut, vbExclamation, "INST Error Messages"
+    
+    err = viFlush(vi, VI_READ_BUF)
+    If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+    
+    err = viFlush(vi, VI_WRITE_BUF)
+    If (err &lt;&gt; VI_SUCCESS) Then HandleVISAError vi
+    
+  End If
+    
+  Exit Sub
+
+ErrorHandler:
+
+  MsgBox "*** Error : " + Error, vbExclamation
+  End
+
+End Sub
+
+Private Sub HandleVISAError(session As Long)
+
+  Dim strVisaErr As String * 200
+  Call viStatusDesc(session, err, strVisaErr)
+  MsgBox "*** VISA Error : " + strVisaErr, vbExclamation
+
+  ' If the error is not a warning, close the session.
+  If err &lt; VI_SUCCESS Then
+    If session &lt;&gt; 0 Then Call viClose(session)
+    End
+  End If
+
+End Sub</pre></div></body></html>

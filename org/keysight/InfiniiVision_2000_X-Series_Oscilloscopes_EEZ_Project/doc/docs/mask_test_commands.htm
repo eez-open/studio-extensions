@@ -1,0 +1,172 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:MTESt Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_measure_window.htm" title=":MEASure:WINDow"><link rel="next" href="_mtest_all.htm" title=":MTESt:ALL"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="mask_test_commands"></a>:MTESt Commands<a name="d0e27216"></a><a name="d0e27219"></a></h2></div></div></div><p>The MTESt subsystem commands and queries control the mask test features. See <a href="mask_test_commands.htm#mask_test_commands_overview">Introduction to :MTESt Commands</a>.</p><div class="table"><a name="d0e27226"></a><p class="title"><b>:MTESt Commands Summary:</b></p><div class="table-contents"><table summary=":MTESt Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_mtest_all.htm#_mtest_all_command" title="Command Syntax">:MTESt:ALL {{0 |
+        OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_all.htm#_mtest_all_query" title="Query Syntax">:MTESt:ALL?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_amask_create.htm#_mtest_amask_create_command" title="Command Syntax">:MTESt:AMASk:CREate</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_amask_source.htm#_mtest_amask_source_command" title="Command Syntax">:MTESt:AMASk:SOURce
+        &lt;source&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_amask_source.htm#_mtest_amask_source_query" title="Query Syntax">:MTESt:AMASk:SOURce?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::=
+        CHANnel&lt;n&gt;</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= {1 |
+        2 | 3 | 4} for 4ch models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt;
+        ::= {1 | 2} for 2ch models</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_amask_units.htm#_mtest_amask_units_command" title="Command Syntax">:MTESt:AMASk:UNITs
+        &lt;units&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_amask_units.htm#_mtest_amask_units_query" title="Query Syntax">:MTESt:AMASk:UNITs?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;units&gt; ::= {CURRent |
+        DIVisions}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_amask_xdelta.htm#_mtest_amask_xdelta_command" title="Command Syntax">:MTESt:AMASk:XDELta
+        &lt;value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_amask_xdelta.htm#_mtest_amask_xdelta_query" title="Query Syntax">:MTESt:AMASk:XDELta?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;value&gt; ::= X delta value in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_amask_ydelta.htm#_mtest_amask_ydelta_command" title="Command Syntax">:MTESt:AMASk:YDELta
+        &lt;value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_amask_ydelta.htm#_mtest_amask_ydelta_query" title="Query Syntax">:MTESt:AMASk:YDELta?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;value&gt; ::= Y delta value in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_mtest_count_fwaveforms.htm#_mtest_count_fwaveforms_query" title="Query Syntax">:MTESt:COUNt:FWAVeforms?
+        [CHANnel&lt;n&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;failed&gt; ::= number of failed waveforms
+        in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_count_reset.htm#_mtest_count_reset_command" title="Command Syntax">:MTESt:COUNt:RESet</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_mtest_count_time.htm#_mtest_count_time_query" title="Query Syntax">:MTESt:COUNt:TIME?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;time&gt; ::= elapsed seconds in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_mtest_count_waveforms.htm#_mtest_count_waveforms_query" title="Query Syntax">:MTESt:COUNt:WAVeforms?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;count&gt; ::= number of waveforms in NR1
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_data.htm#_mtest_data_command" title="Command Syntax">:MTESt:DATA
+        &lt;mask&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_data.htm#_mtest_data_query" title="Query Syntax">:MTESt:DATA?</a></code></strong></td><td><strong class="userinput"><code>&lt;mask&gt; ::= data in IEEE 488.2 #
+        format.</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_delete.htm#_mtest_delete_command" title="Command Syntax">:MTESt:DELete</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_enable.htm#_mtest_enable_command" title="Command Syntax">:MTESt:ENABle
+        {{0 | OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_enable.htm#_mtest_enable_query" title="Query Syntax">:MTESt:ENABle?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_lock.htm#_mtest_lock_command" title="Command Syntax">:MTESt:LOCK {{0
+        | OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_lock.htm#_mtest_lock_query" title="Query Syntax">:MTESt:LOCK?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_rmode.htm#_mtest_rmode_command" title="Command Syntax">:MTESt:RMODe
+        &lt;rmode&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_rmode.htm#_mtest_rmode_query" title="Query Syntax">:MTESt:RMODe?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;rmode&gt; ::= {FORever | TIME | SIGMa |
+        WAVeforms}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_rmode_faction_measure.htm#_mtest_rmode_faction_measure_command" title="Command Syntax">:MTESt:RMODe:FACTion:MEASure
+        {{0 | OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_rmode_faction_measure.htm#_mtest_rmode_faction_measure_query" title="Query Syntax">:MTESt:RMODe:FACTion:MEASure?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_rmode_faction_print.htm#_mtest_rmode_faction_print_command" title="Command Syntax">:MTESt:RMODe:FACTion:PRINt
+        {{0 | OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_rmode_faction_print.htm#_mtest_rmode_faction_print_query" title="Query Syntax">:MTESt:RMODe:FACTion:PRINt?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_rmode_faction_save.htm#_mtest_rmode_faction_save_command" title="Command Syntax">:MTESt:RMODe:FACTion:SAVE
+        {{0 | OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_rmode_faction_save.htm#_mtest_rmode_faction_save_query" title="Query Syntax">:MTESt:RMODe:FACTion:SAVE?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_rmode_faction_stop.htm#_mtest_rmode_faction_stop_command" title="Command Syntax">:MTESt:RMODe:FACTion:STOP
+        {{0 | OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_rmode_faction_stop.htm#_mtest_rmode_faction_stop_query" title="Query Syntax">:MTESt:RMODe:FACTion:STOP?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_rmode_sigma.htm#_mtest_rmode_sigma_command" title="Command Syntax">:MTESt:RMODe:SIGMa
+        &lt;level&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_rmode_sigma.htm#_mtest_rmode_sigma_query" title="Query Syntax">:MTESt:RMODe:SIGMa?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;level&gt; ::= from 0.1 to 9.3 in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_rmode_time.htm#_mtest_rmode_time_command" title="Command Syntax">:MTESt:RMODe:TIME
+        &lt;seconds&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_rmode_time.htm#_mtest_rmode_time_query" title="Query Syntax">:MTESt:RMODe:TIME?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;seconds&gt; ::= from 1 to 86400 in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_rmode_waveforms.htm#_mtest_rmode_waveforms_command" title="Command Syntax">:MTESt:RMODe:WAVeforms
+        &lt;count&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_rmode_waveforms.htm#_mtest_rmode_waveforms_query" title="Query Syntax">:MTESt:RMODe:WAVeforms?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;count&gt; ::= number of waveforms in NR1
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_scale_bind.htm#_mtest_scale_bind_command" title="Command Syntax">:MTESt:SCALe:BIND {{0 | OFF} | {1
+        | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_scale_bind.htm#_mtest_scale_bind_query" title="Query Syntax">:MTESt:SCALe:BIND?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_scale_x1.htm#_mtest_scale_x1_command" title="Command Syntax">:MTESt:SCALe:X1
+        &lt;x1_value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_scale_x1.htm#_mtest_scale_x1_query" title="Query Syntax">:MTESt:SCALe:X1?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;x1_value&gt; ::= X1 value in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_scale_xdelta.htm#_mtest_scale_xdelta_command" title="Command Syntax">:MTESt:SCALe:XDELta
+        &lt;xdelta_value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_scale_xdelta.htm#_mtest_scale_xdelta_query" title="Query Syntax">:MTESt:SCALe:XDELta?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;xdelta_value&gt; ::= X delta value in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_scale_y1.htm#_mtest_scale_y1_command" title="Command Syntax">:MTESt:SCALe:Y1
+        &lt;y1_value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_scale_y1.htm#_mtest_scale_y1_query" title="Query Syntax">:MTESt:SCALe:Y1?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;y1_value&gt; ::= Y1 value in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_scale_y2.htm#_mtest_scale_y2_command" title="Command Syntax">:MTESt:SCALe:Y2
+        &lt;y2_value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_scale_y2.htm#_mtest_scale_y2_query" title="Query Syntax">:MTESt:SCALe:Y2?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;y2_value&gt; ::= Y2 value in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_mtest_source.htm#_mtest_source_command" title="Command Syntax">:MTESt:SOURce
+        &lt;source&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_mtest_source.htm#_mtest_source_query" title="Query Syntax">:MTESt:SOURce?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        NONE}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= {1 | 2 | 3 | 4}
+        for 4ch models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= {1 |
+        2} for 2ch models</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_mtest_title.htm#_mtest_title_query" title="Query Syntax">:MTESt:TITLe?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;title&gt; ::= a string of up to 128 ASCII
+        characters</code></strong></p></td></tr></tbody></table></div></div><br class="table-break"><h2><a name="mask_test_commands_overview"></a>Introduction to :MTESt Commands</h2><p>Mask testing automatically compares the current displayed waveform with the boundaries of a set of polygons that you define. Any waveform or sample that falls within the boundaries of one or more polygons is recorded as a failure.</p><p><b>Reporting the Setup.&nbsp;</b>Use :MTESt? to query setup information for the MTESt subsystem.</p><p><b>Return Format.&nbsp;</b>The following is a sample response from the :MTESt? query. In this case, the query was issued following a *RST command.</p><pre class="programlisting">:MTES:SOUR CHAN1;ENAB 0;LOCK 1;:MTES:AMAS:SOUR CHAN1;UNIT DIV;XDEL
++2.50000000E-001;YDEL +2.50000000E-001;:MTES:SCAL:X1 +200.000E-06;XDEL
++400.000E-06;Y1 -3.00000E+00;Y2 +3.00000E+00;BIND 0;:MTES:RMOD
+FOR;RMOD:TIME +1E+00;WAV 1000;SIGM +6.0E+00;:MTES:RMOD:FACT:STOP
+0;PRIN 0;SAVE 0</pre><h2><a name="mask_test_code"></a>Example Code</h2><p><a name="d0e27631"></a><a name="d0e27634"></a><a name="d0e27637"></a></p><pre class="programlisting">' Mask testing commands example.
+' -------------------------------------------------------------------
+
+Option Explicit
+
+Public myMgr As VisaComLib.ResourceManager
+Public myScope As VisaComLib.FormattedIO488
+Public varQueryResult As Variant
+Public strQueryResult As String
+
+Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+Sub Main()
+
+  On Error GoTo VisaComError
+  
+  ' Create the VISA COM I/O resource.
+  Set myMgr = New VisaComLib.ResourceManager
+  Set myScope = New VisaComLib.FormattedIO488
+  Set myScope.IO = _
+        myMgr.Open("USB0::0x0957::0x17A6::US50210029::0::INSTR")
+  myScope.IO.Clear   ' Clear the interface.
+  
+  ' Make sure oscilloscope is running.
+  myScope.WriteString ":RUN"
+  
+  ' Set mask test termination conditions.
+  myScope.WriteString ":MTESt:RMODe SIGMa"
+  myScope.WriteString ":MTESt:RMODe?"
+  strQueryResult = myScope.ReadString
+  Debug.Print "Mask test termination mode: " + strQueryResult
+
+  myScope.WriteString ":MTESt:RMODe:SIGMa 4.2"
+  myScope.WriteString ":MTESt:RMODe:SIGMa?"
+  varQueryResult = myScope.ReadNumber
+  Debug.Print "Mask test termination 'test sigma': " + _
+      FormatNumber(varQueryResult)
+  
+  ' Use auto-mask to create mask.
+  myScope.WriteString ":MTESt:AMASk:SOURce CHANnel1"
+  myScope.WriteString ":MTESt:AMASk:SOURce?"
+  strQueryResult = myScope.ReadString
+  Debug.Print "Mask test auto-mask source: " + strQueryResult
+
+  myScope.WriteString ":MTESt:AMASk:UNITs DIVisions"
+  myScope.WriteString ":MTESt:AMASk:UNITs?"
+  strQueryResult = myScope.ReadString
+  Debug.Print "Mask test auto-mask units: " + strQueryResult
+
+  myScope.WriteString ":MTESt:AMASk:XDELta 0.1"
+  myScope.WriteString ":MTESt:AMASk:XDELta?"
+  varQueryResult = myScope.ReadNumber
+  Debug.Print "Mask test auto-mask X delta: " + _
+      FormatNumber(varQueryResult)
+
+  myScope.WriteString ":MTESt:AMASk:YDELta 0.1"
+  myScope.WriteString ":MTESt:AMASk:YDELta?"
+  varQueryResult = myScope.ReadNumber
+  Debug.Print "Mask test auto-mask Y delta: " + _
+      FormatNumber(varQueryResult)
+
+  ' Enable "Auto Mask Created" event (bit 10, &amp;H400)
+  myScope.WriteString "*CLS"
+  myScope.WriteString ":MTEenable " + CStr(CInt("&amp;H400"))
+  
+  ' Create mask.
+  myScope.WriteString ":MTESt:AMASk:CREate"
+  Debug.Print "Auto-mask created, mask test automatically enabled."
+  
+  ' Set up timeout variables.
+  Dim lngTimeout As Long   ' Max millisecs to wait.
+  Dim lngElapsed As Long
+  lngTimeout = 60000   ' 60 seconds.
+  
+  ' Wait until mask is created.
+  lngElapsed = 0
+  Do While lngElapsed &lt;= lngTimeout
+    myScope.WriteString ":OPERegister:CONDition?"
+    varQueryResult = myScope.ReadNumber
+    ' Operation Status Condition Register MTE bit (bit 9, &amp;H200).
+    If (varQueryResult And &amp;H200) &lt;&gt; 0 Then
+      Exit Do
+    Else
+      Sleep 100   ' Small wait to prevent excessive queries.
+      lngElapsed = lngElapsed + 100
+    End If
+  Loop
+  
+  ' Look for RUN bit = stopped (mask test termination).
+  lngElapsed = 0
+  Do While lngElapsed &lt;= lngTimeout
+    myScope.WriteString ":OPERegister:CONDition?"
+    varQueryResult = myScope.ReadNumber
+    ' Operation Status Condition Register RUN bit (bit 3, &amp;H8).
+    If (varQueryResult And &amp;H8) = 0 Then
+      Exit Do
+    Else
+      Sleep 100   ' Small wait to prevent excessive queries.
+      lngElapsed = lngElapsed + 100
+    End If
+  Loop
+
+  ' Get total waveforms, failed waveforms, and test time.
+  myScope.WriteString ":MTESt:COUNt:WAVeforms?"
+  strQueryResult = myScope.ReadString
+  Debug.Print "Mask test total waveforms: " + strQueryResult
+
+  myScope.WriteString ":MTESt:COUNt:FWAVeforms?"
+  strQueryResult = myScope.ReadString
+  Debug.Print "Mask test failed waveforms: " + strQueryResult
+
+  myScope.WriteString ":MTESt:COUNt:TIME?"
+  strQueryResult = myScope.ReadString
+  Debug.Print "Mask test elapsed seconds: " + strQueryResult
+
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error:" + vbCrLf + Err.Description
+
+End Sub</pre></div></body></html>

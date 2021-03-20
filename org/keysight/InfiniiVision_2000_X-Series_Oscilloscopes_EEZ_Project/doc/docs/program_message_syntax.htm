@@ -1,0 +1,41 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Program Message Syntax </title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="cn_valid_commands.htm" title="Valid Command/Query Strings"><link rel="prev" href="cn_valid_commands.htm" title="Valid Command/Query Strings"><link rel="next" href="truncation_rules.htm" title="Long Form to Short Form Truncation Rules"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="cn_valid_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Valid Command/Query Strings </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="program_message_syntax"></a>Program Message Syntax <a name="d0e51959"></a><a name="d0e51962"></a></h3></div></div></div><p>To program the instrument remotely, you must understand the command
+  format and structure expected by the instrument. The IEEE 488.2 syntax rules
+  govern how individual elements such as headers, separators, program data,
+  and terminators may be grouped together to form complete instructions.
+  Syntax definitions are also given to show how query responses are formatted.
+  The following figure shows the main syntactical parts of a typical program
+  statement.</p><div class="mediaobject"><img src="images/../images/program_message.png"></div><p>Instructions (both commands and queries) normally appear as a string
+  embedded in a statement of your host language, such as Visual Basic or
+  C/C++. The only time a parameter is not meant to be expressed as a string is
+  when the instruction's syntax definition specifies &lt;block data&gt;, such
+  as &lt;learn string&gt;. There are only a few instructions that use block
+  data.</p><p><a name="d0e51975"></a><a name="d0e51978"></a>Program messages can have long or short form commands (and
+  data in some cases — see <a href="truncation_rules.htm" title="Long Form to Short Form Truncation Rules">Long Form to Short Form Truncation Rules</a>), and
+  upper and/or lower case ASCII characters may be used. (Query responses,
+  however, are always returned in upper case.)</p><p>Instructions are composed of two main parts:</p><div class="itemizedlist"><ul type="disc"><li><p>The header, which specifies the command or query to be
+      sent.</p></li><li><p>The program data, which provide additional information needed to
+      clarify the meaning of the instruction.</p></li></ul></div><h4><a name="d0e51993"></a>Instruction Header<a name="d0e51995"></a><a name="d0e51998"></a><a name="d0e52001"></a></h4><p>The instruction header is one or more mnemonics separated by colons
+	  (:) that represent the operation to be performed by the instrument. </p><p>":DISPlay:LABel ON" is a command. Queries are indicated by adding a
+  question mark (?) to the end of the header, for example, ":DISPlay:LABel?".
+  Many instructions can be used as either commands or queries, depending on
+  whether or not you have included the question mark. The command and query
+  forms of an instruction usually have different program data. Many queries do
+  not use any program data.</p><p>There are three types of headers:</p><div class="itemizedlist"><ul type="disc"><li><p><a href="simple_command_headers.htm" title="Simple Command Headers">Simple Command Headers</a></p></li><li><p><a href="compound_command_headers.htm" title="Compound Command Headers">Compound Command Headers</a></p></li><li><p><a href="common_command_headers.htm" title="Common Command Headers">Common Command Headers</a></p></li></ul></div><h4><a name="d0e52021"></a>White Space (Separator)</h4><p>White space is used to separate the instruction header from the
+  program data. If the instruction does not require any program data
+  parameters, you do not need to include any white space. White space is
+  defined as one or more space characters. ASCII defines a space to be
+  character 32 (in decimal).</p><h4><a name="d0e52025"></a>Program Data<a name="d0e52027"></a></h4><p>Program data are used to clarify the meaning of the command or query.
+  They provide necessary information, such as whether a function should be on
+  or off, or which waveform is to be displayed. Each instruction's syntax
+  definition shows the program data, as well as the values they accept. <a href="program_data_syntax_rules.htm" title="Program Data Syntax Rules">Program Data Syntax Rules</a> describes all of the general rules
+  about acceptable values.</p><p>When there is more than one data parameter, they are separated by
+  commas(,). Spaces can be added around the commas to improve
+  readability.</p><h4><a name="d0e52036"></a>Program Message Terminator<a name="d0e52038"></a></h4><p>The program instructions within a data message are executed after the
+  program message terminator is received. The terminator may be either an NL
+  (New Line<a name="d0e52043"></a><a name="d0e52046"></a>) character, an EOI (End-Or-Identify<a name="d0e52050"></a><a name="d0e52053"></a>) asserted in the programming interface, or a combination of
+  the two. Asserting the EOI sets the EOI control line low on the last byte of
+  the data message. The NL character is an ASCII linefeed (decimal 10).</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p><span class="bold"><strong>New Line Terminator Functions</strong></span>. The
+    NL (New Line) terminator has the same function as an EOS (End Of
+    String<a name="d0e52062"></a><a name="d0e52065"></a>) and EOT (End Of Text<a name="d0e52069"></a><a name="d0e52072"></a>) terminator.</p></td></tr></table></div></div></body></html>

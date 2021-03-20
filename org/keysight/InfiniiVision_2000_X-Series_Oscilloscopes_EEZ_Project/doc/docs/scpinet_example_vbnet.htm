@@ -1,0 +1,308 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>SCPI.NET Example in Visual Basic .NET</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="scpinet_examples.htm" title="SCPI.NET Examples"><link rel="prev" href="scpinet_example_csharp.htm" title="SCPI.NET Example in C#"><link rel="next" href="scpinet_example_ironpython.htm" title="SCPI.NET Example in IronPython"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="scpinet_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>SCPI.NET Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="scpinet_example_vbnet"></a>SCPI.NET Example in Visual Basic .NET<a name="d0e53324"></a><a name="d0e53327"></a><a name="d0e53330"></a></h3></div></div></div><p>To compile and run this example in Microsoft Visual Studio
+    2008:</p><div class="orderedlist"><ol type="1"><li><p>Install the Agilent Command Expert software and the command set
+        for the oscilloscope.</p></li><li><p>Open Visual Studio.</p></li><li><p>Create a new Visual Basic, Windows, Console Application
+        project.</p></li><li><p>Cut-and-paste the code that follows into the Visual Basic .NET
+        source file.</p></li><li><p>Edit the program to use the VISA address of your
+        oscilloscope.</p></li><li><p>Add a reference to the SCPI.NET 3.0 driver:</p><div class="orderedlist"><ol type="a"><li><p>Right-click the project you wish to modify (not the
+            solution) in the Solution Explorer window of the Microsoft Visual
+            Studio environment.</p></li><li><p>Choose <span class="guimenu">Add Reference...</span>.</p></li><li><p>In the Add Reference dialog, select the
+            <span class="guilabel">Browse</span> tab, and navigate to the
+            ScpiNetDrivers folder.</p><div class="itemizedlist"><ul type="disc"><li><p>Windows XP: C:\Documents and Settings\All
+                Users\Agilent\Command Expert\ScpiNetDrivers</p></li><li><p>Windows 7: C:\ProgramData\Agilent\Command
+                Expert\ScpiNetDrivers</p></li></ul></div></li><li><p>Select the .dll file for your oscilloscope, for example
+            <span class="guilabel">AgInfiniiVision2000X_01_20.dll</span>; then, click
+            <span class="guibutton">OK</span>.</p></li><li><p>Right-click the project you wish to modify (not the
+            solution) in the Solution Explorer window of the Microsoft Visual
+            Studio environment and choose
+            <span class="guimenuitem">Properties</span>; then, select
+            "InfiniiVision.ScpiNetInstrumentApp" as the <span class="guilabel">Startup
+            object</span>.</p></li></ol></div></li><li><p>Build and run the program.</p></li></ol></div><p>For more information, see the SCPI.NET driver help that comes with
+    Agilent Command Expert.</p><pre class="programlisting">'
+' Agilent SCPI.NET Example in Visual Basic .NET
+' -------------------------------------------------------------------
+' This program illustrates a few commonly used programming
+' features of your Agilent oscilloscope.
+' -------------------------------------------------------------------
+
+Imports System
+Imports System.IO
+Imports System.Text
+Imports Agilent.CommandExpert.ScpiNet.AgInfiniiVision2000X_01_20
+
+Namespace InfiniiVision
+  Class ScpiNetInstrumentApp
+    Private Shared myScope As AgInfiniiVision2000X
+
+    Public Shared Sub Main(ByVal args As String())
+      Try
+        Dim strScopeAddress As String
+        'strScopeAddress = "a-mx3054a-60028.cos.agilent.com";
+        strScopeAddress = _
+          "TCPIP0::a-mx3054a-60028.cos.agilent.com::inst0::INSTR"
+        Console.WriteLine("Connecting to oscilloscope...")
+        Console.WriteLine()
+        myScope = New AgInfiniiVision2000X(strScopeAddress)
+        myScope.Transport.DefaultTimeout.[Set](10000)
+
+        ' Initialize - start from a known state.
+        Initialize()
+
+        ' Capture data.
+        Capture()
+
+        ' Analyze the captured waveform.
+        Analyze()
+
+        Console.WriteLine("Press any key to exit")
+        Console.ReadKey()
+      Catch err As System.ApplicationException
+        Console.WriteLine("*** SCPI.NET Error : " &amp; err.Message)
+      Catch err As System.SystemException
+        Console.WriteLine("*** System Error Message : " &amp; err.Message)
+      Catch err As System.Exception
+        System.Diagnostics.Debug.Fail("Unexpected Error")
+        Console.WriteLine("*** Unexpected Error : " &amp; err.Message)
+        'myScope.Dispose();
+      Finally
+      End Try
+
+    End Sub
+
+    ' Initialize the oscilloscope to a known state.
+    ' --------------------------------------------------------------
+
+    Private Shared Sub Initialize()
+      Dim strResults As String
+
+      ' Get and display the device's *IDN? string.
+      myScope.SCPI.IDN.Query(strResults)
+      Console.WriteLine("*IDN? result is: {0}", strResults)
+
+      ' Clear status and load the default setup.
+      myScope.SCPI.CLS.Command()
+      myScope.SCPI.RST.Command()
+    End Sub
+
+    ' Capture the waveform.
+    ' --------------------------------------------------------------
+
+    Private Shared Sub Capture()
+      Dim strResults As String
+      Dim fResult As Double
+
+      ' Use auto-scale to automatically configure oscilloscope.
+      myScope.SCPI.AUToscale.Command(Nothing, Nothing, Nothing, _
+                                     Nothing, Nothing)
+
+      ' Set trigger mode.
+      myScope.SCPI.TRIGger.MODE.Command("EDGE")
+      myScope.SCPI.TRIGger.MODE.Query(strResults)
+      Console.WriteLine("Trigger mode: {0}", strResults)
+
+      ' Set EDGE trigger parameters.
+      myScope.SCPI.TRIGger.EDGE.SOURce.Command("CHANnel1")
+      myScope.SCPI.TRIGger.EDGE.SOURce.Query(strResults)
+      Console.WriteLine("Trigger edge source: {0}", strResults)
+
+      myScope.SCPI.TRIGger.EDGE.LEVel.Command(1.5, "CHANnel1")
+      myScope.SCPI.TRIGger.EDGE.LEVel.Query("CHANnel1", fResult)
+      Console.WriteLine("Trigger edge level: {0:F2}", fResult)
+
+      myScope.SCPI.TRIGger.EDGE.SLOPe.Command("POSitive")
+      myScope.SCPI.TRIGger.EDGE.SLOPe.Query(strResults)
+      Console.WriteLine("Trigger edge slope: {0}", strResults)
+
+      ' Save oscilloscope configuration.
+      Dim strResultsArray As String()
+      ' Results array.
+      Dim nLength As Integer
+      ' Number of bytes returned from instrument.
+      Dim strPath As String
+
+      ' Query and read setup string.
+      myScope.SCPI.SYSTem.SETup.Query(strResultsArray)
+      nLength = strResultsArray.Length
+
+      ' Write setup string to file.
+      strPath = "c:\scope\config\setup.stp"
+      File.WriteAllLines(strPath, strResultsArray)
+      Console.WriteLine("Setup bytes saved: {0}", nLength)
+
+
+      ' Change settings with individual commands:
+
+      ' Set vertical scale and offset.
+      myScope.SCPI.CHANnel.SCALe.Command(1, 0.05)
+      myScope.SCPI.CHANnel.SCALe.Query(1, fResult)
+      Console.WriteLine("Channel 1 vertical scale: {0:F4}", fResult)
+
+      myScope.SCPI.CHANnel.OFFSet.Command(1, -1.5)
+      myScope.SCPI.CHANnel.OFFSet.Query(1, fResult)
+      Console.WriteLine("Channel 1 vertical offset: {0:F4}", fResult)
+
+      ' Set horizontal scale and offset.
+      myScope.SCPI.TIMebase.SCALe.Command(0.0002)
+      myScope.SCPI.TIMebase.SCALe.Query(fResult)
+      Console.WriteLine("Timebase scale: {0:F4}", fResult)
+
+      myScope.SCPI.TIMebase.POSition.Command(0.0)
+      myScope.SCPI.TIMebase.POSition.Query(fResult)
+      Console.WriteLine("Timebase position: {0:F2}", fResult)
+
+      ' Set the acquisition type.
+      myScope.SCPI.ACQuire.TYPE.Command("NORMal")
+      myScope.SCPI.ACQuire.TYPE.Query(strResults)
+      Console.WriteLine("Acquire type: {0}", strResults)
+
+      ' Or, configure by loading a previously saved setup.
+      Dim nBytesWritten As Integer
+
+      strPath = "c:\scope\config\setup.stp"
+      strResultsArray = File.ReadAllLines(strPath)
+      nBytesWritten = strResultsArray.Length
+
+      ' Restore setup string.
+      myScope.SCPI.SYSTem.SETup.Command(strResultsArray)
+      Console.WriteLine("Setup bytes restored: {0}", nBytesWritten)
+
+      ' Capture an acquisition using :DIGitize.
+      myScope.SCPI.DIGitize.Command("CHANnel1", Nothing, Nothing, _
+                                    Nothing, Nothing)
+    End Sub
+
+    ' Analyze the captured waveform.
+    ' --------------------------------------------------------------
+
+    Private Shared Sub Analyze()
+      Dim strResults As String, source1 As String, source2 As String
+      Dim fResult As Double
+
+      ' Make a couple of measurements.
+      ' -----------------------------------------------------------
+      myScope.SCPI.MEASure.SOURce.Command("CHANnel1", Nothing)
+      myScope.SCPI.MEASure.SOURce.Query(source1, source2)
+      Console.WriteLine("Measure source: {0}", source1)
+
+      myScope.SCPI.MEASure.FREQuency.Command("CHANnel1")
+      myScope.SCPI.MEASure.FREQuency.Query("CHANnel1", fResult)
+      Console.WriteLine("Frequency: {0:F4} kHz", fResult / 1000)
+
+      ' Use direct command/query when commands not in command set.
+      myScope.Transport.Command.Invoke(":MEASure:VAMPlitude CHANnel1")
+      myScope.Transport.Query.Invoke(":MEASure:VAMPlitude? CHANnel1", _
+                                     strResults)
+      Console.WriteLine("Vertial amplitude: {0} V", strResults)
+
+      ' Download the screen image.
+      ' -----------------------------------------------------------
+      myScope.SCPI.HARDcopy.INKSaver.Command(False)
+
+      ' Get the screen data.
+      Dim byteResultsArray As Byte()
+      ' Results array.
+      myScope.SCPI.DISPlay.DATA.Query("PNG", "COLor", byteResultsArray)
+      Dim nLength As Integer
+      ' Number of bytes returned from instrument.
+      nLength = byteResultsArray.Length
+
+      ' Store the screen data to a file.
+      Dim strPath As String
+      strPath = "c:\scope\data\screen.png"
+      Dim fStream As FileStream = File.Open(strPath, FileMode.Create)
+      fStream.Write(byteResultsArray, 0, nLength)
+      fStream.Close()
+      Console.WriteLine("Screen image ({0} bytes) written to {1}", _
+                        nLength, strPath)
+
+      ' Download waveform data.
+      ' -----------------------------------------------------------
+
+      ' Set the waveform points mode.
+      myScope.SCPI.WAVeform.POINts.MODE.Command("RAW")
+      myScope.SCPI.WAVeform.POINts.MODE.Query(strResults)
+      Console.WriteLine("Waveform points mode: {0}", strResults)
+
+      ' Get the number of waveform points available.
+      myScope.SCPI.WAVeform.POINts.CommandPoints(10240)
+      Dim nPointsAvail As Integer
+      myScope.SCPI.WAVeform.POINts.Query1(nPointsAvail)
+      Console.WriteLine("Waveform points available: {0}", nPointsAvail)
+
+      ' Set the waveform source.
+      myScope.SCPI.WAVeform.SOURce.Command("CHANnel1")
+      myScope.SCPI.WAVeform.SOURce.Query(strResults)
+      Console.WriteLine("Waveform source: {0}", strResults)
+
+      ' Choose the format of the data returned (WORD, BYTE, ASCII):
+      myScope.SCPI.WAVeform.FORMat.Command("BYTE")
+      myScope.SCPI.WAVeform.FORMat.Query(strResults)
+      Console.WriteLine("Waveform format: {0}", strResults)
+
+      ' Display the waveform settings:
+      Dim nFormat As Integer, nType As Integer, nPoints As Integer, _
+        nCount As Integer, nXreference As Integer, _
+        nYreference As Integer
+      Dim dblXincrement As Double, dblXorigin As Double, _
+        dblYincrement As Double, dblYorigin As Double
+      myScope.SCPI.WAVeform.PREamble.Query(nFormat, nType, nPoints, _
+        nCount, dblXincrement, dblXorigin, nXreference, _
+        dblYincrement, dblYorigin, nYreference)
+
+      If nFormat = 0 Then
+        Console.WriteLine("Waveform format: BYTE")
+      ElseIf nFormat = 1 Then
+        Console.WriteLine("Waveform format: WORD")
+      ElseIf nFormat = 2 Then
+        Console.WriteLine("Waveform format: ASCii")
+      End If
+
+      If nType = 0 Then
+        Console.WriteLine("Acquire type: NORMal")
+      ElseIf nType = 1 Then
+        Console.WriteLine("Acquire type: PEAK")
+      ElseIf nType = 2 Then
+        Console.WriteLine("Acquire type: AVERage")
+      ElseIf nType = 3 Then
+        Console.WriteLine("Acquire type: HRESolution")
+      End If
+
+      Console.WriteLine("Waveform points: {0:e}", nPoints)
+      Console.WriteLine("Waveform average count: {0:e}", nCount)
+      Console.WriteLine("Waveform X increment: {0:e}", dblXincrement)
+      Console.WriteLine("Waveform X origin: {0:e}", dblXorigin)
+      Console.WriteLine("Waveform X reference: {0:e}", nXreference)
+      Console.WriteLine("Waveform Y increment: {0:e}", dblYincrement)
+      Console.WriteLine("Waveform Y origin: {0:e}", dblYorigin)
+      Console.WriteLine("Waveform Y reference: {0:e}", nYreference)
+
+      ' Read waveform data.
+      myScope.SCPI.WAVeform.DATA.QueryBYTE(byteResultsArray)
+      nLength = byteResultsArray.Length
+      Console.WriteLine("Number of data values: {0}", nLength)
+
+      ' Set up output file:
+      strPath = "c:\scope\data\waveform_data.csv"
+      If File.Exists(strPath) Then
+        File.Delete(strPath)
+      End If
+
+      ' Open file for output.
+      Dim writer As StreamWriter = File.CreateText(strPath)
+
+      ' Output waveform data in CSV format.
+      For i As Integer = 0 To nLength - 2
+        writer.WriteLine("{0:f9}, {1:f6}", _
+          dblXorigin + (CSng(i) * dblXincrement), _
+          ((CSng(byteResultsArray(i)) - nYreference) * _
+           dblYincrement) + dblYorigin)
+      Next
+
+      ' Close output file.
+      writer.Close()
+      Console.WriteLine("Waveform format BYTE data written to {0}", _
+                        strPath)
+    End Sub
+  End Class
+End Namespace</pre></div></body></html>

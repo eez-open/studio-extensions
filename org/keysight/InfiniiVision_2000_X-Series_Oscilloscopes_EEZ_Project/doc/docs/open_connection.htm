@@ -1,0 +1,23 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Opening the Oscilloscope Connection via the IO Library</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="programming.htm" title="Programming the Oscilloscope"><link rel="prev" href="ref_io_lib.htm" title="Referencing the IO Library"><link rel="next" href="initialize_interface.htm" title="Initializing the Interface and the Oscilloscope"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="programming.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Programming the Oscilloscope </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="open_connection"></a>Opening the Oscilloscope Connection via the IO Library<a name="d0e1958"></a></h3></div></div></div><p>PC controllers communicate with the oscilloscope by sending and
+    receiving messages over a remote interface. Once you have opened a
+    connection to the oscilloscope over the remote interface, programming
+    instructions normally appear as ASCII character strings embedded inside
+    write statements of the programing language. Read statements are used to
+    read query responses from the oscilloscope.</p><p>For example, when using the Agilent VISA COM library in Visual Basic
+    (after opening the connection to the instrument using the <a name="d0e1965"></a>ResourceManager object's <a name="d0e1969"></a>Open method), the <a name="d0e1973"></a>FormattedIO488 object's <a name="d0e1977"></a>WriteString, <a name="d0e1981"></a>WriteNumber, <a name="d0e1985"></a>WriteList, or <a name="d0e1989"></a>WriteIEEEBlock methods are used for sending commands and
+    queries. After a query is sent, the response is read using the <a name="d0e1993"></a>ReadString, <a name="d0e1997"></a>ReadNumber, <a name="d0e2001"></a>ReadList, or <a name="d0e2005"></a>ReadIEEEBlock methods.</p><p>The following Visual Basic statements open the connection and send a
+    command that turns on the oscilloscope's label display.</p><pre class="programlisting">Dim myMgr As VisaComLib.ResourceManager
+Dim myScope As VisaComLib.FormattedIO488
+
+Set myMgr = New VisaComLib.ResourceManager
+Set myScope = New VisaComLib.FormattedIO488
+
+' Open the connection to the oscilloscope. Get the VISA Address from the
+' Agilent Connection Expert (installed with Agilent IO Libraries Suite).
+Set myScope.IO = myMgr.Open("&lt;VISA Address&gt;")
+
+' Send a command.
+myScope.WriteString ":DISPlay:LABel ON"</pre><p>The ":DISPLAY:LABEL ON" in the above example is called a <a name="d0e2015"></a><em class="firstterm">program message</em>. Program messages are
+    explained in more detail in <a href="program_message_syntax.htm" title="Program Message Syntax ">Program Message Syntax </a>.</p></div></body></html>

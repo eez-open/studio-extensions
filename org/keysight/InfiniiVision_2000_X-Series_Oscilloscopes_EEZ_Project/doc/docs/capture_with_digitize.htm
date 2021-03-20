@@ -1,0 +1,45 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Capturing Data with the :DIGitize Command</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="programming.htm" title="Programming the Oscilloscope"><link rel="prev" href="setup_code.htm" title="Example Oscilloscope Setup Code"><link rel="next" href="read_query_responses.htm" title="Reading Query Responses from the Oscilloscope"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="programming.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Programming the Oscilloscope </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="capture_with_digitize"></a>Capturing Data with the :DIGitize Command<a name="d0e2094"></a></h3></div></div></div><p>The :DIGitize command captures data that meets the specifications
+    set up by the <a name="d0e2099"></a>:ACQuire subsystem. When the digitize process is complete,
+    the acquisition is stopped. The captured data can then be measured by the
+    instrument or transferred to the controller for further analysis. The
+    captured data consists of two parts: the waveform data record, and the
+    preamble.</p><div class="note"><table border="0" summary="Note: Ensure New Data is Collected"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left">Ensure New Data is Collected</th></tr><tr><td align="left" valign="top"><p>When you change the oscilloscope configuration, the waveform
+      buffers are cleared. Before doing a measurement, send the :DIGitize
+      command to the oscilloscope to ensure new data has been
+      collected.</p></td></tr></table></div><p>When you send the :DIGitize command to the oscilloscope, the
+    specified channel signal is digitized with the current :ACQuire
+    parameters. To obtain waveform data, you must specify the <a name="d0e2110"></a>:WAVeform parameters for the SOURce channel, the FORMat
+    type, and the number of POINts prior to sending the :WAVeform:DATA?
+    query.</p><div class="note"><table border="0" summary="Note: Set :TIMebase:MODE to MAIN when using :DIGitize"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left">Set :TIMebase:MODE to MAIN when using :DIGitize</th></tr><tr><td align="left" valign="top"><p><a name="d0e2118"></a>:TIMebase:MODE must be set to MAIN to perform a :DIGitize
+      command or to perform any :WAVeform subsystem query. A "Settings
+      conflict" error message will be returned if these commands are executed
+      when MODE is set to ROLL, XY, or WINDow (zoomed). Sending the *RST
+      (reset) command will also set the time base mode to normal.</p></td></tr></table></div><p>The number of data points comprising a waveform varies according to
+    the number requested in the :ACQuire subsystem. The :ACQuire subsystem
+    determines the number of data points, type of acquisition, and number of
+    averages used by the :DIGitize command. This allows you to specify exactly
+    what the digitized information contains.</p><p>The following program example shows a typical setup:</p><pre class="programlisting">myScope.WriteString ":ACQuire:TYPE AVERage"
+myScope.WriteString ":ACQuire:COMPlete 100"
+myScope.WriteString ":ACQuire:COUNt 8"
+myScope.WriteString ":DIGitize CHANnel1"
+myScope.WriteString ":WAVeform:SOURce CHANnel1"
+myScope.WriteString ":WAVeform:FORMat BYTE"
+myScope.WriteString ":WAVeform:POINts 500"
+myScope.WriteString ":WAVeform:DATA?"</pre><p>This setup places the instrument into the averaged mode with eight
+    averages. This means that when the :DIGitize command is received, the
+    command will execute until the signal has been averaged at least eight
+    times.</p><p>After receiving the :WAVeform:DATA? query, the instrument will start
+    passing the waveform information.</p><p>Digitized waveforms are passed from the instrument to the controller
+    by sending a numerical representation of each digitized point. The format
+    of the numerical representation is controlled with the <a name="d0e2134"></a>:WAVeform:FORMat command and may be selected as BYTE, WORD,
+    or ASCii.</p><p>The easiest method of transferring a digitized waveform depends on
+    data structures, formatting available and I/O capabilities. You must scale
+    the integers to determine the voltage value of each point. These integers
+    are passed starting with the left most point on the instrument's
+    display.</p><p>For more information, see the waveform subsystem commands and
+    corresponding program code examples in <a href="waveform_commands.htm" title=":WAVeform Commands"><i>:WAVeform Commands</i></a>.</p><div class="note"><table border="0" summary="Note: Aborting a Digitize Operation Over the Programming&#xA;      Interface"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left">Aborting a Digitize Operation Over the Programming
+      Interface</th></tr><tr><td align="left" valign="top"><p>When using the programming interface, you can abort a digitize
+      operation by sending a Device Clear over the bus (for example,
+      myScope.IO.Clear).</p></td></tr></table></div></div></body></html>

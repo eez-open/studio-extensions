@@ -1,0 +1,22 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Initializing the Interface and the Oscilloscope</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="programming.htm" title="Programming the Oscilloscope"><link rel="prev" href="open_connection.htm" title="Opening the Oscilloscope Connection via the IO Library"><link rel="next" href="autoscale_setup.htm" title="Using :AUToscale to Automate Oscilloscope Setup"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="programming.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Programming the Oscilloscope </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="initialize_interface"></a>Initializing the Interface and the Oscilloscope<a name="d0e2026"></a></h3></div></div></div><p>To make sure the bus and all appropriate interfaces are in a known
+    state, begin every program with an initialization statement. When using
+    the Agilent VISA COM library, you can use the <a name="d0e2031"></a>resource session object's <a name="d0e2035"></a>Clear method to clears the interface buffer:</p><pre class="programlisting">Dim myMgr As VisaComLib.ResourceManager
+Dim myScope As VisaComLib.FormattedIO488
+
+Set myMgr = New VisaComLib.ResourceManager
+Set myScope = New VisaComLib.FormattedIO488
+
+' Open the connection to the oscilloscope. Get the VISA Address from the
+' Agilent Connection Expert (installed with Agilent IO Libraries Suite).
+Set myScope.IO = myMgr.Open("&lt;VISA Address&gt;")
+
+' Clear the interface buffer and set the interface timeout to 10 seconds.
+myScope.IO.Clear
+myScope.IO.Timeout = 10000</pre><p>When you are using GPIB, CLEAR also resets the oscilloscope's
+    parser. The parser is the program which reads in the instructions which
+    you send it.</p><p>After clearing the interface, initialize the instrument to a preset
+    state:</p><pre class="programlisting">myScope.WriteString "*RST"</pre><div class="note"><table border="0" summary="Note: Information for Initializing the Instrument"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left">Information for Initializing the Instrument</th></tr><tr><td align="left" valign="top"><p>The actual commands and syntax for initializing the instrument are
+      discussed in <a href="common_commands.htm" title="Common (*) Commands"><i>Common (*) Commands</i></a>.</p><p>Refer to the <a name="d0e2056"></a>Agilent IO Libraries Suite documentation for information
+      on initializing the interface.</p></td></tr></table></div></div></body></html>

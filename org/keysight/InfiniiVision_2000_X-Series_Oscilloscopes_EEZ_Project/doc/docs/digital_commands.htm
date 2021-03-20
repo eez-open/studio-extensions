@@ -1,0 +1,32 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:DIGital&lt;d&gt; Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_demo_output.htm" title=":DEMO:OUTPut"><link rel="next" href="_digital_d_display.htm" title=":DIGital<d&gt;:DISPlay"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="digital_commands"></a>:DIGital&lt;d&gt; Commands<a name="d0e18265"></a></h2></div></div></div><p>Control all oscilloscope functions associated with individual digital
+  channels. See <a href="digital_commands.htm#digital_commands_overview">Introduction to :DIGital&lt;d&gt;
+  Commands</a>.</p><div class="table"><a name="d0e18272"></a><p class="title"><b>:DIGital&lt;d&gt; Commands Summary:</b></p><div class="table-contents"><table summary=":DIGital<d&gt; Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_digital_d_display.htm#_digital_d_display_command" title="Command Syntax">:DIGital&lt;d&gt;:DISPlay {{0 |
+        OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_digital_d_display.htm#_digital_d_display_query" title="Query Syntax">:DIGital&lt;d&gt;:DISPlay?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;d&gt; ::= 0 to (# digital channels - 1) in
+        NR1 format</code></strong></p><p><strong class="userinput"><code>{0 |
+        1}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_digital_d_label.htm#_digital_d_label_command" title="Command Syntax">:DIGital&lt;d&gt;:LABel
+        &lt;string&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_digital_d_label.htm#_digital_d_label_query" title="Query Syntax">:DIGital&lt;d&gt;:LABel?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;d&gt; ::= 0 to (# digital channels - 1) in
+        NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;string&gt; ::= any
+        series of 10 or less ASCII characters enclosed in quotation
+        marks</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_digital_d_position.htm#_digital_d_position_command" title="Command Syntax">:DIGital&lt;d&gt;:POSition
+        &lt;position&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_digital_d_position.htm#_digital_d_position_query" title="Query Syntax">:DIGital&lt;d&gt;:POSition?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;d&gt; ::= 0 to (# digital channels - 1) in
+        NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;position&gt; ::= 0-7
+        if display size = large, 0-15 if size = medium, 0-31 if size =
+        small</code></strong></p><p><strong class="userinput"><code>Returns -1 when there is no
+        space to display the digital waveform.</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_digital_d_size.htm#_digital_d_size_command" title="Command Syntax">:DIGital&lt;d&gt;:SIZE
+        &lt;value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_digital_d_size.htm#_digital_d_size_query" title="Query Syntax">:DIGital&lt;d&gt;:SIZE?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;d&gt; ::= 0 to (# digital channels - 1) in
+        NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;value&gt; ::= {SMALl
+        | MEDium | LARGe}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_digital_d_threshold.htm#_digital_d_threshold_command" title="Command Syntax">:DIGital&lt;d&gt;:THReshold
+        &lt;value&gt;[suffix]</a></code></strong></td><td><strong class="userinput"><code><a href="_digital_d_threshold.htm#_digital_d_threshold_query" title="Query Syntax">:DIGital&lt;d&gt;:THReshold?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;d&gt; ::= 0 to (# digital channels - 1) in
+        NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;value&gt; ::= {CMOS
+        | ECL | TTL | &lt;user defined
+        value&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;user defined
+        value&gt; ::= value in NR3 format from -8.00 to
+        +8.00</code></strong></p><p><strong class="userinput"><code>[suffix] ::= {V | mV |
+        uV}</code></strong></p></td></tr></tbody></table></div></div><br class="table-break"><h2><a name="digital_commands_overview"></a>Introduction to :DIGital&lt;d&gt;
+  Commands</h2><pre class="programlisting">&lt;d&gt; ::= 0 to (# digital channels - 1) in NR1 format</pre><p><a name="d0e18382"></a><a name="d0e18385"></a><a name="d0e18388"></a><a name="d0e18391"></a>The DIGital subsystem commands control the viewing, labeling,
+  and positioning of digital channels. They also control threshold settings
+  for groups of digital channels, or <span class="emphasis"><em>pods</em></span>.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>These commands are only valid for the MSO models.</p></td></tr></table></div><p><b>Reporting the Setup.&nbsp;</b>Use :DIGital&lt;d&gt;? to query setup information for the DIGital
+    subsystem.</p><p><b>Return Format.&nbsp;</b>The following is a sample response from the :DIGital0? query. In
+    this case, the query was issued following a *RST command.</p><pre class="programlisting">:DIG0:DISP 0;THR +1.40E+00;LAB 'D0';POS +0</pre></div></body></html>

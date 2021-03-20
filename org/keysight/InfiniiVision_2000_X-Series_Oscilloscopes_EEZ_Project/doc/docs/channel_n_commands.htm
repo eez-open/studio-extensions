@@ -1,0 +1,70 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:CHANnel&lt;n&gt; Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_calibrate_time.htm" title=":CALibrate:TIME"><link rel="next" href="_channel_n_bwlimit.htm" title=":CHANnel<n&gt;:BWLimit"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="channel_n_commands"></a>:CHANnel&lt;n&gt; Commands<a name="d0e16350"></a></h2></div></div></div><p>Control all oscilloscope functions associated with individual analog
+  channels or groups of channels. See <a href="channel_n_commands.htm#channel_n_commands_overview">Introduction to
+  :CHANnel&lt;n&gt; Commands</a>.</p><div class="table"><a name="d0e16357"></a><p class="title"><b>:CHANnel&lt;n&gt; Commands Summary:</b></p><div class="table-contents"><table summary=":CHANnel<n&gt; Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_channel_n_bwlimit.htm#_channel_n_bwlimit_command" title="Command Syntax">:CHANnel&lt;n&gt;:BWLimit {{0 |
+        OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_bwlimit.htm#_channel_n_bwlimit_query" title="Query Syntax">:CHANnel&lt;n&gt;:BWLimit?</a></code></strong></td><td><p><strong class="userinput"><code>{0 |
+        1}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_coupling.htm#_channel_n_coupling_command" title="Command Syntax">:CHANnel&lt;n&gt;:COUPling
+        &lt;coupling&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_coupling.htm#_channel_n_coupling_query" title="Query Syntax">:CHANnel&lt;n&gt;:COUPling?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;coupling&gt; ::= {AC |
+        DC}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_display.htm#_channel_n_display_command" title="Command Syntax">:CHANnel&lt;n&gt;:DISPlay {{0 |
+        OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_display.htm#_channel_n_display_query" title="Query Syntax">:CHANnel&lt;n&gt;:DISPlay?</a></code></strong></td><td><p><strong class="userinput"><code>{0 |
+        1}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_impedance.htm#_channel_n_impedance_command" title="Command Syntax">:CHANnel&lt;n&gt;:IMPedance
+        &lt;impedance&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_impedance.htm#_channel_n_impedance_query" title="Query Syntax">:CHANnel&lt;n&gt;:IMPedance?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;impedance&gt; ::=
+        ONEMeg</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_invert.htm#_channel_n_invert_command" title="Command Syntax">:CHANnel&lt;n&gt;:INVert {{0 |
+        OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_invert.htm#_channel_n_invert_query" title="Query Syntax">:CHANnel&lt;n&gt;:INVert?</a></code></strong></td><td><p><strong class="userinput"><code>{0 |
+        1}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_label.htm#_channel_n_label_command" title="Command Syntax">:CHANnel&lt;n&gt;:LABel
+        &lt;string&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_label.htm#_channel_n_label_query" title="Query Syntax">:CHANnel&lt;n&gt;:LABel?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;string&gt; ::= any series of 10 or less
+        ASCII characters enclosed in quotation
+        marks</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_offset.htm#_channel_n_offset_command" title="Command Syntax">:CHANnel&lt;n&gt;:OFFSet
+        &lt;offset&gt;[suffix]</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_offset.htm#_channel_n_offset_query" title="Query Syntax">:CHANnel&lt;n&gt;:OFFSet?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;offset&gt; ::= Vertical offset value in
+        NR3 format</code></strong></p><p><strong class="userinput"><code>[suffix] ::= {V |
+        mV}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1-2 or 1-4; in
+        NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_probe.htm#_channel_n_probe_command" title="Command Syntax">:CHANnel&lt;n&gt;:PROBe
+        &lt;attenuation&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_probe.htm#_channel_n_probe_query" title="Query Syntax">:CHANnel&lt;n&gt;:PROBe?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;attenuation&gt; ::= Probe attenuation
+        ratio in NR3 format</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::=
+        1-2 or 1-4r in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_probe_head_type.htm#_channel_n_probe_head_type_command" title="Command Syntax">:CHANnel&lt;n&gt;:PROBe:HEAD[:TYPE]
+        &lt;head_param&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_probe_head_type.htm#_channel_n_probe_head_type_query" title="Query Syntax">:CHANnel&lt;n&gt;:PROBe:HEAD[:TYPE]?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;head_param&gt; ::= {SEND0 | SEND6 | SEND12
+        | SEND20 | DIFF0 | DIFF6 | DIFF12 | DIFF20 |
+        NONE}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_channel_n_probe_id.htm#_channel_n_probe_id_query" title="Query Syntax">:CHANnel&lt;n&gt;:PROBe:ID?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;probe id&gt; ::= unquoted ASCII string up
+        to 11 characters</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to
+        (# analog channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_probe_skew.htm#_channel_n_probe_skew_command" title="Command Syntax">:CHANnel&lt;n&gt;:PROBe:SKEW
+        &lt;skew_value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_probe_skew.htm#_channel_n_probe_skew_query" title="Query Syntax">:CHANnel&lt;n&gt;:PROBe:SKEW?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;skew_value&gt; ::= -100 ns to +100 ns in
+        NR3 format</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (#
+        analog channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_probe_stype.htm#_channel_n_probe_stype_command" title="Command Syntax">:CHANnel&lt;n&gt;:PROBe:STYPe
+        &lt;signal type&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_probe_stype.htm#_channel_n_probe_stype_query" title="Query Syntax">:CHANnel&lt;n&gt;:PROBe:STYPe?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;signal type&gt; ::= {DIFFerential |
+        SINGle}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (#
+        analog channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_protection.htm#_channel_n_protection_command" title="Command Syntax">:CHANnel&lt;n&gt;:PROTection</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_protection.htm#_channel_n_protection_query" title="Query Syntax">:CHANnel&lt;n&gt;:PROTection?</a></code></strong></td><td><p><strong class="userinput"><code>NORM</code></strong></p><p><strong class="userinput"><code>&lt;n&gt;
+        ::= 1 to (# analog channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_range.htm#_channel_n_range_command" title="Command Syntax">:CHANnel&lt;n&gt;:RANGe
+        &lt;range&gt;[suffix]</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_range.htm#_channel_n_range_query" title="Query Syntax">:CHANnel&lt;n&gt;:RANGe?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;range&gt; ::= Vertical full-scale range
+        value in NR3 format</code></strong></p><p><strong class="userinput"><code>[suffix] ::= {V
+        | mV}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_scale.htm#_channel_n_scale_command" title="Command Syntax">:CHANnel&lt;n&gt;:SCALe
+        &lt;scale&gt;[suffix]</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_scale.htm#_channel_n_scale_query" title="Query Syntax">:CHANnel&lt;n&gt;:SCALe?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;scale&gt; ::= Vertical units per division
+        value in NR3 format</code></strong></p><p><strong class="userinput"><code>[suffix] ::= {V
+        | mV}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_units.htm#_channel_n_units_command" title="Command Syntax">:CHANnel&lt;n&gt;:UNITs
+        &lt;units&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_units.htm#_channel_n_units_query" title="Query Syntax">:CHANnel&lt;n&gt;:UNITs?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;units&gt; ::= {VOLT |
+        AMPere}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (#
+        analog channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_channel_n_vernier.htm#_channel_n_vernier_command" title="Command Syntax">:CHANnel&lt;n&gt;:VERNier {{0 |
+        OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_channel_n_vernier.htm#_channel_n_vernier_query" title="Query Syntax">:CHANnel&lt;n&gt;:VERNier?</a></code></strong></td><td><p><strong class="userinput"><code>{0 |
+        1}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p></td></tr></tbody></table></div></div><br class="table-break"><h2><a name="channel_n_commands_overview"></a>Introduction to
+  :CHANnel&lt;n&gt; Commands</h2><pre class="programlisting">&lt;n&gt; ::= 1 to (# analog channels) in NR1 format</pre><p><a name="d0e16658"></a><a name="d0e16661"></a>The CHANnel&lt;n&gt; subsystem commands control an analog
+  channel (vertical or Y-axis of the oscilloscope). Channels are independently
+  programmable for all offset, probe, coupling, bandwidth limit, inversion,
+  vernier, and range (scale) functions. The channel number (1, 2, 3, or 4)
+  specified in the command selects the analog channel that is affected by the
+  command.</p><p>A label command provides identifying annotations of up to 10
+  characters.</p><p>You can toggle the channel displays on and off with the
+  :CHANnel&lt;n&gt;:DISPlay command as well as with the root level commands
+  :VIEW and :BLANk.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The obsolete CHANnel subsystem is supported.</p></td></tr></table></div><p><b>Reporting the Setup<a name="d0e16675"></a><a name="d0e16678"></a>.&nbsp;</b>Use :CHANnel1?, :CHANnel2?, :CHANnel3? or :CHANnel4? to query setup
+    information for the CHANnel&lt;n&gt; subsystem.</p><p><b>Return Format.&nbsp;</b>The following are sample responses from the :CHANnel&lt;n&gt;?
+    query. In this case, the query was issued following a *RST command.</p><pre class="programlisting">:CHAN1:RANG +40.0E+00;OFFS +0.00000E+00;COUP DC;IMP ONEM;DISP 1;BWL 0;
+INV 0;LAB "1";UNIT VOLT;PROB +10E+00;PROB:SKEW +0.00E+00;STYP SING</pre></div></body></html>

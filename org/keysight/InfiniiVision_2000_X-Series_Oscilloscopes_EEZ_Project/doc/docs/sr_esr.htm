@@ -1,0 +1,14 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>(Standard) Event Status Register (ESR)</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Status.htm" title="Status Reporting"><link rel="prev" href="sr_message_queue.htm" title="Message Queue"><link rel="next" href="sr_ese.htm" title="(Standard) Event Status Enable Register (ESE)"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Status.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Status Reporting </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sr_esr"></a>(Standard) Event Status Register (ESR)<a name="d0e51312"></a><a name="d0e51315"></a><a name="d0e51318"></a></h2></div></div></div><p>The (Standard) Event Status Register (ESR) monitors the following
+    oscilloscope status events:</p><div class="itemizedlist"><ul type="disc"><li><p>PON - Power On</p></li><li><p>URQ - User Request</p></li><li><p>CME - Command Error</p></li><li><p>EXE - Execution Error</p></li><li><p>DDE - Device Dependent Error</p></li><li><p>QYE - Query Error</p></li><li><p>RQC - Request Control</p></li><li><p>OPC - Operation Complete</p></li></ul></div><p>When one of these events occur, the event sets the corresponding bit
+    in the register. If the bits are enabled in the Standard Event Status
+    Enable Register, the bits set in this register generate a summary bit to
+    set bit 5 (ESB) in the Status Byte Register.</p><p>You can read the contents of the Standard Event Status Register and
+    clear the register by sending the *ESR? query. The value returned is the
+    total bit weights of all of the bits that are set at the present
+    time.</p><h3><a name="d0e51352"></a>Example</h3><p>The following example uses the *ESR query to read the contents of
+    the Standard Event Status Register.</p><pre class="programlisting">myScope.WriteString "*ESR?"
+varQueryResult = myScope.ReadNumber
+MsgBox "Standard Event Status Register: 0x" + Hex(varQueryResult)</pre><p>If bit 4 (weight = 16) and bit 5 (weight = 32) are set, the program
+    prints the sum of the two weights.</p></div></body></html>

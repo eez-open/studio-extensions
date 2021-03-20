@@ -1,0 +1,310 @@
+/*
+=====================================================================
+CSS stylesheet for DocBook XSL translation to DDS format HTML Help.
+=====================================================================
+*/
+
+a:active {
+ color: #0000CC
+}
+
+a:hover {
+ color: #CC0033
+}
+
+a:link {
+ color: #3366CC
+}
+
+a:visited {
+ color: #9999CC
+}
+
+body {
+ background-color: #FFFFFF;
+ color: #000000;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+h2 {
+ color: #003366;
+ font-size: 14px; font-style: normal; font-weight: bold;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ margin-left: 0em; margin-top: 0.5em; margin-bottom: 0.5em;
+ text-align: left; text-indent: 0em; text-decoration: none;
+ white-space: normal
+}
+
+h3 {
+ color: #000000;
+ font-size: 13px; font-style: normal; font-weight: bold;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ margin-left: 0em; margin-top: 0.5em; margin-bottom: 0.5em;
+ text-align: left; text-indent: 0em; text-decoration: none;
+ white-space: normal
+}
+
+h4 {
+ color: #000000;
+ font-size: 12px; font-style: italic; font-weight: bold;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ margin-left: 0em; margin-top: 0.5em; margin-bottom: 0.5em;
+ text-align: left; text-indent: 0em; text-decoration: none;
+ white-space: normal
+}
+
+div.book div.titlepage h1 { 
+ list-style-type: none;
+ padding-left: 6em;
+ padding-top: 2.25em;
+ padding-bottom: 2.25em;
+ background-image: url("images/spark_small.gif");
+ background-repeat: no-repeat;
+ background-position: center left;
+ color: #003366;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ font-size: 20px; font-style: normal; font-weight: bold;
+ margin-left: 0em; margin-top: 0.5em; margin-bottom: 0.5em;
+ text-align: left; text-indent: 0em; text-decoration: none;
+ white-space: normal;
+}
+
+div.preface div.titlepage h2,
+div.chapter div.titlepage h2,
+div.sect1 div.titlepage h2,
+div.sect2 div.titlepage h3,
+div.sect3 div.titlepage h4,
+div.sect4 div.titlepage h5,
+div.sect5 div.titlepage h6,
+div.refentry div.refnamediv p,
+{
+ color: #000000;
+ font-size: 18px; font-style: normal; font-weight: bold;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ margin-left: 0em; margin-top: 0.5em; margin-bottom: 0.5em;
+ text-align: left; text-indent: 0em; text-decoration: none;
+ white-space: normal
+}
+
+div.sect1 h3,
+div.sect2 h4,
+div.sect3 h5,
+div.sect4 h6,
+div.sect5 h7,
+{
+ color: #003366;
+ font-size: 14px; font-style: normal; font-weight: bold;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ margin-left: 0em; margin-top: 0.5em; margin-bottom: 0.5em;
+ text-align: left; text-indent: 0em; text-decoration: none;
+ white-space: normal
+}
+
+pre {
+ color: #000000;
+ font-family: monospace;
+ font-size: 12px; font-style: normal; font-weight: normal;
+ /*
+ margin-left: 0em; margin-top: 0em; margin-bottom: 0em;
+ */
+ text-align: left; text-indent: 0em; text-decoration: none;
+ white-space: pre
+}
+
+.programlisting {
+ border: 1px solid #cccccc;
+ background-color: #e2e2e2;
+ padding-top: 3px;
+ padding-bottom: 5px;
+ padding-left: 5px;
+ padding-right: 5px;
+}
+
+code {
+ color: #000000;
+ font-family: monospace;
+ font-size: 12px; font-style: normal; font-weight: normal;
+ margin-left: 0em; margin-top: 0em; margin-bottom: 0em;
+ text-align: left; text-indent: 0em; text-decoration: none;
+ white-space: pre
+}
+
+table, caption, tr, th, td, ol, ul, h5, p, div, dt, dd,
+{
+ color: #000000;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ font-size: 12px;
+}
+
+div.toc dt, div.highlights p {
+ margin-top: 0.3em;   /* Same as normal bulleted list. */
+ margin-bottom: 0.3em;
+}
+
+/*
+dt {
+ color: #000000;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ margin-top: 1.5em;
+ margin-bottom: 0.5em;
+ font-size: 12px
+}
+
+dd {
+ color: #000000;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ margin-top: 0.5em;
+ margin-bottom: 1.0em;
+ font-size: 12px
+}
+*/
+
+div img, table {
+ margin-bottom: 20px;
+}
+
+/*
+ * For inline graphics:
+ */
+p img {
+ margin-bottom: 0px;
+}
+
+div.sect2 div.titlepage h3 img,
+{
+ margin-bottom: 0px;
+}
+
+a img,
+{
+ margin-bottom: 0px;
+ border-width: 0px;
+}
+
+.guibutton,
+.guilabel,
+.guimenu,
+.guimenuitem,
+{
+ font-weight: bold;
+}
+
+div.itemizedlist p {
+ margin-top: 0.3em;   /* Same as normal bulleted list. */
+ margin-bottom: 0.3em;
+}
+
+div.table table,
+div.table th,
+div.table td,
+{
+ border-style: solid;
+ border-color: #cccccc;
+}
+
+div.informaltable table,
+{
+ border-collapse: collapse;
+ border-width: 1px;
+ border-style: solid;
+ border-color: #999999;
+ /*
+ border-style: hidden;
+ border-color: #cccccc;
+ */
+}
+
+div.informaltable th,
+div.informaltable td,
+{
+ border-width: 1px;
+ border-style: solid;
+ border-color: #999999;
+ /*
+ border-style: hidden;
+ border-color: #cccccc;
+ border-bottom-width: 1px;
+ border-bottom-style: solid;
+ border-bottom-color: #cccccc;
+ */
+}
+
+div.table table,
+{
+ border-collapse: collapse;
+ border-width: 1px;
+ border-style: solid;
+ border-color: #999999;
+ /*
+ border-style: hidden;
+ border-color: #cccccc;
+ */
+}
+
+div.table th,
+div.table td,
+{
+ border-width: 1px;
+ border-style: solid;
+ border-color: #999999;
+ /*
+ border-style: hidden;
+ border-color: #cccccc;
+ border-bottom-width: 1px;
+ border-bottom-style: solid;
+ border-bottom-color: #cccccc;
+ */
+}
+
+div.simplemsgentry,
+{
+}
+
+div.simplemsgentry p,
+{
+ font-weight: bold;
+}
+
+div.msgexplan,
+{
+}
+
+div.msgexplan p b,
+{
+}
+
+div.msgexplan p,
+{
+ font-weight: normal;
+ margin-left: 3em;
+}
+
+div.refentry div.refnamediv h2,
+{
+ display: none;
+}
+
+ /*
+div.refentry div.refnamediv p,
+{
+ color: #000000;
+ font-size: 18px; font-style: normal; font-weight: bold;
+ font-family: Verdana, Arial, Helvetica, sans-serif;
+ margin-left: 0em; margin-top: 0.5em; margin-bottom: 0.5em;
+ text-align: left; text-indent: 0em; text-decoration: none;
+ white-space: normal;
+ border: 2px solid black;
+ line-height: -18px;
+ vertical-align: baseline;
+}
+ */
+
+div.sect2 div.titlepage h3 img,
+div.refentry div.refnamediv p a img,
+div.itemizedlist ul li p a img,
+dl dt span.sect2 a img,
+p a img,
+{
+ vertical-align: middle;
+}
+

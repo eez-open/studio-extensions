@@ -1,0 +1,97 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Synchronization with an Averaging Acquisition</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Synchronizing_Acquisitions.htm" title="Synchronizing Acquisitions"><link rel="prev" href="sync_single_shot.htm" title="Synchronizing with a Single-Shot Device Under Test (DUT)"><link rel="next" href="Concepts.htm" title="More About Oscilloscope Commands"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Synchronizing_Acquisitions.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Synchronizing Acquisitions </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sync_averaging"></a>Synchronization with an Averaging Acquisition<a name="d0e51858"></a></h2></div></div></div><p>When averaging, it is necessary to know when the average count has
+    been reached. The :SINGle command does not average.</p><p>If it is known that a trigger will occur, a :DIGitize will acquire
+    the complete number of averages, but if the number of averages is large, a
+    timeout on the connection can occur.</p><p>The example below polls during the :DIGitize to prevent a timeout on
+    the connection.</p><pre class="programlisting">'
+' Synchronizing in averaging acquisition mode.
+' ===================================================================
+
+Option Explicit
+
+Public myMgr As VisaComLib.ResourceManager
+Public myScope As VisaComLib.FormattedIO488
+Public varQueryResult As Variant
+Public strQueryResult As String
+
+Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+Sub Main()
+
+  On Error GoTo VisaComError
+  
+  ' Create the VISA COM I/O resource.
+  Set myMgr = New VisaComLib.ResourceManager
+  Set myScope = New VisaComLib.FormattedIO488
+  Set myScope.IO = myMgr.Open("TCPIP0::130.29.69.12::inst0::INSTR")
+  myScope.IO.Clear   ' Clear the interface.
+  myScope.IO.Timeout = 5000
+  
+  ' Set up.
+  ' -----------------------------------------------------------------
+  ' Set up the trigger and horizontal scale.
+  myScope.WriteString ":TRIGger:SWEep NORMal"
+  myScope.WriteString ":TRIGger:MODE EDGE"
+  myScope.WriteString ":TRIGger:EDGE:LEVel 2"
+  myScope.WriteString ":TIMebase:SCALe 5e-8"
+  
+  ' Stop acquisitions and wait for the operation to complete.
+  myScope.WriteString ":STOP"
+  myScope.WriteString "*OPC?"
+  strQueryResult = myScope.ReadString
+  
+  ' Set up average acquisition mode.
+  Dim lngAverages As Long
+  lngAverages = 256
+  myScope.WriteString ":ACQuire:COUNt " + CStr(lngAverages)
+  myScope.WriteString ":ACQuire:TYPE AVERage"
+  
+  ' Save *ESE (Standard Event Status Enable register) mask
+  ' (so it can be restored later).
+  Dim varInitialESE As Variant
+  myScope.WriteString "*ESE?"
+  varInitialESE = myScope.ReadNumber
+  
+  ' Set *ESE mask to allow only OPC (Operation Complete) bit.
+  myScope.WriteString "*ESE " + CStr(CInt("&amp;H01"))
+  
+  ' Acquire using :DIGitize.  Set up OPC bit to be set when the
+  ' operation is complete.
+  ' -----------------------------------------------------------------
+  myScope.WriteString ":DIGitize"
+  myScope.WriteString "*OPC"
+  
+  ' Assume the oscilloscope will trigger, if not put a check here.
+
+  ' Wait until OPC becomes true (bit 5 of Status Byte register, STB,
+  ' from Standard Event Status register, ESR, is set).  STB can be
+  ' read during :DIGitize without generating a timeout.
+  Do
+    Sleep 4000   ' Poll more often than the timeout setting.
+    varQueryResult = myScope.IO.ReadSTB
+  Loop While (varQueryResult And &amp;H20) = 0
+  
+  ' Clear ESR and restore previously saved *ESE mask.
+  myScope.WriteString "*ESR?"   ' Clear ESR by reading it.
+  varQueryResult = myScope.ReadNumber
+  myScope.WriteString "*ESE " + CStr(varInitialESE)
+
+  ' Get results.
+  ' -----------------------------------------------------------------
+  myScope.WriteString ":WAVeform:COUNt?"
+  varQueryResult = myScope.ReadNumber
+  Debug.Print "Averaged waveforms: " + CStr(varQueryResult)
+  
+  myScope.WriteString ":MEASure:RISetime"
+  myScope.WriteString ":MEASure:RISetime?"
+  varQueryResult = myScope.ReadNumber   ' Read risetime.
+  Debug.Print "Risetime: " + _
+      FormatNumber(varQueryResult * 1000000000, 1) + " ns"
+  
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error:" + vbCrLf + Err.Description
+
+End Sub</pre></div></body></html>

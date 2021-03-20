@@ -1,0 +1,20 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Capturing Data</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="prog_struct.htm" title="Basic Oscilloscope Program Structure"><link rel="prev" href="prog_struct_initialize.htm" title="Initializing"><link rel="next" href="prog_struct_analyze.htm" title="Analyzing Captured Data"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="prog_struct.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Basic Oscilloscope Program Structure </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prog_struct_capture"></a>Capturing Data<a name="d0e1795"></a></h3></div></div></div><p>Once you initialize the oscilloscope, you can begin capturing data
+    for analysis. Remember that while the oscilloscope is responding to
+    commands from the controller, it is not performing acquisitions. Also,
+    when you change the oscilloscope configuration, any data already captured
+    will most likely be rendered.</p><p>To collect data, you use the <a name="d0e1802"></a>:DIGitize command. This command clears the waveform buffers
+    and starts the acquisition process. Acquisition continues until
+    acquisition memory is full, then stops. The acquired data is displayed by
+    the oscilloscope, and the captured data can be measured, stored in
+    acquisition memory in the oscilloscope, or transferred to the controller
+    for further analysis. Any additional commands sent while :DIGitize is
+    working are buffered until :DIGitize is complete.</p><p>You could also put the oscilloscope into run mode, then use a wait
+    loop in your program to ensure that the oscilloscope has completed at
+    least one acquisition before you make a measurement. Agilent does not
+    recommend this because the needed length of the wait loop may vary,
+    causing your program to fail. :DIGitize, on the other hand, ensures that
+    data capture is complete. Also, :DIGitize, when complete, stops the
+    acquisition process so that all measurements are on displayed data, not on
+    a constantly changing data set.</p></div></body></html>

@@ -1,0 +1,23 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Sending Multiple Queries and Reading Results</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="programming.htm" title="Programming the Oscilloscope"><link rel="prev" href="read_definite-length_blocks.htm" title="Reading Definite-Length Block Query Response Data"><link rel="next" href="instrument_status.htm" title="Checking Instrument Status"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="programming.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Programming the Oscilloscope </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="multiple_queries"></a>Sending Multiple Queries and Reading Results<a name="d0e2273"></a><a name="d0e2276"></a></h3></div></div></div><p>You can send multiple queries to the instrument within a single
+    command string, but you must also read them back as a single query result.
+    This can be accomplished by reading them back into a single string
+    variable, multiple string variables, or multiple numeric variables.</p><p>For example, to read the :TIMebase:RANGe?;DELay? query result into a
+    single string variable, you could use the commands:</p><pre class="programlisting">myScope.WriteString ":TIMebase:RANGe?;DELay?"
+Dim strQueryResult As String
+strQueryResult = myScope.ReadString
+MsgBox "Timebase range; delay:" + strQueryResult</pre><p>When you read the result of multiple queries into a single
+    <a name="d0e2287"></a>string variable, each response is separated by a semicolon.
+    For example, the output of the previous example would be:</p><pre class="programlisting">Timebase range; delay: &lt;range_value&gt;;&lt;delay_value&gt;</pre><p>To read the :TIMebase:RANGe?;DELay? query result into multiple
+    <a name="d0e2295"></a>string variables, you could use the ReadList method to read
+    the query results into a string array variable using the commands:</p><pre class="programlisting">myScope.WriteString ":TIMebase:RANGe?;DELay?"
+Dim strResults() As String
+strResults() = myScope.ReadList(ASCIIType_BSTR)
+MsgBox "Timebase range: " + strResults(0) + ", delay: " + strResults(1)</pre><p>To read the :TIMebase:RANGe?;DELay? query result into multiple
+    <a name="d0e2303"></a>numeric variables, you could use the ReadList method to read
+    the query results into a variant array variable using the commands:</p><pre class="programlisting">myScope.WriteString ":TIMebase:RANGe?;DELay?"
+Dim varResults() As Variant
+varResults() = myScope.ReadList
+MsgBox "Timebase range: " + FormatNumber(varResults(0) * 1000, 4) + _
+       " ms, delay: " + FormatNumber(varResults(1) * 1000000, 4) + " us"</pre></div></body></html>

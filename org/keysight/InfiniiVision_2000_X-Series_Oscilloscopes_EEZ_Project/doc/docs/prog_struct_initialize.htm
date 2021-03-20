@@ -1,0 +1,12 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Initializing</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="prog_struct.htm" title="Basic Oscilloscope Program Structure"><link rel="prev" href="prog_struct.htm" title="Basic Oscilloscope Program Structure"><link rel="next" href="prog_struct_capture.htm" title="Capturing Data"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="prog_struct.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Basic Oscilloscope Program Structure </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prog_struct_initialize"></a>Initializing<a name="d0e1768"></a></h3></div></div></div><p>To ensure consistent, repeatable performance, you need to start the
+    program, controller, and oscilloscope in a known state. Without correct
+    initialization, your program may run correctly in one instance and not in
+    another. This might be due to changes made in configuration by previous
+    program runs or from the front panel of the oscilloscope.</p><div class="itemizedlist"><ul type="disc"><li><p><a name="d0e1776"></a>Program initialization defines and initializes
+        variables, allocates memory, or tests system configuration.</p></li><li><p><a name="d0e1782"></a>Controller initialization ensures that the interface to
+        the oscilloscope is properly set up and ready for data
+        transfer.</p></li><li><p><a name="d0e1788"></a>Oscilloscope initialization sets the channel
+        configuration, channel labels, threshold voltages, trigger
+        specification, trigger mode, timebase, and acquisition type.</p></li></ul></div></div></body></html>

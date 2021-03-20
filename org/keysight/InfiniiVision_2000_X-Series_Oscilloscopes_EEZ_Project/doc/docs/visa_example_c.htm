@@ -1,0 +1,508 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>VISA Example in C</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="visa_examples.htm" title="VISA Examples"><link rel="prev" href="visa_examples.htm" title="VISA Examples"><link rel="next" href="visa_example_vb.htm" title="VISA Example in Visual Basic"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="visa_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>VISA Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="visa_example_c"></a>VISA Example in C<a name="d0e52695"></a><a name="d0e52698"></a><a name="d0e52701"></a></h3></div></div></div><p>To compile and run this example in Microsoft Visual Studio
+      2008:</p><div class="orderedlist"><ol type="1"><li><p>Open Visual Studio.</p></li><li><p>Create a new Visual C++, Win32, Win32 Console Application
+          project.</p></li><li><p>In the Win32 Application Wizard, click
+          <span class="guibutton">Next&nbsp;&gt;</span>. Then, check <span class="guilabel">Empty
+          project</span>, and click <span class="guibutton">Finish</span>.</p></li><li><p>Cut-and-paste the code that follows into a file named
+          "example.c" in the project directory.</p></li><li><p>In Visual Studio 2008, right-click the Source Files folder,
+          choose <span class="guimenuitem">Add &gt; Add Existing Item...</span>,
+          select the example.c file, and click
+          <span class="guibutton">Add</span>.</p></li><li><p>Edit the program to use the VISA address of your
+          oscilloscope.</p></li><li><p>Choose <span class="guimenuitem">Project &gt; Properties...</span>.
+          In the Property Pages dialog, update these project settings:</p><div class="orderedlist"><ol type="a"><li><p>Under Configuration Properties, Linker, Input, add
+              "visa32.lib" to the Additional Dependencies field.</p></li><li><p>Under Configuration Properties, C/C++, Code Generation,
+              select Multi-threaded DLL for the Runtime Library field.</p></li><li><p>Click <span class="guibutton">OK</span> to close the Property
+              Pages dialog.</p></li></ol></div></li><li><p>Add the include files and library files search paths:</p><div class="orderedlist"><ol type="a"><li><p>Choose <span class="guimenuitem">Tools &gt;
+              Options...</span>.</p></li><li><p>In the Options dialog, select <span class="guilabel">VC++
+              Directories</span> under Projects and Solutions.</p></li><li><p>Show directories for <span class="guimenuitem">Include
+              files</span>, and add the include directory (for example,
+              Program Files\IVI Foundation\VISA\WinNT\include).</p></li><li><p>Show directories for <span class="guimenuitem">Library
+              files</span>, and add the library files directory (for
+              example, Program Files\IVI
+              Foundation\VISA\WinNT\lib\msc).</p></li><li><p>Click <span class="guibutton">OK</span> to close the Options
+              dialog.</p></li></ol></div></li><li><p>Build and run the program.</p></li></ol></div><pre class="programlisting">/*
+ * Agilent VISA Example in C
+ * ------------------------------------------------------------------
+ * This program illustrates a few commonly-used programming
+ * features of your Agilent oscilloscope.
+ */
+
+#include &lt;stdio.h&gt;            /* For printf(). */
+#include &lt;string.h&gt;           /* For strcpy(), strcat(). */
+#include &lt;time.h&gt;             /* For clock(). */
+#include &lt;visa.h&gt;             /* Agilent VISA routines. */
+
+#define VISA_ADDRESS "USB0::0x0957::0x17A6::US50210029::0::INSTR"
+#define IEEEBLOCK_SPACE 5000000
+
+/* Function prototypes */
+void initialize(void);          /* Initialize to known state. */
+void capture(void);             /* Capture the waveform. */
+void analyze(void);             /* Analyze the captured waveform. */
+
+void do_command(char *command);        /* Send command. */
+int do_command_ieeeblock(char *command); /* Command w/IEEE block. */
+void do_query_string(char *query);     /* Query for string. */
+void do_query_number(char *query);     /* Query for number. */
+void do_query_numbers(char *query);     /* Query for numbers. */
+int do_query_ieeeblock(char *query);   /* Query for IEEE block. */
+void check_instrument_errors();        /* Check for inst errors. */
+void error_handler();                  /* VISA error handler. */
+
+/* Global variables */
+ViSession defaultRM, vi;        /* Device session ID. */
+ViStatus err;                   /* VISA function return value. */
+char str_result[256] = {0};     /* Result from do_query_string(). */
+double num_result;              /* Result from do_query_number(). */
+unsigned char ieeeblock_data[IEEEBLOCK_SPACE];   /* Result from
+                                   do_query_ieeeblock(). */
+double dbl_results[10];         /* Result from do_query_numbers(). */
+
+/* Main Program
+ * --------------------------------------------------------------- */
+void main(void)
+{
+  /* Open the default resource manager session. */
+  err = viOpenDefaultRM(&amp;defaultRM);
+  if (err != VI_SUCCESS) error_handler();
+
+  /* Open the session using the oscilloscope's VISA address. */
+  err = viOpen(defaultRM, VISA_ADDRESS, VI_NULL, VI_NULL, &amp;vi);
+  if (err != VI_SUCCESS) error_handler();
+
+	/* Set the I/O timeout to fifteen seconds. */
+	err = viSetAttribute(vi, VI_ATTR_TMO_VALUE, 15000);
+  if (err != VI_SUCCESS) error_handler();
+
+  /* Initialize - start from a known state. */
+  initialize();
+
+  /* Capture data. */
+  capture();
+
+  /* Analyze the captured waveform. */
+  analyze();
+
+  /* Close the vi session and the resource manager session. */
+  viClose(vi);
+  viClose(defaultRM);
+}
+
+/* Initialize the oscilloscope to a known state.
+ * --------------------------------------------------------------- */
+void initialize (void)
+{
+  /* Clear the interface. */
+  err = viClear(vi);
+  if (err != VI_SUCCESS) error_handler();
+
+  /* Get and display the device's *IDN? string. */
+  do_query_string("*IDN?");
+  printf("Oscilloscope *IDN? string: %s\n", str_result);
+
+  /* Clear status and load the default setup. */
+  do_command("*CLS");
+  do_command("*RST");
+}
+
+/* Capture the waveform.
+ * --------------------------------------------------------------- */
+void capture (void)
+{
+  int num_bytes;
+  FILE *fp;
+
+  /* Use auto-scale to automatically configure oscilloscope. */
+  do_command(":AUToscale");
+
+  /* Set trigger mode (EDGE, PULSe, PATTern, etc., and input source. */
+  do_command(":TRIGger:MODE EDGE");
+  do_query_string(":TRIGger:MODE?");
+  printf("Trigger mode: %s\n", str_result);
+
+  /* Set EDGE trigger parameters. */
+  do_command(":TRIGger:EDGE:SOURCe CHANnel1");
+  do_query_string(":TRIGger:EDGE:SOURce?");
+  printf("Trigger edge source: %s\n", str_result);
+
+  do_command(":TRIGger:EDGE:LEVel 1.5");
+  do_query_string(":TRIGger:EDGE:LEVel?");
+  printf("Trigger edge level: %s\n", str_result);
+
+  do_command(":TRIGger:EDGE:SLOPe POSitive");
+  do_query_string(":TRIGger:EDGE:SLOPe?");
+  printf("Trigger edge slope: %s\n", str_result);
+
+  /* Save oscilloscope configuration. */
+
+  /* Read system setup. */
+  num_bytes = do_query_ieeeblock(":SYSTem:SETup?");
+  printf("Read setup string query (%d bytes).\n", num_bytes);
+
+  /* Write setup string to file. */
+  fp = fopen ("c:\\scope\\config\\setup.stp", "wb");
+  num_bytes = fwrite(ieeeblock_data, sizeof(unsigned char), num_bytes,
+    fp);
+  fclose (fp);
+  printf("Wrote setup string (%d bytes) to ", num_bytes);
+  printf("c:\\scope\\config\\setup.stp.\n");
+
+  /* Change settings with individual commands:
+  
+  /* Set vertical scale and offset. */
+  do_command(":CHANnel1:SCALe 0.05");
+  do_query_string(":CHANnel1:SCALe?");
+  printf("Channel 1 vertical scale: %s\n", str_result);
+
+  do_command(":CHANnel1:OFFSet -1.5");
+  do_query_string(":CHANnel1:OFFSet?");
+  printf("Channel 1 offset: %s\n", str_result);
+
+  /* Set horizontal scale and offset. */
+  do_command(":TIMebase:SCALe 0.0002");
+  do_query_string(":TIMebase:SCALe?");
+  printf("Timebase scale: %s\n", str_result);
+
+  do_command(":TIMebase:POSition 0.0");
+  do_query_string(":TIMebase:POSition?");
+  printf("Timebase position: %s\n", str_result);
+
+  /* Set the acquisition type (NORMal, PEAK, AVERage, or HRESolution). */
+  do_command(":ACQuire:TYPE NORMal");
+  do_query_string(":ACQuire:TYPE?");
+  printf("Acquire type: %s\n", str_result);
+
+  /* Or, configure by loading a previously saved setup. */
+
+  /* Read setup string from file. */
+  fp = fopen ("c:\\scope\\config\\setup.stp", "rb");
+  num_bytes = fread (ieeeblock_data, sizeof(unsigned char),
+    IEEEBLOCK_SPACE, fp);
+  fclose (fp);
+  printf("Read setup string (%d bytes) from file ", num_bytes);
+  printf("c:\\scope\\config\\setup.stp.\n");
+
+  /* Restore setup string. */
+  num_bytes = do_command_ieeeblock(":SYSTem:SETup", num_bytes);
+  printf("Restored setup string (%d bytes).\n", num_bytes);
+
+  /* Capture an acquisition using :DIGitize. */
+  do_command(":DIGitize CHANnel1");
+}
+
+/* Analyze the captured waveform.
+ * --------------------------------------------------------------- */
+void analyze (void)
+{
+  double wav_format;
+  double acq_type;
+  double wav_points;
+  double avg_count;
+  double x_increment;
+  double x_origin;
+  double x_reference;
+  double y_increment;
+  double y_origin;
+  double y_reference;
+
+  FILE *fp;
+  int num_bytes;   /* Number of bytes returned from instrument. */
+  int i;
+
+  /* Make a couple of measurements.
+   * ------------------------------------------------------------- */
+  do_command(":MEASure:SOURce CHANnel1");
+  do_query_string(":MEASure:SOURce?");
+  printf("Measure source: %s\n", str_result);
+
+  do_command(":MEASure:FREQuency");
+  do_query_number(":MEASure:FREQuency?");
+  printf("Frequency: %.4f kHz\n", num_result / 1000);
+
+  do_command(":MEASure:VAMPlitude");
+  do_query_number(":MEASure:VAMPlitude?");
+  printf("Vertical amplitude: %.2f V\n", num_result);
+
+  /* Download the screen image.
+   * ------------------------------------------------------------- */
+  do_command(":HARDcopy:INKSaver OFF");
+
+  /* Read screen image. */
+  num_bytes = do_query_ieeeblock(":DISPlay:DATA? PNG, COLor");
+  printf("Screen image bytes: %d\n", num_bytes);
+
+  /* Write screen image bytes to file. */
+  fp = fopen ("c:\\scope\\data\\screen.png", "wb");
+  num_bytes = fwrite(ieeeblock_data, sizeof(unsigned char), num_bytes,
+    fp);
+  fclose (fp);
+  printf("Wrote screen image (%d bytes) to ", num_bytes);
+  printf("c:\\scope\\data\\screen.bmp.\n");
+
+  /* Download waveform data.
+   * ------------------------------------------------------------- */
+
+  /* Set the waveform points mode. */
+  do_command(":WAVeform:POINts:MODE RAW");
+  do_query_string(":WAVeform:POINts:MODE?");
+  printf("Waveform points mode: %s\n", str_result);
+
+  /* Get the number of waveform points available. */
+  do_query_string(":WAVeform:POINts?");
+  printf("Waveform points available: %s\n", str_result);
+
+  /* Set the waveform source. */
+  do_command(":WAVeform:SOURce CHANnel1");
+  do_query_string(":WAVeform:SOURce?");
+  printf("Waveform source: %s\n", str_result);
+
+  /* Choose the format of the data returned (WORD, BYTE, ASCII): */
+  do_command(":WAVeform:FORMat BYTE");
+  do_query_string(":WAVeform:FORMat?");
+  printf("Waveform format: %s\n", str_result);
+
+  /* Display the waveform settings: */
+  do_query_numbers(":WAVeform:PREamble?");
+
+  wav_format = dbl_results[0];
+  if (wav_format == 0.0)
+  {
+    printf("Waveform format: BYTE\n");
+  }
+  else if (wav_format == 1.0)
+  {
+    printf("Waveform format: WORD\n");
+  }
+  else if (wav_format == 2.0)
+  {
+    printf("Waveform format: ASCii\n");
+  }
+
+  acq_type = dbl_results[1];
+  if (acq_type == 0.0)
+  {
+    printf("Acquire type: NORMal\n");
+  }
+  else if (acq_type == 1.0)
+  {
+    printf("Acquire type: PEAK\n");
+  }
+  else if (acq_type == 2.0)
+  {
+    printf("Acquire type: AVERage\n");
+  }
+  else if (acq_type == 3.0)
+  {
+    printf("Acquire type: HRESolution\n");
+  }
+
+  wav_points = dbl_results[2];
+  printf("Waveform points: %e\n", wav_points);
+
+  avg_count = dbl_results[3];
+  printf("Waveform average count: %e\n", avg_count);
+
+  x_increment = dbl_results[4];
+  printf("Waveform X increment: %e\n", x_increment);
+
+  x_origin = dbl_results[5];
+  printf("Waveform X origin: %e\n", x_origin);
+
+  x_reference = dbl_results[6];
+  printf("Waveform X reference: %e\n", x_reference);
+
+  y_increment = dbl_results[7];
+  printf("Waveform Y increment: %e\n", y_increment);
+
+  y_origin = dbl_results[8];
+  printf("Waveform Y origin: %e\n", y_origin);
+
+  y_reference = dbl_results[9];
+  printf("Waveform Y reference: %e\n", y_reference);
+
+  /* Read waveform data. */
+  num_bytes = do_query_ieeeblock(":WAVeform:DATA?");
+  printf("Number of data values: %d\n", num_bytes);
+
+  /* Open file for output. */
+  fp = fopen("c:\\scope\\data\\waveform_data.csv", "wb");
+
+  /* Output waveform data in CSV format. */
+  for (i = 0; i &lt; num_bytes - 1; i++)
+  {
+    /* Write time value, voltage value. */
+    fprintf(fp, "%9f, %6f\n",
+      x_origin + ((float)i * x_increment),
+      (((float)ieeeblock_data[i] - y_reference) * y_increment)
+      + y_origin);
+  }
+
+  /* Close output file. */
+   fclose(fp);
+   printf("Waveform format BYTE data written to ");
+   printf("c:\\scope\\data\\waveform_data.csv.\n");
+}
+
+/* Send a command to the instrument.
+ * --------------------------------------------------------------- */
+void do_command(command)
+char *command;
+{
+  char message[80];
+
+  strcpy(message, command);
+  strcat(message, "\n");
+  err = viPrintf(vi, message);
+  if (err != VI_SUCCESS) error_handler();
+
+  check_instrument_errors();
+}
+
+/* Command with IEEE definite-length block.
+ * --------------------------------------------------------------- */
+int do_command_ieeeblock(command, num_bytes)
+char *command;
+int num_bytes;
+{
+  char message[80];
+  int data_length;
+
+  strcpy(message, command);
+  strcat(message, " #8%08d");
+  err = viPrintf(vi, message, num_bytes);
+  if (err != VI_SUCCESS) error_handler();
+
+  err = viBufWrite(vi, ieeeblock_data, num_bytes, &amp;data_length);
+  if (err != VI_SUCCESS) error_handler();
+
+  check_instrument_errors();
+
+  return(data_length);
+}
+
+/* Query for a string result.
+ * --------------------------------------------------------------- */
+void do_query_string(query)
+char *query;
+{
+  char message[80];
+
+  strcpy(message, query);
+  strcat(message, "\n");
+
+  err = viPrintf(vi, message);
+  if (err != VI_SUCCESS) error_handler();
+
+  err = viScanf(vi, "%t", str_result);
+  if (err != VI_SUCCESS) error_handler();
+
+  check_instrument_errors();
+}
+
+/* Query for a number result.
+ * --------------------------------------------------------------- */
+void do_query_number(query)
+char *query;
+{
+  char message[80];
+
+  strcpy(message, query);
+  strcat(message, "\n");
+
+  err = viPrintf(vi, message);
+  if (err != VI_SUCCESS) error_handler();
+
+  err = viScanf(vi, "%lf", &amp;num_result);
+  if (err != VI_SUCCESS) error_handler();
+
+  check_instrument_errors();
+}
+
+/* Query for numbers result.
+ * --------------------------------------------------------------- */
+void do_query_numbers(query)
+char *query;
+{
+  char message[80];
+
+  strcpy(message, query);
+  strcat(message, "\n");
+
+  err = viPrintf(vi, message);
+  if (err != VI_SUCCESS) error_handler();
+
+  err = viScanf(vi, "%,10lf\n", dbl_results);
+  if (err != VI_SUCCESS) error_handler();
+
+  check_instrument_errors();
+}
+
+/* Query for an IEEE definite-length block result.
+ * --------------------------------------------------------------- */
+int do_query_ieeeblock(query)
+char *query;
+{
+  char message[80];
+  int data_length;
+
+  strcpy(message, query);
+  strcat(message, "\n");
+  err = viPrintf(vi, message);
+  if (err != VI_SUCCESS) error_handler();
+
+  data_length = IEEEBLOCK_SPACE;
+  err = viScanf(vi, "%#b\n", &amp;data_length, ieeeblock_data);
+  if (err != VI_SUCCESS) error_handler();
+
+  if (data_length == IEEEBLOCK_SPACE )
+  {
+    printf("IEEE block buffer full: ");
+    printf("May not have received all data.\n");
+  }
+
+  check_instrument_errors();
+
+  return(data_length);
+}
+
+/* Check for instrument errors.
+ * --------------------------------------------------------------- */
+void check_instrument_errors()
+{
+  char str_err_val[256] = {0};
+  char str_out[800] = "";
+
+  err = viQueryf(vi, ":SYSTem:ERRor?\n", "%t", str_err_val);
+  if (err != VI_SUCCESS) error_handler();
+  while(strncmp(str_err_val, "+0,No error", 3) != 0 )
+  {
+    strcat(str_out, ", ");
+    strcat(str_out, str_err_val);
+    err = viQueryf(vi, ":SYSTem:ERRor?\n", "%t", str_err_val);
+    if (err != VI_SUCCESS) error_handler();
+  }
+
+  if (strcmp(str_out, "") != 0)
+  {
+    printf("INST Error%s\n", str_out);
+    err = viFlush(vi, VI_READ_BUF);
+    if (err != VI_SUCCESS) error_handler();
+    err = viFlush(vi, VI_WRITE_BUF);
+    if (err != VI_SUCCESS) error_handler();
+  }
+}
+
+/* Handle VISA errors.
+ * --------------------------------------------------------------- */
+void error_handler()
+{
+  char err_msg[1024] = {0};
+
+  viStatusDesc(vi, err, err_msg);
+  printf("VISA Error: %s\n", err_msg);
+  if (err &lt; VI_SUCCESS)
+  {
+    exit(1);
+  }
+}</pre></div></body></html>

@@ -1,0 +1,13 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Using Other Oscilloscope Setup Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="programming.htm" title="Programming the Oscilloscope"><link rel="prev" href="autoscale_setup.htm" title="Using :AUToscale to Automate Oscilloscope Setup"><link rel="next" href="setup_code.htm" title="Example Oscilloscope Setup Code"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="programming.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Programming the Oscilloscope </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="other_setup_commands"></a>Using Other Oscilloscope Setup Commands<a name="d0e2075"></a></h3></div></div></div><p>A typical oscilloscope setup would set the vertical range and offset
+    voltage, the horizontal range, delay time, delay reference, trigger mode,
+    trigger level, and slope. An example of the commands that might be sent to
+    the oscilloscope are:</p><pre class="programlisting">myScope.WriteString ":CHANnel1:PROBe 10"
+myScope.WriteString ":CHANnel1:RANGe 16"
+myScope.WriteString ":CHANnel1:OFFSet 1.00"
+myScope.WriteString ":TIMebase:MODE MAIN"
+myScope.WriteString ":TIMebase:RANGe 1E-3"
+myScope.WriteString ":TIMebase:DELay 100E-6"</pre><p>Vertical is set to 16 V full-scale (2 V/div) with center of screen
+    at 1 V and probe attenuation set to 10. This example sets the time base at
+    1 ms full-scale (100 ms/div) with a delay of 100 µs.</p></div></body></html>

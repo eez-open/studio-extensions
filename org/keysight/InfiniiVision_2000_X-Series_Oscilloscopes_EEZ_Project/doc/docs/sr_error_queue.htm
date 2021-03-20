@@ -1,0 +1,13 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Error Queue</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Status.htm" title="Status Reporting"><link rel="prev" href="sr_ese.htm" title="(Standard) Event Status Enable Register (ESE)"><link rel="next" href="sr_operation_status_event.htm" title="Operation Status Event Register (:OPERegister[:EVENt])"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Status.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Status Reporting </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sr_error_queue"></a>Error Queue<a name="d0e51394"></a></h2></div></div></div><p>As errors are detected, they are placed in an error queue. This
+    queue is first in, first out. If the error queue overflows, the last error
+    in the queue is replaced with error 350, Queue overflow. Any time the
+    queue overflows, the least recent errors remain in the queue, and the most
+    recent error is discarded. The length of the oscilloscope's error queue is
+    30 (29 positions for the error messages, and 1 position for the Queue
+    overflow message).</p><p>The error queue is read with the :SYSTem:ERRor? query. Executing
+    this query reads and removes the oldest error from the head of the queue,
+    which opens a position at the tail of the queue for a new error. When all
+    the errors have been read from the queue, subsequent error queries return
+    "0, No error".</p><p>The error queue is cleared when:</p><div class="itemizedlist"><ul type="disc"><li><p>the instrument is powered up,</p></li><li><p>the instrument receives the *CLS common command, or</p></li><li><p>the last item is read from the error queue.</p></li></ul></div></div></body></html>

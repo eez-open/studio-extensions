@@ -1,0 +1,17 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Acquire a Waveform</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="sync_flow.htm" title="Synchronization in the Programming Flow"><link rel="prev" href="sync_flow_set_up.htm" title="Set Up the Oscilloscope"><link rel="next" href="sync_flow_retrieve.htm" title="Retrieve Results"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="sync_flow.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Synchronization in the Programming Flow </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sync_flow_acquire"></a>Acquire a Waveform</h3></div></div></div><p>When acquiring a waveform there are two possible methods used to
+      wait for the acquisition to complete. These methods are <a name="d0e51725"></a>blocking and <a name="d0e51729"></a>polling. The table below details when each method should
+      be chosen and why.</p><div class="informaltable"><table cellspacing="0" cellpadding="5" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">&nbsp;</th><th align="left">Blocking Wait</th><th align="left">Polling Wait</th></tr></thead><tbody valign="top"><tr><td><p><span class="bold"><strong>Use
+              When</strong></span></p></td><td><p>You know the oscilloscope <span class="emphasis"><em>will</em></span>
+              trigger based on the oscilloscope setup and device under
+              test.</p></td><td>You know the oscilloscope <span class="emphasis"><em>may or may
+              not</em></span> trigger on the oscilloscope setup and device
+              under test.</td></tr><tr><td><p><span class="bold"><strong>Advantages</strong></span></p></td><td><p>No need for polling.</p><p>Fastest
+              method.</p></td><td><p>Remote interface will not timeout</p><p>No
+              need for device clear if no trigger.</p></td></tr><tr><td><p><span class="bold"><strong>Disadvantages</strong></span></p></td><td><p>Remote interface may timeout.</p><p>Device
+              clear only way to get control of oscilloscope if there is no
+              trigger.</p></td><td><p>Slower method.</p><p>Requires polling
+              loop.</p><p>Requires known maximum wait
+              time.</p></td></tr><tr><td><p><span class="bold"><strong>Implementation
+              Details</strong></span></p></td><td><p>See <a href="blocking_sync.htm" title="Blocking Synchronization">Blocking Synchronization</a>.</p></td><td><p>See <a href="polling_sync.htm" title="Polling Synchronization With Timeout">Polling Synchronization With Timeout</a>.</p></td></tr></tbody></table></div></div></body></html>
