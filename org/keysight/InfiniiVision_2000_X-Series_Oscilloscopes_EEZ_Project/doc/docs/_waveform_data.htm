@@ -1,0 +1,58 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:WAVeform:DATA</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="waveform_commands.htm" title=":WAVeform Commands"><link rel="prev" href="_waveform_count.htm" title=":WAVeform:COUNt"><link rel="next" href="_waveform_format.htm" title=":WAVeform:FORMat"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="waveform_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:WAVeform Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="refentry" lang="en"><a name="_waveform_data"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>:WAVeform:DATA — <a href="core_commands.htm" title="Core Commands"><img src="images/../images/core.gif"></a></p></div><div class="refsection" lang="en"><a name="_waveform_data_query"></a><h2>Query Syntax<a name="d0e43509"></a><a name="d0e43512"></a><a name="d0e43515"></a><a name="d0e43518"></a></h2><pre class="synopsis">:WAVeform:DATA?</pre><p>The :WAVeform:DATA query returns the binary block of sampled data
+    points transmitted using the IEEE 488.2 arbitrary block data format. The
+    binary data is formatted according to the settings of the
+    :WAVeform:UNSigned, :WAVeform:BYTeorder, :WAVeform:FORMat, and
+    :WAVeform:SOURce commands. The number of points returned is controlled by
+    the :WAVeform:POINts command.</p><p>In BYTE or WORD waveform formats, these data values have special
+    meaning:</p><div class="itemizedlist"><ul type="disc"><li><p><a name="d0e43530"></a><a name="d0e43533"></a><a name="d0e43536"></a>0x00 or 0x0000 — Hole. Holes are locations where
+        data has not yet been acquired.</p><p><a name="d0e43541"></a>Another situation where there can be zeros in the data,
+        incorrectly, is when programming over telnet port 5024. Port 5024
+        provides a command prompt and is intended for ASCII transfers. Use
+        telnet port 5025 instead.</p></li><li><p><a name="d0e43547"></a><a name="d0e43550"></a><a name="d0e43553"></a>0x01 or 0x0001 — Clipped low. These are locations
+        where the waveform is clipped at the bottom of the oscilloscope
+        display.</p></li><li><p><a name="d0e43559"></a><a name="d0e43562"></a>0xFF or 0xFFFF — Clipped high. These are locations
+        where the waveform is clipped at the top of the oscilloscope
+        display.</p></li></ul></div></div><div class="refsection" lang="en"><a name="d0e43566"></a><h2>Return Format</h2><pre class="synopsis">&lt;binary block data&gt;&lt;NL&gt;</pre></div><div class="refsection" lang="en"><a name="d0e43571"></a><h2>See Also</h2><div class="itemizedlist"><ul type="disc"><li><p>For a more detailed description of the data returned for
+        different acquisition types, see: <a href="waveform_commands.htm#waveform_commands_overview">Introduction to :WAVeform
+  Commands</a></p></li><li><p><a href="_waveform_unsigned.htm" title=":WAVeform:UNSigned">:WAVeform:UNSigned</a></p></li><li><p><a href="_waveform_byteorder.htm" title=":WAVeform:BYTeorder">:WAVeform:BYTeorder</a></p></li><li><p><a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat</a></p></li><li><p><a href="_waveform_points.htm" title=":WAVeform:POINts">:WAVeform:POINts</a></p></li><li><p><a href="_waveform_preamble.htm" title=":WAVeform:PREamble">:WAVeform:PREamble</a></p></li><li><p><a href="_waveform_source.htm" title=":WAVeform:SOURce">:WAVeform:SOURce</a></p></li><li><p><a href="_waveform_type.htm" title=":WAVeform:TYPE">:WAVeform:TYPE</a></p></li></ul></div></div><div class="refsection" lang="en"><a name="waveform_data_code"></a><h2>Example Code<a name="d0e43603"></a><a name="d0e43606"></a></h2><pre class="programlisting">   ' QUERY_WAVE_DATA - Outputs waveform data that is stored in a buffer.
+
+   ' Query the oscilloscope for the waveform data.
+   myScope.WriteString ":WAV:DATA?"
+
+   ' READ_WAVE_DATA - The wave data consists of two parts: the header,
+   ' and the actual waveform data followed by a new line (NL) character.
+   ' The query data has the following format:
+   '
+   '    &lt;header&gt;&lt;waveform_data&gt;&lt;NL&gt;
+   '
+   ' Where:
+   '    &lt;header&gt; = #800001000 (This is an example header)
+   ' The "#8" may be stripped off of the header and the remaining
+   ' numbers are the size, in bytes, of the waveform data block.  The
+   ' size can vary depending on the number of points acquired for the
+   ' waveform.  You can then read that number of bytes from the
+   ' oscilloscope and the terminating NL character.
+   '
+   Dim lngI As Long
+   Dim lngDataValue As Long
+
+   varQueryResult = myScope.ReadIEEEBlock(BinaryType_UI1)
+   ' Unsigned integer bytes.
+   For lngI = 0 To UBound(varQueryResult) _
+       Step (UBound(varQueryResult) / 20)   ' 20 points.
+     If intBytesPerData = 2 Then
+       lngDataValue = varQueryResult(lngI) * 256 _
+           + varQueryResult(lngI + 1)   ' 16-bit value.
+     Else
+       lngDataValue = varQueryResult(lngI)   ' 8-bit value.
+     End If
+     strOutput = strOutput + "Data point " + _
+       CStr(lngI / intBytesPerData) + ", " + _
+       FormatNumber((lngDataValue - lngYReference) _
+           * sngYIncrement + sngYOrigin) + " V, " + _
+       FormatNumber(((lngI / intBytesPerData - lngXReference) _
+           * sngXIncrement + dblXOrigin) * 1000000) + " us" + vbCrLf
+   Next lngI
+   MsgBox "Waveform data:" + vbCrLf + strOutput</pre><p>See complete example programs at: <a href="Examples.htm" title="Programming Examples"><i>Programming Examples</i></a></p></div></div></body></html>

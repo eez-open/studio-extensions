@@ -1,0 +1,39 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:MEASure:SOURce</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="measure_commands.htm" title=":MEASure Commands"><link rel="prev" href="_measure_show.htm" title=":MEASure:SHOW"><link rel="next" href="_measure_tedge.htm" title=":MEASure:TEDGe"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="measure_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:MEASure Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="refentry" lang="en"><a name="_measure_source"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>:MEASure:SOURce — <a href="core_commands.htm" title="Core Commands"><img src="images/../images/core.gif"></a></p></div><div class="refsection" lang="en"><a name="_measure_source_command"></a><h2>Command Syntax</h2><pre class="synopsis">:MEASure:SOURce &lt;source1&gt;[,&lt;source2&gt;]</pre><pre class="synopsis">&lt;source1&gt;,&lt;source2&gt; ::= {&lt;digital channels&gt; | CHANnel&lt;n&gt; | FUNCtion
+                        | MATH | WMEMory&lt;r&gt; | EXTernal}</pre><pre class="synopsis">&lt;digital channels&gt; ::= DIGital&lt;d&gt; for the MSO models</pre><pre class="synopsis">&lt;n&gt; ::= 1 to (# of analog channels) in NR1 format</pre><pre class="synopsis">&lt;r&gt; ::= 1-2 in NR1 format</pre><pre class="synopsis">&lt;d&gt; ::= 0 to (# digital channels - 1) in NR1 format</pre><p><a name="d0e26312"></a><a name="d0e26315"></a><a name="d0e26318"></a><a name="d0e26321"></a><a name="d0e26324"></a><a name="d0e26327"></a><a name="d0e26330"></a>The :MEASure:SOURce command sets the default sources for
+    measurements. The specified sources are used as the sources for the
+    MEASure subsystem commands if the sources are not explicitly set with the
+    command.</p><p>If a source is specified for any measurement, the current source is
+    changed to this new value.</p><p>If :MARKer:MODE is set to OFF or MANual, setting :MEASure:SOURce to
+    CHANnel&lt;n&gt;, FUNCtion, or MATH will also set :MARKer:X1Y1source to
+    source1 and :MARKer:X2Y2source to source2.</p><p>EXTernal is only a valid source for the counter measurement (and
+    &lt;source1&gt;).</p></div><div class="refsection" lang="en"><a name="_measure_source_query"></a><h2>Query Syntax</h2><pre class="synopsis">:MEASure:SOURce?</pre><p>The :MEASure:SOURce? query returns the current source selections. If
+    source2 is not specified, the query returns "NONE" for source2. If all
+    channels are off, the query returns "NONE,NONE". Source2 only applies to
+    :MEASure:DELay and :MEASure:PHASe measurements.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>MATH is an alias for FUNCtion. The query will return FUNC if the
+      source is FUNCtion or MATH.</p></td></tr></table></div></div><div class="refsection" lang="en"><a name="d0e26350"></a><h2>Return Format</h2><pre class="synopsis">&lt;source1&gt;,&lt;source2&gt;&lt;NL&gt;</pre><pre class="synopsis">&lt;source1&gt;,&lt;source2&gt; ::= {&lt;digital channels&gt; | CHAN&lt;n&gt; | FUNC | WMWM&lt;r&gt;
+                        | EXT | NONE}</pre></div><div class="refsection" lang="en"><a name="d0e26357"></a><h2>See Also:</h2><div class="itemizedlist"><ul type="disc"><li><p><a href="measure_commands.htm#measure_commands_overview">Introduction to :MEASure
+  Commands</a></p></li><li><p><a href="_marker_mode.htm" title=":MARKer:MODE">:MARKer:MODE</a></p></li><li><p><a href="_marker_x1y1source.htm" title=":MARKer:X1Y1source">:MARKer:X1Y1source</a></p></li><li><p><a href="_marker_x2y2source.htm" title=":MARKer:X2Y2source">:MARKer:X2Y2source</a></p></li><li><p><a href="_measure_delay.htm" title=":MEASure:DELay">:MEASure:DELay</a></p></li><li><p><a href="_measure_phase.htm" title=":MEASure:PHASe">:MEASure:PHASe</a></p></li></ul></div></div><div class="refsection" lang="en"><a name="measure_period_code"></a><h2>Example Code<a name="d0e26382"></a><a name="d0e26385"></a></h2><pre class="programlisting">   ' MEASURE - The commands in the MEASURE subsystem are used to make
+   ' measurements on displayed waveforms.
+   myScope.WriteString ":MEASURE:SOURCE CHANNEL1"   ' Source to measure.
+   myScope.WriteString ":MEASURE:FREQUENCY?"   ' Query for frequency.
+   varQueryResult = myScope.ReadNumber   ' Read frequency.
+   MsgBox "Frequency:" + vbCrLf _
+         + FormatNumber(varQueryResult / 1000, 4) + " kHz"
+   myScope.WriteString ":MEASURE:DUTYCYCLE?"   ' Query for duty cycle.
+   varQueryResult = myScope.ReadNumber   ' Read duty cycle.
+   MsgBox "Duty cycle:" + vbCrLf _
+         + FormatNumber(varQueryResult, 3) + "%"
+   myScope.WriteString ":MEASURE:RISETIME?"   ' Query for risetime.
+   varQueryResult = myScope.ReadNumber   ' Read risetime.
+   MsgBox "Risetime:" + vbCrLf _
+         + FormatNumber(varQueryResult * 1000000, 4) + " us"
+   myScope.WriteString ":MEASURE:VPP?"   ' Query for Pk to Pk voltage.
+   varQueryResult = myScope.ReadNumber   ' Read VPP.
+   MsgBox "Peak to peak voltage:" + vbCrLf _
+         + FormatNumber(varQueryResult, 4) + " V"
+   myScope.WriteString ":MEASURE:VMAX?"   ' Query for Vmax.
+   varQueryResult = myScope.ReadNumber   ' Read Vmax.
+   MsgBox "Maximum voltage:" + vbCrLf _
+         + FormatNumber(varQueryResult, 4) + " V"</pre><p>See complete example programs at: <a href="Examples.htm" title="Programming Examples"><i>Programming Examples</i></a></p></div></div></body></html>

@@ -1,0 +1,19 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Query Return Values</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Concepts.htm" title="More About Oscilloscope Commands"><link rel="prev" href="tree_traversal_rules.htm" title="Tree Traversal Rules and Multiple Commands"><link rel="next" href="cn_sequential.htm" title="All Oscilloscope Commands Are Sequential"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Concepts.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>More About Oscilloscope Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="cn_return_values"></a>Query Return Values<a name="d0e52335"></a><a name="d0e52338"></a></h2></div></div></div><p>Command headers immediately followed by a question mark (?) are
+    queries. Queries are used to get results of measurements made by the
+    instrument or to find out how the instrument is currently
+    configured.</p><p>After receiving a query, the instrument interrogates the requested
+    function and places the answer in its output queue. The answer remains in
+    the output queue until it is read or another command is issued.</p><p>When read, the answer is transmitted across the bus to the
+    designated listener (typically a controller). For example, the query
+    :TIMebase:RANGe? places the current time base setting in the output queue.
+    When using the Agilent VISA COM library in Visual Basic, the controller
+    statements:</p><pre class="programlisting">Dim strQueryResult As String
+myScope.WriteString ":TIMebase:RANGe?"
+strQueryResult = myScope.ReadString</pre><p>pass the value across the bus to the controller and place it in the
+    variable strQueryResult.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p><span class="bold"><strong>Read Query Results Before Sending Another
+      Command</strong></span>. Sending another command or query before reading the
+      result of a query clears the output buffer (the current response) and
+      places a Query INTERRUPTED error in the error queue.</p></td></tr></table></div><h3><a name="d0e52356"></a>Infinity Representation<a name="d0e52358"></a></h3><p><a name="d0e52362"></a>The representation of infinity is +9.9E+37. This is also the
+    value returned when a measurement cannot be made.</p></div></body></html>

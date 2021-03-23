@@ -1,0 +1,153 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:WAVeform Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_trigger_tv_standard.htm" title=":TRIGger:TV:STANdard"><link rel="next" href="_waveform_byteorder.htm" title=":WAVeform:BYTeorder"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="waveform_commands"></a>:WAVeform Commands<a name="d0e42675"></a></h2></div></div></div><p>Provide access to waveform data. See <a href="waveform_commands.htm#waveform_commands_overview">Introduction to :WAVeform
+  Commands</a>.</p><div class="table"><a name="d0e42682"></a><p class="title"><b>:WAVeform Commands Summary:</b></p><div class="table-contents"><table summary=":WAVeform Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_waveform_byteorder.htm#_waveform_byteorder_command" title="Command Syntax">:WAVeform:BYTeorder &lt;value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_waveform_byteorder.htm#_waveform_byteorder_query" title="Query Syntax">:WAVeform:BYTeorder?</a></code></strong></td><td><strong class="userinput"><code>&lt;value&gt; ::= {LSBFirst | MSBFirst}</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_count.htm#_waveform_count_query" title="Query Syntax">:WAVeform:COUNt?</a></code></strong></td><td><strong class="userinput"><code>&lt;count&gt; ::= an integer from 1 to 65536 in NR1 format</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_data.htm#_waveform_data_query" title="Query Syntax">:WAVeform:DATA?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;binary block length bytes&gt;, &lt;binary data&gt;</code></strong></p><p><strong class="userinput"><code>For example, to transmit 1000 bytes of data, the syntax would be: #800001000&lt;1000 bytes of data&gt;&lt;NL&gt;</code></strong></p><p><strong class="userinput"><code>8 is the number of digits that follow</code></strong></p><p><strong class="userinput"><code>00001000 is the number of bytes to be transmitted</code></strong></p><p><strong class="userinput"><code>&lt;1000 bytes of data&gt; is the actual data</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_waveform_format.htm#_waveform_format_command" title="Command Syntax">:WAVeform:FORMat &lt;value&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_waveform_format.htm#_waveform_format_query" title="Query Syntax">:WAVeform:FORMat?</a></code></strong></td><td><strong class="userinput"><code>&lt;value&gt; ::= {WORD | BYTE | ASCII}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_waveform_points.htm#_waveform_points_command" title="Command Syntax">:WAVeform:POINts &lt;#&nbsp;points&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_waveform_points.htm#_waveform_points_query" title="Query Syntax">:WAVeform:POINts?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;#&nbsp;points&gt; ::= {100 | 250 | 500 | 1000 | &lt;points_mode&gt;} if waveform points mode is NORMal</code></strong></p><p><strong class="userinput"><code>&lt;#&nbsp;points&gt; ::= {100 | 250 | 500 | 1000 | 2000 ... 8000000 in 1-2-5 sequence | &lt;points_mode&gt;} if waveform points mode is MAXimum or RAW</code></strong></p><p><strong class="userinput"><code>&lt;points_mode&gt; ::= {NORMal | MAXimum | RAW}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_waveform_points_mode.htm#_waveform_points_mode_command" title="Command Syntax">:WAVeform:POINts:MODE &lt;points_mode&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_waveform_points_mode.htm#_waveform_points_mode_query" title="Query Syntax">:WAVeform:POINts:MODE?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;points_mode&gt; ::= {NORMal | MAXimum | RAW}</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_preamble.htm#_waveform_preamble_query" title="Query Syntax">:WAVeform:PREamble?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;preamble_block&gt; ::= &lt;format NR1&gt;, &lt;type NR1&gt;,&lt;points NR1&gt;,&lt;count NR1&gt;, &lt;xincrement NR3&gt;, &lt;xorigin NR3&gt;, &lt;xreference NR1&gt;,&lt;yincrement NR3&gt;, &lt;yorigin NR3&gt;, &lt;yreference NR1&gt;</code></strong></p><p><strong class="userinput"><code>&lt;format&gt; ::= an integer in NR1 format:</code></strong></p><pre class="synopsis"> • 0 for BYTE format
+ • 1 for WORD format
+ • 2 for ASCii format</pre><p><strong class="userinput"><code>&lt;type&gt; ::= an integer in NR1 format:</code></strong></p><pre class="synopsis"> • 0 for NORMal type
+ • 1 for PEAK detect type
+ • 3 for AVERage type
+ • 4 for HRESolution type</pre><p><strong class="userinput"><code>&lt;count&gt; ::= Average count, or 1 if PEAK detect type or NORMal; an integer in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_segmented_count.htm#_waveform_segmented_count_query" title="Query Syntax">:WAVeform:SEGMented:COUNt?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;count&gt; ::= an integer from 2 to 1000 in NR1 format (with Option SGM)</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_segmented_ttag.htm#_waveform_segmented_ttag_query" title="Query Syntax">:WAVeform:SEGMented:TTAG?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;time_tag&gt; ::= in NR3 format (with Option SGM)</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_waveform_source.htm#_waveform_source_command" title="Command Syntax">:WAVeform:SOURce &lt;source&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_waveform_source.htm#_waveform_source_query" title="Query Syntax">:WAVeform:SOURce?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; | FUNCtion | MATH | SBUS1} for DSO models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; | POD{1 | 2} | BUS{1 | 2} | FUNCtion | MATH | SBUS1} for MSO models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog channels) in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_waveform_source_subsource.htm#_waveform_source_subsource_command" title="Command Syntax">:WAVeform:SOURce:SUBSource &lt;subsource&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_waveform_source_subsource.htm#_waveform_source_subsource_query" title="Query Syntax">:WAVeform:SOURce:SUBSource?</a></code></strong></td><td><strong class="userinput"><code>&lt;subsource&gt; ::= {{SUB0 | RX | MOSI} | {SUB1 | TX | MISO}}</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_type.htm#_waveform_type_query" title="Query Syntax">:WAVeform:TYPE?</a></code></strong></td><td><strong class="userinput"><code>&lt;return_mode&gt; ::= {NORM | PEAK | AVER | HRES}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_waveform_unsigned.htm#_waveform_unsigned_command" title="Command Syntax">:WAVeform:UNSigned {{0 | OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_waveform_unsigned.htm#_waveform_unsigned_query" title="Query Syntax">:WAVeform:UNSigned?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_waveform_view.htm#_waveform_view_command" title="Command Syntax">:WAVeform:VIEW &lt;view&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_waveform_view.htm#_waveform_view_query" title="Query Syntax">:WAVeform:VIEW?</a></code></strong></td><td><strong class="userinput"><code>&lt;view&gt; ::= {MAIN}</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_xincrement.htm#_waveform_xincrement_query" title="Query Syntax">:WAVeform:XINCrement?</a></code></strong></td><td><strong class="userinput"><code>&lt;return_value&gt; ::= x-increment in the current preamble in NR3 format</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_xorigin.htm#_waveform_xorigin_query" title="Query Syntax">:WAVeform:XORigin?</a></code></strong></td><td><strong class="userinput"><code>&lt;return_value&gt; ::= x-origin value in the current preamble in NR3 format</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_xreference.htm#_waveform_xreference_query" title="Query Syntax">:WAVeform:XREFerence?</a></code></strong></td><td><strong class="userinput"><code>&lt;return_value&gt; ::= 0 (x-reference value in the current preamble in NR1 format)</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_yincrement.htm#_waveform_yincrement_query" title="Query Syntax">:WAVeform:YINCrement?</a></code></strong></td><td><strong class="userinput"><code>&lt;return_value&gt; ::= y-increment value in the current preamble in NR3 format</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_yorigin.htm#_waveform_yorigin_query" title="Query Syntax">:WAVeform:YORigin?</a></code></strong></td><td><strong class="userinput"><code>&lt;return_value&gt; ::= y-origin in the current preamble in NR3 format</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_waveform_yreference.htm#_waveform_yreference_query" title="Query Syntax">:WAVeform:YREFerence?</a></code></strong></td><td><strong class="userinput"><code>&lt;return_value&gt; ::= y-reference value in the current preamble in NR1 format</code></strong></td></tr></tbody></table></div></div><br class="table-break"><h2><a name="waveform_commands_overview"></a>Introduction to :WAVeform
+  Commands</h2><p><a name="d0e42973"></a><a name="d0e42976"></a>The WAVeform subsystem is used to transfer data to a
+  controller from the oscilloscope waveform memories. The queries in this
+  subsystem will only operate when the channel selected by :WAVeform:SOURce is
+  on.</p><p><b>Waveform Data and Preamble<a name="d0e42983"></a><a name="d0e42986"></a>.&nbsp;</b>The waveform record is actually contained in two portions: the
+    preamble and waveform data. The waveform record must be read from the
+    oscilloscope by the controller using two separate commands, <a href="_waveform_data.htm" title=":WAVeform:DATA">:WAVeform:DATA</a> and <a href="_waveform_preamble.htm" title=":WAVeform:PREamble">:WAVeform:PREamble</a>. The waveform data
+    is the actual data acquired for each point in the specified source. The
+    preamble contains the information for interpreting the waveform data,
+    which includes the number of points acquired, the format of acquired data,
+    and the type of acquired data. The preamble also contains the X and Y
+    increments, origins, and references for the acquired data, so that word
+    and byte data can be translated to time and voltage values.</p><p><b>Data Acquisition Types<a name="d0e43000"></a><a name="d0e43003"></a>.&nbsp;</b>There are four types of waveform acquisitions that can be selected
+    for analog channels with the <a href="_acquire_type.htm" title=":ACQuire:TYPE">:ACQuire:TYPE
+    command</a>: NORMal, AVERage, PEAK, and HRESolution. Digital channels
+    are always acquired using NORMal. When the data is acquired using the
+    <a href="_digitize.htm" title=":DIGitize">:DIGitize command</a> or <a href="_run.htm" title=":RUN">:RUN command</a>, the data is placed in the channel
+    buffer of the specified source.</p><p><a name="d0e43018"></a>Once you have acquired data with the :DIGitize command, the
+  instrument is stopped. If the instrument is restarted (via the programming
+  interface or the front panel), or if any instrument setting is changed, the
+  data acquired with the :DIGitize command may be overwritten.You should first
+  acquire the data with the :DIGitize command, then immediately read the data
+  with the <a href="_waveform_data.htm" title=":WAVeform:DATA">:WAVeform:DATA? query</a> before
+  changing any instrument setup.</p><p>A waveform record consists of either all of the acquired points or a
+  subset of the acquired points. The number of points acquired may be queried
+  using <a href="_acquire_points.htm" title=":ACQuire:POINts">:ACQuire:POINts?</a>.</p><p><span class="bold"><strong>Helpful Hints:<a name="d0e43033"></a></strong></span></p><p>The number of points transferred to the computer is controlled using
+  the <a href="_waveform_points.htm" title=":WAVeform:POINts">:WAVeform:POINts command</a>. If
+  :WAVeform:POINts MAXimum is specified and the instrument is not running
+  (stopped), all of the points that are displayed are transferred. This can be
+  as many as 4,000,000 in some operating modes or as many as 8,000,000 for a
+  digital channel on the mixed signal oscilloscope. Fewer points may be
+  specified to speed data transfers and minimize controller analysis time. The
+  :WAVeform:POINts may be varied even after data on a channel is acquired.
+  However, this decimation may result in lost pulses and transitions. The
+  number of points selected for transfer using :WAVeform:POINts must be an
+  even divisor of 1,000 or be set to MAXimum. :WAVeform:POINts determines the
+  increment between time buckets that will be transferred. If POINts =
+  MAXimum, the data cannot be decimated. For example:</p><div class="itemizedlist"><ul type="disc"><li><p><strong class="userinput"><code>:WAVeform:POINts 1000</code></strong> — returns time
+      buckets 0, 1, 2, 3, 4 ,.., 999.</p></li><li><p><strong class="userinput"><code>:WAVeform:POINts 500</code></strong> — returns time
+      buckets 0, 2, 4, 6, 8 ,.., 998.</p></li><li><p><strong class="userinput"><code>:WAVeform:POINts 250</code></strong> — returns time
+      buckets 0, 4, 8, 12, 16 ,.., 996.</p></li><li><p><strong class="userinput"><code>:WAVeform:POINts 100</code></strong> — returns time
+      buckets 0, 10, 20, 30, 40 ,.., 990.</p></li></ul></div><p><b>Analog Channel Data.&nbsp;</b></p><p><span class="bold"><strong>NORMal Data<a name="d0e43069"></a></strong></span></p><p>Normal data consists of the last data point (hit) in each time bucket.
+  This data is transmitted over the programming interface in a linear fashion
+  starting with time bucket 0 and going through time bucket n - 1, where n is
+  the number returned by the <a href="_waveform_points.htm" title=":WAVeform:POINts">:WAVeform:POINts? query</a>. Only the
+  magnitude values of each data point are transmitted. The first voltage value
+  corresponds to the first time bucket on the left side of the screen and the
+  last value corresponds to the next-to-last time bucket on the right side of
+  the screen. Time buckets without data return 0. The time values for each
+  data point correspond to the position of the data point in the data array.
+  These time values are not transmitted.</p><p><span class="bold"><strong>AVERage Data<a name="d0e43080"></a></strong></span></p><p>AVERage data consists of the average of the first n hits in a time
+  bucket, where n is the value returned by the <a href="_acquire_count.htm" title=":ACQuire:COUNt">:ACQuire:COUNt query</a>. Time buckets that have
+  fewer than n hits return the average of the data they do have. If a time
+  bucket does not have any data in it, it returns 0.</p><p>This data is transmitted over the interface linearly, starting with
+  time bucket 0 and proceeding through time bucket n-1, where n is the number
+  returned by the <a href="_waveform_points.htm" title=":WAVeform:POINts">:WAVeform:POINts?
+  query</a>. The first value corresponds to a point at the left side of the
+  screen and the last value corresponds to one point away from the right side
+  of the screen. The maximum number of points that can be returned in average
+  mode is 1000 unless ACQuire:COUNt has been set to 1.</p><p><span class="bold"><strong>PEAK Data<a name="d0e43096"></a><a name="d0e43099"></a></strong></span></p><p>Peak detect display mode is used to detect glitches for time base
+  settings of 500&nbsp;us/div and slower. In this mode, the oscilloscope can
+  sample more data than it can store and display. So, when peak detect is
+  turned on, the oscilloscope scans through the extra data, picks up the
+  minimum and maximum for each time bucket, then stores the data in an array.
+  Each time bucket contains two data sample.</p><p>The array is transmitted over the interface bus linearly, starting
+  with time bucket 0 proceeding through time bucket n-1, where n is the number
+  returned by the <a href="_waveform_points.htm" title=":WAVeform:POINts">:WAVeform:POINts?
+  query</a>. In each time bucket, two values are transmitted, first the
+  minimum, followed by the maximum. The first pair of values corresponds to
+  the time bucket at the leftmost side of the screen. The last pair of values
+  corresponds to the time bucket at the far right side of the screen. In <a href="_acquire_type.htm" title=":ACQuire:TYPE">:ACQuire:TYPE PEAK mode</a>, the value returned
+  by the <a href="_waveform_xincrement.htm" title=":WAVeform:XINCrement">:WAVeform:XINCrement
+  query</a> should be doubled to find the time difference between the
+  min-max pairs.</p><p><span class="bold"><strong>HRESolution Data<a name="d0e43118"></a><a name="d0e43121"></a></strong></span></p><p>The high resolution (<span class="emphasis"><em>smoothing</em></span>) mode is used to
+  reduce noise at slower sweep speeds where the digitizer samples faster than
+  needed to fill memory for the displayed time range.</p><p><span class="bold"><strong>Data Conversion<a name="d0e43132"></a><a name="d0e43135"></a></strong></span></p><p>Word or byte data sent from the oscilloscope must be scaled for useful
+  interpretation. The values used to interpret the data are the X and Y
+  references, X and Y origins, and X and Y increments. These values are read
+  from the waveform preamble. Each channel has its own waveform
+  preamble.</p><p>In converting a data value to a voltage value, the following formula
+  is used:</p><div class="blockquote"><blockquote class="blockquote"><p>voltage = [(data value - yreference) * yincrement] + yorigin</p></blockquote></div><p>If the <a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat data format
+  is ASCii</a>, the data values are converted internally and sent as
+  floating point values separated by commas.</p><p>In converting a data value to time, the time value of a data point can
+  be determined by the position of the data point. For example, the fourth
+  data point sent with :WAVeform:XORigin = 16&nbsp;ns, :WAVeform:XREFerence =
+  0, and :WAVeform:XINCrement = 2&nbsp;ns, can be calculated using the
+  following formula:</p><div class="blockquote"><blockquote class="blockquote"><p>time = [(data point number - xreference) * xincrement] +
+    xorigin</p></blockquote></div><p>This would result in the following calculation for time bucket
+  3:</p><div class="blockquote"><blockquote class="blockquote"><p>time = [(3 - 0) * 2&nbsp;ns] + 16&nbsp;ns = 22&nbsp;ns</p></blockquote></div><p>In <a href="_acquire_type.htm" title=":ACQuire:TYPE">:ACQuire:TYPE PEAK mode</a>,
+  because data is acquired in max-min pairs, modify the previous time formula
+  to the following:</p><div class="blockquote"><blockquote class="blockquote"><p>time=[(data pair number - xreference) * xincrement * 2] +
+    xorigin</p></blockquote></div><p><span class="bold"><strong>Data Format for Transfer<a name="d0e43171"></a></strong></span></p><p>There are three formats for transferring waveform data over the
+  interface: BYTE, WORD and ASCii (see <a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat</a>).
+  BYTE, WORD and ASCii formatted waveform records are transmitted using the
+  arbitrary block program data format specified in IEEE 488.2.</p><p>When you use the block data format, the ASCII character string
+  "#8&lt;DD...D&gt;" is sent prior to sending the actual data. The 8 indicates
+  how many Ds follow. The Ds are ASCII numbers that indicate how many data
+  bytes follow.</p><p>For example, if 1000 points will be transferred, and the WORD format
+  was specified, the block header "#800001000" would be sent. The 8 indicates
+  that eight length bytes follow, and 00001000 indicates that 1000 binary data
+  bytes follow.</p><p><a name="d0e43183"></a><a name="d0e43186"></a>Use the <a href="_waveform_unsigned.htm" title=":WAVeform:UNSigned">:WAVeform:UNSigned
+  command</a> to control whether data values are sent as unsigned or signed
+  integers. This command can be used to match the instrument's internal data
+  type to the data type used by the programming language. This command has no
+  effect if the data format is ASCii.</p><div class="variablelist"><dl><dt><span class="term">Data Format for Transfer - ASCii format<a name="d0e43197"></a></span></dt><dd><p>The ASCii format (see <a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat</a>)
+        provides access to the waveform data as real Y-axis values without
+        using Y origin, Y reference, and Y increment to convert the binary
+        data. Values are transferred as ASCii digits in floating point format
+        separated by commas. In ASCii format, holes are represented by the
+        value 9.9e+37. The setting of <a href="_waveform_byteorder.htm" title=":WAVeform:BYTeorder">:WAVeform:BYTeorder</a> and <a href="_waveform_unsigned.htm" title=":WAVeform:UNSigned">:WAVeform:UNSigned</a> have no effect
+        when the format is ASCii.</p></dd><dt><span class="term">Data Format for Transfer - WORD format<a name="d0e43214"></a></span></dt><dd><p>WORD format (see <a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat</a>) provides
+        16-bit access to the waveform data. In the WORD format, the number of
+        data bytes is twice the number of data points. The number of data
+        points is the value returned by the <a href="_waveform_points.htm" title=":WAVeform:POINts">:WAVeform:POINts? query</a>. If the data
+        intrinsically has less than 16 bits of resolution, the data is
+        left-shifted to provide 16 bits of resolution and the least
+        significant bits are set to 0. Currently, the greatest intrinsic
+        resolution of any data is 12 bits, so at least the lowest 4 bits of
+        data will be 0. If there is a hole in the data, the hole is
+        represented by a 16 bit value equal to 0.</p><p>Use <a href="_waveform_byteorder.htm" title=":WAVeform:BYTeorder">:WAVeform:BYTeorder</a> to determine
+        if the least significant byte or most significant byte is to be
+        transferred first. The :BYTeorder command can be used to alter the
+        transmit sequence to match the storage sequence of an integer in the
+        programming language being used.</p></dd><dt><span class="term">Data Format for Transfer - BYTE format<a name="d0e43233"></a></span></dt><dd><p>The BYTE format (see <a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat</a> )
+        allows 8-bit access to the waveform data. If the data intrinsically
+        has more than 8 bits of resolution (averaged data), the data is
+        right-shifted (truncated) to fit into 8 bits. If there is a hole in
+        the data, the hole is represented by a value of 0. The BYTE-formatted
+        data transfers over the programming interface faster than ASCii or
+        WORD-formatted data, because in ASCii format, as many as 13 bytes per
+        point are transferred, in BYTE format one byte per point is
+        transferred, and in WORD format two bytes per point are
+        transferred.</p><p>The <a href="_waveform_byteorder.htm" title=":WAVeform:BYTeorder">:WAVeform:BYTeorder
+        command</a> has no effect when the data format is BYTE.</p></dd></dl></div><p><b>Digital Channel Data (MSO models only)<a name="d0e43249"></a>.&nbsp;</b>The waveform record for digital channels is similar to that of
+    analog channels. The main difference is that the data points represent
+    either DIGital0,..,7 (POD1), DIGital8,..,15 (POD2), or any grouping of
+    digital channels (BUS1 or BUS2).</p><p>For digital channels, <a href="_waveform_unsigned.htm" title=":WAVeform:UNSigned">:WAVeform:UNSigned</a> must be set to
+  ON.</p><p><span class="bold"><strong>Digital Channel POD Data Format<a name="d0e43262"></a></strong></span></p><p>Data for digital channels is only available in groups of 8 bits (Pod1
+  = D0 - D7, Pod2 = D8 - D15). The bytes are organized as:</p><div class="informaltable"><table cellspacing="0" cellpadding="5" border="1"><colgroup><col><col><col><col><col><col><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">:WAVeform:SOURce</th><th align="left">Bit 7</th><th align="left">Bit 6</th><th align="left">Bit 5</th><th align="left">Bit 4</th><th align="left">Bit 3</th><th align="left">Bit 2</th><th align="left">Bit 1</th><th align="left">Bit 0</th></tr></thead><tbody valign="top"><tr><td>POD1</td><td>D7</td><td>D6</td><td>D5</td><td>D4</td><td>D3</td><td>D2</td><td>D1</td><td>D0</td></tr><tr><td>POD2</td><td>D15</td><td>D14</td><td>D13</td><td>D12</td><td>D11</td><td>D10</td><td>D9</td><td>D8</td></tr></tbody></table></div><p>If the <a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat is
+  WORD</a> is WORD, every other data byte will be 0. The setting of <a href="_waveform_byteorder.htm" title=":WAVeform:BYTeorder">:WAVeform:BYTeorder</a> controls which byte
+  is 0.</p><p>If a digital channel is not displayed, its bit value in the pod data
+  byte is not defined.</p><p><span class="bold"><strong>Digital Channel BUS Data Format<a name="d0e43350"></a></strong></span></p><p>Digital channel BUS definitions can include any or all of the digital
+  channels. Therefore, data is always returned as 16-bit values. <a href="bus_commands.htm" title=":BUS<n&gt; Commands">:BUS commands</a> are used to select the digital
+  channels for a bus.</p><p><b>Reporting the Setup.&nbsp;</b>The following is a sample response from the :WAVeform? query. In
+    this case, the query was issued following a *RST command.</p><pre class="programlisting">:WAV:UNS 1;VIEW MAIN;BYT MSBF;FORM BYTE;POIN +1000;SOUR CHAN1;SOUR:SUBS NONE</pre></div></body></html>

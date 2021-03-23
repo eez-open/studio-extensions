@@ -1,0 +1,21 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:FUNCtion[:FFT]:WINDow</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="function_commands.htm" title=":FUNCtion Commands"><link rel="prev" href="_function_fft_vtype.htm" title=":FUNCtion[:FFT]:VTYPe"><link rel="next" href="_function_goft_operation.htm" title=":FUNCtion:GOFT:OPERation"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="function_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:FUNCtion Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="refentry" lang="en"><a name="_function_fft_window"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>:FUNCtion[:FFT]:WINDow — <a href="non-core_commands.htm" title="Non-Core&#xA;    Commands"><img src="images/../images/non_core.gif"></a></p></div><div class="refsection" lang="en"><a name="_function_fft_window_command"></a><h2>Command Syntax<a name="d0e20931"></a><a name="d0e20934"></a><a name="d0e20937"></a><a name="d0e20940"></a><a name="d0e20943"></a><a name="d0e20946"></a><a name="d0e20949"></a><a name="d0e20952"></a><a name="d0e20955"></a><a name="d0e20958"></a><a name="d0e20961"></a></h2><pre class="synopsis">:FUNCtion[:FFT]:WINDow &lt;window&gt;</pre><pre class="synopsis">&lt;window&gt; ::= {RECTangular | HANNing | FLATtop | BHARris}</pre><p>The :FUNCtion[:FFT]:WINDow command allows the selection of four
+    different windowing transforms or operations for the FFT (Fast Fourier
+    Transform) function.</p><p>The FFT operation assumes that the time record repeats. Unless an
+    integral number of sampled waveform cycles exist in the record, a
+    discontinuity is created between the end of one record and the beginning
+    of the next. This discontinuity introduces additional frequency components
+    about the peaks into the spectrum. This is referred to as leakage. To
+    minimize leakage, windows that approach zero smoothly at the start and end
+    of the record are employed as filters to the FFTs. Each window is useful
+    for certain classes of input signals.</p><div class="itemizedlist"><ul type="disc"><li><p>RECTangular<a name="d0e20976"></a> — useful for transient signals, and signals where there
+        are an integral number of cycles in the time record.</p></li><li><p>HANNing<a name="d0e20983"></a> — useful for frequency resolution and general purpose
+        use. It is good for resolving two frequencies that are close together,
+        or for making frequency measurements. This is the default
+        window.</p></li><li><p>FLATtop<a name="d0e20990"></a> — best for making accurate amplitude measurements of
+        frequency peaks.</p></li><li><p>BHARris (Blackman-Harris)<a name="d0e20997"></a> — reduces time resolution compared to the rectangular
+        window, but it improves the capacity to detect smaller impulses due to
+        lower secondary lobes (provides minimal spectral leakage).</p></li></ul></div></div><div class="refsection" lang="en"><a name="_function_fft_window_query"></a><h2>Query Syntax</h2><pre class="synopsis">:FUNCtion[:FFT]:WINDow?</pre><p>The :FUNCtion[:FFT]:WINDow? query returns the value of the window
+    selected for the FFT function.</p></div><div class="refsection" lang="en"><a name="d0e21008"></a><h2>Return Format</h2><pre class="synopsis">&lt;window&gt;&lt;NL&gt;</pre><pre class="synopsis">&lt;window&gt; ::= {RECT | HANN | FLAT | BHAR}</pre></div><div class="refsection" lang="en"><a name="d0e21015"></a><h2>See Also</h2><div class="itemizedlist"><ul type="disc"><li><p><a href="function_commands.htm#function_commands_overview">Introduction to :FUNCtion
+  Commands</a></p></li></ul></div></div></div></body></html>

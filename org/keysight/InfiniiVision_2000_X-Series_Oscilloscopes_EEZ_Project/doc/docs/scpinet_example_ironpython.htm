@@ -1,0 +1,243 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>SCPI.NET Example in IronPython</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="scpinet_examples.htm" title="SCPI.NET Examples"><link rel="prev" href="scpinet_example_vbnet.htm" title="SCPI.NET Example in Visual Basic .NET"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="scpinet_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>SCPI.NET Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="scpinet_example_ironpython"></a>SCPI.NET Example in IronPython<a name="d0e53405"></a><a name="d0e53408"></a><a name="d0e53411"></a></h3></div></div></div><p>You can also control Agilent oscilloscopes using the SCPI.NET
+    library and Python programming language on the .NET platform using:</p><div class="itemizedlist"><ul type="disc"><li><p>IronPython (<a href="http://ironpython.codeplex.com/" target="_top">http://ironpython.codeplex.com/</a>)
+        which is an implementation of the Python programming language running
+        under .NET.</p></li></ul></div><p>To run this example with IronPython:</p><div class="orderedlist"><ol type="1"><li><p>Install the Agilent Command Expert software and the command set
+        for the oscilloscope.</p></li><li><p>Cut-and-paste the code that follows into a file named
+        "example.py".</p></li><li><p>Edit the program to use the address of your oscilloscope.</p></li><li><p>If the IronPython "ipy.exe" can be found via your PATH
+        environment variable, open a Command Prompt window; then, change to
+        the folder that contains the "example.py" file, and enter:</p><div class="literallayout"><p>ipy&nbsp;example.py</p></div></li></ol></div><pre class="programlisting">#
+# Agilent SCPI.NET Example in IronPython
+# *********************************************************
+# This program illustrates a few commonly used programming
+# features of your Agilent oscilloscope.
+# *********************************************************
+
+# Import Python modules.
+# ---------------------------------------------------------
+import sys
+sys.path.append("C:\Python26\Lib")   # Python Standard Library.
+sys.path.append("C:\ProgramData\Agilent\Command Expert\ScpiNetDrivers")
+import string
+
+# Import .NET modules.
+# ---------------------------------------------------------
+from System import *
+from System.IO import *
+from System.Text import *
+from System.Runtime.InteropServices import *
+import clr
+clr.AddReference("AgInfiniiVision2000X_01_20")
+from Agilent.CommandExpert.ScpiNet.AgInfiniiVision2000X_01_20 import *
+
+
+# =========================================================
+# Initialize:
+# =========================================================
+def initialize():
+
+ # Get and display the device's *IDN? string.
+ idn_string = scope.SCPI.IDN.Query()
+ print "Identification string '%s'" % idn_string
+
+ # Clear status and load the default setup.
+ scope.SCPI.CLS.Command()
+ scope.SCPI.RST.Command()
+
+
+# =========================================================
+# Capture:
+# =========================================================
+def capture():
+
+ # Use auto-scale to automatically set up oscilloscope.
+ print "Autoscale."
+ scope.SCPI.AUToscale.Command(None, None, None, None, None)
+
+ # Set trigger mode.
+ scope.SCPI.TRIGger.MODE.Command("EDGE")
+ qresult = scope.SCPI.TRIGger.MODE.Query()
+ print "Trigger mode: %s" % qresult
+
+ # Set EDGE trigger parameters.
+ scope.SCPI.TRIGger.EDGE.SOURce.Command("CHANnel1")
+ qresult = scope.SCPI.TRIGger.EDGE.SOURce.Query()
+ print "Trigger edge source: %s" % qresult
+
+ scope.SCPI.TRIGger.EDGE.LEVel.Command(1.5, "CHANnel1")
+ qresult = scope.SCPI.TRIGger.EDGE.LEVel.Query("CHANnel1")
+ print "Trigger edge level: %s" % qresult
+
+ scope.SCPI.TRIGger.EDGE.SLOPe.Command("POSitive")
+ qresult = scope.SCPI.TRIGger.EDGE.SLOPe.Query()
+ print "Trigger edge slope: %s" % qresult
+
+ # Save oscilloscope setup.
+ setup_lines = scope.SCPI.SYSTem.SETup.Query()
+ nLength = len(setup_lines)
+ File.WriteAllLines("setup.stp", setup_lines)
+ print "Setup lines saved: %d" % nLength
+
+ # Change oscilloscope settings with individual commands:
+  
+ # Set vertical scale and offset.
+ scope.SCPI.CHANnel.SCALe.Command(1, 0.05)
+ qresult = scope.SCPI.CHANnel.SCALe.Query(1)
+ print "Channel 1 vertical scale: %f" % qresult
+
+ scope.SCPI.CHANnel.OFFSet.Command(1, -1.5)
+ qresult = scope.SCPI.CHANnel.OFFSet.Query(1)
+ print "Channel 1 offset: %f" % qresult
+
+ # Set horizontal scale and offset.
+ scope.SCPI.TIMebase.SCALe.Command(0.0002)
+ qresult = scope.SCPI.TIMebase.SCALe.Query()
+ print "Timebase scale: %f" % qresult
+
+ scope.SCPI.TIMebase.POSition.Command(0.0)
+ qresult = scope.SCPI.TIMebase.POSition.Query()
+ print "Timebase position: %f" % qresult
+
+ # Set the acquisition type.
+ scope.SCPI.ACQuire.TYPE.Command("NORMal")
+ qresult = scope.SCPI.ACQuire.TYPE.Query()
+ print "Acquire type: %s" % qresult
+
+ # Or, set up oscilloscope by loading a previously saved setup.
+ setup_lines = File.ReadAllLines("setup.stp")
+ scope.SCPI.SYSTem.SETup.Command(setup_lines)
+ print "Setup lines restored: %d" % len(setup_lines)
+
+ # Capture an acquisition using :DIGitize.
+ scope.SCPI.DIGitize.Command("CHANnel1", None, None, None, None)
+
+
+# =========================================================
+# Analyze:
+# =========================================================
+def analyze():
+
+ # Make measurements.
+ # --------------------------------------------------------
+ scope.SCPI.MEASure.SOURce.Command("CHANnel1", None)
+ (source1, source2) = scope.SCPI.MEASure.SOURce.Query()
+ print "Measure source: %s" % source1
+
+ scope.SCPI.MEASure.FREQuency.Command("CHANnel1")
+ qresult = scope.SCPI.MEASure.FREQuency.Query("CHANnel1")
+ print "Measured frequency on channel 1: %f" % qresult
+
+ # Use direct command/query when commands not in command set.
+ scope.Transport.Command.Invoke(":MEASure:VAMPlitude CHANnel1")
+ qresult = scope.Transport.Query.Invoke(":MEASure:VAMPlitude? CHANnel1")
+ print "Measured vertical amplitude on channel 1: %s" % qresult
+
+ # Download the screen image.
+ # --------------------------------------------------------
+ scope.SCPI.HARDcopy.INKSaver.Command(False)
+
+ image_bytes = scope.SCPI.DISPlay.DATA.Query("PNG", "COLor")
+ nLength = len(image_bytes)
+ fStream = File.Open("screen_image.png", FileMode.Create)
+ fStream.Write(image_bytes, 0, nLength)
+ fStream.Close()
+ print "Screen image written to screen_image.png."
+
+ # Download waveform data.
+ # --------------------------------------------------------
+
+ # Set the waveform points mode.
+ scope.SCPI.WAVeform.POINts.MODE.Command("RAW")
+ qresult = scope.SCPI.WAVeform.POINts.MODE.Query()
+ print "Waveform points mode: %s" % qresult
+
+ # Get the number of waveform points available.
+ scope.SCPI.WAVeform.POINts.CommandPoints(10240)
+ qresult = scope.SCPI.WAVeform.POINts.Query1()
+ print "Waveform points available: %s" % qresult
+
+ # Set the waveform source.
+ scope.SCPI.WAVeform.SOURce.Command("CHANnel1")
+ qresult = scope.SCPI.WAVeform.SOURce.Query()
+ print "Waveform source: %s" % qresult
+
+ # Choose the format of the data returned:
+ scope.SCPI.WAVeform.FORMat.Command("BYTE")
+ qresult = scope.SCPI.WAVeform.FORMat.Query()
+ print "Waveform format: %s" % qresult
+
+ # Display the waveform settings from preamble:
+ wav_form_dict = {
+  0 : "BYTE",
+  1 : "WORD",
+  4 : "ASCii",
+ }
+ acq_type_dict = {
+  0 : "NORMal",
+  1 : "PEAK",
+  2 : "AVERage",
+  3 : "HRESolution",
+ }
+ 
+ (
+  wav_form, acq_type, wfmpts, avgcnt, x_increment, x_origin,
+  x_reference, y_increment, y_origin, y_reference
+ ) = scope.SCPI.WAVeform.PREamble.Query()
+
+ print "Waveform format: %s" % wav_form_dict[int(wav_form)]
+ print "Acquire type: %s" % acq_type_dict[int(acq_type)]
+ print "Waveform points desired: %s" % wfmpts
+ print "Waveform average count: %s" % avgcnt
+ print "Waveform X increment: %s" % x_increment
+ print "Waveform X origin: %s" % x_origin
+ print "Waveform X reference: %s" % x_reference   # Always 0.
+ print "Waveform Y increment: %s" % y_increment
+ print "Waveform Y origin: %s" % y_origin
+ print "Waveform Y reference: %s" % y_reference
+
+ # Get numeric values for later calculations.
+ x_increment = scope.SCPI.WAVeform.XINCrement.Query()
+ x_origin = scope.SCPI.WAVeform.XORigin.Query()
+ y_increment = scope.SCPI.WAVeform.YINCrement.Query()
+ y_origin = scope.SCPI.WAVeform.YORigin.Query()
+ y_reference = scope.SCPI.WAVeform.YREFerence.Query()
+
+ # Get the waveform data.
+ data_bytes = scope.SCPI.WAVeform.DATA.QueryBYTE()
+ nLength = len(data_bytes)
+ print "Number of data values: %d" % nLength
+
+ # Open file for output.
+ strPath = "waveform_data.csv"
+ writer = File.CreateText(strPath)
+
+ # Output waveform data in CSV format.
+ for i in xrange(0, nLength - 1):
+  time_val = x_origin + i * x_increment
+  voltage = (data_bytes[i] - y_reference) * y_increment + y_origin
+  writer.WriteLine("%E, %f" % (time_val, voltage))
+ 
+ # Close output file.
+ writer.Close()
+ print "Waveform format BYTE data written to %s." % strPath
+ 
+
+# =========================================================
+# Main program:
+# =========================================================
+#addr = "a-mx3054a-60028.cos.agilent.com"
+addr = "TCPIP0::a-mx3054a-60028.cos.agilent.com::inst0::INSTR"
+scope = AgInfiniiVision2000X(addr)
+scope.Transport.DefaultTimeout.Set(10000)
+
+# Initialize the oscilloscope, capture data, and analyze.
+initialize()
+capture()
+analyze()
+
+print "End of program."
+
+# Wait for a key press before exiting.
+print "Press any key to exit..."
+Console.ReadKey(True)</pre></div></body></html>

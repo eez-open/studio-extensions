@@ -1,0 +1,9 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Trigger Event Register (TER)</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Status.htm" title="Status Reporting"><link rel="prev" href="sr_sre.htm" title="Service Request Enable Register (SRE)"><link rel="next" href="sr_output_queue.htm" title="Output Queue"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Status.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Status Reporting </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sr_ter"></a>Trigger Event Register (TER)<a name="d0e51279"></a><a name="d0e51282"></a></h2></div></div></div><p>This register sets the TRG bit in the status byte when a trigger
+    event occurs.</p><p>The TER event register stays set until it is cleared by reading the
+    register or using the *CLS command. If your application needs to detect
+    multiple triggers, the TER event register must be cleared after each
+    one.</p><p>If you are using the Service Request to interrupt a program or
+    controller operation, you must clear the event register each time the
+    trigger bit is set.</p></div></body></html>

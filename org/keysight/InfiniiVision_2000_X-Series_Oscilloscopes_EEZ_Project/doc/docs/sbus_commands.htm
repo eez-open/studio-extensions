@@ -1,0 +1,30 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:SBUS&lt;n&gt; Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_save_wmemory_start.htm" title=":SAVE:WMEMory[:STARt]"><link rel="next" href="sbus_commands_general.htm" title="General :SBUS<n&gt; Commands"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="sbus_commands"></a>:SBUS&lt;n&gt; Commands<a name="d0e31168"></a></h2></div></div></div><p>Control the modes and parameters for each serial bus decode/trigger
+  type. See:</p><div class="itemizedlist"><ul type="disc"><li><p><a href="sbus_commands.htm#sbus_commands_overview">Introduction to :SBUS&lt;n&gt;
+  Commands</a></p></li><li><p><a href="sbus_commands_general.htm" title="General :SBUS<n&gt; Commands">General :SBUS&lt;n&gt; Commands</a></p></li><li><p><a href="sbus_n_can_commands.htm" title=":SBUS<n&gt;:CAN Commands">:SBUS&lt;n&gt;:CAN Commands</a></p></li><li><p><a href="sbus_n_iic_commands.htm" title=":SBUS<n&gt;:IIC Commands">:SBUS&lt;n&gt;:IIC Commands</a></p></li><li><p><a href="sbus_n_lin_commands.htm" title=":SBUS<n&gt;:LIN Commands">:SBUS&lt;n&gt;:LIN Commands</a></p></li><li><p><a href="sbus_n_spi_commands.htm" title=":SBUS<n&gt;:SPI Commands">:SBUS&lt;n&gt;:SPI Commands</a></p></li><li><p><a href="sbus_n_uart_commands.htm" title=":SBUS<n&gt;:UART Commands">:SBUS&lt;n&gt;:UART Commands</a></p></li></ul></div><h2><a name="sbus_commands_overview"></a>Introduction to :SBUS&lt;n&gt;
+  Commands</h2><p><a name="d0e31198"></a><a name="d0e31201"></a>The :SBUS subsystem commands control the serial decode bus
+  viewing, mode, and other options.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>These commands are only valid on oscilloscope models when a serial
+    decode option has been licensed.</p></td></tr></table></div><p>The following serial bus decode/trigger types are available (see <a href="_trigger_mode.htm" title=":TRIGger:MODE">:TRIGger:MODE</a>).</p><div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>CAN (Controller Area Network)
+      triggering</strong></span> <a name="d0e31218"></a>— will trigger on CAN version 2.0A and 2.0B signals.
+      Setup consists of connecting the oscilloscope to a CAN signal. Baud
+      rate, signal source, and signal polarity, and type of data to trigger on
+      can be specified. You can trigger on CAN data and identifier patterns
+      and you can set the bit sample point.</p></li><li><p><span class="bold"><strong>IIC (Inter-IC bus) triggering</strong></span>
+      <a name="d0e31227"></a>— consists of connecting the oscilloscope to the
+      serial data (SDA) line and the serial clock (SCL) line, then triggering
+      on a stop/start condition, a restart, a missing acknowledge, or on a
+      read/write frame with a specific device address and data value.</p></li><li><p><span class="bold"><strong>LIN (Local Interconnect Network)
+      triggering</strong></span> <a name="d0e31236"></a>— will trigger on LIN sync break at the beginning of
+      a message frame.You can trigger on Sync Break, Frame IDs, or Frame IDs
+      and Data.</p></li><li><p><span class="bold"><strong>SPI (Serial Peripheral Interface)
+      triggering</strong></span> <a name="d0e31245"></a>— consists of connecting the oscilloscope to a
+      clock, data (MOSI or MISO), and framing signal. You can then trigger on
+      a data pattern during a specific framing period. The serial data string
+      can be specified to be from 4 to 64 bits long.</p></li><li><p><span class="bold"><strong>UART/RS-232 triggering</strong></span> (with
+      Option&nbsp;232) <a name="d0e31254"></a><a name="d0e31257"></a>— lets you trigger on RS-232 serial data.</p></li></ul></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Two I2S buses or two SPI buses cannot be decoded on both SBUS1 and
+    SBUS2 at the same time.</p></td></tr></table></div><p><b>Reporting the Setup.&nbsp;</b>Use :SBUS&lt;n&gt;? to query setup information for the
+    :SBUS&lt;n&gt; subsystem.</p><p><b>Return Format.&nbsp;</b>The following is a sample response from the :SBUS1? query. In this
+    case, the query was issued following a *RST command.</p><pre class="programlisting">:SBUS1:DISP 0;MODE IIC;:SBUS1:IIC:ASIZ BIT7;:SBUS1:IIC:TRIG:TYPE
+STAR;QUAL EQU;:SBUS1:IIC:SOUR:CLOC CHAN1;DATA
+CHAN2;:SBUS1:IIC:TRIG:PATT:ADDR -1;DATA -1;DATA2 -1</pre></div></body></html>

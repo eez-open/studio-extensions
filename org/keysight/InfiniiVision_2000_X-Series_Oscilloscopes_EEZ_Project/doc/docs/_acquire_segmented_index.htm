@@ -1,0 +1,97 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:ACQuire:SEGMented:INDex</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="acquire_commands.htm" title=":ACQuire Commands"><link rel="prev" href="_acquire_segmented_count.htm" title=":ACQuire:SEGMented:COUNt"><link rel="next" href="_acquire_srate.htm" title=":ACQuire:SRATe"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="acquire_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:ACQuire Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="refentry" lang="en"><a name="_acquire_segmented_index"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>:ACQuire:SEGMented:INDex — <a href="non-core_commands.htm" title="Non-Core&#xA;    Commands"><img src="images/../images/non_core.gif"></a></p></div><div class="refsection" lang="en"><a name="_acquire_segmented_index_command"></a><h2>Command Syntax<a name="d0e15036"></a></h2><pre class="synopsis">:ACQuire:SEGMented:INDex &lt;index&gt;</pre><pre class="synopsis">&lt;index&gt; ::= an integer from 1 to 25 (w/100K memory) in NR1 format</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>This command is available when the segmented memory option (Option
+      SGM) is enabled.</p></td></tr></table></div><p>The :ACQuire:SEGMented:INDex command sets the index into the memory
+    segments that have been acquired.</p><p>The segmented memory acquisition mode is enabled with the
+    :ACQuire:MODE command. The number of segments to acquire is set using the
+    :ACQuire:SEGMented:COUNt command, and data is acquired using the
+    :DIGitize, :SINGle, or :RUN commands. The number of memory segments that
+    have been acquired is returned by the :WAVeform:SEGMented:COUNt? query.
+    The time tag of the currently indexed memory segment is returned by the
+    :WAVeform:SEGMented:TTAG? query.</p><p>The maximum number of segments may be limited by the memory depth of
+    your oscilloscope. For example, an oscilloscope with 100K memory allows a
+    maximum of 25 segments.</p></div><div class="refsection" lang="en"><a name="_acquire_segmented_index_query"></a><h2>Query Syntax</h2><pre class="synopsis">:ACQuire:SEGMented:INDex?</pre><p>The :ACQuire:SEGMented:INDex? query returns the current segmented
+    memory index setting.</p></div><div class="refsection" lang="en"><a name="d0e15059"></a><h2>Return Format</h2><pre class="synopsis">&lt;index&gt;&lt;NL&gt;</pre><pre class="synopsis">&lt;index&gt; ::= an integer from 1 to 25 (w/100K memory) in NR1 format</pre></div><div class="refsection" lang="en"><a name="d0e15066"></a><h2>See Also</h2><div class="itemizedlist"><ul type="disc"><li><p><a href="_acquire_mode.htm" title=":ACQuire:MODE">:ACQuire:MODE</a></p></li><li><p><a href="_acquire_segmented_count.htm" title=":ACQuire:SEGMented:COUNt">:ACQuire:SEGMented:COUNt</a></p></li><li><p><a href="_digitize.htm" title=":DIGitize">:DIGitize</a></p></li><li><p><a href="_single.htm" title=":SINGle">:SINGle</a></p></li><li><p><a href="_run.htm" title=":RUN">:RUN</a></p></li><li><p><a href="_waveform_segmented_count.htm" title=":WAVeform:SEGMented:COUNt">:WAVeform:SEGMented:COUNt</a></p></li><li><p><a href="_waveform_segmented_ttag.htm" title=":WAVeform:SEGMented:TTAG">:WAVeform:SEGMented:TTAG</a></p></li><li><p><a href="_acquire_segmented_analyze.htm" title=":ACQuire:SEGMented:ANALyze">:ACQuire:SEGMented:ANALyze</a></p></li><li><p><a href="acquire_commands.htm#acquire_commands_overview">Introduction to :ACQuire
+  Commands</a></p></li></ul></div></div><div class="refsection" lang="en"><a name="segmented_code"></a><h2>Example Code<a name="d0e15100"></a><a name="d0e15103"></a><a name="d0e15106"></a><a name="d0e15109"></a></h2><pre class="programlisting">' Segmented memory commands example.
+' -------------------------------------------------------------------
+
+Option Explicit
+
+Public myMgr As VisaComLib.ResourceManager
+Public myScope As VisaComLib.FormattedIO488
+Public varQueryResult As Variant
+Public strQueryResult As String
+
+Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+Sub Main()
+
+  On Error GoTo VisaComError
+  
+  ' Create the VISA COM I/O resource.
+  Set myMgr = New VisaComLib.ResourceManager
+  Set myScope = New VisaComLib.FormattedIO488
+  Set myScope.IO = _
+        myMgr.Open("USB0::0x0957::0x17A6::US50210029::0::INSTR")
+  myScope.IO.Clear   ' Clear the interface.
+  
+  ' Turn on segmented memory acquisition mode.
+  myScope.WriteString ":ACQuire:MODE SEGMented"
+  myScope.WriteString ":ACQuire:MODE?"
+  strQueryResult = myScope.ReadString
+  Debug.Print "Acquisition mode: " + strQueryResult
+
+  ' Set the number of segments to 25.
+  myScope.WriteString ":ACQuire:SEGMented:COUNt 25"
+  myScope.WriteString ":ACQuire:SEGMented:COUNt?"
+  strQueryResult = myScope.ReadString
+  Debug.Print "Acquisition memory segments: " + strQueryResult
+
+  ' If data will be acquired within the IO timeout:
+  'myScope.IO.Timeout = 10000
+  'myScope.WriteString ":DIGitize"
+  'Debug.Print ":DIGitize blocks until all segments acquired."
+  'myScope.WriteString ":WAVeform:SEGMented:COUNt?"
+  'varQueryResult = myScope.ReadNumber
+  
+  ' Or, to poll until the desired number of segments acquired:
+  myScope.WriteString ":SINGle"
+  Debug.Print ":SINGle does not block until all segments acquired."
+  Do
+    Sleep 100   ' Small wait to prevent excessive queries.
+    myScope.WriteString ":WAVeform:SEGMented:COUNt?"
+    varQueryResult = myScope.ReadNumber
+  Loop Until varQueryResult = 25
+  
+  Debug.Print "Number of segments in acquired data: " _
+      + FormatNumber(varQueryResult)
+  
+  Dim lngSegments As Long
+  lngSegments = varQueryResult
+
+  ' For each segment:
+  Dim dblTimeTag As Double
+  Dim lngI As Long
+
+  For lngI = lngSegments To 1 Step -1
+  
+    ' Set the segmented memory index.
+    myScope.WriteString ":ACQuire:SEGMented:INDex " + CStr(lngI)
+    myScope.WriteString ":ACQuire:SEGMented:INDex?"
+    strQueryResult = myScope.ReadString
+    Debug.Print "Acquisition memory segment index: " + strQueryResult
+
+    ' Display the segment time tag.
+    myScope.WriteString ":WAVeform:SEGMented:TTAG?"
+    dblTimeTag = myScope.ReadNumber
+    Debug.Print "Segment " + CStr(lngI) + " time tag: " _
+        + FormatNumber(dblTimeTag, 12)
+
+  Next lngI
+  
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error:" + vbCrLf + Err.Description
+
+End Sub</pre></div></div></body></html>

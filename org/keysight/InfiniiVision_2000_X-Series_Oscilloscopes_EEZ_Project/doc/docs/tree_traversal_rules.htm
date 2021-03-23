@@ -1,0 +1,40 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Tree Traversal Rules and Multiple Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="cn_valid_commands.htm" title="Valid Command/Query Strings"><link rel="prev" href="duplicate_mnemonics.htm" title="Duplicate Mnemonics"><link rel="next" href="cn_return_values.htm" title="Query Return Values"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="cn_valid_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Valid Command/Query Strings </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="tree_traversal_rules"></a>Tree Traversal Rules and Multiple Commands<a name="d0e52255"></a><a name="d0e52258"></a><a name="d0e52261"></a></h3></div></div></div><p>Command headers are created by traversing down the command tree. A legal command header would
+      be :TIMebase:RANGe. This is referred to as a <span class="emphasis"><em>compound
+      header</em></span><a name="d0e52270"></a>. A compound header is a header made of two or more
+      mnemonics separated by colons. The mnemonic created contains no
+      spaces.</p><p>The following rules apply to traversing the tree:</p><div class="itemizedlist"><ul type="disc"><li><p>A leading colon (&lt;NL&gt; or EOI true on the last byte)
+          places the parser<a name="d0e52280"></a> at the root of the command tree. A leading colon is a
+          colon that is the first character of a program header. Executing a
+          subsystem command<a name="d0e52284"></a> lets you access that subsystem until a leading colon
+          or a program message terminator (&lt;NL&gt;) or EOI true is
+          found.</p></li><li><p>In the command tree, use the last mnemonic in the compound
+          header as the reference point (for example, RANGe). Then find the
+          last colon above that mnemonic (TIMebase:). That is the point where
+          the parser resides. Any command below that point can be sent within
+          the current program message without sending the mnemonics which
+          appear above them (for example, POSition).</p></li></ul></div><p>The output statements in the examples are written using the
+      Agilent VISA COM library in Visual Basic. The quoted string is placed on
+      the bus, followed by a carriage return and linefeed (CRLF).</p><p>To execute more than one function within the same subsystem,
+      separate the functions with a semicolon (;):</p><pre class="programlisting">:&lt;subsystem&gt;:&lt;function&gt;&lt;separator&gt;&lt;data&gt;;&lt;function&gt;&lt;separator&gt;&lt;data&gt;&lt;terminator&gt;</pre><p>For example:</p><pre class="programlisting">myScope.WriteString ":TIMebase:RANGe 0.5;POSition 0"</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The colon between TIMebase and RANGe is necessary because
+        TIMebase:RANGe is a compound command. The semicolon between the RANGe
+        command and the POSition command is the required program message unit
+        separator. The POSition command does not need TIMebase preceding it
+        because the TIMebase:RANGe command sets the parser to the TIMebase
+        node in the tree.</p></td></tr></table></div><h4><a name="d0e52304"></a>Example 2: Program Message Terminator Sets Parser Back to
+      Root</h4><pre class="programlisting">myScope.WriteString ":TIMebase:REFerence CENTer;POSition 0.00001"</pre><p>or</p><pre class="programlisting">myScope.WriteString ":TIMebase:REFerence CENTer"
+myScope.WriteString ":TIMebase:POSition 0.00001"</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>In the first line of example 2, the subsystem selector is
+        implied for the POSition command in the compound command. The POSition
+        command must be in the same program message as the REFerence command
+        because the program message terminator places the parser back at the
+        root of the command tree.</p></td></tr></table></div><p>A second way to send these commands is by placing TIMebase: before
+      the POSition command as shown in the second part of example 2. The space
+      after POSition is required.</p><h4><a name="d0e52317"></a>Example 3: Selecting Multiple Subsystems</h4><p>You can send multiple program commands and program queries for
+      different subsystems on the same line by separating each command with a
+      semicolon. The colon following the semicolon enables you to enter a new
+      subsystem. For example:</p><pre class="programlisting">&lt;program mnemonic&gt;&lt;data&gt;;:&lt;program mnemonic&gt;&lt;data&gt;&lt;terminator&gt;</pre><p>For example:</p><pre class="programlisting">myScope.WriteString ":TIMebase:REFerence CENTer;:DISPlay:VECTors ON"</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The leading colon before DISPlay:VECTors ON tells the parser to
+        go back to the root of the command tree. The parser can then see the
+        DISPlay:VECTors ON command. The space between REFerence and CENter is
+        required; so is the space between VECTors and ON.</p></td></tr></table></div><p>Multiple commands may be any combination of compound and simple
+      commands.</p></div></body></html>

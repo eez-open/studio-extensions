@@ -1,0 +1,327 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>VISA Example in Python</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="visa_examples.htm" title="VISA Examples"><link rel="prev" href="visa_example_vbnet.htm" title="VISA Example in Visual Basic .NET"><link rel="next" href="sicl_examples.htm" title="SICL Examples"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="visa_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>VISA Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="visa_example_python"></a>VISA Example in Python<a name="d0e52996"></a><a name="d0e52999"></a><a name="d0e53002"></a></h3></div></div></div><p>You can use the Python programming language with the PyVISA
+      package to control Agilent oscilloscopes.</p><p>The Python language and PyVISA package can be downloaded from the
+      web at <a href="http://www.python.org/" target="_top">http://www.python.org/</a> and <a href="http://pyvisa.sourceforge.net/" target="_top">http://pyvisa.sourceforge.net/</a>,
+      respectively.</p><p>To run this example with Python and PyVISA:</p><div class="orderedlist"><ol type="1"><li><p>Cut-and-paste the code that follows into a file named
+          "example.py".</p></li><li><p>Edit the program to use the VISA address of your
+          oscilloscope.</p></li><li><p>If "python.exe" can be found via your PATH environment
+          variable, open a Command Prompt window; then, change to the folder
+          that contains the "example.py" file, and enter:</p><div class="literallayout"><p>python&nbsp;example.py</p></div></li></ol></div><pre class="programlisting"># *********************************************************
+# This program illustrates a few commonly-used programming
+# features of your Agilent oscilloscope.
+# *********************************************************
+
+# Import modules.
+# ---------------------------------------------------------
+import visa
+import string
+import struct
+import sys
+
+# Global variables (booleans: 0 = False, 1 = True).
+# ---------------------------------------------------------
+debug = 0
+
+
+# =========================================================
+# Initialize:
+# =========================================================
+def initialize():
+
+ # Get and display the device's *IDN? string.
+ idn_string = do_query_string("*IDN?")
+ print "Identification string: '%s'" % idn_string
+
+ # Clear status and load the default setup.
+ do_command("*CLS")
+ do_command("*RST")
+
+
+# =========================================================
+# Capture:
+# =========================================================
+def capture():
+
+ # Use auto-scale to automatically set up oscilloscope.
+ print "Autoscale."
+ do_command(":AUToscale")
+
+ # Set trigger mode.
+ do_command(":TRIGger:MODE EDGE")
+ qresult = do_query_string(":TRIGger:MODE?")
+ print "Trigger mode: %s" % qresult
+
+ # Set EDGE trigger parameters.
+ do_command(":TRIGger:EDGE:SOURCe CHANnel1")
+ qresult = do_query_string(":TRIGger:EDGE:SOURce?")
+ print "Trigger edge source: %s" % qresult
+
+ do_command(":TRIGger:EDGE:LEVel 1.5")
+ qresult = do_query_string(":TRIGger:EDGE:LEVel?")
+ print "Trigger edge level: %s" % qresult
+
+ do_command(":TRIGger:EDGE:SLOPe POSitive")
+ qresult = do_query_string(":TRIGger:EDGE:SLOPe?")
+ print "Trigger edge slope: %s" % qresult
+
+ # Save oscilloscope setup.
+ sSetup = do_query_string(":SYSTem:SETup?")
+ sSetup = get_definite_length_block_data(sSetup)
+
+ f = open("setup.stp", "wb")
+ f.write(sSetup)
+ f.close()
+ print "Setup bytes saved: %d" % len(sSetup)
+
+ # Change oscilloscope settings with individual commands:
+  
+ # Set vertical scale and offset.
+ do_command(":CHANnel1:SCALe 0.05")
+ qresult = do_query_values(":CHANnel1:SCALe?")[0]
+ print "Channel 1 vertical scale: %f" % qresult
+
+ do_command(":CHANnel1:OFFSet -1.5")
+ qresult = do_query_values(":CHANnel1:OFFSet?")[0]
+ print "Channel 1 offset: %f" % qresult
+
+ # Set horizontal scale and offset.
+ do_command(":TIMebase:SCALe 0.0002")
+ qresult = do_query_string(":TIMebase:SCALe?")
+ print "Timebase scale: %s" % qresult
+
+ do_command(":TIMebase:POSition 0.0")
+ qresult = do_query_string(":TIMebase:POSition?")
+ print "Timebase position: %s" % qresult
+
+ # Set the acquisition type.
+ do_command(":ACQuire:TYPE NORMal")
+ qresult = do_query_string(":ACQuire:TYPE?")
+ print "Acquire type: %s" % qresult
+
+ # Or, set up oscilloscope by loading a previously saved setup.
+ sSetup = ""
+ f = open("setup.stp", "rb")
+ sSetup = f.read()
+ f.close()
+ do_command(":SYSTem:SETup #8%08d%s" % (len(sSetup), sSetup), hide_params=True)
+ print "Setup bytes restored: %d" % len(sSetup)
+
+ # Capture an acquisition using :DIGitize.
+ do_command(":DIGitize CHANnel1")
+
+
+# =========================================================
+# Analyze:
+# =========================================================
+def analyze():
+
+ # Make measurements.
+ # --------------------------------------------------------
+ do_command(":MEASure:SOURce CHANnel1")
+ qresult = do_query_string(":MEASure:SOURce?")
+ print "Measure source: %s" % qresult
+
+ do_command(":MEASure:FREQuency")
+ qresult = do_query_string(":MEASure:FREQuency?")
+ print "Measured frequency on channel 1: %s" % qresult
+
+ do_command(":MEASure:VAMPlitude")
+ qresult = do_query_string(":MEASure:VAMPlitude?")
+ print "Measured vertical amplitude on channel 1: %s" % qresult
+
+ # Download the screen image.
+ # --------------------------------------------------------
+ do_command(":HARDcopy:INKSaver OFF")
+
+ sDisplay = do_query_string(":DISPlay:DATA? PNG, COLor")
+ sDisplay = get_definite_length_block_data(sDisplay)
+
+ # Save display data values to file.
+ f = open("screen_image.png", "wb")
+ f.write(sDisplay)
+ f.close()
+ print "Screen image written to screen_image.png."
+
+ # Download waveform data.
+ # --------------------------------------------------------
+
+ # Set the waveform points mode.
+ do_command(":WAVeform:POINts:MODE RAW")
+ qresult = do_query_string(":WAVeform:POINts:MODE?")
+ print "Waveform points mode: %s" % qresult
+
+ # Get the number of waveform points available.
+ do_command(":WAVeform:POINts 10240")
+ qresult = do_query_string(":WAVeform:POINts?")
+ print "Waveform points available: %s" % qresult
+
+ # Set the waveform source.
+ do_command(":WAVeform:SOURce CHANnel1")
+ qresult = do_query_string(":WAVeform:SOURce?")
+ print "Waveform source: %s" % qresult
+
+ # Choose the format of the data returned:
+ do_command(":WAVeform:FORMat BYTE")
+ print "Waveform format: %s" % do_query_string(":WAVeform:FORMat?")
+
+ # Display the waveform settings from preamble:
+ wav_form_dict = {
+  0 : "BYTE",
+  1 : "WORD",
+  4 : "ASCii",
+ }
+ acq_type_dict = {
+  0 : "NORMal",
+  1 : "PEAK",
+  2 : "AVERage",
+  3 : "HRESolution",
+ }
+
+ preamble_string = do_query_string(":WAVeform:PREamble?")
+ (
+  wav_form, acq_type, wfmpts, avgcnt, x_increment, x_origin,
+  x_reference, y_increment, y_origin, y_reference
+ ) = string.split(preamble_string, ",")
+
+ print "Waveform format: %s" % wav_form_dict[int(wav_form)]
+ print "Acquire type: %s" % acq_type_dict[int(acq_type)]
+ print "Waveform points desired: %s" % wfmpts
+ print "Waveform average count: %s" % avgcnt
+ print "Waveform X increment: %s" % x_increment
+ print "Waveform X origin: %s" % x_origin
+ print "Waveform X reference: %s" % x_reference   # Always 0.
+ print "Waveform Y increment: %s" % y_increment
+ print "Waveform Y origin: %s" % y_origin
+ print "Waveform Y reference: %s" % y_reference
+
+ # Get numeric values for later calculations.
+ x_increment = do_query_values(":WAVeform:XINCrement?")[0]
+ x_origin = do_query_values(":WAVeform:XORigin?")[0]
+ y_increment = do_query_values(":WAVeform:YINCrement?")[0]
+ y_origin = do_query_values(":WAVeform:YORigin?")[0]
+ y_reference = do_query_values(":WAVeform:YREFerence?")[0]
+
+ # Get the waveform data.
+ sData = do_query_string(":WAVeform:DATA?")
+ sData = get_definite_length_block_data(sData)
+
+ # Unpack unsigned byte data.
+ values = struct.unpack("%dB" % len(sData), sData)
+ print "Number of data values: %d" % len(values)
+
+ # Save waveform data values to CSV file.
+ f = open("waveform_data.csv", "w")
+
+ for i in xrange(0, len(values) - 1):
+  time_val = x_origin + (i * x_increment)
+  voltage = ((values[i] - y_reference) * y_increment) + y_origin
+  f.write("%E, %f\n" % (time_val, voltage))
+ 
+ f.close()
+ print "Waveform format BYTE data written to waveform_data.csv."
+
+
+# =========================================================
+# Send a command and check for errors:
+# =========================================================
+def do_command(command, hide_params=False):
+
+ if hide_params:
+  (header, data) = string.split(command, " ", 1)
+  if debug:
+   print "\nCmd = '%s'" % header
+ else:
+  if debug:
+   print "\nCmd = '%s'" % command
+
+ InfiniiVision.write("%s\n" % command)
+
+ if hide_params:
+  check_instrument_errors(header)
+ else:
+  check_instrument_errors(command)
+
+
+# =========================================================
+# Send a query, check for errors, return string:
+# =========================================================
+def do_query_string(query):
+ if debug:
+  print "Qys = '%s'" % query
+ result = InfiniiVision.ask("%s\n" % query)
+ check_instrument_errors(query)
+ return result
+
+
+# =========================================================
+# Send a query, check for errors, return values:
+# =========================================================
+def do_query_values(query):
+ if debug:
+  print "Qyv = '%s'" % query
+ results = InfiniiVision.ask_for_values("%s\n" % query)
+ check_instrument_errors(query)
+ return results
+
+
+# =========================================================
+# Check for instrument errors:
+# =========================================================
+def check_instrument_errors(command):
+
+ while True:
+  error_string = InfiniiVision.ask(":SYSTem:ERRor?\n")
+  if error_string:   # If there is an error string value.
+
+   if error_string.find("+0,", 0, 3) == -1:   # Not "No error".
+
+    print "ERROR: %s, command: '%s'" % (error_string, command)
+    print "Exited because of error."
+    sys.exit(1)
+
+   else:   # "No error"
+    break
+
+  else:   # :SYSTem:ERRor? should always return string.
+   print "ERROR: :SYSTem:ERRor? returned nothing, command: '%s'" % command
+   print "Exited because of error."
+   sys.exit(1)
+
+
+# =========================================================
+# Returns data from definite-length block.
+# =========================================================
+def get_definite_length_block_data(sBlock):
+
+ # First character should be "#".
+ pound = sBlock[0:1]
+ if pound != "#":
+  print "PROBLEM: Invalid binary block format, pound char is '%s'." % pound
+  print "Exited because of problem."
+  sys.exit(1)
+
+ # Second character is number of following digits for length value.
+ digits = sBlock[1:2]
+
+ # Get the data out of the block and return it.
+ sData = sBlock[int(digits) + 2:]
+
+ return sData
+
+
+# =========================================================
+# Main program:
+# =========================================================
+
+InfiniiVision = visa.instrument("TCPIP0::130.29.70.139::inst0::INSTR")
+InfiniiVision.timeout = 15
+InfiniiVision.term_chars = ""
+InfiniiVision.clear()
+
+# Initialize the oscilloscope, capture data, and analyze.
+initialize()
+capture()
+analyze()
+
+print "End of program."</pre></div></body></html>

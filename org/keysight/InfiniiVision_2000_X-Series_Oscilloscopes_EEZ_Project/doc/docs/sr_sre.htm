@@ -1,0 +1,11 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Service Request Enable Register (SRE)</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Status.htm" title="Status Reporting"><link rel="prev" href="sr_stb.htm" title="Status Byte Register (STB)"><link rel="next" href="sr_ter.htm" title="Trigger Event Register (TER)"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Status.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Status Reporting </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sr_sre"></a>Service Request Enable Register (SRE)<a name="d0e51251"></a><a name="d0e51254"></a></h2></div></div></div><p>Setting the Service Request Enable Register bits enable
+    corresponding bits in the Status Byte Register. These enabled bits can
+    then set RQS and MSS (bit 6) in the Status Byte Register.</p><p>Bits are set in the Service Request Enable Register using the *SRE
+    command and the bits that are set are read with the *SRE? query.</p><h3><a name="d0e51261"></a>Example</h3><p>The following example sets bit 4 (MAV) and bit 5 (ESB) in the
+    Service Request Enable Register.</p><pre class="programlisting">myScope.WriteString "*SRE " + CStr(CInt("&amp;H30"))</pre><p>This example uses the decimal parameter value of 48, the string
+    returned by CStr(CInt("&amp;H30")), to enable the oscilloscope to generate
+    an SRQ interrupt under the following conditions:</p><div class="itemizedlist"><ul type="disc"><li><p>When one or more bytes in the Output Queue set bit 4
+        (MAV).</p></li><li><p>When an enabled event in the Standard Event Status Register
+        generates a summary bit that sets bit 5 (ESB).</p></li></ul></div></div></body></html>

@@ -1,0 +1,27 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Program Data Syntax Rules</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="program_message_syntax.htm" title="Program Message Syntax "><link rel="prev" href="common_command_headers.htm" title="Common Command Headers"><link rel="next" href="duplicate_mnemonics.htm" title="Duplicate Mnemonics"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="program_message_syntax.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Program Message Syntax  </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="program_data_syntax_rules"></a>Program Data Syntax Rules<a name="d0e52190"></a><a name="d0e52193"></a></h4></div></div></div><p>Program data is used to convey a parameter information related to
+    the command header. At least one space must separate the command header or
+    query header from the program data.</p><pre class="programlisting">&lt;program mnemonic&gt;&lt;separator&gt;&lt;data&gt;&lt;terminator&gt;</pre><p>When a program mnemonic or query has multiple program data, a comma
+    separates sequential program data.</p><pre class="programlisting">&lt;program mnemonic&gt;&lt;separator&gt;&lt;data&gt;,&lt;data&gt;&lt;terminator&gt;</pre><p>For example, :MEASure:DELay CHANnel1,CHANnel2 has two program data:
+    CHANnel1 and CHANnel2.</p><p>Two main types of program data are used in commands: character and
+    numeric.</p><h5><a name="d0e52208"></a>Character Program Data</h5><p>Character program data is used to convey parameter information as
+    alpha or alphanumeric strings. For example, the :TIMebase:MODE command can
+    be set to normal, zoomed (delayed), XY, or ROLL. The character program data in this
+    case may be MAIN, WINDow, XY, or ROLL. The command :TIMebase:MODE WINDow
+    sets the time base mode to zoomed.</p><p>The available mnemonics for character program data are always
+    included with the command's syntax definition.</p><p>When sending commands, you may either the long form or short form
+    (if one exists). Uppercase and lowercase letters may be mixed
+    freely.</p><p>When receiving query responses, uppercase letters are used
+    exclusively.</p><h5><a name="d0e52218"></a>Numeric Program Data</h5><p>Some command headers require program data to be expressed
+    numerically. For example, :TIMebase:RANGe requires the desired full scale
+    range to be expressed numerically.</p><p>For numeric program data, you have the option of using exponential
+    notation or using suffix multipliers to indicate the numeric value. The
+    following numbers are all equal:</p><div class="literallayout"><p>28&nbsp;=&nbsp;0.28E2&nbsp;=&nbsp;280e-1&nbsp;=&nbsp;28000m&nbsp;=&nbsp;0.028K&nbsp;=&nbsp;28e-3K.</p></div><p>When a syntax definition specifies that a number is an integer, that
+    means that the number should be whole. Any fractional part will be
+    ignored, truncating the number. Numeric data parameters accept fractional
+    values are called real numbers.</p><p>All numbers must be strings of ASCII characters. Thus, when sending
+    the number 9, you would send a byte representing the ASCII code for the
+    character 9 (which is 57). A three-digit number like 102 would take up
+    three bytes (ASCII codes 49, 48, and 50). This is handled automatically
+    when you include the entire instruction in a string.</p></div></body></html>

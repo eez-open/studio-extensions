@@ -1,0 +1,64 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:FUNCtion Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_external_units.htm" title=":EXTernal:UNITs"><link rel="next" href="_function_display.htm" title=":FUNCtion:DISPlay"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="function_commands"></a>:FUNCtion Commands<a name="d0e20362"></a></h2></div></div></div><p>Control functions in the measurement/storage module. See <a href="function_commands.htm#function_commands_overview">Introduction to :FUNCtion
+  Commands</a>.</p><div class="table"><a name="d0e20369"></a><p class="title"><b>:FUNCtion Commands Summary:</b></p><div class="table-contents"><table summary=":FUNCtion Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_function_display.htm#_function_display_command" title="Command Syntax">:FUNCtion:DISPlay {{0 | OFF} | {1
+        | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_function_display.htm#_function_display_query" title="Query Syntax">:FUNCtion:DISPlay?</a></code></strong></td><td><strong class="userinput"><code>{0 | 1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_function_fft_center.htm#_function_fft_center_command" title="Command Syntax">:FUNCtion[:FFT]:CENTer
+        &lt;frequency&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_fft_center.htm#_function_fft_center_query" title="Query Syntax">:FUNCtion[:FFT]:CENTer?</a></code></strong></td><td><strong class="userinput"><code>&lt;frequency&gt; ::= the current center frequency
+        in NR3 format. The range of legal values is from 0&nbsp;Hz to
+        25&nbsp;GHz.</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_function_fft_span.htm#_function_fft_span_command" title="Command Syntax">:FUNCtion[:FFT]:SPAN
+        &lt;span&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_fft_span.htm#_function_fft_span_query" title="Query Syntax">:FUNCtion[:FFT]:SPAN?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;span&gt; ::= the current frequency span in
+        NR3 format.</code></strong></p><p><strong class="userinput"><code>Legal values are
+        1&nbsp;Hz to 100&nbsp;GHz.</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_function_fft_vtype.htm#_function_fft_vtype_command" title="Command Syntax">:FUNCtion[:FFT]:VTYPe
+        &lt;units&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_fft_vtype.htm#_function_fft_vtype_query" title="Query Syntax">:FUNCtion[:FFT]:VTYPe?</a></code></strong></td><td><strong class="userinput"><code>&lt;units&gt; ::= {DECibel |
+        VRMS}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_function_fft_window.htm#_function_fft_window_command" title="Command Syntax">:FUNCtion[:FFT]:WINDow
+        &lt;window&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_fft_window.htm#_function_fft_window_query" title="Query Syntax">:FUNCtion[:FFT]:WINDow?</a></code></strong></td><td><strong class="userinput"><code>&lt;window&gt; ::= {RECTangular | HANNing | FLATtop
+        | BHARris}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_function_goft_operation.htm#_function_goft_operation_command" title="Command Syntax">:FUNCtion:GOFT:OPERation
+        &lt;operation&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_goft_operation.htm#_function_goft_operation_query" title="Query Syntax">:FUNCtion:GOFT:OPERation?</a></code></strong></td><td><strong class="userinput"><code>&lt;operation&gt; ::= {ADD | SUBTract |
+        MULTiply}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_function_goft_source1.htm#_function_goft_source1_command" title="Command Syntax">:FUNCtion:GOFT:SOURce1
+        &lt;source&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_goft_source1.htm#_function_goft_source1_query" title="Query Syntax">:FUNCtion:GOFT:SOURce1?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::=
+        CHANnel&lt;n&gt;</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= {1 |
+        2 | 3 | 4} for 4ch models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt;
+        ::= {1 | 2} for 2ch models</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_function_goft_source2.htm#_function_goft_source2_command" title="Command Syntax">:FUNCtion:GOFT:SOURce2
+        &lt;source&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_goft_source2.htm#_function_goft_source2_query" title="Query Syntax">:FUNCtion:GOFT:SOURce2?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::=
+        CHANnel&lt;n&gt;</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= {1 |
+        2 | 3 | 4} for 4ch models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt;
+        ::= {1 | 2} for 2ch models</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_function_offset.htm#_function_offset_command" title="Command Syntax">:FUNCtion:OFFSet
+        &lt;offset&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_offset.htm#_function_offset_query" title="Query Syntax">:FUNCtion:OFFSet?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;offset&gt; ::= the value at center screen
+        in NR3 format. </code></strong></p><p><strong class="userinput"><code>The range of legal
+        values is +/-10 times the current sensitivity of the selected
+        function.</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_function_operation.htm#_function_operation_command" title="Command Syntax">:FUNCtion:OPERation
+        &lt;operation&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_operation.htm#_function_operation_query" title="Query Syntax">:FUNCtion:OPERation?</a></code></strong></td><td><strong class="userinput"><code>&lt;operation&gt; ::= {ADD | SUBTract | MULTiply |
+        FFT}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_function_range.htm#_function_range_command" title="Command Syntax">:FUNCtion:RANGe
+        &lt;range&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_range.htm#_function_range_query" title="Query Syntax">:FUNCtion:RANGe?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;range&gt; ::= the full-scale vertical axis
+        value in NR3 format.</code></strong></p><p><strong class="userinput"><code>The range for
+        ADD, SUBT, MULT is 8E-6 to
+        800E+3.</code></strong></p><p><strong class="userinput"><code>The range for the FFT
+        function is 8 to 800 dBV.</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_function_reference.htm#_function_reference_command" title="Command Syntax">:FUNCtion:REFerence
+        &lt;level&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_reference.htm#_function_reference_query" title="Query Syntax">:FUNCtion:REFerence?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;level&gt; ::= the value at center screen
+        in NR3 format. </code></strong></p><p><strong class="userinput"><code>The range of legal
+        values is +/-10 times the current sensitivity of the selected
+        function.</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_function_scale.htm#_function_scale_command" title="Command Syntax">:FUNCtion:SCALe &lt;scale
+        value&gt;[&lt;suffix&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_function_scale.htm#_function_scale_query" title="Query Syntax">:FUNCtion:SCALe?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;scale value&gt; ::= integer in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;suffix&gt; ::= {V |
+        dB}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_function_source1.htm#_function_source1_command" title="Command Syntax">:FUNCtion:SOURce1
+        &lt;source&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_source1.htm#_function_source1_query" title="Query Syntax">:FUNCtion:SOURce1?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        GOFT}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= {1 | 2 | 3 | 4}
+        for 4ch models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= {1 |
+        2} for 2ch models</code></strong></p><p><strong class="userinput"><code>GOFT is only for
+        FFT operation.</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_function_source2.htm#_function_source2_command" title="Command Syntax">:FUNCtion:SOURce2
+        &lt;source&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_function_source2.htm#_function_source2_query" title="Query Syntax">:FUNCtion:SOURce2?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        NONE}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= {{1 | 2} | {3 |
+        4}} for 4ch models, depending on SOURce1
+        selection</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= {1 | 2} for
+        2ch models</code></strong></p></td></tr></tbody></table></div></div><br class="table-break"><h2><a name="function_commands_overview"></a>Introduction to :FUNCtion
+  Commands</h2><p><a name="d0e20622"></a><a name="d0e20625"></a><a name="d0e20628"></a><a name="d0e20631"></a><a name="d0e20634"></a><a name="d0e20637"></a><a name="d0e20640"></a><a name="d0e20643"></a><a name="d0e20646"></a><a name="d0e20649"></a><a name="d0e20652"></a><a name="d0e20655"></a>The FUNCtion subsystem controls the math functions in the
+  oscilloscope. Add, subtract, multiply, and FFT (Fast Fourier Transform)
+  operations are available. These math operations only use the analog
+  (vertical) channels.</p><p>The SOURce1, DISPlay, RANGe, and OFFSet commands apply to any
+  function.</p><p>The SPAN, CENTer, VTYPe, and WINDow commands are only useful for FFT
+  functions. When FFT is selected, the horizontal cursors change from time to
+  frequency (Hz), and the vertical cursors change from volts to decibel
+  (dB).</p><p><b>Reporting the Setup.&nbsp;</b>Use :FUNCtion? to query setup information for the FUNCtion
+    subsystem.</p><p><b>Return Format.&nbsp;</b>The following is a sample response from the :FUNCtion? queries. In
+    this case, the query was issued following a *RST command.</p><pre class="programlisting">:FUNC:OPER ADD;DISP 0;SOUR1 CHAN1;SOUR2 CHAN2;RANG +8.00E+00;OFFS
++0.0E+00;:FUNC:GOFT:OPER ADD;SOUR1 CHAN1;SOUR2 CHAN2</pre></div></body></html>

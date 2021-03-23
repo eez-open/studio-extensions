@@ -1,0 +1,31 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:TRIGger Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_timebase_window_scale.htm" title=":TIMebase:WINDow:SCALe"><link rel="next" href="trigger_commands_general.htm" title="General :TRIGger Commands"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="trigger_commands"></a>:TRIGger Commands<a name="d0e39997"></a></h2></div></div></div><p>Control the trigger modes and parameters for each trigger type.
+  See:</p><div class="itemizedlist"><ul type="disc"><li><p><a href="trigger_commands.htm#trigger_commands_overview">Introduction to :TRIGger
+  Commands</a></p></li><li><p><a href="trigger_commands_general.htm" title="General :TRIGger Commands">General :TRIGger Commands</a></p></li><li><p><a href="sub_trigger_edge.htm" title=":TRIGger[:EDGE] Commands">:TRIGger[:EDGE] Commands</a></p></li><li><p><a href="sub_trigger_glitch.htm" title=":TRIGger:GLITch Commands">:TRIGger:GLITch Commands</a> (Pulse Width trigger)</p></li><li><p><a href="sub_trigger_pattern.htm" title=":TRIGger:PATTern Commands">:TRIGger:PATTern Commands</a></p></li><li><p><a href="sub_trigger_tv.htm" title=":TRIGger:TV Commands">:TRIGger:TV Commands</a></p></li></ul></div><h2><a name="trigger_commands_overview"></a>Introduction to :TRIGger
+  Commands</h2><p><a name="d0e40025"></a>The commands in the TRIGger subsystem define the conditions
+  for an internal trigger. Many of these commands are valid in multiple
+  trigger modes.</p><p>The default trigger mode is :EDGE.</p><p>The trigger subsystem controls the trigger sweep mode and the trigger
+  specification. The trigger sweep (<a name="d0e40033"></a><a name="d0e40036"></a>see <a href="_trigger_sweep.htm" title=":TRIGger:SWEep">:TRIGger:SWEep</a>) can be AUTO or
+  NORMal.</p><div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>NORMal</strong></span> mode <a name="d0e40048"></a>— displays a waveform only if a trigger signal is
+      present and the trigger conditions are met. Otherwise the oscilloscope
+      does not trigger and the display is not updated. This mode is useful for
+      low-repetitive-rate signals.</p></li><li><p><span class="bold"><strong>AUTO</strong></span> trigger mode <a name="d0e40057"></a>— generates an artificial trigger event if the
+      trigger specification is not satisfied within a preset time, acquires
+      unsynchronized data and displays it.</p><p>AUTO mode is useful for signals other than low-repetitive-rate
+      signals. You must use this mode to display a DC signal because there are
+      no edges on which to trigger.</p></li></ul></div><p>The following trigger types are available (see <a href="_trigger_mode.htm" title=":TRIGger:MODE">:TRIGger:MODE</a>).</p><div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><strong>Edge triggering</strong></span> <a name="d0e40073"></a>— identifies a trigger by looking for a specified
+      slope and voltage level on a waveform.</p></li><li><p><span class="bold"><strong>Pulse width triggering</strong></span> <a name="d0e40082"></a>— (:TRIGger:GLITch commands) sets the oscilloscope
+      to trigger on a positive pulse or on a negative pulse of a specified
+      width.</p></li><li><p><span class="bold"><strong>Pattern triggering</strong></span> <a name="d0e40091"></a>— identifies a trigger condition by looking for a
+      specified pattern. This pattern is a logical AND combination of the
+      channels. You can also trigger on a specified time duration<a name="d0e40095"></a> of a pattern.</p></li><li><p><span class="bold"><strong>TV triggering</strong></span> <a name="d0e40104"></a>— is used to capture the complicated waveforms of
+      television equipment. The trigger circuitry detects the vertical and
+      horizontal interval of the waveform and produces triggers based on the
+      TV trigger settings you selected. TV triggering requires greater than ¼
+      division of sync amplitude with any analog channel as the trigger
+      source.</p></li></ul></div><p><b>Reporting the Setup<a name="d0e40111"></a><a name="d0e40114"></a><a name="d0e40117"></a>.&nbsp;</b>Use :TRIGger? to query setup information for the TRIGger
+    subsystem.</p><p><b>Return Format.&nbsp;</b>The return format for the TRIGger? query varies depending on the
+    current mode. The following is a sample response from the :TRIGger? query.
+    In this case, the query was issued following a *RST command.</p><pre class="programlisting">:TRIG:MODE EDGE;SWE AUTO;NREJ 0;HFR 0;HOLD +60.0000000000000E-09;
+:TRIG:EDGE:SOUR CHAN1;LEV +0.00000E+00;SLOP POS;REJ OFF;COUP DC</pre></div></body></html>

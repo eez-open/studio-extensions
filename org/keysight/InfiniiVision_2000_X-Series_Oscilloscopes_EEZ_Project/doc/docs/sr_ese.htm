@@ -1,0 +1,20 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>(Standard) Event Status Enable Register (ESE)</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Status.htm" title="Status Reporting"><link rel="prev" href="sr_esr.htm" title="(Standard) Event Status Register (ESR)"><link rel="next" href="sr_error_queue.htm" title="Error Queue"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Status.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Status Reporting </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sr_ese"></a>(Standard) Event Status Enable Register (ESE)<a name="d0e51363"></a><a name="d0e51366"></a><a name="d0e51369"></a></h2></div></div></div><p>To allow any of the (Standard) Event Status Register (ESR) bits to
+    generate a summary bit, you must first enable that bit. Enable the bit by
+    using the *ESE (Event Status Enable) common command to set the
+    corresponding bit in the (Standard) Event Status Enable Register
+    (ESE).</p><p>Set bits are read with the *ESE? query.</p><h3><a name="d0e51376"></a>Example</h3><p>Suppose your application requires an interrupt whenever any type of
+    error occurs. The error related bits in the (Standard) Event Status
+    Register are bits 2 through 5 (hexadecimal value 0x3C). Therefore, you can
+    enable any of these bits to generate the summary bit by sending:</p><pre class="programlisting">myScope.WriteString "*ESE " + CStr(CInt("&amp;H3C"))</pre><p>Whenever an error occurs, it sets one of these bits in the
+    (Standard) Event Status Register. Because all the error related bits are
+    enabled, a summary bit is generated to set bit 5 (ESB) in the Status Byte
+    Register.</p><p>If bit 5 (ESB) in the Status Byte Register is enabled (via the *SRE
+    command), an SRQ service request interrupt is sent to the controller
+    PC.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p><span class="bold"><strong>Disabled (Standard) Event Status Register
+      bits respond but do not generate a summary bit.</strong></span> (Standard)
+      Event Status Register bits that are not enabled still respond to their
+      corresponding conditions (that is, they are set if the corresponding
+      event occurs). However, because they are not enabled, they do not
+      generate a summary bit to the Status Byte Register.</p></td></tr></table></div></div></body></html>

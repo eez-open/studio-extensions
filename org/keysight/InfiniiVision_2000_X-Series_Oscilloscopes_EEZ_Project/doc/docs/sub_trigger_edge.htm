@@ -1,0 +1,30 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:TRIGger[:EDGE] Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="trigger_commands.htm" title=":TRIGger Commands"><link rel="prev" href="_trigger_sweep.htm" title=":TRIGger:SWEep"><link rel="next" href="_trigger_edge_coupling.htm" title=":TRIGger[:EDGE]:COUPling"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="trigger_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:TRIGger Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sub_trigger_edge"></a>:TRIGger[:EDGE] Commands<a name="d0e40722"></a><a name="d0e40725"></a></h2></div></div></div><div class="table"><a name="d0e40728"></a><p class="title"><b>:TRIGger[:EDGE] Commands Summary:</b></p><div class="table-contents"><table summary=":TRIGger[:EDGE] Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_trigger_edge_coupling.htm#_trigger_edge_coupling_command" title="Command Syntax">:TRIGger[:EDGE]:COUPling {AC
+        | DC | LFReject}</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_edge_coupling.htm#_trigger_edge_coupling_query" title="Query Syntax">:TRIGger[:EDGE]:COUPling?</a></code></strong></td><td><strong class="userinput"><code>{AC | DC | LFReject}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_edge_level.htm#_trigger_edge_level_command" title="Command Syntax">:TRIGger[:EDGE]:LEVel
+        &lt;level&gt; [,&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_edge_level.htm#_trigger_edge_level_query" title="Query Syntax">:TRIGger[:EDGE]:LEVel?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>For internal triggers, &lt;level&gt; ::= .75 x
+        full-scale voltage from center screen in NR3
+        format.</code></strong></p><p><strong class="userinput"><code>For external triggers,
+        &lt;level&gt; ::= ±(external range setting) in NR3
+        format.</code></strong></p><p><strong class="userinput"><code>For digital channels (MSO
+        models), &lt;level&gt; ::= ±8
+        V.</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | EXTernal} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | EXTernal } for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt;
+        ::= 0 to (# digital channels - 1) in NR1
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_edge_reject.htm#_trigger_edge_reject_command" title="Command Syntax">:TRIGger[:EDGE]:REJect {OFF |
+        LFReject | HFReject}</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_edge_reject.htm#_trigger_edge_reject_query" title="Query Syntax">:TRIGger[:EDGE]:REJect?</a></code></strong></td><td><strong class="userinput"><code>{OFF | LFReject | HFReject}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_edge_slope.htm#_trigger_edge_slope_command" title="Command Syntax">:TRIGger[:EDGE]:SLOPe
+        &lt;polarity&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_edge_slope.htm#_trigger_edge_slope_query" title="Query Syntax">:TRIGger[:EDGE]:SLOPe?</a></code></strong></td><td><strong class="userinput"><code>&lt;polarity&gt; ::= {POSitive | NEGative | EITHer |
+        ALTernate}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_trigger_edge_source.htm#_trigger_edge_source_command" title="Command Syntax">:TRIGger[:EDGE]:SOURce
+        &lt;source&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_trigger_edge_source.htm#_trigger_edge_source_query" title="Query Syntax">:TRIGger[:EDGE]:SOURce?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        EXTernal | LINE | WGEN} for the DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | EXTernal | LINE | WGEN} for the
+        MSO models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (#
+        analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::= 0 to (#
+        digital channels - 1) in NR1 format</code></strong></p></td></tr></tbody></table></div></div><br class="table-break"></div></body></html>

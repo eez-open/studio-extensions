@@ -1,0 +1,291 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:MEASure Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_marker_yunits_use.htm" title=":MARKer:YUNits:USE"><link rel="next" href="_measure_all.htm" title=":MEASure:ALL"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="measure_commands"></a>:MEASure Commands<a name="d0e24236"></a></h2></div></div></div><p>Select automatic measurements to be made and control time markers. See
+  <a href="measure_commands.htm#measure_commands_overview">Introduction to :MEASure
+  Commands</a>.</p><div class="table"><a name="d0e24243"></a><p class="title"><b>:MEASure Commands Summary:</b></p><div class="table-contents"><table summary=":MEASure Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_measure_all.htm#_measure_all_command" title="Command Syntax">:MEASure:ALL</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_measure_clear.htm#_measure_clear_command" title="Command Syntax">:MEASure:CLEar</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_measure_define.htm#_measure_define_command" title="Command Syntax">:MEASure:DEFine DELay, &lt;delay
+        spec&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_define.htm#_measure_define_query" title="Query Syntax">:MEASure:DEFine?
+        DELay</a></code></strong></td><td><p><strong class="userinput"><code>&lt;delay spec&gt; ::=
+        &lt;edge_spec1&gt;,&lt;edge_spec2&gt;</code></strong></p><p><strong class="userinput"><code>edge_spec1
+        ::=
+        [&lt;slope&gt;]&lt;occurrence&gt;</code></strong></p><p><strong class="userinput"><code>edge_spec2
+        ::=
+        [&lt;slope&gt;]&lt;occurrence&gt;</code></strong></p><p><strong class="userinput"><code>&lt;slope&gt;
+        ::= {+ | -}</code></strong></p><p><strong class="userinput"><code>&lt;occurrence&gt; ::=
+        integer</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_define.htm#_measure_define_command" title="Command Syntax">:MEASure:DEFine THResholds,
+        &lt;threshold spec&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_define.htm#_measure_define_query" title="Query Syntax">:MEASure:DEFine?
+        THResholds</a></code></strong></td><td><p><strong class="userinput"><code>&lt;threshold spec&gt; ::= {STANdard} |
+        {&lt;threshold mode&gt;,&lt;upper&gt;,
+        &lt;middle&gt;,&lt;lower&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;threshold
+        mode&gt; ::= {PERCent | ABSolute}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_delay.htm#_measure_delay_command" title="Command Syntax">:MEASure:DELay [&lt;source1&gt;]
+        [,&lt;source2&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_delay.htm#_measure_delay_query" title="Query Syntax">:MEASure:DELay?
+        [&lt;source1&gt;] [,&lt;source2&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source1,2&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        floating-point number delay time in seconds in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_dutycycle.htm#_measure_dutycycle_command" title="Command Syntax">:MEASure:DUTYcycle
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_dutycycle.htm#_measure_dutycycle_query" title="Query Syntax">:MEASure:DUTYcycle?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH | WMEMory&lt;r&gt;} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        ratio of positive pulse width to period in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_falltime.htm#_measure_falltime_command" title="Command Syntax">:MEASure:FALLtime
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_falltime.htm#_measure_falltime_query" title="Query Syntax">:MEASure:FALLtime?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH | WMEMory&lt;r&gt;} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        time in seconds between the lower and upper thresholds in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_frequency.htm#_measure_frequency_command" title="Command Syntax">:MEASure:FREQuency
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_frequency.htm#_measure_frequency_query" title="Query Syntax">:MEASure:FREQuency?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH | WMEMory&lt;r&gt;} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        frequency in Hertz in NR3 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_nwidth.htm#_measure_nwidth_command" title="Command Syntax">:MEASure:NWIDth
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_nwidth.htm#_measure_nwidth_query" title="Query Syntax">:MEASure:NWIDth?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH | WMEMory&lt;r&gt;} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        negative pulse width in seconds-NR3 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_overshoot.htm#_measure_overshoot_command" title="Command Syntax">:MEASure:OVERshoot
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_overshoot.htm#_measure_overshoot_query" title="Query Syntax">:MEASure:OVERshoot?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::= the
+        percent of the overshoot of the selected waveform in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_period.htm#_measure_period_command" title="Command Syntax">:MEASure:PERiod
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_period.htm#_measure_period_query" title="Query Syntax">:MEASure:PERiod?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH | WMEMory&lt;r&gt;} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        waveform period in seconds in NR3 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_phase.htm#_measure_phase_command" title="Command Syntax">:MEASure:PHASe [&lt;source1&gt;]
+        [,&lt;source2&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_phase.htm#_measure_phase_query" title="Query Syntax">:MEASure:PHASe?
+        [&lt;source1&gt;] [,&lt;source2&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source1,2&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::= the
+        phase angle value in degrees in NR3 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_preshoot.htm#_measure_preshoot_command" title="Command Syntax">:MEASure:PREShoot
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_preshoot.htm#_measure_preshoot_query" title="Query Syntax">:MEASure:PREShoot?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::= the
+        percent of preshoot of the selected waveform in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_pwidth.htm#_measure_pwidth_command" title="Command Syntax">:MEASure:PWIDth
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_pwidth.htm#_measure_pwidth_query" title="Query Syntax">:MEASure:PWIDth?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH | WMEMory&lt;r&gt;} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        width of positive pulse in seconds in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_risetime.htm#_measure_risetime_command" title="Command Syntax">:MEASure:RISetime
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_risetime.htm#_measure_risetime_query" title="Query Syntax">:MEASure:RISetime?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        rise time in seconds in NR3 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_show.htm#_measure_show_command" title="Command Syntax">:MEASure:SHOW
+        {1 | ON}</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_show.htm#_measure_show_query" title="Query Syntax">:MEASure:SHOW?</a></code></strong></td><td><strong class="userinput"><code>{1}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_measure_source.htm#_measure_source_command" title="Command Syntax">:MEASure:SOURce &lt;source1&gt;
+        [,&lt;source2&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_source.htm#_measure_source_query" title="Query Syntax">:MEASure:SOURce?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source1,2&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH | WMEMory&lt;r&gt; | EXTernal} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source1,2&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt; | EXTernal} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        {&lt;source&gt; | NONE}</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_measure_tedge.htm#_measure_tedge_query" title="Query Syntax">:MEASure:TEDGe?
+        &lt;slope&gt;&lt;occurrence&gt;[,&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;slope&gt; ::= direction of the
+        waveform</code></strong></p><p><strong class="userinput"><code>&lt;occurrence&gt; ::= the
+        transition to be
+        reported</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | FUNCtion | MATH | WMEMory&lt;r&gt;} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        time in seconds of the specified transition</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_measure_tvalue.htm#_measure_tvalue_query" title="Query Syntax">:MEASure:TVALue? &lt;value&gt;,
+        [&lt;slope&gt;]&lt;occurrence&gt;
+        [,&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;value&gt; ::= voltage level that the
+        waveform must cross.</code></strong></p><p><strong class="userinput"><code>&lt;slope&gt;
+        ::= direction of the waveform when &lt;value&gt; is
+        crossed.</code></strong></p><p><strong class="userinput"><code>&lt;occurrence&gt; ::=
+        transitions
+        reported.</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | FUNCtion | MATH | WMEMory&lt;r&gt;} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        time in seconds of specified voltage crossing in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_vamplitude.htm#_measure_vamplitude_command" title="Command Syntax">:MEASure:VAMPlitude
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_vamplitude.htm#_measure_vamplitude_query" title="Query Syntax">:MEASure:VAMPlitude?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::= the
+        amplitude of the selected waveform in volts in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_vaverage.htm#_measure_vaverage_command" title="Command Syntax">:MEASure:VAVerage
+        [&lt;interval&gt;][,][&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_vaverage.htm#_measure_vaverage_query" title="Query Syntax">:MEASure:VAVerage?
+        [&lt;interval&gt;][,][&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;interval&gt; ::= {CYCLe |
+        DISPlay}</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        calculated average voltage in NR3 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_vbase.htm#_measure_vbase_command" title="Command Syntax">:MEASure:VBASe
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_vbase.htm#_measure_vbase_query" title="Query Syntax">:MEASure:VBASe?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;base_voltage&gt; ::=
+        voltage at the base of the selected waveform in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_vmax.htm#_measure_vmax_command" title="Command Syntax">:MEASure:VMAX
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_vmax.htm#_measure_vmax_query" title="Query Syntax">:MEASure:VMAX?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        maximum voltage of the selected waveform in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_vmin.htm#_measure_vmin_command" title="Command Syntax">:MEASure:VMIN
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_vmin.htm#_measure_vmin_query" title="Query Syntax">:MEASure:VMIN?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        minimum voltage of the selected waveform in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_vpp.htm#_measure_vpp_command" title="Command Syntax">:MEASure:VPP
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_vpp.htm#_measure_vpp_query" title="Query Syntax">:MEASure:VPP?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        voltage peak-to-peak of the selected waveform in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_vrms.htm#_measure_vrms_command" title="Command Syntax">:MEASure:VRMS
+        [&lt;interval&gt;][,] [&lt;type&gt;][,]
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_vrms.htm#_measure_vrms_query" title="Query Syntax">:MEASure:VRMS?
+        [&lt;interval&gt;][,] [&lt;type&gt;][,]
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;interval&gt; ::= {CYCLe |
+        DISPlay}</code></strong></p><p><strong class="userinput"><code>&lt;type&gt; ::= {AC |
+        DC}</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        calculated dc RMS voltage in NR3 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_measure_vtime.htm#_measure_vtime_query" title="Query Syntax">:MEASure:VTIMe?
+        &lt;vtime&gt;[,&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;vtime&gt; ::= displayed time from trigger
+        in seconds in NR3
+        format</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | FUNCtion | MATH | WMEMory&lt;r&gt;} for DSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;source&gt; ::=
+        {CHANnel&lt;n&gt; | DIGital&lt;d&gt; | FUNCtion | MATH |
+        WMEMory&lt;r&gt;} for MSO
+        models</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 to (# analog
+        channels) in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt;
+        ::= 1-2 in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;d&gt; ::=
+        0 to (# digital channels - 1) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        voltage at the specified time in NR3 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_vtop.htm#_measure_vtop_command" title="Command Syntax">:MEASure:VTOP
+        [&lt;source&gt;]</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_vtop.htm#_measure_vtop_query" title="Query Syntax">:MEASure:VTOP?
+        [&lt;source&gt;]</a></code></strong></td><td><p><strong class="userinput"><code>&lt;source&gt; ::= {CHANnel&lt;n&gt; |
+        FUNCtion | MATH |
+        WMEMory&lt;r&gt;}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1
+        to (# analog channels) in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;r&gt; ::= 1-2 in NR1
+        format</code></strong></p><p><strong class="userinput"><code>&lt;return_value&gt; ::=
+        voltage at the top of the waveform in NR3
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_measure_window.htm#_measure_window_command" title="Command Syntax">:MEASure:WINDow
+        &lt;type&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_measure_window.htm#_measure_window_query" title="Query Syntax">:MEASure:WINDow?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;type&gt; ::= {MAIN | ZOOM |
+        AUTO}</code></strong></p></td></tr></tbody></table></div></div><br class="table-break"><h2><a name="measure_commands_overview"></a>Introduction to :MEASure
+  Commands</h2><p><a name="d0e24940"></a><a name="d0e24943"></a><a name="d0e24946"></a><a name="d0e24949"></a><a name="d0e24952"></a><a name="d0e24955"></a><a name="d0e24958"></a><a name="d0e24961"></a><a name="d0e24964"></a><a name="d0e24967"></a><a name="d0e24970"></a><a name="d0e24973"></a><a name="d0e24976"></a><a name="d0e24979"></a><a name="d0e24982"></a><a name="d0e24985"></a><a name="d0e24988"></a><a name="d0e24991"></a>The commands in the MEASure subsystem are used to make
+  parametric measurements on displayed waveforms.</p><p><b>Measurement Setup.&nbsp;</b>To make a measurement, the portion of the waveform required for that
+    measurement must be displayed on the oscilloscope screen.</p><div class="informaltable"><table cellspacing="0" cellpadding="5" border="1"><colgroup><col><col></colgroup><thead valign="bottom"><tr><th align="left">Measurement Type</th><th align="left">Portion of waveform that must be
+          displayed</th></tr></thead><tbody valign="top"><tr><td>period, duty cycle, or frequency</td><td>at least one complete cycle</td></tr><tr><td>pulse width</td><td>the entire pulse</td></tr><tr><td>rise time</td><td>rising edge, top and bottom of pulse</td></tr><tr><td>fall time</td><td>falling edge, top and bottom of pulse</td></tr></tbody></table></div><p><b>Measurement Error.&nbsp;</b><a name="d0e25035"></a>If a measurement cannot be made (typically because the
+    proper portion of the waveform is not displayed), the value +9.9E+37 is
+    returned for that measurement.</p><p><b>Making Measurements.&nbsp;</b>If more than one waveform, edge, or pulse is displayed, time
+    measurements are made on the portion of the displayed waveform closest to
+    the trigger reference (left, center, or right).</p><p>When making measurements in the zoomed (delayed) time base mode
+  (:TIMebase:MODE WINDow), the oscilloscope will attempt to make the
+  measurement inside the zoomed sweep window. If the measurement is an average
+  and there are not three edges, the oscilloscope will revert to the mode of
+  making the measurement at the start of the main sweep.</p><p>When the command form is used, the measurement result is displayed on
+  the instrument. When the query form of these measurements is used, the
+  measurement is made one time, and the measurement result is returned over
+  the bus.</p><p>Measurements are made on the displayed waveforms specified by the
+  :MEASure:SOURce command. The MATH source is an alias for the FUNCtion
+  source.</p><p>Not all measurements are available on the digital channels or FFT
+  (Fast Fourier Transform).</p><p><b>Reporting the Setup.&nbsp;</b>Use the :MEASure? query to obtain setup information for the MEASure
+    subsystem. (Currently, this is only :MEASure:SOURce.)</p><p><b>Return Format.&nbsp;</b>The following is a sample response from the :MEASure? query. In this
+    case, the query was issued following a *RST command.</p><pre class="programlisting">:MEAS:SOUR CHAN1,CHAN2;STAT ON</pre></div></body></html>

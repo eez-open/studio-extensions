@@ -1,0 +1,21 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Reading Query Responses from the Oscilloscope</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="programming.htm" title="Programming the Oscilloscope"><link rel="prev" href="capture_with_digitize.htm" title="Capturing Data with the :DIGitize Command"><link rel="next" href="read_string_results.htm" title="Reading Query Results into String Variables"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="programming.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Programming the Oscilloscope </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="read_query_responses"></a>Reading Query Responses from the Oscilloscope<a name="d0e2152"></a></h3></div></div></div><p>After receiving a query (command header followed by a question
+    mark), the instrument interrogates the requested function and places the
+    answer in its output queue. The answer remains in the output queue until
+    it is read or another command is issued. When read, the answer is
+    transmitted across the interface to the designated listener (typically a
+    controller).</p><p>The statement for reading a query response message from an
+    instrument's output queue typically has a format specification for
+    handling the response message.</p><p>When using the VISA COM library in Visual Basic, you use different
+    read methods (<a name="d0e2161"></a>ReadString, <a name="d0e2165"></a>ReadNumber, <a name="d0e2169"></a>ReadList, or <a name="d0e2173"></a>ReadIEEEBlock) for the various query response formats. For
+    example, to read the result of the query command :CHANnel1:COUPling? you
+    would execute the statements:</p><pre class="programlisting">myScope.WriteString ":CHANnel1:COUPling?"
+Dim strQueryResult As String
+strQueryResult = myScope.ReadString</pre><p>This reads the current setting for the channel one coupling into the
+    string variable strQueryResult.</p><p>All results for queries (sent in one program message) must be read
+    before another program message is sent.</p><p>Sending another command before reading the result of the query
+    clears the output buffer and the current response. This also causes an
+    error to be placed in the error queue.</p><p>Executing a read statement before sending a query causes the
+    controller to wait indefinitely.</p><p>The format specification for handling response messages depends on
+    the programming language.</p></div></body></html>

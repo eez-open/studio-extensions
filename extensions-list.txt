@@ -98,3 +98,17 @@ https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez
 ./org/siglent/ssa3000x/siglent_ssa3032x-0.1.0.zip
 https://github.com/lexbrugman/my-eez-studio-extensions/raw/master/siglent-spd1000x/siglent_spd1168x-1.zip
 https://github.com/lexbrugman/my-eez-studio-extensions/raw/master/siglent-spd1000x/siglent_spd1305x-1.zip
+
+# Keysight 2000 X-Series
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2002A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2004A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2012A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2014A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2022A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2024A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2002A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2004A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2012A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2014A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2022A-1.0.0.zip
+./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2024A-1.0.0.zip

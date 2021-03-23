@@ -1,0 +1,453 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>VISA COM Example in Visual Basic .NET</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="visacom_examples.htm" title="VISA COM Examples"><link rel="prev" href="visacom_example_csharp.htm" title="VISA COM Example in C#"><link rel="next" href="visacom_example_python.htm" title="VISA COM Example in Python"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="visacom_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>VISA COM Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="visacom_example_vbnet"></a>VISA COM Example in Visual Basic .NET<a name="d0e52564"></a><a name="d0e52567"></a><a name="d0e52570"></a></h3></div></div></div><p>To compile and run this example in Microsoft Visual Studio 2008:</p><div class="orderedlist"><ol type="1"><li><p>Open Visual Studio.</p></li><li><p>Create a new Visual Basic, Windows, Console Application project.</p></li><li><p>Cut-and-paste the code that follows into the C# source file.</p></li><li><p>Edit the program to use the VISA address of your oscilloscope.</p></li><li><p>Add a reference to the VISA COM 3.0 Type Library:</p><div class="orderedlist"><ol type="a"><li><p>Right-click the project you wish to modify (not the solution) in the Solution Explorer window of the Microsoft Visual Studio environment.</p></li><li><p>Choose <span class="guimenu">Add Reference...</span>.</p></li><li><p>In the Add Reference dialog, select the <span class="guilabel">COM</span> tab.</p></li><li><p>Select <span class="guilabel">VISA COM 3.0 Type Library</span>; then click <span class="guibutton">OK</span>.</p></li><li><p>Right-click the project you wish to modify (not the solution) in the Solution Explorer window of the Microsoft Visual Studio environment and choose <span class="guimenuitem">Properties</span>; then, select "InfiniiVision.VisaComInstrumentApp" as the <span class="guilabel">Startup object</span>.</p></li></ol></div></li><li><p>Build and run the program.</p></li></ol></div><p>For more information, see the VISA COM Help that comes with Agilent IO Libraries Suite 15.</p><pre class="programlisting">'
+' Agilent VISA COM Example in Visual Basic .NET
+' -------------------------------------------------------------------
+' This program illustrates a few commonly used programming
+' features of your Agilent oscilloscope.
+' -------------------------------------------------------------------
+
+Imports System
+Imports System.IO
+Imports System.Text
+Imports Ivi.Visa.Interop
+Imports System.Runtime.InteropServices
+
+Namespace InfiniiVision
+  Class VisaComInstrumentApp
+    Private Shared myScope As VisaComInstrument
+
+    Public Shared Sub Main(ByVal args As String())
+      Try
+        myScope = New  _
+          VisaComInstrument("USB0::0x0957::0x17A6::US50210029::0::INSTR")
+        myScope.SetTimeoutSeconds(10)
+
+        ' Initialize - start from a known state.
+        Initialize()
+
+        ' Capture data.
+        Capture()
+
+        ' Analyze the captured waveform.
+        Analyze()
+
+      Catch err As System.ApplicationException
+        Console.WriteLine("*** VISA Error Message : " + err.Message)
+      Catch err As System.SystemException
+        Console.WriteLine("*** System Error Message : " + err.Message)
+      Catch err As System.Exception
+        System.Diagnostics.Debug.Fail("Unexpected Error")
+        Console.WriteLine("*** Unexpected Error : " + err.Message)
+      Finally
+        myScope.Close()
+      End Try
+    End Sub
+
+    ' Initialize the oscilloscope to a known state.
+    ' --------------------------------------------------------------
+
+    Private Shared Sub Initialize()
+      Dim strResults As String
+
+      ' Get and display the device's *IDN? string.
+      strResults = myScope.DoQueryString("*IDN?")
+      Console.WriteLine("*IDN? result is: {0}", strResults)
+
+      ' Clear status and load the default setup.
+      myScope.DoCommand("*CLS")
+      myScope.DoCommand("*RST")
+
+    End Sub
+
+    ' Capture the waveform.
+    ' --------------------------------------------------------------
+
+    Private Shared Sub Capture()
+
+      ' Use auto-scale to automatically configure oscilloscope.
+      myScope.DoCommand(":AUToscale")
+
+      ' Set trigger mode (EDGE, PULSe, PATTern, etc., and input source.
+      myScope.DoCommand(":TRIGger:MODE EDGE")
+      Console.WriteLine("Trigger mode: {0}", _
+          myScope.DoQueryString(":TRIGger:MODE?"))
+
+      ' Set EDGE trigger parameters.
+      myScope.DoCommand(":TRIGger:EDGE:SOURCe CHANnel1")
+      Console.WriteLine("Trigger edge source: {0}", _
+          myScope.DoQueryString(":TRIGger:EDGE:SOURce?"))
+
+      myScope.DoCommand(":TRIGger:EDGE:LEVel 1.5")
+      Console.WriteLine("Trigger edge level: {0}", _
+          myScope.DoQueryString(":TRIGger:EDGE:LEVel?"))
+
+      myScope.DoCommand(":TRIGger:EDGE:SLOPe POSitive")
+      Console.WriteLine("Trigger edge slope: {0}", _
+          myScope.DoQueryString(":TRIGger:EDGE:SLOPe?"))
+
+      ' Save oscilloscope configuration.
+      Dim ResultsArray As Byte()   ' Results array.
+      Dim nLength As Integer   ' Number of bytes returned from inst.
+      Dim strPath As String
+      Dim fStream As FileStream
+
+      ' Query and read setup string.
+      ResultsArray = myScope.DoQueryIEEEBlock(":SYSTem:SETup?")
+      nLength = ResultsArray.Length
+
+      ' Write setup string to file.
+      strPath = "c:\scope\config\setup.stp"
+      fStream = File.Open(strPath, FileMode.Create)
+      fStream.Write(ResultsArray, 0, nLength)
+      fStream.Close()
+      Console.WriteLine("Setup bytes saved: {0}", nLength)
+
+      ' Change settings with individual commands:
+
+      ' Set vertical scale and offset.
+      myScope.DoCommand(":CHANnel1:SCALe 0.05")
+      Console.WriteLine("Channel 1 vertical scale: {0}", _
+          myScope.DoQueryString(":CHANnel1:SCALe?"))
+
+      myScope.DoCommand(":CHANnel1:OFFSet -1.5")
+      Console.WriteLine("Channel 1 vertical offset: {0}", _
+          myScope.DoQueryString(":CHANnel1:OFFSet?"))
+
+      ' Set horizontal scale and offset.
+      myScope.DoCommand(":TIMebase:SCALe 0.0002")
+      Console.WriteLine("Timebase scale: {0}", _
+          myScope.DoQueryString(":TIMebase:SCALe?"))
+
+      myScope.DoCommand(":TIMebase:POSition 0.0")
+      Console.WriteLine("Timebase position: {0}", _
+          myScope.DoQueryString(":TIMebase:POSition?"))
+
+      ' Set the acquisition type (NORMal, PEAK, AVERage, or HRESolution).
+      myScope.DoCommand(":ACQuire:TYPE NORMal")
+      Console.WriteLine("Acquire type: {0}", _
+          myScope.DoQueryString(":ACQuire:TYPE?"))
+
+      ' Or, configure by loading a previously saved setup.
+      Dim DataArray As Byte()
+      Dim nBytesWritten As Integer
+
+      ' Read setup string from file.
+      strPath = "c:\scope\config\setup.stp"
+      DataArray = File.ReadAllBytes(strPath)
+      nBytesWritten = DataArray.Length
+
+      ' Restore setup string.
+      myScope.DoCommandIEEEBlock(":SYSTem:SETup", DataArray)
+      Console.WriteLine("Setup bytes restored: {0}", nBytesWritten)
+
+      ' Capture an acquisition using :DIGitize.
+      myScope.DoCommand(":DIGitize CHANnel1")
+
+    End Sub
+
+    ' Analyze the captured waveform.
+    ' --------------------------------------------------------------
+
+    Private Shared Sub Analyze()
+
+      Dim fResult As Double
+      Dim ResultsArray As Byte()   ' Results array.
+      Dim nLength As Integer   ' Number of bytes returned from inst.
+      Dim strPath As String
+
+      ' Make a couple of measurements.
+      ' ------------------------------------------------------------
+      myScope.DoCommand(":MEASure:SOURce CHANnel1")
+      Console.WriteLine("Measure source: {0}", _
+          myScope.DoQueryString(":MEASure:SOURce?"))
+
+      myScope.DoCommand(":MEASure:FREQuency")
+      fResult = myScope.DoQueryNumber(":MEASure:FREQuency?")
+      Console.WriteLine("Frequency: {0:F4} kHz", fResult / 1000)
+
+      myScope.DoCommand(":MEASure:VAMPlitude")
+      fResult = myScope.DoQueryNumber(":MEASure:VAMPlitude?")
+      Console.WriteLine("Vertial amplitude: {0:F2} V", fResult)
+
+      ' Download the screen image.
+      ' ------------------------------------------------------------
+      myScope.DoCommand(":HARDcopy:INKSaver OFF")
+
+      ' Get the screen data.
+      ResultsArray = myScope.DoQueryIEEEBlock(":DISPlay:DATA? PNG, COLor")
+      nLength = ResultsArray.Length
+
+      ' Store the screen data to a file.
+      strPath = "c:\scope\data\screen.png"
+      Dim fStream As FileStream
+      fStream = File.Open(strPath, FileMode.Create)
+      fStream.Write(ResultsArray, 0, nLength)
+      fStream.Close()
+      Console.WriteLine("Screen image ({0} bytes) written to {1}", _
+          nLength, strPath)
+
+      ' Download waveform data.
+      ' ------------------------------------------------------------
+
+      ' Set the waveform points mode.
+      myScope.DoCommand(":WAVeform:POINts:MODE RAW")
+      Console.WriteLine("Waveform points mode: {0}", _
+          myScope.DoQueryString(":WAVeform:POINts:MODE?"))
+
+      ' Get the number of waveform points available.
+      Console.WriteLine("Waveform points available: {0}", _
+          myScope.DoQueryString(":WAVeform:POINts?"))
+
+      ' Set the waveform source.
+      myScope.DoCommand(":WAVeform:SOURce CHANnel1")
+      Console.WriteLine("Waveform source: {0}", _
+          myScope.DoQueryString(":WAVeform:SOURce?"))
+
+      ' Choose the format of the data returned (WORD, BYTE, ASCII):
+      myScope.DoCommand(":WAVeform:FORMat BYTE")
+      Console.WriteLine("Waveform format: {0}", _
+          myScope.DoQueryString(":WAVeform:FORMat?"))
+
+      ' Display the waveform settings:
+      Dim fResultsArray As Double()
+      fResultsArray = myScope.DoQueryNumbers(":WAVeform:PREamble?")
+
+      Dim fFormat As Double = fResultsArray(0)
+      If fFormat = 0 Then
+        Console.WriteLine("Waveform format: BYTE")
+      ElseIf fFormat = 1 Then
+        Console.WriteLine("Waveform format: WORD")
+      ElseIf fFormat = 2 Then
+        Console.WriteLine("Waveform format: ASCii")
+      End If
+
+      Dim fType As Double = fResultsArray(1)
+      If fType = 0 Then
+        Console.WriteLine("Acquire type: NORMal")
+      ElseIf fType = 1 Then
+        Console.WriteLine("Acquire type: PEAK")
+      ElseIf fType = 2 Then
+        Console.WriteLine("Acquire type: AVERage")
+      ElseIf fType = 3 Then
+        Console.WriteLine("Acquire type: HRESolution")
+      End If
+
+      Dim fPoints As Double = fResultsArray(2)
+      Console.WriteLine("Waveform points: {0:e}", fPoints)
+
+      Dim fCount As Double = fResultsArray(3)
+      Console.WriteLine("Waveform average count: {0:e}", fCount)
+
+      Dim fXincrement As Double = fResultsArray(4)
+      Console.WriteLine("Waveform X increment: {0:e}", fXincrement)
+
+      Dim fXorigin As Double = fResultsArray(5)
+      Console.WriteLine("Waveform X origin: {0:e}", fXorigin)
+
+      Dim fXreference As Double = fResultsArray(6)
+      Console.WriteLine("Waveform X reference: {0:e}", fXreference)
+
+      Dim fYincrement As Double = fResultsArray(7)
+      Console.WriteLine("Waveform Y increment: {0:e}", fYincrement)
+
+      Dim fYorigin As Double = fResultsArray(8)
+      Console.WriteLine("Waveform Y origin: {0:e}", fYorigin)
+
+      Dim fYreference As Double = fResultsArray(9)
+      Console.WriteLine("Waveform Y reference: {0:e}", fYreference)
+
+      ' Get the waveform data.
+      ResultsArray = myScope.DoQueryIEEEBlock(":WAVeform:DATA?")
+      nLength = ResultsArray.Length
+      Console.WriteLine("Number of data values: {0}", nLength)
+
+      ' Set up output file:
+      strPath = "c:\scope\data\waveform_data.csv"
+      If File.Exists(strPath) Then
+        File.Delete(strPath)
+      End If
+
+      ' Open file for output.
+      Dim writer As StreamWriter = File.CreateText(strPath)
+
+      ' Output waveform data in CSV format.
+      For index As Integer = 0 To nLength - 1
+        ' Write time value, voltage value.
+        writer.WriteLine("{0:f9}, {1:f6}", _
+            fXorigin + (CSng(index) * fXincrement), _
+            ((CSng(ResultsArray(index)) - fYreference) _
+            * fYincrement) + fYorigin)
+      Next
+
+      ' Close output file.
+      writer.Close()
+      Console.WriteLine("Waveform format BYTE data written to {0}", _
+          strPath)
+
+    End Sub
+
+  End Class
+
+  Class VisaComInstrument
+    Private m_ResourceManager As ResourceManagerClass
+    Private m_IoObject As FormattedIO488Class
+    Private m_strVisaAddress As String
+
+    ' Constructor.
+    Public Sub New(ByVal strVisaAddress As String)
+
+      ' Save VISA addres in member variable.
+      m_strVisaAddress = strVisaAddress
+
+      ' Open the default VISA COM IO object.
+      OpenIo()
+
+      ' Clear the interface.
+      m_IoObject.IO.Clear()
+
+    End Sub
+
+    Public Sub DoCommand(ByVal strCommand As String)
+
+      ' Send the command.
+      m_IoObject.WriteString(strCommand, True)
+
+      ' Check for inst errors.
+      CheckInstrumentErrors(strCommand)
+
+    End Sub
+
+    Public Sub DoCommandIEEEBlock(ByVal strCommand As String, _
+        ByVal DataArray As Byte())
+
+      ' Send the command to the device.
+      m_IoObject.WriteIEEEBlock(strCommand, DataArray, True)
+
+      ' Check for inst errors.
+      CheckInstrumentErrors(strCommand)
+
+    End Sub
+
+    Public Function DoQueryString(ByVal strQuery As String) As String
+      ' Send the query.
+      m_IoObject.WriteString(strQuery, True)
+
+      ' Get the result string.
+      Dim strResults As String
+      strResults = m_IoObject.ReadString()
+
+      ' Check for inst errors.
+      CheckInstrumentErrors(strQuery)
+
+      ' Return results string.
+      Return strResults
+    End Function
+
+    Public Function DoQueryNumber(ByVal strQuery As String) As Double
+      ' Send the query.
+      m_IoObject.WriteString(strQuery, True)
+
+      ' Get the result number.
+      Dim fResult As Double
+      fResult = _
+          CDbl(m_IoObject.ReadNumber(IEEEASCIIType.ASCIIType_R8, True))
+
+      ' Check for inst errors.
+      CheckInstrumentErrors(strQuery)
+
+      ' Return result number.
+      Return fResult
+    End Function
+
+    Public Function DoQueryNumbers(ByVal strQuery As String) As _
+        Double()
+      ' Send the query.
+      m_IoObject.WriteString(strQuery, True)
+
+      ' Get the result numbers.
+      Dim fResultsArray As Double()
+      fResultsArray = _
+          m_IoObject.ReadList(IEEEASCIIType.ASCIIType_R8, ",;")
+
+      ' Check for inst errors.
+      CheckInstrumentErrors(strQuery)
+
+      ' Return result numbers.
+      Return fResultsArray
+    End Function
+
+    Public _
+        Function DoQueryIEEEBlock(ByVal strQuery As String) As Byte()
+      ' Send the query.
+      m_IoObject.WriteString(strQuery, True)
+
+      ' Get the results array.
+      System.Threading.Thread.Sleep(2000) ' Delay before reading data.
+      Dim ResultsArray As Byte()
+      ResultsArray = _
+          m_IoObject.ReadIEEEBlock(IEEEBinaryType.BinaryType_UI1, _
+          False, True)
+
+      ' Check for inst errors.
+      CheckInstrumentErrors(strQuery)
+
+      ' Return results array.
+      Return ResultsArray
+    End Function
+
+    Private Sub CheckInstrumentErrors(ByVal strCommand As String)
+      ' Check for instrument errors.
+      Dim strInstrumentError As String
+      Dim bFirstError As Boolean = True
+      Do   ' While not "0,No error".
+        m_IoObject.WriteString(":SYSTem:ERRor?", True)
+        strInstrumentError = m_IoObject.ReadString()
+
+        If Not strInstrumentError.ToString().StartsWith("+0,") Then
+          If bFirstError Then
+            Console.WriteLine("ERROR(s) for command '{0}': ", _
+                strCommand)
+            bFirstError = False
+          End If
+          Console.Write(strInstrumentError)
+        End If
+      Loop While Not strInstrumentError.ToString().StartsWith("+0,")
+    End Sub
+
+    Private Sub OpenIo()
+      m_ResourceManager = New ResourceManagerClass()
+      m_IoObject = New FormattedIO488Class()
+
+      ' Open the default VISA COM IO object.
+      Try
+        m_IoObject.IO = _
+            DirectCast(m_ResourceManager.Open(m_strVisaAddress, _
+                AccessMode.NO_LOCK, 0, ""), IMessage)
+      Catch e As Exception
+        Console.WriteLine("An error occurred: {0}", e.Message)
+      End Try
+    End Sub
+
+    Public Sub SetTimeoutSeconds(ByVal nSeconds As Integer)
+      m_IoObject.IO.Timeout = nSeconds * 1000
+    End Sub
+
+    Public Sub Close()
+      Try
+        m_IoObject.IO.Close()
+      Catch
+      End Try
+
+      Try
+        Marshal.ReleaseComObject(m_IoObject)
+      Catch
+      End Try
+
+      Try
+        Marshal.ReleaseComObject(m_ResourceManager)
+      Catch
+      End Try
+    End Sub
+  End Class
+End Namespace</pre></div></body></html>

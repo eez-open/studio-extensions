@@ -1,0 +1,19 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Reading Definite-Length Block Query Response Data</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="programming.htm" title="Programming the Oscilloscope"><link rel="prev" href="read_numeric_results.htm" title="Reading Query Results into Numeric Variables"><link rel="next" href="multiple_queries.htm" title="Sending Multiple Queries and Reading Results"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="programming.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Programming the Oscilloscope </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="read_definite-length_blocks"></a>Reading Definite-Length Block Query Response Data<a name="d0e2235"></a><a name="d0e2238"></a><a name="d0e2241"></a></h3></div></div></div><p>Definite-length block query response data allows any type of
+    device-dependent data to be transmitted over the system interface as a
+    series of 8-bit binary data bytes. This is particularly useful for sending
+    large quantities of data or 8-bit extended ASCII codes. The syntax is a
+    pound sign (#) followed by a non-zero digit representing the number of
+    digits in the decimal integer. After the non-zero digit is the decimal
+    integer that states the number of 8-bit data bytes being sent. This is
+    followed by the actual data.</p><p>For example, for transmitting 1000 bytes of data, the syntax would
+    be:</p><div class="figure"><a name="d0e2248"></a><p class="title"><b>Figure&nbsp;2.&nbsp;Definite-length block response data</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/../images/block_data.png" alt="Definite-length block response data"></div></div></div><br class="figure-break"><p>The "8" states the number of digits that follow, and "00001000"
+    states the number of bytes to be transmitted.</p><p>The VISA COM library's <a name="d0e2260"></a>ReadIEEEBlock and <a name="d0e2264"></a>WriteIEEEBlock methods understand the definite-length block
+    syntax, so you can simply use variables that contain the data:</p><pre class="programlisting">' Read oscilloscope setup using ":SYSTem:SETup?" query.
+myScope.WriteString ":SYSTem:SETup?"
+Dim varQueryResult As Variant
+varQueryResult = myScope.ReadIEEEBlock(BinaryType_UI1)
+
+' Write learn string back to oscilloscope using ":SYSTem:SETup" command:
+myScope.WriteIEEEBlock ":SYSTem:SETup ", varQueryResult</pre></div></body></html>

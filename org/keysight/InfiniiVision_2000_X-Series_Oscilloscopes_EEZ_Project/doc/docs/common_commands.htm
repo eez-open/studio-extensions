@@ -1,0 +1,99 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Common (*) Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="block_data.htm" title="Definite-Length Block Response Data"><link rel="next" href="_cls.htm" title="*CLS (Clear Status)"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="common_commands"></a>Common (*) Commands<a name="d0e9804"></a></h2></div></div></div><p>Commands defined by IEEE 488.2 standard that are common to all
+  instruments. See <a href="common_commands.htm#common_commands_overview">Introduction to Common (*)
+  Commands</a>.</p><div class="table"><a name="d0e9811"></a><p class="title"><b>Common (*) Commands Summary:</b></p><div class="table-contents"><table summary="Common (*) Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_cls.htm#_cls_command" title="Command Syntax">*CLS</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_ese.htm#_ese_command" title="Command Syntax">*ESE
+        &lt;mask&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_ese.htm#_ese_query" title="Query Syntax">*ESE?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;mask&gt; ::= 0 to 255; an integer in NR1
+        format:</code></strong></p><pre class="synopsis">Bit Weight Name Enables
+--- ------ ---- ----------
+ 7    128  PON  Power On
+ 6     64  URQ  User Request
+ 5     32  CME  Command Error
+ 4     16  EXE  Execution Error
+ 3      8  DDE  Dev. Dependent Error
+ 2      4  QYE  Query Error
+ 1      2  RQL  Request Control
+ 0      1  OPC  Operation Complete</pre></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_esr.htm#_esr_query" title="Query Syntax">*ESR?</a></code></strong></td><td><strong class="userinput"><code>&lt;status&gt; ::= 0 to 255; an integer in NR1
+        format</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_esr.htm#_esr_query" title="Query Syntax">*IDN?</a></code></strong></td><td><p><strong class="userinput"><code>AGILENT TECHNOLOGIES,&lt;model&gt;,&lt;serial
+        number&gt;,X.XX.XX</code></strong></p><p><strong class="userinput"><code>&lt;model&gt;
+        ::= the model number of the
+        instrument</code></strong></p><p><strong class="userinput"><code>&lt;serial number&gt;
+        ::= the serial number of the
+        instrument</code></strong></p><p><strong class="userinput"><code>&lt;X.XX.XX&gt; ::= the
+        software revision of the instrument</code></strong></p></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_lrn.htm#_lrn_query" title="Query Syntax">*LRN?</a></code></strong></td><td><strong class="userinput"><code>&lt;learn_string&gt; ::= current instrument setup as
+        a block of data in IEEE 488.2 # format</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_opc.htm#_opc_command" title="Command Syntax">*OPC</a></code></strong></td><td><strong class="userinput"><code><a href="_opc.htm#_opc_query" title="Query Syntax">*OPC?</a></code></strong></td><td><strong class="userinput"><code>ASCII "1" is placed in the output queue when all
+        pending device operations have completed.</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_opt.htm#_opt_query" title="Query Syntax">*OPT?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;return_value&gt; ::= 0,0,&lt;license
+        info&gt;</code></strong></p><p><strong class="userinput"><code>&lt;license info&gt; ::=
+        &lt;All&nbsp;field&gt;, &lt;reserved&gt;, &lt;MSO&gt;,
+        &lt;reserved&gt;, &lt;reserved&gt;, &lt;reserved&gt;,
+        &lt;reserved&gt;, &lt;reserved&gt;, &lt;reserved&gt;,
+        &lt;Power&nbsp;Measurements&gt;, &lt;reserved&gt;,
+        &lt;Segmented&nbsp;Memory&gt;, &lt;Mask&nbsp;Test&gt;,
+        &lt;reserved&gt;, &lt;Bandwidth&gt;, &lt;reserved&gt;,
+        &lt;reserved&gt;, &lt;reserved&gt;, &lt;reserved&gt;,
+        &lt;reserved&gt;, &lt;reserved&gt;, &lt;Waveform&nbsp;Generator&gt;,
+        &lt;reserved&gt;,
+        &lt;reserved&gt;</code></strong></p><p><strong class="userinput"><code>&lt;All&nbsp;field&gt;
+        ::= {0 | All}</code></strong></p><p><strong class="userinput"><code>&lt;reserved&gt; ::=
+        0</code></strong></p><p><strong class="userinput"><code>&lt;MSO&gt; ::= {0 |
+        MSO}</code></strong></p><p><strong class="userinput"><code>&lt;Power&nbsp;Measurements&gt;
+        ::= {0 |
+        PWR}</code></strong></p><p><strong class="userinput"><code>&lt;Segmented&nbsp;Memory&gt;
+        ::= {0 |
+        SGM}</code></strong></p><p><strong class="userinput"><code>&lt;Mask&nbsp;Test&gt; ::= {0
+        | MASK}</code></strong></p><p><strong class="userinput"><code>&lt;Bandwidth&gt; ::= {0 |
+        BW10 |
+        BW20}</code></strong></p><p><strong class="userinput"><code>&lt;Waveform&nbsp;Generator&gt;
+        ::= {0 | WAVEGEN}</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_rcl.htm#_rcl_command" title="Command Syntax">*RCL
+        &lt;value&gt;</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>&lt;value&gt; ::= {0 | 1 | 4 | 5 | 6 | 7 | 8 |
+        9}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_rst.htm#_rst_command" title="Command Syntax">*RST</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>See <a href="_rst.htm" title="*RST (Reset)">*RST
+        (Reset)</a></code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_sav.htm#_sav_command" title="Command Syntax">*SAV
+        &lt;value&gt;</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>&lt;value&gt; ::= {0 | 1 | 4 | 5 | 6 | 7 | 8 |
+        9}</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_sre.htm#_sre_command" title="Command Syntax">*SRE
+        &lt;mask&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_sre.htm#_sre_query" title="Query Syntax">*SRE?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;mask&gt; ::= sum of all bits that are set,
+        0 to 255; an integer in NR1 format. &lt;mask&gt; ::= following
+        values:</code></strong></p><pre class="synopsis">Bit Weight Name Enables
+--- ------ ---- ----------
+ 7    128  OPER Operation Status Reg
+ 6     64  ---- (Not used.)
+ 5     32  ESB  Event Status Bit
+ 4     16  MAV  Message Available
+ 3      8  ---- (Not used.)
+ 2      4  MSG  Message
+ 1      2  USR  User
+ 0      1  TRG  Trigger</pre></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_stb.htm#_stb_query" title="Query Syntax">*STB?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;value&gt; ::= 0 to 255; an integer in NR1
+        format, as shown in the following:</code></strong></p><pre class="synopsis">Bit Weight Name "1" Indicates
+--- ------ ---- ---------------
+ 7    128  OPER Operation status
+                condition occurred.
+ 6     64  RQS/ Instrument is
+           MSS  requesting service.
+ 5     32  ESB  Enabled event status
+                condition occurred.
+ 4     16  MAV  Message available.
+ 3      8  ---- (Not used.)
+ 2      4  MSG  Message displayed.
+ 1      2  USR  User event
+                condition occurred.
+ 0      1  TRG  A trigger occurred.</pre></td></tr><tr><td><strong class="userinput"><code><a href="_trg.htm#_trg_command" title="Command Syntax">*TRG</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td></tr><tr><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code><a href="_tst.htm#_tst_query" title="Query Syntax">*TST?</a></code></strong></td><td><strong class="userinput"><code>&lt;result&gt; ::= 0 or non-zero value; an integer
+        in NR1 format</code></strong></td></tr><tr><td><strong class="userinput"><code><a href="_wai.htm#_wai_command" title="Command Syntax">*WAI</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td></tr></tbody></table></div></div><br class="table-break"><h2><a name="common_commands_overview"></a>Introduction to Common (*)
+  Commands</h2><p><a name="d0e10047"></a><a name="d0e10050"></a><a name="d0e10053"></a><a name="d0e10056"></a>The common commands are defined by the IEEE 488.2 standard.
+  They are implemented by all instruments that comply with the IEEE 488.2
+  standard. They provide some of the basic instrument functions, such as
+  instrument identification and reset, reading the instrument setup, and
+  determining how status is read and cleared.</p><p><a name="d0e10061"></a><a name="d0e10064"></a>Common commands can be received and processed by the
+  instrument whether they are sent over the interface as separate program
+  messages or within other program messages. If an instrument subsystem has
+  been selected and a common command is received by the instrument, the
+  instrument remains in the selected subsystem. For example, if the program
+  message ":ACQuire:TYPE AVERage; *CLS; COUNt 256" is received by the
+  instrument, the instrument sets the acquire type, then clears the status
+  information and sets the average count.</p><p>In contrast, if a root level command or some other subsystem command
+  is within the program message, you must re-enter the original subsystem
+  after the command. For example, the program message ":ACQuire:TYPE AVERage;
+  :AUToscale; :ACQuire:COUNt 256" sets the acquire type, completes the
+  autoscale, then sets the acquire count. In this example, :ACQuire must be
+  sent again after the :AUToscale command in order to re-enter the ACQuire
+  subsystem and set the count.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>Each of the status registers has an enable (mask) register. By
+    setting the bits in the enable register, you can select the status
+    information you want to use.</p></td></tr></table></div></div></body></html>

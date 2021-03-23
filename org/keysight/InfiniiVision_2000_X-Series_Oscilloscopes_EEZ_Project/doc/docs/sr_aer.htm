@@ -1,0 +1,10 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Arm Event Register (AER)</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Status.htm" title="Status Reporting"><link rel="prev" href="sr_operation_status_condition.htm" title="Operation Status Condition Register&#xA;  (:OPERegister:CONDition)"><link rel="next" href="sr_overload_event.htm" title="Overload Event Register (:OVLRegister)"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Status.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Status Reporting </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sr_aer"></a>Arm Event Register (AER)<a name="d0e51526"></a><a name="d0e51529"></a></h2></div></div></div><p>This register sets bit 5 (Wait Trig bit) in the Operation Status
+    Register and the OPER bit (bit 7) in the Status Byte Register when the
+    instrument becomes armed.</p><p>The ARM event register stays set until it is cleared by reading the
+    register with the AER? query or using the *CLS command. If your
+    application needs to detect multiple triggers, the ARM event register must
+    be cleared after each one.</p><p>If you are using the Service Request to interrupt a program or
+    controller operation when the trigger bit is set, then you must clear the
+    event register after each time it has been set.</p></div></body></html>

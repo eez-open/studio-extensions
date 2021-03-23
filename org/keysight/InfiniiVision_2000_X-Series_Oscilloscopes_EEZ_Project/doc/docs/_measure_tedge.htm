@@ -1,0 +1,65 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:MEASure:TEDGe</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="measure_commands.htm" title=":MEASure Commands"><link rel="prev" href="_measure_source.htm" title=":MEASure:SOURce"><link rel="next" href="_measure_tvalue.htm" title=":MEASure:TVALue"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="measure_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:MEASure Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="refentry" lang="en"><a name="_measure_tedge"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>:MEASure:TEDGe — <a href="non-core_commands.htm" title="Non-Core&#xA;    Commands"><img src="images/../images/non_core.gif"></a></p></div><div class="refsection" lang="en"><a name="_measure_tedge_query"></a><h2>Query Syntax</h2><pre class="synopsis">:MEASure:TEDGe? &lt;slope&gt;&lt;occurrence&gt;[,&lt;source&gt;]</pre><pre class="synopsis">&lt;slope&gt; ::= direction of the waveform. A rising slope is indicated by a
+            space or plus sign (+). A falling edge is indicated by a
+            minus sign (-).</pre><pre class="synopsis">&lt;occurrence&gt; ::= the transition to be reported. If the occurrence number
+                 is one, the first crossing from the left screen edge is
+                 reported.  If the number is two, the second crossing is
+                 reported, etc.</pre><pre class="synopsis">&lt;source&gt; ::= {&lt;digital channels&gt; | CHANnel&lt;n&gt; | FUNCtion | MATH
+             | WMEMory&lt;r&gt;}</pre><pre class="synopsis">&lt;digital channels&gt; ::= DIGital&lt;d&gt; for the MSO models</pre><pre class="synopsis">&lt;n&gt; ::= 1 to (# of analog channels) in NR1 format</pre><pre class="synopsis">&lt;r&gt; ::= 1-2 in NR1 format</pre><pre class="synopsis">&lt;d&gt; ::= 0 to (# digital channels - 1) in NR1 format</pre><p><a name="d0e26420"></a><a name="d0e26423"></a><a name="d0e26426"></a><a name="d0e26429"></a><a name="d0e26432"></a><a name="d0e26435"></a>When the :MEASure:TEDGe query is sent, the displayed signal
+    is searched for the specified transition. The time interval between the
+    trigger event and this occurrence is returned as the response to the
+    query. The sign of the slope selects a rising (+) or falling (-) edge. If
+    no sign is specified for the slope, it is assumed to be the rising
+    edge.</p><p>The magnitude of occurrence defines the occurrence to be reported.
+    For example, +3 returns the time for the third time the waveform crosses
+    the midpoint threshold in the positive direction. Once this crossing is
+    found, the oscilloscope reports the time at that crossing in seconds, with
+    the trigger point (time zero) as the reference.</p><p>If the specified crossing cannot be found, the oscilloscope reports
+    +9.9E+37. This value is returned if the waveform does not cross the
+    specified vertical value, or if the waveform does not cross the specified
+    vertical value for the specific number of times in the direction
+    specified.</p><p>You can make delay and phase measurements using the MEASure:TEDGe
+    command:</p><div class="blockquote"><blockquote class="blockquote"><p>Delay = time at the nth rising or falling edge of the channel -
+      time at the same edge of another channel</p><p>Phase = (delay between channels / period of channel) x 360</p></blockquote></div><p>For an example of making a delay and phase measurement, see <a href="_measure_tedge.htm#measure_tedge_code" title=":MEASure:TEDGe Code">:MEASure:TEDGe Code</a>.</p><p>If the optional source parameter is specified, the current source is
+    modified.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>This query is not available if the source is FFT (Fast Fourier
+      Transform).</p></td></tr></table></div></div><div class="refsection" lang="en"><a name="d0e26459"></a><h2>Return Format</h2><pre class="synopsis">&lt;value&gt;&lt;NL&gt;</pre><pre class="synopsis">&lt;value&gt; ::= time in seconds of the specified transition in NR3 format</pre></div><div class="refsection" lang="en"><a name="measure_tedge_code"></a><h2>:MEASure:TEDGe Code<a name="d0e26469"></a><a name="d0e26472"></a></h2><pre class="programlisting">   ' Make a delay measurement between channel 1 and 2.
+   Dim dblChan1Edge1 As Double
+   Dim dblChan2Edge1 As Double
+   Dim dblChan1Edge2 As Double
+   Dim dblDelay As Double
+   Dim dblPeriod As Double
+   Dim dblPhase As Double
+
+   ' Query time at 1st rising edge on ch1.
+   myScope.WriteString ":MEASURE:TEDGE? +1, CHAN1"
+
+   ' Read time at edge 1 on ch 1.
+   dblChan1Edge1 = myScope.ReadNumber
+
+   ' Query time at 1st rising edge on ch2.
+   myScope.WriteString ":MEASURE:TEDGE? +1, CHAN2"
+
+   ' Read time at edge 1 on ch 2.
+   dblChan2Edge1 = myScope.ReadNumber
+
+   ' Calculate delay time between ch1 and ch2.
+   dblDelay = dblChan2Edge1 - dblChan1Edge1
+
+   ' Write calculated delay time to screen.
+   MsgBox "Delay = " + vbCrLf + CStr(dblDelay)
+
+   ' Make a phase difference measurement between channel 1 and 2.
+   ' Query time at 1st rising edge on ch1.
+   myScope.WriteString ":MEASURE:TEDGE? +2, CHAN1"
+
+   ' Read time at edge 2 on ch 1.
+   dblChan1Edge2 = myScope.ReadNumber
+
+   ' Calculate period of ch 1.
+   dblPeriod = dblChan1Edge2 - dblChan1Edge1
+
+   ' Calculate phase difference between ch1 and ch2.
+   dblPhase = (dblDelay / dblPeriod) * 360
+   MsgBox "Phase = " + vbCrLf + CStr(dblPhase)</pre><p>See complete example programs at: <a href="Examples.htm" title="Programming Examples"><i>Programming Examples</i></a></p></div><div class="refsection" lang="en"><a name="d0e26480"></a><h2>See Also</h2><div class="itemizedlist"><ul type="disc"><li><p><a href="measure_commands.htm#measure_commands_overview">Introduction to :MEASure
+  Commands</a></p></li><li><p><a href="_measure_tvalue.htm" title=":MEASure:TVALue">:MEASure:TVALue</a></p></li><li><p><a href="_measure_vtime.htm" title=":MEASure:VTIMe">:MEASure:VTIMe</a></p></li></ul></div></div></div></body></html>

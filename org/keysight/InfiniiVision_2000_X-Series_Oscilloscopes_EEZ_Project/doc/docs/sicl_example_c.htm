@@ -1,0 +1,493 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>SICL Example in C</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="sicl_examples.htm" title="SICL Examples"><link rel="prev" href="sicl_examples.htm" title="SICL Examples"><link rel="next" href="sicl_example_vb.htm" title="SICL Example in Visual Basic"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="sicl_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>SICL Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sicl_example_c"></a>SICL Example in C<a name="d0e53047"></a><a name="d0e53050"></a><a name="d0e53053"></a></h3></div></div></div><p>To compile and run this example in Microsoft Visual Studio
+      2008:</p><div class="orderedlist"><ol type="1"><li><p>Open Visual Studio.</p></li><li><p>Create a new Visual C++, Win32, Win32 Console Application
+          project.</p></li><li><p>In the Win32 Application Wizard, click
+          <span class="guibutton">Next&nbsp;&gt;</span>. Then, check <span class="guilabel">Empty
+          project</span>, and click <span class="guibutton">Finish</span>.</p></li><li><p>Cut-and-paste the code that follows into a file named
+          "example.c" in the project directory.</p></li><li><p>In Visual Studio 2008, right-click the Source Files folder,
+          choose <span class="guimenuitem">Add &gt; Add Existing Item...</span>,
+          select the example.c file, and click
+          <span class="guibutton">Add</span>.</p></li><li><p>Edit the program to use the SICL address of your
+          oscilloscope.</p></li><li><p>Choose <span class="guimenuitem">Project &gt; Properties...</span>.
+          In the Property Pages dialog, update these project settings:</p><div class="orderedlist"><ol type="a"><li><p>Under Configuration Properties, Linker, Input, add
+              "sicl32.lib" to the Additional Dependencies field.</p></li><li><p>Under Configuration Properties, C/C++, Code Generation,
+              select Multi-threaded DLL for the Runtime Library field.</p></li><li><p>Click <span class="guibutton">OK</span> to close the Property
+              Pages dialog.</p></li></ol></div></li><li><p>Add the include files and library files search paths:</p><div class="orderedlist"><ol type="a"><li><p>Choose <span class="guimenuitem">Tools &gt;
+              Options...</span>.</p></li><li><p>In the Options dialog, select <span class="guilabel">VC++
+              Directories</span> under Projects and Solutions.</p></li><li><p>Show directories for <span class="guimenuitem">Include
+              files</span>, and add the include directory (for example,
+              Program Files\Agilent\ IO Libraries Suite\include).</p></li><li><p>Show directories for <span class="guimenuitem">Library
+              files</span>, and add the library files directory (for
+              example, Program Files\Agilent\IO Libraries Suite\lib).</p></li><li><p>Click <span class="guibutton">OK</span> to close the Options
+              dialog.</p></li></ol></div></li><li><p>Build and run the program.</p></li></ol></div><pre class="programlisting">/*
+ * Agilent SICL Example in C
+ * ------------------------------------------------------------------
+ * This program illustrates a few commonly-used programming
+ * features of your Agilent oscilloscope.
+ */
+
+#include &lt;stdio.h&gt;            /* For printf(). */
+#include &lt;string.h&gt;           /* For strcpy(), strcat(). */
+#include &lt;time.h&gt;             /* For clock(). */
+#include &lt;sicl.h&gt;             /* Agilent SICL routines. */
+
+#define SICL_ADDRESS      "usb0[2391::6054::US50210029::0]"
+#define TIMEOUT           5000
+#define IEEEBLOCK_SPACE   100000
+
+/* Function prototypes */
+void initialize(void);          /* Initialize to known state. */
+void capture(void);             /* Capture the waveform. */
+void analyze(void);             /* Analyze the captured waveform. */
+
+void do_command(char *command);        /* Send command. */
+int do_command_ieeeblock(char *command); /* Command w/IEEE block. */
+void do_query_string(char *query);     /* Query for string. */
+void do_query_number(char *query);     /* Query for number. */
+void do_query_numbers(char *query);    /* Query for numbers. */
+int do_query_ieeeblock(char *query);   /* Query for IEEE block. */
+void check_instrument_errors();        /* Check for inst errors. */
+
+/* Global variables */
+INST id;                        /* Device session ID. */
+char str_result[256] = {0};     /* Result from do_query_string(). */
+double num_result;              /* Result from do_query_number(). */
+unsigned char ieeeblock_data[IEEEBLOCK_SPACE];   /* Result from
+                                   do_query_ieeeblock(). */
+double dbl_results[10];         /* Result from do_query_numbers(). */
+
+/* Main Program
+ * --------------------------------------------------------------- */
+void main(void)
+{
+  /* Install a default SICL error handler that logs an error message
+   * and exits.  On Windows 98SE or Windows Me, view messages with
+   * the SICL Message Viewer.  For Windows 2000 or XP, use the Event
+   * Viewer.
+   */
+  ionerror(I_ERROR_EXIT);
+   
+  /* Open a device session using the SICL_ADDRESS */
+  id = iopen(SICL_ADDRESS);
+
+  if (id == 0)
+  {
+    printf ("Oscilloscope iopen failed!\n");
+  }
+  else
+  {
+    printf ("Oscilloscope session opened!\n");
+  }
+
+  /* Initialize - start from a known state. */
+  initialize();
+
+  /* Capture data. */
+  capture();
+
+  /* Analyze the captured waveform. */
+  analyze();
+
+  /* Close the device session to the instrument. */
+  iclose(id);
+  printf ("Program execution is complete...\n");
+
+  /* For WIN16 programs, call _siclcleanup before exiting to release 
+   * resources allocated by SICL for this application.  This call is
+   * a no-op for WIN32 programs.
+   */
+  _siclcleanup();
+}
+
+/* Initialize the oscilloscope to a known state.
+ * --------------------------------------------------------------- */
+void initialize (void)
+{
+  /* Set the I/O timeout value for this session to 5 seconds. */
+  itimeout(id, TIMEOUT);
+   
+  /* Clear the interface. */
+  iclear(id);
+
+  /* Get and display the device's *IDN? string. */
+  do_query_string("*IDN?");
+  printf("Oscilloscope *IDN? string: %s\n", str_result);
+
+  /* Clear status and load the default setup. */
+  do_command("*CLS");
+  do_command("*RST");
+}
+
+/* Capture the waveform.
+ * --------------------------------------------------------------- */
+void capture (void)
+{
+  int num_bytes;
+  FILE *fp;
+
+  /* Use auto-scale to automatically configure oscilloscope.
+   * ------------------------------------------------------------- */
+  do_command(":AUToscale");
+
+  /* Set trigger mode (EDGE, PULSe, PATTern, etc., and input source. */
+  do_command(":TRIGger:MODE EDGE");
+  do_query_string(":TRIGger:MODE?");
+  printf("Trigger mode: %s\n", str_result);
+
+  /* Set EDGE trigger parameters. */
+  do_command(":TRIGger:EDGE:SOURCe CHANnel1");
+  do_query_string(":TRIGger:EDGE:SOURce?");
+  printf("Trigger edge source: %s\n", str_result);
+
+  do_command(":TRIGger:EDGE:LEVel 1.5");
+  do_query_string(":TRIGger:EDGE:LEVel?");
+  printf("Trigger edge level: %s\n", str_result);
+
+  do_command(":TRIGger:EDGE:SLOPe POSitive");
+  do_query_string(":TRIGger:EDGE:SLOPe?");
+  printf("Trigger edge slope: %s\n", str_result);
+
+  /* Save oscilloscope configuration.
+   * ------------------------------------------------------------- */
+
+  /* Read system setup. */
+  num_bytes = do_query_ieeeblock(":SYSTem:SETup?");
+  printf("Read setup string query (%d bytes).\n", num_bytes);
+
+  /* Write setup string to file. */
+  fp = fopen ("c:\\scope\\config\\setup.stp", "wb");
+  num_bytes = fwrite(ieeeblock_data, sizeof(unsigned char), num_bytes,
+    fp);
+  fclose (fp);
+  printf("Wrote setup string (%d bytes) to ", num_bytes);
+  printf("c:\\scope\\config\\setup.stp.\n");
+
+  /* Change settings with individual commands:
+   * ------------------------------------------------------------- */
+  
+  /* Set vertical scale and offset. */
+  do_command(":CHANnel1:SCALe 0.05");
+  do_query_string(":CHANnel1:SCALe?");
+  printf("Channel 1 vertical scale: %s\n", str_result);
+
+  do_command(":CHANnel1:OFFSet -1.5");
+  do_query_string(":CHANnel1:OFFSet?");
+  printf("Channel 1 offset: %s\n", str_result);
+
+  /* Set horizontal scale and position. */
+  do_command(":TIMebase:SCALe 0.0002");
+  do_query_string(":TIMebase:SCALe?");
+  printf("Timebase scale: %s\n", str_result);
+
+  do_command(":TIMebase:POSition 0.0");
+  do_query_string(":TIMebase:POSition?");
+  printf("Timebase position: %s\n", str_result);
+
+  /* Set the acquisition type (NORMal, PEAK, AVERage, or HRESolution). */
+  do_command(":ACQuire:TYPE NORMal");
+  do_query_string(":ACQuire:TYPE?");
+  printf("Acquire type: %s\n", str_result);
+
+  /* Or, configure by loading a previously saved setup.
+  * ------------------------------------------------------------- */
+
+  /* Read setup string from file. */
+  fp = fopen ("c:\\scope\\config\\setup.stp", "rb");
+  num_bytes = fread (ieeeblock_data, sizeof(unsigned char),
+    IEEEBLOCK_SPACE, fp);
+  fclose (fp);
+  printf("Read setup string (%d bytes) from file ", num_bytes);
+  printf("c:\\scope\\config\\setup.stp.\n");
+
+  /* Restore setup string. */
+  num_bytes = do_command_ieeeblock(":SYSTem:SETup", num_bytes);
+  printf("Restored setup string (%d bytes).\n", num_bytes);
+
+  /* Capture an acquisition using :DIGitize.
+   * ------------------------------------------------------------- */
+  do_command(":DIGitize CHANnel1");
+}
+
+/* Analyze the captured waveform.
+ * --------------------------------------------------------------- */
+void analyze (void)
+{
+  double wav_format;
+  double acq_type;
+  double wav_points;
+  double avg_count;
+  double x_increment;
+  double x_origin;
+  double x_reference;
+  double y_increment;
+  double y_origin;
+  double y_reference;
+
+  FILE *fp;
+  int num_bytes;   /* Number of bytes returned from instrument. */
+  int i;
+
+  /* Make a couple of measurements.
+   * ------------------------------------------------------------- */
+  do_command(":MEASure:SOURce CHANnel1");
+  do_query_string(":MEASure:SOURce?");
+  printf("Measure source: %s\n", str_result);
+
+  do_command(":MEASure:FREQuency");
+  do_query_number(":MEASure:FREQuency?");
+  printf("Frequency: %.4f kHz\n", num_result / 1000);
+
+  do_command(":MEASure:VAMPlitude");
+  do_query_number(":MEASure:VAMPlitude?");
+  printf("Vertical amplitude: %.2f V\n", num_result);
+
+  /* Download the screen image.
+   * ------------------------------------------------------------- */
+  do_command(":HARDcopy:INKSaver OFF");
+
+  /* Read screen image. */
+  num_bytes = do_query_ieeeblock(":DISPlay:DATA? PNG, COLor");
+  printf("Screen image bytes: %d\n", num_bytes);
+
+  /* Write screen image bytes to file. */
+  fp = fopen ("c:\\scope\\data\\screen.png", "wb");
+  num_bytes = fwrite(ieeeblock_data, sizeof(unsigned char), num_bytes,
+    fp);
+  fclose (fp);
+  printf("Wrote screen image (%d bytes) to ", num_bytes);
+  printf("c:\\scope\\data\\screen.png.\n");
+
+  /* Download waveform data.
+   * ------------------------------------------------------------- */
+
+  /* Set the waveform points mode. */
+  do_command(":WAVeform:POINts:MODE RAW");
+  do_query_string(":WAVeform:POINts:MODE?");
+  printf("Waveform points mode: %s\n", str_result);
+
+  /* Get the number of waveform points available. */
+  do_command(":WAVeform:POINts 10240");
+  do_query_string(":WAVeform:POINts?");
+  printf("Waveform points available: %s\n", str_result);
+
+  /* Set the waveform source. */
+  do_command(":WAVeform:SOURce CHANnel1");
+  do_query_string(":WAVeform:SOURce?");
+  printf("Waveform source: %s\n", str_result);
+
+  /* Choose the format of the data returned (WORD, BYTE, ASCII): */
+  do_command(":WAVeform:FORMat BYTE");
+  do_query_string(":WAVeform:FORMat?");
+  printf("Waveform format: %s\n", str_result);
+
+  /* Display the waveform settings: */
+  do_query_numbers(":WAVeform:PREamble?");
+
+  wav_format = dbl_results[0];
+  if (wav_format == 0.0)
+  {
+    printf("Waveform format: BYTE\n");
+  }
+  else if (wav_format == 1.0)
+  {
+    printf("Waveform format: WORD\n");
+  }
+  else if (wav_format == 2.0)
+  {
+    printf("Waveform format: ASCii\n");
+  }
+
+  acq_type = dbl_results[1];
+  if (acq_type == 0.0)
+  {
+    printf("Acquire type: NORMal\n");
+  }
+  else if (acq_type == 1.0)
+  {
+    printf("Acquire type: PEAK\n");
+  }
+  else if (acq_type == 2.0)
+  {
+    printf("Acquire type: AVERage\n");
+  }
+  else if (acq_type == 3.0)
+  {
+    printf("Acquire type: HRESolution\n");
+  }
+
+  wav_points = dbl_results[2];
+  printf("Waveform points: %e\n", wav_points);
+
+  avg_count = dbl_results[3];
+  printf("Waveform average count: %e\n", avg_count);
+
+  x_increment = dbl_results[4];
+  printf("Waveform X increment: %e\n", x_increment);
+
+  x_origin = dbl_results[5];
+  printf("Waveform X origin: %e\n", x_origin);
+
+  x_reference = dbl_results[6];
+  printf("Waveform X reference: %e\n", x_reference);
+
+  y_increment = dbl_results[7];
+  printf("Waveform Y increment: %e\n", y_increment);
+
+  y_origin = dbl_results[8];
+  printf("Waveform Y origin: %e\n", y_origin);
+
+  y_reference = dbl_results[9];
+  printf("Waveform Y reference: %e\n", y_reference);
+
+  /* Read waveform data. */
+  num_bytes = do_query_ieeeblock(":WAVeform:DATA?");
+  printf("Number of data values: %d\n", num_bytes);
+
+  /* Open file for output. */
+  fp = fopen("c:\\scope\\data\\waveform_data.csv", "wb");
+
+  /* Output waveform data in CSV format. */
+  for (i = 0; i &lt; num_bytes - 1; i++)
+  {
+    /* Write time value, voltage value. */
+    fprintf(fp, "%9f, %6f\n",
+      x_origin + ((float)i * x_increment),
+      (((float)ieeeblock_data[i] - y_reference) * y_increment)
+      + y_origin);
+  }
+
+  /* Close output file. */
+   fclose(fp);
+   printf("Waveform format BYTE data written to ");
+   printf("c:\\scope\\data\\waveform_data.csv.\n");
+}
+
+/* Send a command to the instrument.
+ * --------------------------------------------------------------- */
+void do_command(command)
+char *command;
+{
+  char message[80];
+
+  strcpy(message, command);
+  strcat(message, "\n");
+  iprintf(id, message);
+
+  check_instrument_errors();
+}
+
+/* Command with IEEE definite-length block.
+ * --------------------------------------------------------------- */
+int do_command_ieeeblock(command, num_bytes)
+char *command;
+int num_bytes;
+{
+  char message[80];
+  int data_length;
+
+  strcpy(message, command);
+  strcat(message, " #8%08d");
+  iprintf(id, message, num_bytes);
+  ifwrite(id, ieeeblock_data, num_bytes, 1, &amp;data_length);
+
+  check_instrument_errors();
+
+  return(data_length);
+}
+
+/* Query for a string result.
+ * --------------------------------------------------------------- */
+void do_query_string(query)
+char *query;
+{
+  char message[80];
+
+  strcpy(message, query);
+  strcat(message, "\n");
+  iprintf(id, message);
+
+  iscanf(id, "%t\n", str_result);
+
+  check_instrument_errors();
+}
+
+/* Query for a number result.
+ * --------------------------------------------------------------- */
+void do_query_number(query)
+char *query;
+{
+  char message[80];
+
+  strcpy(message, query);
+  strcat(message, "\n");
+  iprintf(id, message);
+
+  iscanf(id, "%lf", &amp;num_result);
+
+  check_instrument_errors();
+}
+
+/* Query for numbers result.
+ * --------------------------------------------------------------- */
+void do_query_numbers(query)
+char *query;
+{
+  char message[80];
+
+  strcpy(message, query);
+  strcat(message, "\n");
+  iprintf(id, message);
+
+  iscanf(id, "%,10lf\n", dbl_results);
+
+  check_instrument_errors();
+}
+
+/* Query for an IEEE definite-length block result.
+ * --------------------------------------------------------------- */
+int do_query_ieeeblock(query)
+char *query;
+{
+  char message[80];
+  int data_length;
+
+  strcpy(message, query);
+  strcat(message, "\n");
+  iprintf(id, message);
+
+  data_length = IEEEBLOCK_SPACE;
+  iscanf(id, "%#b", &amp;data_length, ieeeblock_data);
+
+  if (data_length == IEEEBLOCK_SPACE )
+  {
+    printf("IEEE block buffer full: ");
+    printf("May not have received all data.\n");
+  }
+
+  check_instrument_errors();
+
+  return(data_length);
+}
+
+/* Check for instrument errors.
+ * --------------------------------------------------------------- */
+void check_instrument_errors()
+{
+  char str_err_val[256] = {0};
+  char str_out[800] = "";
+
+  ipromptf(id, ":SYSTem:ERRor?\n", "%t", str_err_val);
+  while(strncmp(str_err_val, "+0,No error", 3) != 0 )
+  {
+    strcat(str_out, ", ");
+    strcat(str_out, str_err_val);
+    ipromptf(id, ":SYSTem:ERRor?\n", "%t", str_err_val);
+  }
+
+  if (strcmp(str_out, "") != 0)
+  {
+    printf("INST Error%s\n", str_out);
+    iflush(id, I_BUF_READ | I_BUF_WRITE);
+  }
+}</pre></div></body></html>

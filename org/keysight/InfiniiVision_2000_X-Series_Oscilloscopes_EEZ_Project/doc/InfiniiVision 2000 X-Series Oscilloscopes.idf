@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScpiConfigurations name="InfiniiVision 2000 X-Series Oscilloscopes" description="InfiniiVision 2000 X-Series Oscilloscopes" firmwareVersion="02.35" supportedModels="MSO-X 2002A, MSO-X 2004A, MSO-X 2012A, MSO-X 2014A, MSO-X 2022A, MSO-X 2024A &#xD;&#xA; DSO-X 2002A, DSO-X 2004A, DSO-X 2012A, DSO-X 2014A, DSO-X 2022A, DSO-X 2024A" guid="9cb8dbcf-4905-449a-9b98-da723e275b11" shortName="InfiniiVision2000X" revisionNumber="1" revisionComment="Initial release for Command Expert." schemaVersion="2.1" sdlSchemaVersion="1.2" xmlns="http://www.Agilent.com/schemas/SCD/2008">
+	<ErrorHandling>
+		<ErrorQuery command=":SYST:ERR?" />
+	</ErrorHandling>
+	<File type="sdl" name="2000.sdl" hash="6D10BB8D3EF78DF848ADDFB9B03262F9" />
+	<File type="documentation" name="docs.zip" hash="" />
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+			<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+			<Reference URI="">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+				<DigestValue>edO0VxBqdm4RheVdVnemuQBWJV0=</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>WCEx/ZLq1ya2KQwEwacgq/g/WWQVTR/MWm+a9Z8vL3zL9Pl6Eg00GibZRWEdSVYg73a0pgL5u4uk0zfqBEQW7EoJTA15pbxpbhnO3tI0UVx021yhlXErGng9i7gt7dfpJ2HIVtbLfk7CrNjf0tNWIBy3rRhyWdyd60hxr4jzTj6RcF2stv1fsMBO2YY142BDUgZBrzh+XBqjRUDSMj18nxWBtZfRsNoBiXk7rZHT4ptqJTd7AyTC8tfyI4p2woRtUq++oYOIK9YYtk2YVR+tFhIfqdHIIFSxz01BFn3Ff4HP4m5PuaKX3QW3jjspNGl2FiyS/RjNZ1dZiFIpdBVqxw==</SignatureValue>
+		<KeyInfo>
+			<X509Data>
+				<X509Certificate>MIIFijCCBHKgAwIBAgIQeywH9czu0mbNbF4nC1HJ9TANBgkqhkiG9w0BAQUFADCBtDELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQLExZWZXJpU2lnbiBUcnVzdCBOZXR3b3JrMTswOQYDVQQLEzJUZXJtcyBvZiB1c2UgYXQgaHR0cHM6Ly93d3cudmVyaXNpZ24uY29tL3JwYSAoYykxMDEuMCwGA1UEAxMlVmVyaVNpZ24gQ2xhc3MgMyBDb2RlIFNpZ25pbmcgMjAxMCBDQTAeFw0xMjA2MDYwMDAwMDBaFw0xNTA2MDYyMzU5NTlaMIHNMQswCQYDVQQGEwJVUzERMA8GA1UECBMIQ29sb3JhZG8xETAPBgNVBAcTCExvdmVsYW5kMSswKQYDVQQKFCJBZ2lsZW50IFRlY2hub2xvZ2llcywgSW5jb3Jwb3JhdGVkMT4wPAYDVQQLEzVEaWdpdGFsIElEIENsYXNzIDMgLSBNaWNyb3NvZnQgU29mdHdhcmUgVmFsaWRhdGlvbiB2MjErMCkGA1UEAxQiQWdpbGVudCBUZWNobm9sb2dpZXMsIEluY29ycG9yYXRlZDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAI1uRsQ1Th6akdFoG9wraBiF3tZkxbhkdTZqA4YPi0N7jJ0BJ7BPrVCDF+N/RBzMPA5IOPbPobUYu2s08CzGWPrA3MtRHa+wcWRaNhXuxOCGgR/H2AzG0BxZlND55anG0VLikgC7YH6oRcL5bl4SFyc8tepWo3GXBGTYAhtKEgsiEvsADqgYuN6rr84kI02JTy8igsEVbeYvTYLuFUNUFvdCUpZ02aa7fLBNccE5fSYp2TrFuGIKYk71tsBHbvrWpEMFeXzb+sS8KrJ7CEMY/fh/8ES84n5Xgka1YdVJesAe093ZpP8o64zWEU9mXAckQROuqPMo8ZM07YdwjqWoK1UCAwEAAaOCAXswggF3MAkGA1UdEwQCMAAwDgYDVR0PAQH/BAQDAgeAMEAGA1UdHwQ5MDcwNaAzoDGGL2h0dHA6Ly9jc2MzLTIwMTAtY3JsLnZlcmlzaWduLmNvbS9DU0MzLTIwMTAuY3JsMEQGA1UdIAQ9MDswOQYLYIZIAYb4RQEHFwMwKjAoBggrBgEFBQcCARYcaHR0cHM6Ly93d3cudmVyaXNpZ24uY29tL3JwYTATBgNVHSUEDDAKBggrBgEFBQcDAzBxBggrBgEFBQcBAQRlMGMwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLnZlcmlzaWduLmNvbTA7BggrBgEFBQcwAoYvaHR0cDovL2NzYzMtMjAxMC1haWEudmVyaXNpZ24uY29tL0NTQzMtMjAxMC5jZXIwHwYDVR0jBBgwFoAUz5mp6nsm9EvJjo/X8AUm7+PSp50wEQYJYIZIAYb4QgEBBAQDAgQQMBYGCisGAQQBgjcCARsECDAGAQEAAQH/MA0GCSqGSIb3DQEBBQUAA4IBAQACP8OPyWsaE64RRRU8oQTR8WYxPQ/YNmkiyusDvZlIb1CkOzVGM+akUfY7qqP9GaZm/uodKOg/gyhza6Yh4d8QLYo2XyiDqDtAQDD4YKERfa+wixRPhnoIoSOSkRkithdZaK7/DY9I1DaBcKLXlL745P5rGQtsrKq2+XGVxDRnPFrhHQoIzDrLtleNrz/efOuYt6DYfSgZEjZ3vw87PXBaQ7Pn0nn0ZSi0WMIToGRQPSunOotBijG7XwNHw+jRCbfkH752w+oluxh6n3L6yeLdzGLXQsISEXNlv5At9a6DbbpcAgslse2y1sXgyXrJKaoGxLr3hTTEGuQedrqgkIqv</X509Certificate>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+</ScpiConfigurations>

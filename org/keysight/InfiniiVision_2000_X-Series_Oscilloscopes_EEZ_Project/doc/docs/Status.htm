@@ -1,0 +1,28 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Status Reporting</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="error_messages.htm" title="Error Messages"><link rel="next" href="sr_data_structures.htm" title="Status Reporting Data Structures"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="Status"></a>Status Reporting<a name="d0e51108"></a><a name="d0e51111"></a></h2></div></div></div><div class="highlights"><p><a href="sr_data_structures.htm" title="Status Reporting Data Structures">Status Reporting Data Structures</a></p><p><a href="sr_stb.htm" title="Status Byte Register (STB)">Status Byte Register (STB)</a></p><p><a href="sr_sre.htm" title="Service Request Enable Register (SRE)">Service Request Enable Register (SRE)</a></p><p><a href="sr_ter.htm" title="Trigger Event Register (TER)">Trigger Event Register (TER)</a></p><p><a href="sr_output_queue.htm" title="Output Queue">Output Queue</a></p><p><a href="sr_message_queue.htm" title="Message Queue">Message Queue</a></p><p><a href="sr_esr.htm" title="(Standard) Event Status Register (ESR)">(Standard) Event Status Register (ESR)</a></p><p><a href="sr_ese.htm" title="(Standard) Event Status Enable Register (ESE)">(Standard) Event Status Enable Register (ESE)</a></p><p><a href="sr_error_queue.htm" title="Error Queue">Error Queue</a></p><p><a href="sr_operation_status_event.htm" title="Operation Status Event Register (:OPERegister[:EVENt])">Operation Status Event Register (:OPERegister[:EVENt])</a></p><p><a href="sr_operation_status_condition.htm" title="Operation Status Condition Register&#xA;  (:OPERegister:CONDition)">Operation Status Condition Register
+  (:OPERegister:CONDition)</a></p><p><a href="sr_aer.htm" title="Arm Event Register (AER)">Arm Event Register (AER)</a></p><p><a href="sr_overload_event.htm" title="Overload Event Register (:OVLRegister)">Overload Event Register (:OVLRegister)</a></p><p><a href="sr_mask_test_event_event.htm" title="Mask Test Event Event Register (:MTERegister[:EVENt])">Mask Test Event Event Register (:MTERegister[:EVENt])</a></p><p><a href="sr_clearing.htm" title="Clearing Registers and Queues">Clearing Registers and Queues</a></p><p><a href="sr_decision_chart.htm" title="Status Reporting Decision Chart">Status Reporting Decision Chart</a></p></div><p>IEEE 488.2 defines data structures, commands, and common bit
+  definitions for status reporting (for example, the Status Byte Register and
+  the Standard Event Status Register). There are also instrument-defined
+  structures and bits (for example, the Operation Status Event Register and
+  the Overload Event Register).</p><p>An overview of the oscilloscope's status reporting structure is shown
+  in the following block diagram. The status reporting structure allows
+  monitoring specified events in the oscilloscope. The ability to monitor and
+  report these events allows determination of such things as the status of an
+  operation, the availability and reliability of the measured data, and
+  more.</p><div class="mediaobject"><img src="images/../images/status_reporting_block.png"></div><div class="itemizedlist"><ul type="disc"><li><p>To monitor an event, first clear the event; then, enable the
+      event. All of the events are cleared when you initialize the
+      instrument.</p></li><li><p>To allow a service request (SRQ) interrupt to an external
+      controller, enable at least one bit in the Status Byte Register (by
+      setting, or unmasking, the bit in the Service Request Enable
+      register).</p></li></ul></div><p>The Status Byte Register, the Standard Event Status Register group,
+  and the Output Queue are defined as the Standard Status Data Structure Model
+  in IEEE 488.2-1987.</p><p>The bits in the status byte act as summary bits for the data
+  structures residing behind them. In the case of queues, the summary bit is
+  set if the queue is not empty. For registers, the summary bit is set if any
+  enabled bit in the event register is set. The events are enabled with the
+  corresponding event enable register. Events captured by an event register
+  remain set until the register is read or cleared. Registers are read with
+  their associated commands. The *CLS command clears all event registers and
+  all queues except the output queue. If you send *CLS immediately after a
+  program message terminator, the output queue is also cleared.</p></div></body></html>

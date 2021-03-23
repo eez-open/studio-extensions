@@ -1,0 +1,42 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Status Byte Register (STB)</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Status.htm" title="Status Reporting"><link rel="prev" href="sr_data_structures.htm" title="Status Reporting Data Structures"><link rel="next" href="sr_sre.htm" title="Service Request Enable Register (SRE)"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Status.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Status Reporting </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sr_stb"></a>Status Byte Register (STB)<a name="d0e51213"></a><a name="d0e51216"></a></h2></div></div></div><p>The Status Byte Register is the summary-level register in the status
+  reporting structure. It contains summary bits that monitor activity in the
+  other status registers and queues. The Status Byte Register is a live
+  register. That is, its summary bits are set and cleared by the presence and
+  absence of a summary bit from other event registers or queues.</p><p>If the Status Byte Register is to be used with the Service Request
+  Enable Register to set bit 6 (RQS/MSS) and to generate an SRQ, at least one
+  of the summary bits must be enabled, then set. Also, event bits in all other
+  status registers must be specifically enabled to generate the summary bit
+  that sets the associated summary bit in the Status Byte Register.</p><p>The Status Byte Register can be read using either the *STB? Common
+  Command or the programming interface serial poll command. Both commands
+  return the decimal-weighted sum of all set bits in the register. The
+  difference between the two methods is that the serial poll command reads bit
+  6 as the Request Service (RQS) bit and clears the bit which clears the SRQ
+  interrupt. The *STB? command reads bit 6 as the Master Summary Status (MSS)
+  and does not clear the bit or have any affect on the SRQ interrupt. The
+  value returned is the total bit weights of all of the bits that are set at
+  the present time.</p><p>The use of bit 6 can be confusing. This bit was defined to cover all
+  possible computer interfaces, including a computer that could not do a
+  serial poll. The important point to remember is that, if you are using an
+  SRQ interrupt to an external computer, the serial poll command clears bit 6.
+  Clearing bit 6 allows the oscilloscope to generate another SRQ interrupt
+  when another enabled event occurs.</p><p>No other bits in the Status Byte Register are cleared by either the
+  *STB? query or the serial poll, except the Message Available bit (bit 4). If
+  there are no other messages in the Output Queue, bit 4 (MAV) can be cleared
+  as a result of reading the response to the *STB? command.</p><p>If bit 4 (weight = 16) and bit 5 (weight = 32) are set, the program
+  prints the sum of the two weights. Since these bits were not enabled to
+  generate an SRQ, bit 6 (weight = 64) is not set.</p><p>The following example uses the *STB? query to read the contents of the
+  oscilloscope's Status Byte Register.</p><pre class="programlisting">myScope.WriteString "*STB?"
+varQueryResult = myScope.ReadNumber
+MsgBox "Status Byte Register, Read: 0x" + Hex(varQueryResult)</pre><p>The next program prints 0xD1 and clears bit 6 (RQS) and bit 4 (MAV) of
+  the Status Byte Register. The difference in the output value between this
+  example and the previous one is the value of bit 6 (weight = 64). Bit 6 is
+  set when the first enabled summary bit is set and is cleared when the Status
+  Byte Register is read by the serial poll command.</p><h3><a name="d0e51237"></a>Example</h3><p>The following example uses the resource session object's ReadSTB
+  method to read the contents of the oscilloscope's Status Byte
+  Register.</p><pre class="programlisting">varQueryResult = myScope.IO.ReadSTB
+MsgBox "Status Byte Register, Serial Poll: 0x" + Hex(varQueryResult)</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p><span class="bold"><strong>Use Serial Polling to Read Status Byte
+    Register</strong></span>. Serial polling is the preferred method to read the
+    contents of the Status Byte Register because it resets bit 6 and allows
+    the next enabled event that occurs to generate a new SRQ interrupt.</p></td></tr></table></div></div></body></html>

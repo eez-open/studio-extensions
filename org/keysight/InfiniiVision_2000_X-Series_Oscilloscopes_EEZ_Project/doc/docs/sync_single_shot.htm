@@ -1,0 +1,96 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Synchronizing with a Single-Shot Device Under Test (DUT)</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Synchronizing_Acquisitions.htm" title="Synchronizing Acquisitions"><link rel="prev" href="polling_sync.htm" title="Polling Synchronization With Timeout"><link rel="next" href="sync_averaging.htm" title="Synchronization with an Averaging Acquisition"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Synchronizing_Acquisitions.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Synchronizing Acquisitions </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sync_single_shot"></a>Synchronizing with a Single-Shot Device Under Test (DUT)<a name="d0e51837"></a></h2></div></div></div><p>The examples in <a href="blocking_sync.htm" title="Blocking Synchronization">Blocking Synchronization</a> and <a href="polling_sync.htm" title="Polling Synchronization With Timeout">Polling Synchronization With Timeout</a> assume the DUT is continually running and
+    therefore the oscilloscope will have more than one opportunity to trigger.
+    With a single shot DUT, there is only one opportunity for the oscilloscope
+    to trigger, so it is necessary for the oscilloscope to be armed and ready
+    before the DUT is enabled.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>The blocking :DIGitize command cannot be used for a single shot
+      DUT because once the :DIGitize command is issued, the oscilloscope is
+      blocked from any further commands until the acquisition is
+      complete.</p></td></tr></table></div><p>This example is the same <a href="polling_sync.htm" title="Polling Synchronization With Timeout">Polling Synchronization With Timeout</a> with the
+    addition of checking for the armed event status.</p><pre class="programlisting">'
+' Synchronizing single-shot acquisition using polling.
+' ===================================================================
+
+Option Explicit
+
+Public myMgr As VisaComLib.ResourceManager
+Public myScope As VisaComLib.FormattedIO488
+Public varQueryResult As Variant
+Public strQueryResult As String
+
+Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+Sub Main()
+
+  On Error GoTo VisaComError
+  
+  ' Create the VISA COM I/O resource.
+  Set myMgr = New VisaComLib.ResourceManager
+  Set myScope = New VisaComLib.FormattedIO488
+  Set myScope.IO = myMgr.Open("TCPIP0::130.29.69.12::inst0::INSTR")
+  myScope.IO.Clear   ' Clear the interface.
+  
+  ' Set up.
+  ' -----------------------------------------------------------------
+  ' Set up the trigger and horizontal scale.
+  myScope.WriteString ":TRIGger:MODE EDGE"
+  myScope.WriteString ":TRIGger:EDGE:LEVel 2"
+  myScope.WriteString ":TIMebase:SCALe 5e-8"
+  
+  ' Stop acquisitions and wait for the operation to complete.
+  myScope.WriteString ":STOP"
+  myScope.WriteString "*OPC?"
+  strQueryResult = myScope.ReadString
+  
+  ' Acquire.
+  ' -----------------------------------------------------------------
+  ' Start a single acquisition.
+  myScope.WriteString ":SINGle"
+
+  ' Wait until the trigger system is armed.
+  Do
+    Sleep 100   ' Small wait to prevent excessive queries.
+    myScope.WriteString ":AER?"
+    varQueryResult = myScope.ReadNumber
+  Loop Until varQueryResult = 1
+  
+  ' Oscilloscope is armed and ready, enable DUT here.
+  Debug.Print "Oscilloscope is armed and ready, enable DUT."
+  
+  ' Now, look for RUN bit = stopped (acquisition complete).
+  Dim lngTimeout As Long   ' Max millisecs to wait for single-shot.
+  Dim lngElapsed As Long
+  lngTimeout = 10000   ' 10 seconds.
+  lngElapsed = 0
+  
+  Do While lngElapsed &lt;= lngTimeout
+    myScope.WriteString ":OPERegister:CONDition?"
+    varQueryResult = myScope.ReadNumber
+    ' Mask RUN bit (bit 3, &amp;H8).
+    If (varQueryResult And &amp;H8) = 0 Then
+      Exit Do
+    Else
+      Sleep 100   ' Small wait to prevent excessive queries.
+      lngElapsed = lngElapsed + 100
+    End If
+  Loop
+
+  ' Get results.
+  ' -----------------------------------------------------------------
+  If lngElapsed &lt; lngTimeout Then
+    myScope.WriteString ":MEASure:RISetime"
+    myScope.WriteString ":MEASure:RISetime?"
+    varQueryResult = myScope.ReadNumber   ' Read risetime.
+    Debug.Print "Risetime: " + _
+        FormatNumber(varQueryResult * 1000000000, 1) + " ns"
+  Else
+    Debug.Print "Timeout waiting for single-shot trigger."
+  End If
+  
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error:" + vbCrLf + Err.Description
+
+End Sub</pre></div></body></html>

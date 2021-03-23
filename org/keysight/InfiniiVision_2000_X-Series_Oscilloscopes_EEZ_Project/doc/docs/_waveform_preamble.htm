@@ -1,0 +1,58 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:WAVeform:PREamble</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="waveform_commands.htm" title=":WAVeform Commands"><link rel="prev" href="_waveform_points_mode.htm" title=":WAVeform:POINts:MODE"><link rel="next" href="_waveform_segmented_count.htm" title=":WAVeform:SEGMented:COUNt"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="waveform_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:WAVeform Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="refentry" lang="en"><a name="_waveform_preamble"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>:WAVeform:PREamble — <a href="core_commands.htm" title="Core Commands"><img src="images/../images/core.gif"></a></p></div><div class="refsection" lang="en"><a name="_waveform_preamble_query"></a><h2>Query Syntax</h2><pre class="synopsis">:WAVeform:PREamble?</pre><p><a name="d0e43948"></a><a name="d0e43951"></a><a name="d0e43954"></a><a name="d0e43957"></a><a name="d0e43960"></a>The :WAVeform:PREamble query requests the preamble
+    information for the selected waveform source. The preamble data contains
+    information concerning the vertical and horizontal scaling of the data of
+    the corresponding channel.</p></div><div class="refsection" lang="en"><a name="d0e43964"></a><h2>Return Format</h2><pre class="synopsis">&lt;preamble_block&gt;&lt;NL&gt;</pre><pre class="synopsis">&lt;preamble_block&gt; ::= &lt;format 16-bit NR1&gt;,
+                     &lt;type 16-bit NR1&gt;,
+                     &lt;points 32-bit NR1&gt;,
+                     &lt;count 32-bit NR1&gt;,
+                     &lt;xincrement 64-bit floating point NR3&gt;,
+                     &lt;xorigin 64-bit floating point NR3&gt;,
+                     &lt;xreference 32-bit NR1&gt;,
+                     &lt;yincrement 32-bit floating point NR3&gt;,
+                     &lt;yorigin 32-bit floating point NR3&gt;,
+                     &lt;yreference 32-bit NR1&gt;</pre><pre class="synopsis">&lt;format&gt; ::= 0 for BYTE format, 1 for WORD format, 4 for ASCii format;
+             an integer in NR1 format (format set by :WAVeform:FORMat).</pre><pre class="synopsis">&lt;type&gt; ::= 2 for AVERage type, 0 for NORMal type, 1 for PEAK detect
+           type; an integer in NR1 format (type set by :ACQuire:TYPE).</pre><pre class="synopsis">&lt;count&gt; ::= Average count or 1 if PEAK or NORMal; an integer in NR1
+            format (count set by :ACQuire:COUNt).</pre><div class="mediaobject"><img src="images/../images/preamble.png"></div></div><div class="refsection" lang="en"><a name="d0e43983"></a><h2>See Also</h2><div class="itemizedlist"><ul type="disc"><li><p><a href="waveform_commands.htm#waveform_commands_overview">Introduction to :WAVeform
+  Commands</a></p></li><li><p><a href="_acquire_count.htm" title=":ACQuire:COUNt">:ACQuire:COUNt</a></p></li><li><p><a href="_acquire_points.htm" title=":ACQuire:POINts">:ACQuire:POINts</a></p></li><li><p><a href="_acquire_type.htm" title=":ACQuire:TYPE">:ACQuire:TYPE</a></p></li><li><p><a href="_digitize.htm" title=":DIGitize">:DIGitize</a></p></li><li><p><a href="_waveform_count.htm" title=":WAVeform:COUNt">:WAVeform:COUNt</a></p></li><li><p><a href="_waveform_data.htm" title=":WAVeform:DATA">:WAVeform:DATA</a></p></li><li><p><a href="_waveform_format.htm" title=":WAVeform:FORMat">:WAVeform:FORMat</a></p></li><li><p><a href="_waveform_points.htm" title=":WAVeform:POINts">:WAVeform:POINts</a></p></li><li><p><a href="_waveform_type.htm" title=":WAVeform:TYPE">:WAVeform:TYPE</a></p></li><li><p><a href="_waveform_xincrement.htm" title=":WAVeform:XINCrement">:WAVeform:XINCrement</a></p></li><li><p><a href="_waveform_xorigin.htm" title=":WAVeform:XORigin">:WAVeform:XORigin</a></p></li><li><p><a href="_waveform_xreference.htm" title=":WAVeform:XREFerence">:WAVeform:XREFerence</a></p></li><li><p><a href="_waveform_yincrement.htm" title=":WAVeform:YINCrement">:WAVeform:YINCrement</a></p></li><li><p><a href="_waveform_yorigin.htm" title=":WAVeform:YORigin">:WAVeform:YORigin</a></p></li><li><p><a href="_waveform_yreference.htm" title=":WAVeform:YREFerence">:WAVeform:YREFerence</a></p></li></ul></div></div><div class="refsection" lang="en"><a name="more_waveform_code"></a><h2>Example Code<a name="d0e44038"></a><a name="d0e44041"></a></h2><pre class="programlisting">   ' GET_PREAMBLE - The preamble block contains all of the current
+   ' WAVEFORM settings.  It is returned in the form &lt;preamble_block&gt;&lt;NL&gt;
+   ' where &lt;preamble_block&gt; is:
+   '    FORMAT        : int16 - 0 = BYTE, 1 = WORD, 4 = ASCII.
+   '    TYPE          : int16 - 0 = NORMAL, 1 = PEAK DETECT, 2 = AVERAGE
+   '    POINTS        : int32 - number of data points transferred.
+   '    COUNT         : int32 - 1 and is always 1.
+   '    XINCREMENT    : float64 - time difference between data points.
+   '    XORIGIN       : float64 - always the first data point in memory.
+   '    XREFERENCE    : int32 - specifies the data point associated with
+   '                            x-origin.
+   '    YINCREMENT    : float32 - voltage diff between data points.
+   '    YORIGIN       : float32 - value is the voltage at center screen.
+   '    YREFERENCE    : int32 - specifies the data point where y-origin
+   '                            occurs.
+   Dim Preamble()
+   Dim intFormat As Integer
+   Dim intType As Integer
+   Dim lngPoints As Long
+   Dim lngCount As Long
+   Dim dblXIncrement As Double
+   Dim dblXOrigin As Double
+   Dim lngXReference As Long
+   Dim sngYIncrement As Single
+   Dim sngYOrigin As Single
+   Dim lngYReference As Long
+   Dim strOutput As String
+
+   myScope.WriteString ":WAVEFORM:PREAMBLE?"   ' Query for the preamble.
+   Preamble() = myScope.ReadList   ' Read preamble information.
+   intFormat = Preamble(0)
+   intType = Preamble(1)
+   lngPoints = Preamble(2)
+   lngCount = Preamble(3)
+   dblXIncrement = Preamble(4)
+   dblXOrigin = Preamble(5)
+   lngXReference = Preamble(6)
+   sngYIncrement = Preamble(7)
+   sngYOrigin = Preamble(8)
+   lngYReference = Preamble(9)</pre><p>See complete example programs at: <a href="Examples.htm" title="Programming Examples"><i>Programming Examples</i></a></p></div></div></body></html>

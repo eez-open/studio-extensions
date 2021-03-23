@@ -1,0 +1,30 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:DEMO:FUNCtion</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="demo_commands.htm" title=":DEMO Commands"><link rel="prev" href="demo_commands.htm" title=":DEMO Commands"><link rel="next" href="_demo_function_phase_phase.htm" title=":DEMO:FUNCtion:PHASe:PHASe"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="demo_commands.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>:DEMO Commands </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="refentry" lang="en"><a name="_demo_function"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>:DEMO:FUNCtion — <a href="non-core_commands.htm" title="Non-Core&#xA;    Commands"><img src="images/../images/non_core.gif"></a></p></div><div class="refsection" lang="en"><a name="_demo_function_command"></a><h2>Command Syntax<a name="d0e17958"></a><a name="d0e17961"></a></h2><pre class="synopsis">:DEMO:FUNCtion &lt;signal&gt;</pre><pre class="synopsis">&lt;signal&gt; ::= {SINusoid | NOISy | PHASe | RINGing | SINGle | AM | CLK
+             | GLITch | BURSt | MSO | RFBurst | LFSine | FMBurst}</pre><p>The :DEMO:FUNCtion command selects the type of demo signal:</p><div class="informaltable"><table cellspacing="0" cellpadding="5" border="1"><colgroup><col><col><col></colgroup><thead><tr><th>Demo Signal Function</th><th>Demo 1 Terminal</th><th>Demo 2 Terminal</th></tr></thead><tbody><tr><td><p>SINusoid<a name="d0e17988"></a></p></td><td><p>5&nbsp;MHz sine wave @ ~ 6&nbsp;Vpp, 0&nbsp;V
+            offset</p></td><td>Off</td></tr><tr><td><p>NOISy<a name="d0e18000"></a></p></td><td><p>1&nbsp;kHz sine wave @ ~ 2.4&nbsp;Vpp, 0.0&nbsp;V
+            offset, with ~ 0.5&nbsp;Vpp of random noise added</p></td><td>Off</td></tr><tr><td><p>PHAse<a name="d0e18012"></a></p></td><td><p>1&nbsp;kHz sine wave @ 2.4&nbsp;Vpp, 0.0&nbsp;V
+            offset</p></td><td>1&nbsp;kHz sine wave @ 2.4&nbsp;Vpp, 0.0&nbsp;V offset ,
+            phase shifted by the amount entered using the <a href="_demo_function_phase_phase.htm" title=":DEMO:FUNCtion:PHASe:PHASe">:DEMO:FUNCtion:PHASe:PHASe</a> command</td></tr><tr><td><p>RINGing<a name="d0e18026"></a></p></td><td><p>500&nbsp;kHz digital pulse @ ~ 3&nbsp;Vpp, 1.5&nbsp;V
+            offset, and ~500&nbsp;ns pulse width with ringing</p></td><td>Off</td></tr><tr><td><p>SINGle<a name="d0e18038"></a></p></td><td><p>~500&nbsp;ns wide digital pulse with ringing @ ~
+            3&nbsp;Vpp, 1.5&nbsp;V offset</p><p>Press the front panel
+            <span class="guibutton">Set Off Single-Shot</span> softkey to cause the
+            selected single-shot signal to be output.</p></td><td>Off</td></tr><tr><td><p>AM<a name="d0e18055"></a></p></td><td><p>26&nbsp;kHz sine wave, ~ 7&nbsp;Vpp, 0&nbsp;V
+            offset</p></td><td>Amplitude modulated signal, ~ 3&nbsp;Vpp, 0&nbsp;V offset,
+            with ~13&nbsp;MHz carrier and sine envelope</td></tr><tr><td><p>CLK<a name="d0e18067"></a></p></td><td><p>500&nbsp;kHz clock @ ~2&nbsp;Vpp, 1&nbsp;V offset,
+            with infrequent glitch (1 glitch per 50,000 clocks)</p></td><td>Off</td></tr><tr><td><p>GLITch<a name="d0e18079"></a></p></td><td><p>Burst of 6 digital pulses (plus infrequent glitch)
+            that occurs once every 80&nbsp;µs @ ~3.6&nbsp;Vpp, ~1.8&nbsp;V
+            offset</p></td><td>Off</td></tr><tr><td><p>BURSt<a name="d0e18091"></a></p></td><td><p>Burst of digital pulses that occur every 50&nbsp;µs @
+            ~ 3.6&nbsp;Vpp, ~1.5&nbsp;V offset</p></td><td>Off</td></tr><tr><td><p>MSO<a name="d0e18103"></a></p></td><td><p>3.1&nbsp;kHz stair-step sine wave output of DAC @
+            ~1.5&nbsp;Vpp, 0.75&nbsp;V offset</p><p>DAC input signals
+            are internally routed to digital channels D0 through
+            D7</p></td><td>~3.1&nbsp;kHz sine wave filtered from DAC output @ ~
+            600&nbsp;mVpp, 300&nbsp;mV offset</td></tr><tr><td><p>RFBurst<a name="d0e18117"></a></p></td><td><p>5-cycle burst of a 10&nbsp;MHz amplitude modulated
+            sine wave @ ~ 2.6&nbsp;Vpp, 0&nbsp;V offset occurring once every
+            4&nbsp;ms</p></td><td>Off</td></tr><tr><td><p>LFSine<a name="d0e18129"></a></p></td><td><p>30&nbsp;Hz sine wave @ ~2.7&nbsp;Vpp, 0&nbsp;V
+            offset, with very narrow glitch near each positive
+            peak</p></td><td>Off</td></tr><tr><td><p>FMBurst<a name="d0e18141"></a></p></td><td><p>FM burst, modulated from ~100&nbsp;kHz to
+            ~1&nbsp;MHz, ~5.0&nbsp;Vpp, ~600&nbsp;mV offset.</p></td><td>Off</td></tr></tbody></table></div></div><div class="refsection" lang="en"><a name="_demo_function_query"></a><h2>Query Syntax</h2><pre class="synopsis">:DEMO:FUNCtion?</pre><p>The :DEMO:FUNCtion? query returns the currently selected demo signal
+    type.</p></div><div class="refsection" lang="en"><a name="d0e18156"></a><h2>Return Format</h2><pre class="synopsis">&lt;signal&gt;&lt;NL&gt;</pre><pre class="synopsis">&lt;signal&gt; ::= {SIN | NOIS | PHAS | RING | SING | AM | CLK | GLIT | BURS
+             | MSO | RFB | LFS | FMB}</pre></div><div class="refsection" lang="en"><a name="d0e18163"></a><h2>See Also</h2><div class="itemizedlist"><ul type="disc"><li><p><a href="demo_commands.htm#demo_commands_overview">Introduction to :DEMO
+  Commands</a></p></li></ul></div></div></div></body></html>

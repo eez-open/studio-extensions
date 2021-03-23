@@ -1,0 +1,486 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>VISA COM Example in Visual Basic</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="visacom_examples.htm" title="VISA COM Examples"><link rel="prev" href="visacom_examples.htm" title="VISA COM Examples"><link rel="next" href="visacom_example_csharp.htm" title="VISA COM Example in C#"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="visacom_examples.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>VISA COM Examples </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="visacom_example_vb"></a>VISA COM Example in Visual Basic<a name="d0e52438"></a><a name="d0e52441"></a><a name="d0e52444"></a></h3></div></div></div><p>To run this example in Visual Basic for Applications (VBA)<a name="d0e52449"></a><a name="d0e52452"></a>:</p><div class="orderedlist"><ol type="1"><li><p>Start the application that provides Visual Basic for Applications (for example, Microsoft Excel).</p></li><li><p>Press ALT+F11 to launch the Visual Basic editor.</p></li><li><p>Reference the Agilent VISA COM library:</p><div class="orderedlist"><ol type="a"><li><p>Choose <span class="guimenu">Tools&gt;References...</span> from the main menu.</p></li><li><p>In the References dialog, check the "VISA COM 3.0 Type Library".</p></li><li><p>Click <span class="guibutton">OK</span>.</p></li></ol></div></li><li><p>Choose <span class="guimenuitem">Insert&gt;Module</span>.</p></li><li><p>Cut-and-paste the code that follows into the editor.</p></li><li><p>Edit the program to use the VISA address of your oscilloscope, and save the changes.</p></li><li><p>Run the program.</p></li></ol></div><pre class="programlisting">'
+' Agilent VISA COM Example in Visual Basic
+' -------------------------------------------------------------------
+' This program illustrates a few commonly-used programming
+' features of your Agilent oscilloscope.
+' -------------------------------------------------------------------
+
+Option Explicit
+
+Public myMgr As VisaComLib.ResourceManager
+Public myScope As VisaComLib.FormattedIO488
+Public varQueryResult As Variant
+Public strQueryResult As String
+
+' For Sleep subroutine.
+Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+'
+' Main Program
+' -------------------------------------------------------------------
+
+Sub Main()
+
+  On Error GoTo VisaComError
+  
+  ' Create the VISA COM I/O resource.
+  Set myMgr = New VisaComLib.ResourceManager
+  Set myScope = New VisaComLib.FormattedIO488
+  Set myScope.IO = _
+      myMgr.Open("USB0::0x0957::0x17A6::US50210029::0::INSTR")
+  myScope.IO.Clear   ' Clear the interface.
+  myScope.IO.Timeout = 10000   ' Set I/O communication timeout.
+  
+  ' Initialize - start from a known state.
+  Initialize
+  
+  ' Capture data.
+  Capture
+  
+  ' Analyze the captured waveform.
+  Analyze
+  
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error:" + vbCrLf + Err.Description
+  End
+
+End Sub
+
+'
+' Initialize the oscilloscope to a known state.
+' -------------------------------------------------------------------
+
+Private Sub Initialize()
+
+  On Error GoTo VisaComError
+  
+  ' Get and display the device's *IDN? string.
+  strQueryResult = DoQueryString("*IDN?")
+  Debug.Print "Identification string: " + strQueryResult
+
+  ' Clear status and load the default setup.
+  DoCommand "*CLS"
+  DoCommand "*RST"
+  
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error:" + vbCrLf + Err.Description
+  End
+
+End Sub
+
+'
+' Capture the waveform.
+' -------------------------------------------------------------------
+
+Private Sub Capture()
+
+  On Error GoTo VisaComError
+  
+  ' Use auto-scale to automatically configure oscilloscope.
+  ' -----------------------------------------------------------------
+  DoCommand ":AUToscale"
+  
+  ' Set trigger mode (EDGE, PULSe, PATTern, etc., and input source.
+  DoCommand ":TRIGger:MODE EDGE"
+  Debug.Print "Trigger mode: " + _
+      DoQueryString(":TRIGger:MODE?")
+
+  ' Set EDGE trigger parameters.
+  DoCommand ":TRIGger:EDGE:SOURCe CHANnel1"
+  Debug.Print "Trigger edge source: " + _
+      DoQueryString(":TRIGger:EDGE:SOURce?")
+
+  DoCommand ":TRIGger:EDGE:LEVel 1.5"
+  Debug.Print "Trigger edge level: " + _
+      DoQueryString(":TRIGger:EDGE:LEVel?")
+
+  DoCommand ":TRIGger:EDGE:SLOPe POSitive"
+  Debug.Print "Trigger edge slope: " + _
+      DoQueryString(":TRIGger:EDGE:SLOPe?")
+
+  ' Save oscilloscope configuration.
+  ' -----------------------------------------------------------------
+  varQueryResult = DoQueryIEEEBlock_UI1(":SYSTem:SETup?")
+
+  ' Output setup string to a file:
+  Dim strPath As String
+  strPath = "c:\scope\config\setup.dat"
+  Dim hFile As Long
+  hFile = FreeFile
+  Open strPath For Binary Access Write Lock Write As hFile
+  Put hFile, , varQueryResult   ' Write data.
+  Close hFile   ' Close file.
+  Debug.Print "Setup bytes saved: " + CStr(LenB(varQueryResult))
+  
+  ' Change settings with individual commands:
+  ' -----------------------------------------------------------------
+  
+  ' Set vertical scale and offset.
+  DoCommand ":CHANnel1:SCALe 0.05"
+  Debug.Print "Channel 1 vertical scale: " + _
+      DoQueryString(":CHANnel1:SCALe?")
+
+  DoCommand ":CHANnel1:OFFSet -1.5"
+  Debug.Print "Channel 1 vertical offset: " + _
+      DoQueryString(":CHANnel1:OFFSet?")
+
+  ' Set horizontal scale and offset.
+  DoCommand ":TIMebase:SCALe 0.0002"
+  Debug.Print "Timebase scale: " + _
+      DoQueryString(":TIMebase:SCALe?")
+
+  DoCommand ":TIMebase:POSition 0.0"
+  Debug.Print "Timebase position: " + _
+      DoQueryString(":TIMebase:POSition?")
+
+  ' Set the acquisition type (NORMal, PEAK, AVERage, or HRESolution).
+  DoCommand ":ACQuire:TYPE NORMal"
+  Debug.Print "Acquire type: " + _
+      DoQueryString(":ACQuire:TYPE?")
+      
+  ' Or, configure by loading a previously saved setup.
+  ' -----------------------------------------------------------------
+  Dim varSetupString As Variant
+  strPath = "c:\scope\config\setup.dat"
+  Open strPath For Binary Access Read As hFile   ' Open file for input.
+  Get hFile, , varSetupString   ' Read data.
+  Close hFile   ' Close file.
+  ' Write learn string back to oscilloscope using ":SYSTem:SETup"
+  ' command:
+  DoCommandIEEEBlock ":SYSTem:SETup", varSetupString
+  Debug.Print "Setup bytes restored: " + CStr(LenB(varSetupString))
+  
+  ' Capture an acquisition using :DIGitize.
+  ' -----------------------------------------------------------------
+  DoCommand ":DIGitize CHANnel1"
+
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error:" + vbCrLf + Err.Description
+  End
+
+End Sub
+
+'
+' Analyze the captured waveform.
+' -------------------------------------------------------------------
+
+Private Sub Analyze()
+
+  On Error GoTo VisaComError
+  
+  ' Make a couple of measurements.
+  ' -----------------------------------------------------------------
+  DoCommand ":MEASure:SOURce CHANnel1"
+  Debug.Print "Measure source: " + _
+      DoQueryString(":MEASure:SOURce?")
+
+  DoCommand ":MEASure:FREQuency"
+  varQueryResult = DoQueryNumber(":MEASure:FREQuency?")
+  MsgBox "Frequency:" + vbCrLf + _
+      FormatNumber(varQueryResult / 1000, 4) + " kHz"
+  
+  DoCommand ":MEASure:VAMPlitude"
+  varQueryResult = DoQueryNumber(":MEASure:VAMPlitude?")
+  MsgBox "Vertial amplitude:" + vbCrLf + _
+      FormatNumber(varQueryResult, 4) + " V"
+
+
+  ' Download the screen image.
+  ' -----------------------------------------------------------------
+  ' Get screen image.
+  DoCommand ":HARDcopy:INKSaver OFF"
+  Dim byteData() As Byte
+  byteData = DoQueryIEEEBlock_UI1(":DISPlay:DATA? PNG, COLor")
+  
+  ' Save screen image to a file.
+  Dim strPath As String
+  strPath = "c:\scope\data\screen.png"
+  If Len(Dir(strPath)) Then
+    Kill strPath   ' Remove file if it exists.
+  End If
+  
+  Dim hFile As Long
+  hFile = FreeFile
+  Open strPath For Binary Access Write Lock Write As hFile
+  Put hFile, , byteData   ' Write data.
+  Close hFile   ' Close file.
+  MsgBox "Screen image (" + CStr(UBound(byteData) + 1) + _
+      " bytes) written to " + strPath
+  
+
+  ' Download waveform data.
+  ' -----------------------------------------------------------------
+
+  ' Set the waveform points mode.
+  DoCommand ":WAVeform:POINts:MODE RAW"
+  Debug.Print "Waveform points mode: " + _
+      DoQueryString(":WAVeform:POINts:MODE?")
+
+  ' Get the number of waveform points available.
+  Debug.Print "Waveform points available: " + _
+      DoQueryString(":WAVeform:POINts?")
+
+  ' Set the waveform source.
+  DoCommand ":WAVeform:SOURce CHANnel1"
+  Debug.Print "Waveform source: " + _
+      DoQueryString(":WAVeform:SOURce?")
+
+  ' Choose the format of the data returned (WORD, BYTE, ASCII):
+  DoCommand ":WAVeform:FORMat BYTE"
+  Debug.Print "Waveform format: " + _
+      DoQueryString(":WAVeform:FORMat?")
+
+  ' Display the waveform settings:
+  Dim Preamble()
+  Dim intFormat As Integer
+  Dim intType As Integer
+  Dim lngPoints As Long
+  Dim lngCount As Long
+  Dim dblXIncrement As Double
+  Dim dblXOrigin As Double
+  Dim lngXReference As Long
+  Dim sngYIncrement As Single
+  Dim sngYOrigin As Single
+  Dim lngYReference As Long
+  
+  Preamble() = DoQueryNumbers(":WAVeform:PREamble?")
+  
+  intFormat = Preamble(0)
+  intType = Preamble(1)
+  lngPoints = Preamble(2)
+  lngCount = Preamble(3)
+  dblXIncrement = Preamble(4)
+  dblXOrigin = Preamble(5)
+  lngXReference = Preamble(6)
+  sngYIncrement = Preamble(7)
+  sngYOrigin = Preamble(8)
+  lngYReference = Preamble(9)
+  
+  If intFormat = 0 Then
+    Debug.Print "Waveform format: BYTE"
+  ElseIf intFormat = 1 Then
+    Debug.Print "Waveform format: WORD"
+  ElseIf intFormat = 4 Then
+    Debug.Print "Waveform format: ASCii"
+  End If
+  
+  If intType = 0 Then
+    Debug.Print "Acquisition type: NORMal"
+  ElseIf intType = 1 Then
+    Debug.Print "Acquisition type: PEAK"
+  ElseIf intType = 2 Then
+    Debug.Print "Acquisition type: AVERage"
+  ElseIf intType = 3 Then
+    Debug.Print "Acquisition type: HRESolution"
+  End If
+  
+  Debug.Print "Waveform points: " + _
+      FormatNumber(lngPoints, 0)
+      
+  Debug.Print "Waveform average count: " + _
+      FormatNumber(lngCount, 0)
+      
+  Debug.Print "Waveform X increment: " + _
+      Format(dblXIncrement, "Scientific")
+  
+  Debug.Print "Waveform X origin: " + _
+      Format(dblXOrigin, "Scientific")
+  
+  Debug.Print "Waveform X reference: " + _
+      FormatNumber(lngXReference, 0)
+      
+  Debug.Print "Waveform Y increment: " + _
+      Format(sngYIncrement, "Scientific")
+  
+  Debug.Print "Waveform Y origin: " + _
+      FormatNumber(sngYOrigin, 0)
+  
+  Debug.Print "Waveform Y reference: " + _
+      FormatNumber(lngYReference, 0)
+      
+  ' Get the waveform data
+  varQueryResult = DoQueryIEEEBlock_UI1(":WAVeform:DATA?")
+  Debug.Print "Number of data values: " + _
+      CStr(UBound(varQueryResult) + 1)
+  
+  ' Set up output file:
+  strPath = "c:\scope\data\waveform_data.csv"
+
+  ' Open file for output.
+  Open strPath For Output Access Write Lock Write As hFile
+  
+  ' Output waveform data in CSV format.
+  Dim lngDataValue As Long
+  Dim lngI As Long
+  
+  For lngI = 0 To UBound(varQueryResult)
+    lngDataValue = varQueryResult(lngI)
+    
+    ' Write time value, voltage value.
+    Print #hFile, _
+        FormatNumber(dblXOrigin + (lngI * dblXIncrement), 9) + _
+        ", " + _
+        FormatNumber(((lngDataValue - lngYReference) * _
+        sngYIncrement) + sngYOrigin)
+        
+  Next lngI
+  
+  ' Close output file.
+  Close hFile   ' Close file.
+  MsgBox "Waveform format BYTE data written to " + _
+      "c:\scope\data\waveform_data.csv."
+
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error:" + vbCrLf + Err.Description
+  End
+
+End Sub
+
+Private Sub DoCommand(command As String)
+
+  On Error GoTo VisaComError
+  
+  myScope.WriteString command
+  CheckInstrumentErrors
+  
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error: " + vbCrLf + CStr(Err.Number) + ", " + _
+      Err.Source + ", " + _
+      Err.Description, vbExclamation, "VISA COM Error"
+  End
+
+End Sub
+
+Private Sub DoCommandIEEEBlock(command As String, data As Variant)
+
+  On Error GoTo VisaComError
+  
+  Dim strErrors As String
+  
+  myScope.WriteIEEEBlock command, data
+  CheckInstrumentErrors
+    
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error: " + vbCrLf + CStr(Err.Number) + ", " + _
+      Err.Source + ", " + _
+      Err.Description, vbExclamation, "VISA COM Error"
+  End
+
+End Sub
+
+Private Function DoQueryString(query As String) As String
+
+  On Error GoTo VisaComError
+  
+  myScope.WriteString query
+  DoQueryString = myScope.ReadString
+  CheckInstrumentErrors
+    
+  Exit Function
+
+VisaComError:
+  MsgBox "VISA COM Error: " + vbCrLf + CStr(Err.Number) + ", " + _
+      Err.Source + ", " + _
+      Err.Description, vbExclamation, "VISA COM Error"
+  End
+
+End Function
+
+Private Function DoQueryNumber(query As String) As Variant
+
+  On Error GoTo VisaComError
+  
+  myScope.WriteString query
+  DoQueryNumber = myScope.ReadNumber
+  CheckInstrumentErrors
+    
+  Exit Function
+
+VisaComError:
+  MsgBox "VISA COM Error: " + vbCrLf + CStr(Err.Number) + ", " + _
+      Err.Source + ", " + _
+      Err.Description, vbExclamation, "VISA COM Error"
+  End
+
+End Function
+
+Private Function DoQueryNumbers(query As String) As Variant()
+
+  On Error GoTo VisaComError
+  
+  Dim strErrors As String
+  
+  myScope.WriteString query
+  DoQueryNumbers = myScope.ReadList
+  CheckInstrumentErrors
+    
+  Exit Function
+
+VisaComError:
+  MsgBox "VISA COM Error: " + vbCrLf + CStr(Err.Number) + ", " + _
+      Err.Source + ", " + _
+      Err.Description, vbExclamation, "VISA COM Error"
+  End
+
+End Function
+
+Private Function DoQueryIEEEBlock_UI1(query As String) As Variant
+
+  On Error GoTo VisaComError
+  
+  myScope.WriteString query
+  DoQueryIEEEBlock_UI1 = myScope.ReadIEEEBlock(BinaryType_UI1)
+  CheckInstrumentErrors
+  
+  Exit Function
+
+VisaComError:
+  MsgBox "VISA COM Error: " + vbCrLf + CStr(Err.Number) + ", " + _
+      Err.Source + ", " + _
+      Err.Description, vbExclamation, "VISA COM Error"
+  End
+
+End Function
+
+Private Sub CheckInstrumentErrors()
+  
+  On Error GoTo VisaComError
+  
+  Dim strErrVal As String
+  Dim strOut As String
+    
+  myScope.WriteString ":SYSTem:ERRor?"   ' Query any errors data.
+  strErrVal = myScope.ReadString         ' Read: Errnum,"Error String".
+  While Val(strErrVal) &lt;&gt; 0              ' End if find: 0,"No Error".
+    strOut = strOut + "INST Error: " + strErrVal
+    myScope.WriteString ":SYSTem:ERRor?"   ' Request error message.
+    strErrVal = myScope.ReadString         ' Read error message.
+  Wend
+  
+  If Not strOut = "" Then
+    MsgBox strOut, vbExclamation, "INST Error Messages"
+    myScope.FlushWrite (False)
+    myScope.FlushRead
+    
+  End If
+    
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error: " + vbCrLf + Err.Description
+
+End Sub</pre></div></body></html>

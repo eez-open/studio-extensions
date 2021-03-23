@@ -1,0 +1,49 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>Blocking Synchronization</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="Synchronizing_Acquisitions.htm" title="Synchronizing Acquisitions"><link rel="prev" href="sync_flow_retrieve.htm" title="Retrieve Results"><link rel="next" href="polling_sync.htm" title="Polling Synchronization With Timeout"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="Synchronizing_Acquisitions.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Synchronizing Acquisitions </b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="blocking_sync"></a>Blocking Synchronization<a name="d0e51817"></a></h2></div></div></div><p>Use the :DIGitize command to start the acquisition. This blocks
+    subsequent queries until the acquisition and processing is complete. For
+    example:</p><pre class="programlisting">'
+' Synchronizing acquisition using blocking.
+' ===================================================================
+
+Option Explicit
+
+Public myMgr As VisaComLib.ResourceManager
+Public myScope As VisaComLib.FormattedIO488
+Public varQueryResult As Variant
+Public strQueryResult As String
+
+Sub Main()
+
+  On Error GoTo VisaComError
+  
+  ' Create the VISA COM I/O resource.
+  Set myMgr = New VisaComLib.ResourceManager
+  Set myScope = New VisaComLib.FormattedIO488
+  Set myScope.IO = myMgr.Open("TCPIP0::130.29.69.12::inst0::INSTR")
+  myScope.IO.Clear   ' Clear the interface.
+  
+  ' Set up.
+  ' -----------------------------------------------------------------
+  myScope.WriteString ":TRIGger:MODE EDGE"
+  myScope.WriteString ":TRIGger:EDGE:LEVel 2"
+  myScope.WriteString ":TIMebase:SCALe 5e-8"
+  
+  ' Acquire.
+  ' -----------------------------------------------------------------
+  myScope.WriteString ":DIGitize"
+
+  ' Get results.
+  ' -----------------------------------------------------------------
+  myScope.WriteString ":MEASure:RISetime"
+  myScope.WriteString ":MEASure:RISetime?"
+  varQueryResult = myScope.ReadNumber   ' Read risetime.
+  Debug.Print "Risetime: " + _
+      FormatNumber(varQueryResult * 1000000000, 1) + " ns"
+  
+  Exit Sub
+
+VisaComError:
+  MsgBox "VISA COM Error:" + vbCrLf + Err.Description
+
+End Sub</pre></div></body></html>

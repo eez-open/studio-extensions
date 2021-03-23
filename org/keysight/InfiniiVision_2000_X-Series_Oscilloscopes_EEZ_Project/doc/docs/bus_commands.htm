@@ -1,0 +1,36 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title>:BUS&lt;n&gt; Commands</title><link rel="stylesheet" href="docbook_xsl_dds.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.70.1"><link rel="start" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="up" href="index.htm" title="Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes"><link rel="prev" href="_acquire_type.htm" title=":ACQuire:TYPE"><link rel="next" href="_bus_n_bit_m.htm" title=":BUS<n&gt;:BIT<m&gt;"><link rel="copyright" href="ln-warranty.htm" title="Warranty"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><p align="right"><a href="index.htm" style="text-decoration: none"><font size="1" color="#0099CC"><b>Agilent InfiniiVision 2000&nbsp;X-Series Oscilloscopes Programmer's Guide</b></font></a><br><hr noshade="true" color="#0099CC"></p><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="bus_commands"></a>:BUS&lt;n&gt; Commands<a name="d0e15270"></a></h2></div></div></div><p>Control all oscilloscope functions associated with buses made up of
+  digital channels. See <a href="bus_commands.htm#bus_commands_overview">Introduction to :BUS&lt;n&gt;
+  Commands</a>.</p><div class="table"><a name="d0e15277"></a><p class="title"><b>:BUS&lt;n&gt; Commands Summary:</b></p><div class="table-contents"><table summary=":BUS<n&gt; Commands Summary" cellspacing="0" cellpadding="5" width="100%" border="1"><colgroup><col><col><col></colgroup><thead valign="bottom"><tr><th align="left">Command</th><th align="left">Query</th><th align="left">Options and Query Returns</th></tr></thead><tbody valign="top"><tr><td><strong class="userinput"><code><a href="_bus_n_bit_m.htm#_bus_n_bit_m_command" title="Command Syntax">:BUS&lt;n&gt;:BIT&lt;m&gt; {{0 | OFF} |
+        {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_bus_n_bit_m.htm#_bus_n_bit_m_query" title="Query Syntax">:BUS&lt;n&gt;:BIT&lt;m&gt;?</a></code></strong></td><td><p><strong class="userinput"><code>{0 |
+        1}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 or 2; an integer
+        in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;m&gt; ::= 0-7; an
+        integer in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_bus_n_bits.htm#_bus_n_bits_command" title="Command Syntax">:BUS&lt;n&gt;:BITS &lt;channel_list&gt;,
+        {{0 | OFF} | {1 | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_bus_n_bits.htm#_bus_n_bits_query" title="Query Syntax">:BUS&lt;n&gt;:BITS?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;channel_list&gt;, {0 |
+        1}</code></strong></p><p><strong class="userinput"><code>&lt;channel_list&gt; ::=
+        (@&lt;m&gt;,&lt;m&gt;:&lt;m&gt; ...) where "," is separator and ":" is
+        range</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 or 2; an
+        integer in NR1 format</code></strong></p><p><strong class="userinput"><code>&lt;m&gt; ::=
+        0-7; an integer in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_bus_n_clear.htm#_bus_n_clear_command" title="Command Syntax">:BUS&lt;n&gt;:CLEar</a></code></strong></td><td><strong class="userinput"><code>n/a</code></strong></td><td><p><strong class="userinput"><code>&lt;n&gt; ::= 1 or 2; an integer in NR1
+        format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_bus_n_display.htm#_bus_n_display_command" title="Command Syntax">:BUS&lt;n&gt;:DISPlay {{0 | OFF} | {1
+        | ON}}</a></code></strong></td><td><strong class="userinput"><code><a href="_bus_n_display.htm#_bus_n_display_query" title="Query Syntax">:BUS&lt;n&gt;:DISPlay?</a></code></strong></td><td><p><strong class="userinput"><code>{0 |
+        1}</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 or 2; an integer
+        in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_bus_n_label.htm#_bus_n_label_command" title="Command Syntax">:BUS&lt;n&gt;:LABel
+        &lt;string&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_bus_n_label.htm#_bus_n_label_query" title="Query Syntax">:BUS&lt;n&gt;:LABel?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;string&gt; ::= quoted ASCII string up to
+        10 characters</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 or 2;
+        an integer in NR1 format</code></strong></p></td></tr><tr><td><strong class="userinput"><code><a href="_bus_n_mask.htm#_bus_n_mask_command" title="Command Syntax">:BUS&lt;n&gt;:MASK
+        &lt;mask&gt;</a></code></strong></td><td><strong class="userinput"><code><a href="_bus_n_mask.htm#_bus_n_mask_query" title="Query Syntax">:BUS&lt;n&gt;:MASK?</a></code></strong></td><td><p><strong class="userinput"><code>&lt;mask&gt; ::= 32-bit integer in decimal,
+        &lt;nondecimal&gt;, or
+        &lt;string&gt;</code></strong></p><p><strong class="userinput"><code>&lt;nondecimal&gt;
+        ::= #Hnn...n where n ::= {0,..,9 | A,..,F} for
+        hexadecimal</code></strong></p><p><strong class="userinput"><code>&lt;nondecimal&gt; ::=
+        #Bnn...n where n ::= {0 | 1} for
+        binary</code></strong></p><p><strong class="userinput"><code>&lt;string&gt; ::=
+        "0xnn...n" where n ::= {0,..,9 | A,..,F} for
+        hexadecimal</code></strong></p><p><strong class="userinput"><code>&lt;n&gt; ::= 1 or 2;
+        an integer in NR1 format</code></strong></p></td></tr></tbody></table></div></div><br class="table-break"><h2><a name="bus_commands_overview"></a>Introduction to :BUS&lt;n&gt;
+  Commands</h2><pre class="programlisting">&lt;n&gt; ::= {1 | 2}</pre><p><a name="d0e15408"></a><a name="d0e15411"></a><a name="d0e15414"></a><a name="d0e15417"></a>The BUS subsystem commands control the viewing, labeling, and
+  digital channel makeup of two possible buses.</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.gif"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>These commands are only valid for the MSO models.</p></td></tr></table></div><p><b>Reporting the Setup.&nbsp;</b>Use :BUS&lt;n&gt;? to query setup information for the BUS
+    subsystem.</p><p><b>Return Format.&nbsp;</b>The following is a sample response from the :BUS1? query. In this
+    case, the query was issued following a *RST command.</p><pre class="programlisting">:BUS1:DISP 0;LAB "BUS1";MASK +255</pre></div></body></html>
