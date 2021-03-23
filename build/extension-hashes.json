@@ -354,5 +354,53 @@
     {
         "downloadUrl": "https://github.com/lexbrugman/my-eez-studio-extensions/raw/master/siglent-spd1000x/siglent_spd1305x-1.zip",
         "sha256": "45044a9dbe415e7f9fb6ca9660b745866eae04a08664e4b8c5d7cf964a4ceff8"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2002A-1.0.0.zip",
+        "sha256": "52e06742c773f952d2c2dee412052727446d4be8ddb0a309e870aab68d0bb2c3"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2004A-1.0.0.zip",
+        "sha256": "f9f6120babb5a14cad441272822501b498df957b5692dd44303b94f844f5ea00"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2012A-1.0.0.zip",
+        "sha256": "66452235c9676de5ca487d8795a998e5f5f1850d1922160f656c9edfd21c0168"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2014A-1.0.0.zip",
+        "sha256": "c93f4422c9af6488eab71d9a9c921e8cfcfdd18c6f6639d84ce2aa6dcdc5c130"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2022A-1.0.0.zip",
+        "sha256": "4de4ac6e7382180ac0d2e36432b4bff65993db9159a8a6a1d0e7feadd3ac2d72"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-DSOX2024A-1.0.0.zip",
+        "sha256": "2398bd72567e948655576fd69d8d1d62601a354df49965519be8cffb5f869731"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2002A-1.0.0.zip",
+        "sha256": "9138eef66ad2ec9d1e0d27eeafaaab9eb37b34ba8e46bba2f914223915d002e6"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2004A-1.0.0.zip",
+        "sha256": "57b19b869372bea11bda88e0daf3974d04d1d18144c281169826d4ee7b52b4f4"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2012A-1.0.0.zip",
+        "sha256": "c40c48bc05040a231b6c1fdc5d76f66ee689b8ba6da1036b9260d6dd0eedfdad"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2014A-1.0.0.zip",
+        "sha256": "c1cb186efff900ecda6f300b339e57464c601d68862b3c90675436e0b65f4cc8"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2022A-1.0.0.zip",
+        "sha256": "288d4b53e380ead958b6499ee9f859c0551a268a8e7b1272f2a2dd4982f658af"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2024A-1.0.0.zip",
+        "sha256": "fb5394fd16be3ed2ed40aadbba8f3936632949e6b5d952585e2056260c790ae2"
     }
 ]
