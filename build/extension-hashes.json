@@ -450,5 +450,13 @@
     {
         "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2024A-1.0.1.zip",
         "sha256": "c12e49f5d35e303a0aff534ed177b61149cdcc85946b3f01becd4ba038c2f17a"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3-1.7.0.zip",
+        "sha256": "a3282eb4b8551b3fc77ee7db58e889ac39c7cfb62ee2e79a5db56f9aa80300cf"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.7.0.zip",
+        "sha256": "fd526a24eb10058efebe28f000a87599e766255e0d8ea76496034d4f9c6ec672"
     }
 ]
