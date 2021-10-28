@@ -98,6 +98,8 @@ https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez
 
 # Generic (changes in SCPI STATus and SYSTem commands)
 ./org/eez/generic_scpi/generic_scpi-1.0.1.zip
+# Generic (added USBTMC)
+./org/eez/generic_scpi/generic_scpi-1.0.2.zip
 
 # Sigilent (initial versions)
 ./org/siglent/ssa3000x/siglent_ssa3031x-0.1.0.zip

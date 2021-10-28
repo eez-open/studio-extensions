@@ -1,41 +1,23 @@
 {
   "settings": {
     "general": {
-      "scpiDocFolder": "doc"
+      "projectVersion": "v3",
+      "projectType": "master",
+      "scpiDocFolder": "doc",
+      "imports": []
     },
     "build": {
       "configurations": [
         {
           "name": "Generic SCPI instrument",
           "description": "An example instrument with serial and Ethernet connection",
-          "properties": "{\n  \"connection\": {\n    \"ethernet\": {\n      \"port\": 5025\n    },\n    \"serial\": {\n      \"baudRates\": [9600, 19200, 38400, 57600, 74880, 115200, 230400, 250000],\n      \"defaultBaudRate\": 9600\n    }\n  }\n}"
+          "properties": "{\n  \"connection\": {\n    \"ethernet\": {\n      \"port\": 5025\n    },\n    \"serial\": {\n      \"baudRates\": [9600, 19200, 38400, 57600, 74880, 115200, 230400, 250000],\n      \"defaultBaudRate\": 9600\n    },\n    \"usbtmc\": {\n      \"idVendor\": \"0x0000\",\n      \"idProduct\": \"0x0000\"\n    }\n  }\n}"
         }
       ],
       "files": [],
       "destinationFolder": "."
     }
   },
-  "extensionDefinitions": [
-    {
-      "name": "Generic SCPI",
-      "description": "An example instrument with serial and Ethernet connection",
-      "buildConfiguration": "Generic SCPI instrument",
-      "buildFolder": "",
-      "image": "doc/images/generic_scpi.png",
-      "extensionName": "generic_scpi",
-      "idn": "\"SCPI\"",
-      "idfName": "Generic SCPI",
-      "idfShortName": "Generic SCPI",
-      "idfFirmwareVersion": "1.0",
-      "idfGuid": "12ef0990-36b6-4282-8048-ddb88039f7e9",
-      "idfRevisionNumber": "1.0.1",
-      "idfDescription": "Generic SCPI instrument",
-      "idfSupportedModels": "Any",
-      "idfRevisionComments": "No comment",
-      "idfAuthor": "Envox",
-      "sdlFriendlyName": "Generic SCPI"
-    }
-  ],
   "scpi": {
     "subsystems": [
       {
@@ -46,7 +28,11 @@
             "name": "*CLS",
             "helpLink": "1. Generic SCPI reference - common comand reference.html#cls",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "*ESE",
@@ -62,14 +48,22 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "*ESE?",
             "helpLink": "1. Generic SCPI reference - common comand reference.html#ese",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -77,7 +71,11 @@
             "helpLink": "1. Generic SCPI reference - common comand reference.html#esr",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -85,21 +83,33 @@
             "helpLink": "1. Generic SCPI reference - common comand reference.html#idn",
             "parameters": [],
             "response": {
-              "type": "quoted-string"
+              "type": [
+                {
+                  "type": "quoted-string"
+                }
+              ]
             }
           },
           {
             "name": "*OPC",
             "helpLink": "1. Generic SCPI reference - common comand reference.html#opc",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "*OPC?",
             "helpLink": "1. Generic SCPI reference - common comand reference.html#opc",
             "parameters": [],
             "response": {
-              "type": "boolean"
+              "type": [
+                {
+                  "type": "boolean"
+                }
+              ]
             }
           },
           {
@@ -116,13 +126,21 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "*RST",
             "helpLink": "1. Generic SCPI reference - common comand reference.html#rst",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "*SAV",
@@ -138,7 +156,11 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "*SRE",
@@ -154,14 +176,22 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "*SRE?",
             "helpLink": "1. Generic SCPI reference - common comand reference.html#sre",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -169,28 +199,44 @@
             "helpLink": "1. Generic SCPI reference - common comand reference.html#stb",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
             "name": "*TRG",
             "helpLink": "1. Generic SCPI reference - common comand reference.html#trg",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "*TST?",
             "helpLink": "1. Generic SCPI reference - common comand reference.html#tst",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
             "name": "*WAI",
             "helpLink": "1. Generic SCPI reference - common comand reference.html#wai",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           }
         ]
       },
@@ -203,7 +249,11 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_cond",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -220,14 +270,22 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "STATus:OPERation:ENABle?",
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_enab",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -244,14 +302,22 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "STATus:OPERation:INSTrument:ENABle?",
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_enab",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -259,7 +325,11 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum_cond",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -276,14 +346,22 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "STATus:OPERation:INSTrument:ISUMmary[<n>]:ENABle?",
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum_enab",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -291,7 +369,11 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst_isum",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -299,7 +381,11 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper_inst",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -307,21 +393,33 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_oper",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
             "name": "STATus:PREset",
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_pre",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "STATus:QUEStionable:CONDition?",
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_cond",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -338,14 +436,22 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "STATus:QUEStionable:ENABle?",
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_enab",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -353,7 +459,11 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_cond",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -370,14 +480,22 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "STATus:QUEStionable:INSTrument:ENABle?",
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_enab",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -385,7 +503,11 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum_cond",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -402,14 +524,22 @@
                 "isOptional": false
               }
             ],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "STATus:QUEStionable:INSTrument:ISUMmary[<n>]:ENABle?",
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum_enab",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -417,7 +547,11 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst_isum",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -425,7 +559,11 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques_inst",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
@@ -433,7 +571,11 @@
             "helpLink": "2. Generic SCPI reference - STATus.html#stat_ques",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           }
         ]
@@ -447,7 +589,11 @@
             "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_cap",
             "parameters": [],
             "response": {
-              "type": "arbitrary-ascii"
+              "type": [
+                {
+                  "type": "arbitrary-ascii"
+                }
+              ]
             }
           },
           {
@@ -455,39 +601,63 @@
             "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_err_coun",
             "parameters": [],
             "response": {
-              "type": "nr1"
+              "type": [
+                {
+                  "type": "nr1"
+                }
+              ]
             }
           },
           {
             "name": "SYSTem:KLOCk",
             "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_kloc",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "SYSTem:LOCal",
             "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_loc",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "SYSTem:REMote",
             "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_rem",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "SYSTem:RWLock",
             "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_rwl",
             "parameters": [],
-            "response": {}
+            "response": {
+              "type": [
+                {}
+              ]
+            }
           },
           {
             "name": "SYSTem:VERSion?",
             "helpLink": "3. Generic SCPI reference - SYSTem.html#syst_vers",
             "parameters": [],
             "response": {
-              "type": "arbitrary-ascii"
+              "type": [
+                {
+                  "type": "arbitrary-ascii"
+                }
+              ]
             }
           }
         ]
@@ -511,5 +681,28 @@
         "requiresConfirmation": false
       }
     ]
-  }
+  },
+  "extensionDefinitions": [
+    {
+      "name": "Generic SCPI",
+      "description": "An example instrument with serial and Ethernet connection",
+      "buildConfiguration": "Generic SCPI instrument",
+      "buildFolder": "",
+      "image": "doc/images/generic_scpi.png",
+      "extensionName": "generic_scpi",
+      "idn": "\"SCPI\"",
+      "idfName": "Generic SCPI",
+      "idfShortName": "Generic SCPI",
+      "idfFirmwareVersion": "1.0",
+      "idfGuid": "12ef0990-36b6-4282-8048-ddb88039f7e9",
+      "idfRevisionNumber": "1.0.2",
+      "idfDescription": "Generic SCPI instrument",
+      "idfSupportedModels": "Any",
+      "idfRevisionComments": "No comment",
+      "idfAuthor": "Envox",
+      "sdlFriendlyName": "Generic SCPI"
+    }
+  ],
+  "colors": [],
+  "themes": []
 }
