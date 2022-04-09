@@ -478,5 +478,13 @@
     {
         "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/eez/generic_scpi/generic_scpi-1.0.2.zip",
         "sha256": "cc368d44d9ba061f50b95c307439e27b52e8096e80600df0b8f959131a7d5e9b"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3-1.8.alpha3.zip",
+        "sha256": "90961710c434e6da12f35e102a3144d2e8c4f33a867779c7c36fee45264b7986"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.8.alpha3.zip",
+        "sha256": "907d3fee67024c81b92f19fe1381ac86fd13081cb1a3eca1878a89934957653f"
     }
 ]
