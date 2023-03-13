@@ -502,5 +502,21 @@
     {
         "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.8.alpha4.zip",
         "sha256": "73d6c45a87439d3ff26b6c0081af69c474102d380c945e76263065dcb47f4169"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1074z-1.0.3.zip",
+        "sha256": "41e6c9660ecc7bd1e72caa13972aab5addd42d818e21e40d5e86025384da5766"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1074zs-1.0.3.zip",
+        "sha256": "ed007ccc61422789c8c1594f331eeb96b834ca2b5eaeb22715159cf7806bce64"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1104z-1.0.3.zip",
+        "sha256": "8d2ffe8216cfd3267cf6cc7cbba300e44d3cfcb18922ddf9fdb3e53142124fe0"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/rigol/rigol_ds_mso_1000/rigol_mso1104zs-1.0.3.zip",
+        "sha256": "ba32caa7624714e3560bce97f7faa3814a7b617b6c8697f8264dde695da47289"
     }
 ]
