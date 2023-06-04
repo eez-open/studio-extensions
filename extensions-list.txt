@@ -1,3 +1,8 @@
+# PEXT (project extensions)
+pext:eez-flow-ext-postgres
+
+# IEXT (instrument extensions)
+
 # EEZ
 ./org/eez/advanced-measurements/advanced-measurements-1.0.0.zip
 ./org/eez/advanced-measurements/advanced-measurements-1.1.0.zip

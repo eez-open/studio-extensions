@@ -71,3 +71,4 @@ org/eez/advanced-measurements/*.js
 
 */.~lock.*
 
+build/npm_registry.json
