@@ -51,15 +51,73 @@ async function getRepositoryCatalogs() {
                 encoding: "utf-8",
             });
 
-            const json = JSON.parse(jsonStr)
+            const json = JSON.parse(jsonStr);
 
-            repositoryCatalogs.push({
-                name,
-                description: json.versions[json["dist-tags"].latest].description,
-                "eez-studio": {
-                    minVersion: "0.10.1",
-                },
-            });
+            for (const versionKey of Object.keys(json.versions)) {
+                const version = json.versions[versionKey];
+                const packageDownloadUrl = version.dist.tarball;
+                if (packageDownloadUrl) {
+                    let extensionHash = extensionHashes.find(
+                        (extensionHash: any) =>
+                            extensionHash.downloadUrl === packageDownloadUrl
+                    );
+                    if (!extensionHash) {
+                        console.log(
+                            "New SHA256 hash stored for package download url: ",
+                            packageDownloadUrl
+                        );
+                        extensionHash = {
+                            downloadUrl: packageDownloadUrl,
+                            sha256: version.dist.shasum,
+                        };
+                        extensionHashes.push(extensionHash);
+                    } else {
+                        if (extensionHash.sha256 !== version.dist.shasum) {
+                            console.log(
+                                `SHA256 hash changed for extension ${extension}-${versionKey} from ${extensionHash.sha256} to ${version.dist.shasum}`
+                            );
+                        }
+                    }
+
+                    const tarball = await request({
+                        method: "GET",
+                        url: packageDownloadUrl,
+                        encoding: null,
+                    });
+                    const files = await decompress(tarball);
+
+                    let image;
+                    const imagePath = "package/" + version.image || "image.png";
+                    const imageFile = files.find(
+                        (file) => file.path === imagePath
+                    );
+
+                    if (imageFile) {
+                        const imageData = await Jimp.read(imageFile.data);
+                        image = await imageData
+                            .resize(
+                                256,
+                                (imageData.getHeight() * 256) /
+                                    imageData.getWidth()
+                            )
+                            .getBase64Async(imageData.getMIME());
+                    }
+
+                    repositoryCatalogs.push({
+                        id: name,
+                        name,
+                        description: version.description,
+                        version: version.version,
+                        image,
+                        "eez-studio": {
+                            minVersion: "0.10.1",
+                        },
+                        sha256: version.dist.shasum,
+                    });
+                } else {
+                    console.log(`extension ${extension} has no tarball`);
+                }
+            }
         } else {
             let downloadUrl: string;
             let extensionZipFileData;
@@ -121,6 +179,8 @@ async function getRepositoryCatalogs() {
 
             packageJson.download = downloadUrl;
 
+            let extensionSha256 = sha256(extensionZipFileData);
+
             let extensionHash = extensionHashes.find(
                 (extensionHash: any) =>
                     extensionHash.downloadUrl === downloadUrl
@@ -132,9 +192,15 @@ async function getRepositoryCatalogs() {
                 );
                 extensionHash = {
                     downloadUrl,
-                    sha256: sha256(extensionZipFileData),
+                    sha256: extensionSha256,
                 };
                 extensionHashes.push(extensionHash);
+            } else {
+                if (extensionHash.sha256 !== extensionSha256) {
+                    console.log(
+                        `SHA256 hash changed for "${downloadUrl}" from ${extensionHash.sha256} to ${extensionSha256}`
+                    );
+                }
             }
             packageJson.sha256 = extensionHash.sha256;
 

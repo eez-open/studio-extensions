@@ -526,5 +526,413 @@
     {
         "downloadUrl": "https://github.com/eez-open/modular-psu-firmware/raw/master/build/extensions/eez_bb3_simulator-1.8.alpha5.zip",
         "sha256": "65f0761baaad81a902d19860eb370ca694194ea34c19c23cfaaca23651640b9a"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.1.tgz",
+        "sha256": "dc46372727c2f5b2fc68b3582fec99f8708d0bf4"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.2.tgz",
+        "sha256": "636b8ffef54e9065ca0c690072738768f641d572"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.4.tgz",
+        "sha256": "7b7da2b5e1d0381f72df4a27201a296a5c3fa0d5"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.5.tgz",
+        "sha256": "5125b6a8a49c01b8d12adc20dd8f790d8c8b4bec"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.6.tgz",
+        "sha256": "1d7cd78616b2a24b5b4bcd3b039f54caa4a9c29c"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.7.tgz",
+        "sha256": "7cd93545e690e3c0e54f473e49a9cbd1af33c8a8"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.8.tgz",
+        "sha256": "8967f2a11e3649ff691daca875f4cf097796467c"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.9.tgz",
+        "sha256": "65ab5a4b3f82d22349acfcfe76080130f730ff84"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.0.tgz",
+        "sha256": "7d66f120e23304a9217bed7e8e7d0a70fa9ff8be"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.1.tgz",
+        "sha256": "08e41e002e73fafaf3fb9fe3951340c5d4b2c06d"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.2.tgz",
+        "sha256": "df6376f56091dfb850baeff062a0fc532ee48b0d"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.3.tgz",
+        "sha256": "0303525596343d9a030949bef140711563315092"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.4.tgz",
+        "sha256": "b1fd7e8c658f74abfd18a2377adc175e42e1cbd1"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.5.tgz",
+        "sha256": "5f56696b85922b3624587dbe90570e620829bb62"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.6.tgz",
+        "sha256": "855191c87965420aa06233e0b805aa35221552f9"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.7.tgz",
+        "sha256": "b64e020fc1ab9c2f558563a4528418a31d4c99ef"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.8.tgz",
+        "sha256": "dda172ac5f81b4bc1fad4253b750cc9ff9627219"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.9.tgz",
+        "sha256": "fdce014881ccc1eb22ca8053b4fb7b6c5b04115a"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.10.tgz",
+        "sha256": "e57512b8646f649adc5d2a212d2de2cd1011d9b6"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.11.tgz",
+        "sha256": "ada5f2b1776a5e0033e483fb7a16550633b7664d"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.12.tgz",
+        "sha256": "c4714fa47e6d16458926c6efb50e3bb40e5ba6a9"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.13.tgz",
+        "sha256": "034eaa9fa6b7a653ab295bcc1bc135cc0464dede"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.14.tgz",
+        "sha256": "2541a12b85259b3a666bf6a98fe49c80a5025f9f"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.15.tgz",
+        "sha256": "73d9da27253ba1a01681f715fcf2d3cd20fb8fdc"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.16.tgz",
+        "sha256": "e9aa9f322c9f1a01f04e55eba23795ecbb92ba43"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.17.tgz",
+        "sha256": "bcb0b8bde86d2f4caaa7c2721cbab3101c8ad416"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.18.tgz",
+        "sha256": "ac88a78eca1bfaedaebfc929604ba13dfb9ebbad"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.19.tgz",
+        "sha256": "2ae1b57b70a1b41120a1524280e482487bdf054c"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.20.tgz",
+        "sha256": "85a5314ac39b5bbd4c6461d19645a0cdc5518054"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.21.tgz",
+        "sha256": "6f10ff2fe415ebaef54071b7f76f8e3320e7e1fb"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.22.tgz",
+        "sha256": "633e84147f46e535976333a34e21090dfcced805"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.23.tgz",
+        "sha256": "da00330665f2d78e32c17278e28b6f9285089871"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.24.tgz",
+        "sha256": "7263080e19f42260a7475421d02eca9e0eefa9dd"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.25.tgz",
+        "sha256": "f20688c00596819bbc8fcb7db9ccf0b598c0448a"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.1.tgz",
+        "sha256": "dc46372727c2f5b2fc68b3582fec99f8708d0bf4"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.2.tgz",
+        "sha256": "636b8ffef54e9065ca0c690072738768f641d572"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.4.tgz",
+        "sha256": "7b7da2b5e1d0381f72df4a27201a296a5c3fa0d5"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.5.tgz",
+        "sha256": "5125b6a8a49c01b8d12adc20dd8f790d8c8b4bec"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.6.tgz",
+        "sha256": "1d7cd78616b2a24b5b4bcd3b039f54caa4a9c29c"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.7.tgz",
+        "sha256": "7cd93545e690e3c0e54f473e49a9cbd1af33c8a8"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.8.tgz",
+        "sha256": "8967f2a11e3649ff691daca875f4cf097796467c"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.9.tgz",
+        "sha256": "65ab5a4b3f82d22349acfcfe76080130f730ff84"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.0.tgz",
+        "sha256": "7d66f120e23304a9217bed7e8e7d0a70fa9ff8be"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.1.tgz",
+        "sha256": "08e41e002e73fafaf3fb9fe3951340c5d4b2c06d"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.2.tgz",
+        "sha256": "df6376f56091dfb850baeff062a0fc532ee48b0d"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.3.tgz",
+        "sha256": "0303525596343d9a030949bef140711563315092"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.4.tgz",
+        "sha256": "b1fd7e8c658f74abfd18a2377adc175e42e1cbd1"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.5.tgz",
+        "sha256": "5f56696b85922b3624587dbe90570e620829bb62"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.6.tgz",
+        "sha256": "855191c87965420aa06233e0b805aa35221552f9"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.7.tgz",
+        "sha256": "b64e020fc1ab9c2f558563a4528418a31d4c99ef"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.8.tgz",
+        "sha256": "dda172ac5f81b4bc1fad4253b750cc9ff9627219"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.9.tgz",
+        "sha256": "fdce014881ccc1eb22ca8053b4fb7b6c5b04115a"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.10.tgz",
+        "sha256": "e57512b8646f649adc5d2a212d2de2cd1011d9b6"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.11.tgz",
+        "sha256": "ada5f2b1776a5e0033e483fb7a16550633b7664d"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.12.tgz",
+        "sha256": "c4714fa47e6d16458926c6efb50e3bb40e5ba6a9"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.13.tgz",
+        "sha256": "034eaa9fa6b7a653ab295bcc1bc135cc0464dede"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.14.tgz",
+        "sha256": "2541a12b85259b3a666bf6a98fe49c80a5025f9f"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.15.tgz",
+        "sha256": "73d9da27253ba1a01681f715fcf2d3cd20fb8fdc"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.16.tgz",
+        "sha256": "e9aa9f322c9f1a01f04e55eba23795ecbb92ba43"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.17.tgz",
+        "sha256": "bcb0b8bde86d2f4caaa7c2721cbab3101c8ad416"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.18.tgz",
+        "sha256": "ac88a78eca1bfaedaebfc929604ba13dfb9ebbad"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.19.tgz",
+        "sha256": "2ae1b57b70a1b41120a1524280e482487bdf054c"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.20.tgz",
+        "sha256": "85a5314ac39b5bbd4c6461d19645a0cdc5518054"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.21.tgz",
+        "sha256": "6f10ff2fe415ebaef54071b7f76f8e3320e7e1fb"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.22.tgz",
+        "sha256": "633e84147f46e535976333a34e21090dfcced805"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.23.tgz",
+        "sha256": "da00330665f2d78e32c17278e28b6f9285089871"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.24.tgz",
+        "sha256": "7263080e19f42260a7475421d02eca9e0eefa9dd"
+    },
+    {
+        "packageDownloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.25.tgz",
+        "sha256": "f20688c00596819bbc8fcb7db9ccf0b598c0448a"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.1.tgz",
+        "sha256": "dc46372727c2f5b2fc68b3582fec99f8708d0bf4"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.2.tgz",
+        "sha256": "636b8ffef54e9065ca0c690072738768f641d572"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.4.tgz",
+        "sha256": "7b7da2b5e1d0381f72df4a27201a296a5c3fa0d5"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.5.tgz",
+        "sha256": "5125b6a8a49c01b8d12adc20dd8f790d8c8b4bec"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.6.tgz",
+        "sha256": "1d7cd78616b2a24b5b4bcd3b039f54caa4a9c29c"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.7.tgz",
+        "sha256": "7cd93545e690e3c0e54f473e49a9cbd1af33c8a8"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.8.tgz",
+        "sha256": "8967f2a11e3649ff691daca875f4cf097796467c"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.0.9.tgz",
+        "sha256": "65ab5a4b3f82d22349acfcfe76080130f730ff84"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.0.tgz",
+        "sha256": "7d66f120e23304a9217bed7e8e7d0a70fa9ff8be"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.1.tgz",
+        "sha256": "08e41e002e73fafaf3fb9fe3951340c5d4b2c06d"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.2.tgz",
+        "sha256": "df6376f56091dfb850baeff062a0fc532ee48b0d"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.3.tgz",
+        "sha256": "0303525596343d9a030949bef140711563315092"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.4.tgz",
+        "sha256": "b1fd7e8c658f74abfd18a2377adc175e42e1cbd1"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.5.tgz",
+        "sha256": "5f56696b85922b3624587dbe90570e620829bb62"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.6.tgz",
+        "sha256": "855191c87965420aa06233e0b805aa35221552f9"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.7.tgz",
+        "sha256": "b64e020fc1ab9c2f558563a4528418a31d4c99ef"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.8.tgz",
+        "sha256": "dda172ac5f81b4bc1fad4253b750cc9ff9627219"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.9.tgz",
+        "sha256": "fdce014881ccc1eb22ca8053b4fb7b6c5b04115a"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.10.tgz",
+        "sha256": "e57512b8646f649adc5d2a212d2de2cd1011d9b6"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.11.tgz",
+        "sha256": "ada5f2b1776a5e0033e483fb7a16550633b7664d"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.12.tgz",
+        "sha256": "c4714fa47e6d16458926c6efb50e3bb40e5ba6a9"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.13.tgz",
+        "sha256": "034eaa9fa6b7a653ab295bcc1bc135cc0464dede"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.14.tgz",
+        "sha256": "2541a12b85259b3a666bf6a98fe49c80a5025f9f"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.15.tgz",
+        "sha256": "73d9da27253ba1a01681f715fcf2d3cd20fb8fdc"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.16.tgz",
+        "sha256": "e9aa9f322c9f1a01f04e55eba23795ecbb92ba43"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.17.tgz",
+        "sha256": "bcb0b8bde86d2f4caaa7c2721cbab3101c8ad416"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.18.tgz",
+        "sha256": "ac88a78eca1bfaedaebfc929604ba13dfb9ebbad"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.19.tgz",
+        "sha256": "2ae1b57b70a1b41120a1524280e482487bdf054c"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.20.tgz",
+        "sha256": "85a5314ac39b5bbd4c6461d19645a0cdc5518054"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.21.tgz",
+        "sha256": "6f10ff2fe415ebaef54071b7f76f8e3320e7e1fb"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.22.tgz",
+        "sha256": "633e84147f46e535976333a34e21090dfcced805"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.23.tgz",
+        "sha256": "da00330665f2d78e32c17278e28b6f9285089871"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.24.tgz",
+        "sha256": "7263080e19f42260a7475421d02eca9e0eefa9dd"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.25.tgz",
+        "sha256": "f20688c00596819bbc8fcb7db9ccf0b598c0448a"
     }
 ]
