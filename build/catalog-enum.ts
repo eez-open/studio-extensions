@@ -105,13 +105,15 @@ async function getRepositoryCatalogs() {
 
                     repositoryCatalogs.push({
                         id: name,
+                        extensionType: "pext",
                         name,
                         description: version.description,
                         version: version.version,
+                        author: version.author.name,
                         image,
-                        "eez-studio": {
+                        "eez-studio": Object.assign({}, version["eez-studio"], {
                             minVersion: "0.10.1",
-                        },
+                        }),
                         sha256: version.dist.shasum,
                     });
                 } else {
@@ -203,6 +205,8 @@ async function getRepositoryCatalogs() {
                 }
             }
             packageJson.sha256 = extensionHash.sha256;
+
+            packageJson.extensionType = packageJson["eez-studio"].main ? "measurement-functions" : "iext";
 
             repositoryCatalogs.push(packageJson);
         }
