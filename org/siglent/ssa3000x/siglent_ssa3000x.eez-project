@@ -1,6 +1,8 @@
 {
   "settings": {
-    "general": {
+    "general": {      
+      "projectVersion": "v3",
+      "projectType": "iext",
       "scpiDocFolder": "doc"
     },
     "build": {

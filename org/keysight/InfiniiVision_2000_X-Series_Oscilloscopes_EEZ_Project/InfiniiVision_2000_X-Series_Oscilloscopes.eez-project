@@ -1,8 +1,8 @@
 {
   "settings": {
     "general": {
-      "projectVersion": "v2",
-      "projectType": "master",
+      "projectVersion": "v3",
+      "projectType": "iext",
       "scpiDocFolder": "doc",
       "imports": []
     },

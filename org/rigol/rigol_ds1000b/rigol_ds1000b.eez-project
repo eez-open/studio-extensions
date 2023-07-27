@@ -1,22 +1,760 @@
 {
+  "objID": "6666cd76-f969-5646-9e7b-e39d750cc7d9",
   "settings": {
+    "objID": "e007d988-9fba-797d-72e9-efc33ca6d05c",
     "general": {
-      "scpiDocFolder": "doc"
+      "objID": "fd434352-2277-c4a8-e87e-e96cfcbf2305",
+      "projectVersion": "v3",
+      "projectType": "iext",
+      "scpiDocFolder": "doc",
+      "extensions": [],
+      "imports": [],
+      "resourceFiles": []
     },
     "build": {
+      "objID": "72794a43-a0fc-13c2-7eb5-67dd952141a4",
       "configurations": [
         {
+          "objID": "4e176253-816f-3983-c2a2-cc771b90926f",
           "name": "DS1000B",
           "description": "The Rigol DS1000B Oscilloscopes provide 4 channels with a medium-range bandwidth and sample rate. If 4 channels are required, this series is a suitable alternative to the (lower priced) DS1000Z and the higher priced DS4000 series.\nAll models are equipped with 4 channels, a sample rate of 2 GSa/s, a storage of 15 kpts and a 5,7” (14,4 cm) TFT color display, as well as basic measurement and mathematical functions.\nYou can choose between 3 ranges of bandwidth: 70, 100 and 200 MHz.",
           "properties": "{\n  \"connection\": {\n    \"serial\": {\n      \"baudRates\": [9600, 19200, 38400, 57600]\n    },\n    \"ethernet\": {\n      \"port\": 5555\n    }\n  },\n  \"channels\": [\n    { \"color\": \"#FBFB00\", \"colorInverse\": \"#AEAE00\" },\n    { \"color\": \"#03FFFF\", \"colorInverse\": \"#00B5B5\" },\n    { \"color\": \"#F000F0\", \"colorInverse\": \"#A300A3\" },\n    { \"color\": \"#007FFF\", \"colorInverse\": \"#0059B3\" }\n  ]\n}"
         }
       ],
       "files": [],
-      "destinationFolder": "."
+      "destinationFolder": ".",
+      "lvglInclude": "lvgl/lvgl.h"
     }
+  },
+  "variables": {
+    "objID": "c6c71e16-53e1-217f-d03b-cef56c6b037a",
+    "globalVariables": [],
+    "structures": [],
+    "enums": []
+  },
+  "actions": [],
+  "userPages": [],
+  "userWidgets": [],
+  "styles": [],
+  "scpi": {
+    "objID": "6efb8aa0-10ce-d5da-e496-646dec7fee06",
+    "subsystems": [
+      {
+        "objID": "4d71cb98-fa2c-4d97-1fd9-dc51ae95c626",
+        "name": "IEEE488.2 Common Commands ",
+        "helpLink": "1 - Rigol-DS1000B-IEEE488.html",
+        "commands": [
+          {
+            "objID": "35df42f5-3d06-78c3-0356-7d982f6316c5",
+            "name": "*IDN?",
+            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_idn",
+            "parameters": [],
+            "response": {
+              "objID": "3bb230a3-2981-1573-77e3-daf6927edf78",
+              "type": [
+                {
+                  "objID": "d5285660-e6b2-75b8-4c3a-33ee8db000d8",
+                  "type": "quoted-string"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "435f974f-2361-a642-70c2-907163b7ee95",
+            "name": "*OPC?",
+            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_opc",
+            "parameters": [],
+            "response": {
+              "objID": "c6808ccc-b44e-2511-5048-078cb1a10c51",
+              "type": [
+                {
+                  "objID": "cdbe63df-8e2f-e0a0-4b14-f3535de2950d",
+                  "type": "boolean"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "3929d111-5a22-bc1c-6233-ade21397d2d6",
+            "name": "*RST",
+            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_rst",
+            "parameters": [],
+            "response": {
+              "objID": "fd5b2484-e2e9-e182-f68f-d543c3d4aac1",
+              "type": [
+                {
+                  "objID": "dbb61e0e-78f6-7987-a45b-68051197a6ff"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "7fee9092-8c54-513a-48b2-1af5bff848f3",
+            "name": "*LRN?",
+            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_lrn",
+            "parameters": [],
+            "response": {
+              "objID": "d4195f90-74f1-4f97-b7ea-b264d574ad6b",
+              "type": [
+                {
+                  "objID": "fe9dde0e-9d52-d94d-a8d9-f7170f66e15f",
+                  "type": "quoted-string"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "objID": "977b2abb-60b1-f8b4-aed9-96a19a3e142e",
+        "name": "SYSTem Commands ",
+        "helpLink": "2 - Rigol-DS1000B-SYSTem.html",
+        "commands": [
+          {
+            "objID": "35b00951-f531-840f-1e05-1850ea5d1ff8",
+            "name": ":AUTO",
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_auto",
+            "parameters": [],
+            "response": {
+              "objID": "21b24c6d-ed7f-2680-8d9a-135fcb23f322",
+              "type": [
+                {
+                  "objID": "a8c27fe4-4990-58b6-a5cc-c5a0810da9ac"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "6baf19f6-d6a2-5213-c73f-fe9f8dc3182b",
+            "name": ":RUN",
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_run",
+            "parameters": [],
+            "response": {
+              "objID": "571b9054-b867-6087-910c-ddd2e43f7c59",
+              "type": [
+                {
+                  "objID": "b5c0bd57-e93d-5ef2-661e-4ad7442dada4"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "ae9d8376-696d-a5e8-0abf-841730ce9e31",
+            "name": ":STOP",
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_stop",
+            "parameters": [],
+            "response": {
+              "objID": "7a943266-b5db-11e5-4694-5fc6fa0cfadc",
+              "type": [
+                {
+                  "objID": "05769393-2503-6efa-dafe-c397b9e32404"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "750b4c2e-aeb0-95ec-ce58-a7f214969b1a",
+            "name": ":SYSTem:ERRor",
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_err",
+            "parameters": [],
+            "response": {
+              "objID": "f87abe67-96f6-d7a9-4ade-d5906d20c9f3",
+              "type": [
+                {
+                  "objID": "d3301527-427c-0c5c-9f0d-3bf12c92e850"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "9138ae87-9d14-056f-d3a1-c742e060dfd8",
+            "name": ":SYSTem:ERRor?",
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_err",
+            "parameters": [],
+            "response": {
+              "objID": "826b4862-1e92-d279-cdd1-f6d5f59b775a",
+              "type": [
+                {
+                  "objID": "caaab2be-a5b1-d379-2b52-6bb999c85186",
+                  "type": "nr1"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "9a64ba9a-e909-8f0f-203c-8778aef8049b",
+            "name": ":SYSTem:SETup",
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_set",
+            "parameters": [
+              {
+                "objID": "0ceaa938-5f09-4ad5-b622-584474c1da60",
+                "name": "setup_data",
+                "type": [],
+                "isOptional": false
+              }
+            ],
+            "response": {
+              "objID": "b8118647-160c-3e40-a647-5c6705064ca8",
+              "type": [
+                {
+                  "objID": "bee3da12-81e9-cab7-856f-993df2eea438"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "131174e8-a78b-b246-c00d-a0f901cea321",
+            "name": ":SYSTem:SETup?",
+            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_set",
+            "parameters": [],
+            "response": {
+              "objID": "901e17e4-319c-5d5c-df97-a2edb74b1b5e",
+              "type": [
+                {
+                  "objID": "9b5c225f-90ae-d712-7a15-151ad6eea25f",
+                  "type": "data-block"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "objID": "162e6d00-2012-2f9c-a3a2-df5955becfc4",
+        "name": "ACQuire Commands",
+        "helpLink": "3 - Rigol-DS1000B-ACQuire.html",
+        "commands": [
+          {
+            "objID": "d1c50657-1111-3df8-42d9-445520b4d2fa",
+            "name": ":ACQuire:AVERages",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_aver",
+            "parameters": [],
+            "response": {
+              "objID": "59539732-f487-1bd6-b6d9-314409a00509",
+              "type": [
+                {
+                  "objID": "d7e6e379-52b2-f7e9-9c37-604ebe366079"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "80d7f714-6aaf-e5cc-1dae-955c8854133d",
+            "name": ":ACQuire:AVERages?",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_aver2",
+            "parameters": [],
+            "response": {
+              "objID": "2cf074bc-4639-9d70-fe53-9b81afa670e6",
+              "type": [
+                {
+                  "objID": "f681354b-7855-08bb-8eca-1ee06e59f449",
+                  "type": "nr1"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "d83a3272-8bde-4e33-056b-da3b663c9d31",
+            "name": ":ACQuire:MODE",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_mode",
+            "parameters": [],
+            "response": {
+              "objID": "b5439d8e-83bb-8153-fc48-39f582d9f3e2",
+              "type": [
+                {
+                  "objID": "bcf1abf6-10c4-5706-5729-b480a0f70977"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "aa957014-30b7-77d4-3d63-cf254670b981",
+            "name": ":ACQuire:MODE?",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_mode2",
+            "parameters": [],
+            "response": {
+              "objID": "6f35994d-b167-36c7-6912-28a11344291e",
+              "type": [
+                {
+                  "objID": "b7b444e6-64d2-fbe6-47b3-a51853b0fdef",
+                  "type": "discrete",
+                  "enumeration": "acq_mode"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "385c34d8-4a7e-fc78-2f9c-76e6562e8d28",
+            "name": ":ACQuire:SRATe?[{<CHANnel<n>}]",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_srat",
+            "parameters": [],
+            "response": {
+              "objID": "fe5d5ab2-61cf-9eac-6c79-4ba5f903a63d",
+              "type": [
+                {
+                  "objID": "36ea1cab-9944-ed94-78d4-0267e1dd250f"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "bec506ce-9373-621b-c2dc-43788e4764ab",
+            "name": ":ACQuire:TYPE",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_type",
+            "parameters": [],
+            "response": {
+              "objID": "d8831dba-9c0e-b358-107b-8bf360f825f2",
+              "type": [
+                {
+                  "objID": "59d5d7ce-0018-9e87-56b1-4e07ee8f9527"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "85e6a94c-ae07-2d7b-dfd0-b2d4b62cc594",
+            "name": ":ACQuire:TYPE?",
+            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_type2",
+            "parameters": [],
+            "response": {
+              "objID": "df98d23d-071f-f456-c78d-b4da45f5f3e9",
+              "type": [
+                {
+                  "objID": "ade3a3cb-57eb-9dbc-b129-62ee09de89d5",
+                  "type": "discrete",
+                  "enumeration": "acq_type"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "objID": "f569d1bc-4469-8222-d182-1eee79767a6a",
+        "name": "DISPlay Commands",
+        "helpLink": "4 - Rigol-DS1000B-DISPlay.html",
+        "commands": [
+          {
+            "objID": "0a29a2d2-c4be-673a-54e2-203501809fc5",
+            "name": ":DISPlay:BRIGhtness",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_brig",
+            "parameters": [],
+            "response": {
+              "objID": "3bc28eb1-7f8e-176e-be03-3ee12dbb55c5",
+              "type": [
+                {
+                  "objID": "74605417-a45b-1cfc-d4c2-cd8805077f31"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "5f220a67-ad41-9ed2-2207-bac6bc483696",
+            "name": ":DISPlay:BRIGhtness?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_brig2",
+            "parameters": [],
+            "response": {
+              "objID": "c64d7233-3c70-a321-ee1e-c8c370d6b5cb",
+              "type": [
+                {
+                  "objID": "7d5f02d9-7ade-8f92-d70a-c878ef399058",
+                  "type": "nr1"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "c013135e-6917-4923-936d-a7e3a5ff345d",
+            "name": ":DISPlay:CLEar",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_cle",
+            "parameters": [],
+            "response": {
+              "objID": "eefb9c63-addb-1390-c722-bee6b6cc294a",
+              "type": [
+                {
+                  "objID": "ef940c04-0ee2-643f-6290-359d4df5258a"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "ef1b782d-444f-167e-a9a6-9f7bd5e62867",
+            "name": ":DISPlay:DATA?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_data",
+            "parameters": [],
+            "response": {
+              "objID": "d1910c76-6399-306f-afcf-cf0090b1b77d",
+              "type": [
+                {
+                  "objID": "f0c21eaa-25d4-2e53-6d90-94fe37899514",
+                  "type": "data-block"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "ac343e3b-070e-ecd0-a5f1-b97970237651",
+            "name": ":DISPlay:GRID",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_grid",
+            "parameters": [],
+            "response": {
+              "objID": "2724f5c9-c7b7-9d99-0c31-8c73bfca0242",
+              "type": [
+                {
+                  "objID": "68664d27-163e-363d-70e2-a6a95dcdc54d"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "f938bb85-1733-eee2-7941-92f324ab576d",
+            "name": ":DISPlay:GRID?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_grid2",
+            "parameters": [],
+            "response": {
+              "objID": "510259a6-135d-078a-9c3f-c137cb7231f2",
+              "type": [
+                {
+                  "objID": "6face682-4f1a-fadf-824a-eb3edf92cc0d",
+                  "type": "discrete",
+                  "enumeration": "disp_grid"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "117f2ae9-b146-4ee7-d750-d8c6ec9a0fad",
+            "name": ":DISPlay:INTensity",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_int",
+            "parameters": [],
+            "response": {
+              "objID": "637c0bc2-f065-4bfc-21d7-1f28b78662d0",
+              "type": [
+                {
+                  "objID": "8b8dd2f6-3ace-e810-0fda-8e9397f80302"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "4ae69119-a66e-70fc-6907-1aee8e946ef9",
+            "name": ":DISPlay:INTensity?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_int2",
+            "parameters": [],
+            "response": {
+              "objID": "ff0347ba-948c-1010-52c4-2e85f966536b",
+              "type": [
+                {
+                  "objID": "97c8dd5b-3ad1-e1ef-d635-90d0166a0279",
+                  "type": "nr1"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "f3a6aca1-1a5c-4806-4dd3-c1962da0667c",
+            "name": ":DISPlay:MNUDisplay",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnud",
+            "parameters": [],
+            "response": {
+              "objID": "7b673801-363c-ef22-a982-55ade925a730",
+              "type": [
+                {
+                  "objID": "1596ac80-72ba-fc9b-f0e5-02f3f24aa455"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "18e57978-c003-5a6a-a35b-0a972a687a3f",
+            "name": ":DISPlay:MNUDisplay?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnud2",
+            "parameters": [],
+            "response": {
+              "objID": "3ff72440-6e9b-8ab4-89fe-699c1e04da65",
+              "type": [
+                {
+                  "objID": "9bf0aa48-5ae2-f834-0d3b-cb0f8fc7b58b",
+                  "type": "nr1"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "0c8d98c6-8b85-f350-415e-4fbf4659e4f1",
+            "name": ":DISPlay:MNUStatus",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnus",
+            "parameters": [],
+            "response": {
+              "objID": "af9ea7ca-e6b0-4493-f0f9-285173b1d14d",
+              "type": [
+                {
+                  "objID": "83c83911-4697-7e5a-152c-6bf21da9f7c7"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "269d4a0b-9dc0-2b8d-e983-3efb17aa3685",
+            "name": ":DISPlay:MNUStatus?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnus2",
+            "parameters": [],
+            "response": {
+              "objID": "3086356f-900e-3435-e4c4-5a112d69a372",
+              "type": [
+                {
+                  "objID": "2b77444f-0ac2-84e1-27ba-cf2229f9de6d",
+                  "type": "nr1"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "80d614e2-e6a4-2e2e-5b6e-8601c60f915d",
+            "name": ":DISPlay:PERSist",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_pers",
+            "parameters": [],
+            "response": {
+              "objID": "fb60c9a7-a986-6fdf-5758-a3bcef523376",
+              "type": [
+                {
+                  "objID": "cc0b9779-c650-586f-6fab-c3f46d48973e"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "226949ec-4624-ad71-3b41-af3ac1742ba2",
+            "name": ":DISPlay:PERSist?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_pers2",
+            "parameters": [],
+            "response": {
+              "objID": "90de6313-e12a-1350-c749-2eaf5f1129dd",
+              "type": [
+                {
+                  "objID": "9d207ce2-35c1-ea49-215a-429fc4cce461",
+                  "type": "boolean"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "e286349c-1081-40f5-ca2c-1e5dd7d248b6",
+            "name": ":DISPlay:SCReen",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_scr",
+            "parameters": [],
+            "response": {
+              "objID": "20f32096-1ad4-8986-be09-39b1867936f3",
+              "type": [
+                {
+                  "objID": "d0be66a8-3d63-bf3c-407c-0e218ff3eab5"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "83479997-f12a-2cac-bdb2-a9e947eda6fd",
+            "name": ":DISPlay:SCReen?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_scr2",
+            "parameters": [],
+            "response": {
+              "objID": "ed2fe82a-26f0-6ffb-3137-404ab66f7d7b",
+              "type": [
+                {
+                  "objID": "13166e58-c3c8-9b73-9911-6783a58282b1",
+                  "type": "discrete",
+                  "enumeration": "disp_scr"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "0b00b0ec-c16d-6094-9691-707b994d2eaa",
+            "name": ":DISPlay:TYPE",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_type",
+            "parameters": [],
+            "response": {
+              "objID": "b3593091-476f-4daf-7d55-43da804060fb",
+              "type": [
+                {
+                  "objID": "bf6a8c3d-67d3-d93c-00c2-42ec7c470a08"
+                }
+              ]
+            }
+          },
+          {
+            "objID": "4ea5ff6e-d632-bb36-45e2-35787ecbdb27",
+            "name": ":DISPlay:TYPE?",
+            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_type2",
+            "parameters": [],
+            "response": {
+              "objID": "804aaece-1d45-3066-a92e-adafa795649c",
+              "type": [
+                {
+                  "objID": "47c782e1-c20b-f5e3-ea26-50163b89492b",
+                  "type": "discrete",
+                  "enumeration": "disp_type"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "enums": [
+      {
+        "objID": "edd2b4ab-6cdb-1c08-b865-d9b95dcf2e8c",
+        "name": "acq_mode",
+        "members": [
+          {
+            "objID": "bf40357c-45ee-e61b-895e-c23856ac7d81",
+            "name": "RTIM",
+            "value": ""
+          },
+          {
+            "objID": "e628a2e1-4442-69c0-30bf-e14e1b441dba",
+            "name": "ETIM",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "objID": "45b896ef-6390-58f7-4a20-d54edf9d198e",
+        "name": "acq_type",
+        "members": [
+          {
+            "objID": "356484f4-15d6-407e-2732-c5858526cdde",
+            "name": "NORM",
+            "value": ""
+          },
+          {
+            "objID": "cdd3209f-3093-9046-653d-89f45a8c3e07",
+            "name": "AVER",
+            "value": ""
+          },
+          {
+            "objID": "8f75c7a1-2e3a-5b89-08f5-eecfd9cf9cbe",
+            "name": "PEAK",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "objID": "1c2388eb-2fd1-2abe-2e1e-17b7e87673d7",
+        "name": "disp_grid",
+        "members": [
+          {
+            "objID": "8dec6690-bbe0-4fdb-25a6-4e4717b1c275",
+            "name": "NONE"
+          },
+          {
+            "objID": "fe02d327-870c-4868-29dc-68132b380786",
+            "name": "HALF"
+          },
+          {
+            "objID": "48bce73a-7a38-c080-909d-216997e31546",
+            "name": "FULL"
+          }
+        ]
+      },
+      {
+        "objID": "3212fb23-ae69-5fcf-0eee-93bd1c706a6c",
+        "name": "disp_scr",
+        "members": [
+          {
+            "objID": "306a52d3-5e56-b23f-b5c0-0d3a9285e3fb",
+            "name": "NORM"
+          },
+          {
+            "objID": "05e1cc61-5562-bcd4-15ef-636da56f9a1c",
+            "name": "INV"
+          }
+        ]
+      },
+      {
+        "objID": "22dc6183-6880-e5be-4108-040e86c3a6de",
+        "name": "disp_type",
+        "members": [
+          {
+            "objID": "a7c1ce96-baad-be07-3eae-b026d5041867",
+            "name": "DOTS"
+          },
+          {
+            "objID": "cddb5c3b-1fe4-ff55-34a8-eca43da347ca",
+            "name": "VECT"
+          }
+        ]
+      }
+    ]
+  },
+  "shortcuts": {
+    "objID": "66e91306-0a0a-cfae-fc85-d4665bf6f699",
+    "shortcuts": [
+      {
+        "objID": "533f8380-9388-f2cb-af06-1e90843f6c94",
+        "id": "3f30a216-b77a-42f5-bcba-ecb1cbb84924",
+        "name": "Waveform data",
+        "action": {
+          "objID": "db6030d3-61a0-d92d-9061-196b5c5f658f",
+          "type": "javascript",
+          "data": "// Preamble:\n// <format>,<type>,<points>,<count>,<xincrement>,<xorigin>,<xreference>,<yincrem ent>,<yorigin>,<yreference>\n// Wherein,\n// <format>: 0 (BYTE), 1 (WORD) or 2 (ASC).\n// <type>: 0 (NORMal), 1 (MAXimum) or 2 (RAW).\n// <points>: an integer between 1 and 12000000.\n// <count>: the number of averages in the average sample mode and 1 in other modes.\n// <xincrement>: the time difference between two neighboring points in the X direction.\n// <xorigin>: the start time of the waveform data in the X direction.\n// <xreference>: the reference time of the data point in the X direction.\n// <yincrement>: the waveform increment in the Y direction.\n// <yorigin>: the vertical offset relative to the \"Vertical Reference Position\" in the Y direction.\n// <yreference>: the vertical reference position in the Y direction.\n\nconst CHUNK_MAX_POINTS = 1000000;\nconst NUM_CHANNELS = instrument.properties.channels.length;\n\nconnection.acquire();\n\nvar displayedChannels = [];\n\nfor (var iChannel = 1; iChannel <= NUM_CHANNELS; ++iChannel) {\n    var displayed = await connection.query(`CHANnel${iChannel}:DISPlay?`);\n    if (displayed) {\n        displayedChannels.push(iChannel);\n    }\n}\n\nif (displayedChannels.length > 0) {\n    connection.command(\"ACQuire:MDEPth auto\");\n    connection.command(\"WAVeform:MODE raw\");\n    connection.command(\"STOP\");\n    connection.command(\"WAVeform:FORMat byte\");\n    \n    var samplingRate = await connection.query(\"ACQuire:SRATe?\");\n    var timeScale = await connection.query(\"TIMebase:SCALe?\");\n    \n    var chunk_points = Math.floor(CHUNK_MAX_POINTS / displayedChannels.length);\n\n    for (var iDisplayedChannel = 0; iDisplayedChannel < displayedChannels.length; ++iDisplayedChannel) {\n        var iChannel = displayedChannels[iDisplayedChannel];\n\n        connection.command(`WAVeform:SOURce chan${iChannel}`);\n    \n        var channelScale = await connection.query(`CHANnel${iChannel}:SCALe?`);\n        var channelOffset = await connection.query(`CHANnel${iChannel}:OFFSet?`);\n        \n        var unit = await connection.query(`CHANnel${iChannel}:UNITs?`);\n        var color = instrument.properties.channels[iChannel - 1].color;\n        var colorInverse = instrument.properties.channels[iChannel - 1].colorInverse;\n        var label = `Channel ${iChannel}`;\n\n        var preamble = await connection.query(\"WAVeform:PREamble?\");\n        var preambleArray = preamble.split(',');\n        \n        var numPoints = parseInt(preambleArray[2]);\n        \n        var yinc = parseFloat(preambleArray[7]);\n        var yor = parseFloat(preambleArray[8]);\n        var yref = parseFloat(preambleArray[9]);\n        \n        var offset = -(yor + yref) * yinc;\n        var scale = yinc;\n        \n        var description = `Channel: ${iChannel}, Sampling rate: ${samplingRate}, Preamble: ${preamble}`;\n        notify.info(description);\n        \n        var data = [];\n\n        var numChunks = Math.ceil(numPoints / chunk_points);\n        for (var iChunk = 0; iChunk < numChunks; ++iChunk) {\n            notify.info(`Reading waveform data ${iChunk + 1} of ${numChunks}`);\n            var i = iChunk * chunk_points;\n            connection.command(`WAVeform:STARt ${i + 1}`);\n            connection.command(`WAVeform:STOP ${Math.min(i + chunk_points, numPoints)}`);\n            var waveform = await connection.query(\"WAVeform:DATA?\"); \n            data.push(waveform.data);\n            waveform.deleteLog();\n        }\n\n        session.addChart({\n            description,\n            data,\n            samplingRate,\n            offset,\n            scale,\n            format: 2,\n            unit,\n            color,\n            colorInverse,\n            label,\n            viewOptions: {\n                axesLines: {\n                    type: \"fixed\",\n                    majorSubdivision: {\n                        horizontal: 12,\n                        vertical: 8\n                    },\n                    minorSubdivision: {\n                        horizontal: 5,\n                        vertical: 5\n                    }\n                }\n            },\n            horizontalScale: timeScale,\n            verticalScale: channelScale\n        });\n    }\n}\n\nconnection.release();\n"
+        },
+        "keybinding": "f3",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 2,
+        "toolbarButtonColor": "#7BC3D4",
+        "requiresConfirmation": true
+      },
+      {
+        "objID": "2a479d47-1ff7-5bdf-2ce9-ab57b30cfae6",
+        "id": "1e6d774d-c9db-4dae-b925-5f331c3ff2d3",
+        "name": "Run",
+        "action": {
+          "objID": "c0fefeef-e0e6-67ce-b9df-1c18d5bc2414",
+          "type": "scpi-commands",
+          "data": "RUN"
+        },
+        "keybinding": "f4",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 3,
+        "toolbarButtonColor": "#78C36A",
+        "requiresConfirmation": false
+      },
+      {
+        "objID": "708d9edc-811d-6adb-4f18-1926f9499d88",
+        "id": "a79c310b-564f-49a9-d367-536ec41451fd",
+        "name": "Stop",
+        "action": {
+          "objID": "4b1fb7ab-da81-7a8a-36e1-2c5cda124005",
+          "type": "scpi-commands",
+          "data": "STOP"
+        },
+        "keybinding": "f5",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 4,
+        "toolbarButtonColor": "#E665A0",
+        "requiresConfirmation": false
+      },
+      {
+        "objID": "e870a2bf-8be9-4e09-9b89-d890a1cbc61a",
+        "id": "831922c7-5612-4780-9060-5cd2fd6772d2",
+        "name": "Screenshot",
+        "action": {
+          "objID": "f2b9d143-3eef-30c2-7ae4-92c8d74e683e",
+          "type": "scpi-commands",
+          "data": "STOP\nDISP:DATA?"
+        },
+        "keybinding": "f2",
+        "showInToolbar": true,
+        "toolbarButtonPosition": 1,
+        "toolbarButtonColor": "#7BC3D4",
+        "requiresConfirmation": false
+      }
+    ]
   },
   "extensionDefinitions": [
     {
+      "objID": "3bb775f2-0e45-b2a8-0857-69e8c79a54d9",
       "name": "DS1074B",
       "description": "High quality 4 channel DSO with 70 MHz bandwidth and 2 GSa/s.",
       "buildConfiguration": "DS1000B",
@@ -33,9 +771,11 @@
       "idfSupportedModels": "DS1074B",
       "idfRevisionComments": "No comment",
       "idfAuthor": "Envox",
-      "sdlFriendlyName": "RIGOL DS1074B"
+      "sdlFriendlyName": "RIGOL DS1074B",
+      "useDashboardProjects": []
     },
     {
+      "objID": "948f8f72-e0ad-2436-7199-34a0f4997a0c",
       "name": "DS1104B",
       "description": "High quality 4 channel DSO with 100 MHz bandwidth and 2 GSa/s.",
       "buildConfiguration": "DS1000B",
@@ -51,9 +791,11 @@
       "idfSupportedModels": "DS1104B",
       "idfRevisionComments": "No comment",
       "idfAuthor": "Envox",
-      "sdlFriendlyName": "RIGOL DS1104B"
+      "sdlFriendlyName": "RIGOL DS1104B",
+      "useDashboardProjects": []
     },
     {
+      "objID": "603e0393-47cd-3f57-d9d3-024db0dd12d0",
       "name": "DS1204B",
       "description": "High quality 4 channel DSO with 200 MHz bandwidth and 2 GSa/s.",
       "buildConfiguration": "DS1000B",
@@ -69,414 +811,10 @@
       "idfSupportedModels": "DS1204B",
       "idfRevisionComments": "No comment",
       "idfAuthor": "Envox",
-      "sdlFriendlyName": "RIGOL DS1204B"
+      "sdlFriendlyName": "RIGOL DS1204B",
+      "useDashboardProjects": []
     }
   ],
-  "scpi": {
-    "subsystems": [
-      {
-        "name": "IEEE488.2 Common Commands ",
-        "helpLink": "1 - Rigol-DS1000B-IEEE488.html",
-        "commands": [
-          {
-            "name": "*IDN?",
-            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_idn",
-            "parameters": [],
-            "response": {
-              "type": "quoted-string"
-            }
-          },
-          {
-            "name": "*OPC?",
-            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_opc",
-            "parameters": [],
-            "response": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "*RST",
-            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_rst",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": "*LRN?",
-            "helpLink": "1 - Rigol-DS1000B-IEEE488.html#ieee488_lrn",
-            "parameters": [],
-            "response": {
-              "type": "quoted-string"
-            }
-          }
-        ]
-      },
-      {
-        "name": "SYSTem Commands ",
-        "helpLink": "2 - Rigol-DS1000B-SYSTem.html",
-        "commands": [
-          {
-            "name": ":AUTO",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_auto",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":RUN",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_run",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":STOP",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_stop",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":SYSTem:ERRor",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_err",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":SYSTem:ERRor?",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_err",
-            "parameters": [],
-            "response": {
-              "type": "nr1"
-            }
-          },
-          {
-            "name": ":SYSTem:SETup",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_set",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":SYSTem:SETup?",
-            "helpLink": "2 - Rigol-DS1000B-SYSTem.html#syst_set",
-            "parameters": [],
-            "response": {
-              "type": "data-block"
-            }
-          }
-        ]
-      },
-      {
-        "name": "ACQuire Commands",
-        "helpLink": "3 - Rigol-DS1000B-ACQuire.html",
-        "commands": [
-          {
-            "name": ":ACQuire:AVERages",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_aver",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":ACQuire:AVERages?",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_aver2",
-            "parameters": [],
-            "response": {
-              "type": "nr1"
-            }
-          },
-          {
-            "name": ":ACQuire:MODE",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_mode",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":ACQuire:MODE?",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_mode2",
-            "parameters": [],
-            "response": {
-              "type": "discrete",
-              "enumeration": "acq_mode"
-            }
-          },
-          {
-            "name": ":ACQuire:SRATe?[{<CHANnel<n>}]",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_srat",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":ACQuire:TYPE",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_type",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":ACQuire:TYPE?",
-            "helpLink": "3 - Rigol-DS1000B-ACQuire.html#_scpi_acq_type2",
-            "parameters": [],
-            "response": {
-              "type": "discrete",
-              "enumeration": "acq_type"
-            }
-          }
-        ]
-      },
-      {
-        "name": "DISPlay Commands",
-        "helpLink": "4 - Rigol-DS1000B-DISPlay.html",
-        "commands": [
-          {
-            "name": ":DISPlay:BRIGhtness",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_brig",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":DISPlay:BRIGhtness?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_brig2",
-            "parameters": [],
-            "response": {
-              "type": "nr1"
-            }
-          },
-          {
-            "name": ":DISPlay:CLEar",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_cle",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":DISPlay:DATA?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_data",
-            "parameters": [],
-            "response": {
-              "type": "data-block"
-            }
-          },
-          {
-            "name": ":DISPlay:GRID",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_grid",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":DISPlay:GRID?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_grid2",
-            "parameters": [],
-            "response": {
-              "type": "discrete",
-              "enumeration": "disp_grid"
-            }
-          },
-          {
-            "name": ":DISPlay:INTensity",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_int",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":DISPlay:INTensity?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_int2",
-            "parameters": [],
-            "response": {
-              "type": "nr1"
-            }
-          },
-          {
-            "name": ":DISPlay:MNUDisplay",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnud",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":DISPlay:MNUDisplay?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnud2",
-            "parameters": [],
-            "response": {
-              "type": "nr1"
-            }
-          },
-          {
-            "name": ":DISPlay:MNUStatus",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnus",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":DISPlay:MNUStatus?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_mnus2",
-            "parameters": [],
-            "response": {
-              "type": "nr1"
-            }
-          },
-          {
-            "name": ":DISPlay:PERSist",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_pers",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":DISPlay:PERSist?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_pers2",
-            "parameters": [],
-            "response": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": ":DISPlay:SCReen",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_scr",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":DISPlay:SCReen?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_scr2",
-            "parameters": [],
-            "response": {
-              "type": "discrete",
-              "enumeration": "disp_scr"
-            }
-          },
-          {
-            "name": ":DISPlay:TYPE",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_type",
-            "parameters": [],
-            "response": {}
-          },
-          {
-            "name": ":DISPlay:TYPE?",
-            "helpLink": "4 - Rigol-DS1000B-DISPlay.html#_scpi_disp_type2",
-            "parameters": [],
-            "response": {
-              "type": "discrete",
-              "enumeration": "disp_type"
-            }
-          }
-        ]
-      }
-    ],
-    "enums": [
-      {
-        "name": "acq_mode",
-        "members": [
-          {
-            "name": "RTIM",
-            "value": ""
-          },
-          {
-            "name": "ETIM",
-            "value": ""
-          }
-        ]
-      },
-      {
-        "name": "acq_type",
-        "members": [
-          {
-            "name": "NORM",
-            "value": ""
-          },
-          {
-            "name": "AVER",
-            "value": ""
-          },
-          {
-            "name": "PEAK",
-            "value": ""
-          }
-        ]
-      },
-      {
-        "name": "disp_grid",
-        "members": [
-          {
-            "name": "NONE"
-          },
-          {
-            "name": "HALF"
-          },
-          {
-            "name": "FULL"
-          }
-        ]
-      },
-      {
-        "name": "disp_scr",
-        "members": [
-          {
-            "name": "NORM"
-          },
-          {
-            "name": "INV"
-          }
-        ]
-      },
-      {
-        "name": "disp_type",
-        "members": [
-          {
-            "name": "DOTS"
-          },
-          {
-            "name": "VECT"
-          }
-        ]
-      }
-    ]
-  },
-  "shortcuts": {
-    "shortcuts": [
-      {
-        "id": "3f30a216-b77a-42f5-bcba-ecb1cbb84924",
-        "name": "Waveform data",
-        "action": {
-          "type": "javascript",
-          "data": "// Preamble:\n// <format>,<type>,<points>,<count>,<xincrement>,<xorigin>,<xreference>,<yincrem ent>,<yorigin>,<yreference>\n// Wherein,\n// <format>: 0 (BYTE), 1 (WORD) or 2 (ASC).\n// <type>: 0 (NORMal), 1 (MAXimum) or 2 (RAW).\n// <points>: an integer between 1 and 12000000.\n// <count>: the number of averages in the average sample mode and 1 in other modes.\n// <xincrement>: the time difference between two neighboring points in the X direction.\n// <xorigin>: the start time of the waveform data in the X direction.\n// <xreference>: the reference time of the data point in the X direction.\n// <yincrement>: the waveform increment in the Y direction.\n// <yorigin>: the vertical offset relative to the \"Vertical Reference Position\" in the Y direction.\n// <yreference>: the vertical reference position in the Y direction.\n\nconst CHUNK_MAX_POINTS = 1000000;\nconst NUM_CHANNELS = instrument.properties.channels.length;\n\nconnection.acquire();\n\nvar displayedChannels = [];\n\nfor (var iChannel = 1; iChannel <= NUM_CHANNELS; ++iChannel) {\n    var displayed = await connection.query(`CHANnel${iChannel}:DISPlay?`);\n    if (displayed) {\n        displayedChannels.push(iChannel);\n    }\n}\n\nif (displayedChannels.length > 0) {\n    connection.command(\"ACQuire:MDEPth auto\");\n    connection.command(\"WAVeform:MODE raw\");\n    connection.command(\"STOP\");\n    connection.command(\"WAVeform:FORMat byte\");\n    \n    var samplingRate = await connection.query(\"ACQuire:SRATe?\");\n    var timeScale = await connection.query(\"TIMebase:SCALe?\");\n    \n    var chunk_points = Math.floor(CHUNK_MAX_POINTS / displayedChannels.length);\n\n    for (var iDisplayedChannel = 0; iDisplayedChannel < displayedChannels.length; ++iDisplayedChannel) {\n        var iChannel = displayedChannels[iDisplayedChannel];\n\n        connection.command(`WAVeform:SOURce chan${iChannel}`);\n    \n        var channelScale = await connection.query(`CHANnel${iChannel}:SCALe?`);\n        var channelOffset = await connection.query(`CHANnel${iChannel}:OFFSet?`);\n        \n        var unit = await connection.query(`CHANnel${iChannel}:UNITs?`);\n        var color = instrument.properties.channels[iChannel - 1].color;\n        var colorInverse = instrument.properties.channels[iChannel - 1].colorInverse;\n        var label = `Channel ${iChannel}`;\n\n        var preamble = await connection.query(\"WAVeform:PREamble?\");\n        var preambleArray = preamble.split(',');\n        \n        var numPoints = parseInt(preambleArray[2]);\n        \n        var yinc = parseFloat(preambleArray[7]);\n        var yor = parseFloat(preambleArray[8]);\n        var yref = parseFloat(preambleArray[9]);\n        \n        var offset = -(yor + yref) * yinc;\n        var scale = yinc;\n        \n        var description = `Channel: ${iChannel}, Sampling rate: ${samplingRate}, Preamble: ${preamble}`;\n        notify.info(description);\n        \n        var data = [];\n\n        var numChunks = Math.ceil(numPoints / chunk_points);\n        for (var iChunk = 0; iChunk < numChunks; ++iChunk) {\n            notify.info(`Reading waveform data ${iChunk + 1} of ${numChunks}`);\n            var i = iChunk * chunk_points;\n            connection.command(`WAVeform:STARt ${i + 1}`);\n            connection.command(`WAVeform:STOP ${Math.min(i + chunk_points, numPoints)}`);\n            var waveform = await connection.query(\"WAVeform:DATA?\"); \n            data.push(waveform.data);\n            waveform.deleteLog();\n        }\n\n        session.addChart({\n            description,\n            data,\n            samplingRate,\n            offset,\n            scale,\n            format: 2,\n            unit,\n            color,\n            colorInverse,\n            label,\n            viewOptions: {\n                axesLines: {\n                    type: \"fixed\",\n                    majorSubdivision: {\n                        horizontal: 12,\n                        vertical: 8\n                    },\n                    minorSubdivision: {\n                        horizontal: 5,\n                        vertical: 5\n                    }\n                }\n            },\n            horizontalScale: timeScale,\n            verticalScale: channelScale\n        });\n    }\n}\n\nconnection.release();\n"
-        },
-        "keybinding": "f3",
-        "showInToolbar": true,
-        "toolbarButtonPosition": 2,
-        "toolbarButtonColor": "#7BC3D4",
-        "requiresConfirmation": true
-      },
-      {
-        "id": "1e6d774d-c9db-4dae-b925-5f331c3ff2d3",
-        "name": "Run",
-        "action": {
-          "type": "scpi-commands",
-          "data": "RUN"
-        },
-        "keybinding": "f4",
-        "showInToolbar": true,
-        "toolbarButtonPosition": 3,
-        "toolbarButtonColor": "#78C36A",
-        "requiresConfirmation": false
-      },
-      {
-        "id": "a79c310b-564f-49a9-d367-536ec41451fd",
-        "name": "Stop",
-        "action": {
-          "type": "scpi-commands",
-          "data": "STOP"
-        },
-        "keybinding": "f5",
-        "showInToolbar": true,
-        "toolbarButtonPosition": 4,
-        "toolbarButtonColor": "#E665A0",
-        "requiresConfirmation": false
-      },
-      {
-        "id": "831922c7-5612-4780-9060-5cd2fd6772d2",
-        "name": "Screenshot",
-        "action": {
-          "type": "scpi-commands",
-          "data": "STOP\nDISP:DATA?"
-        },
-        "keybinding": "f2",
-        "showInToolbar": true,
-        "toolbarButtonPosition": 1,
-        "toolbarButtonColor": "#7BC3D4",
-        "requiresConfirmation": false
-      }
-    ]
-  }
+  "colors": [],
+  "themes": []
 }
