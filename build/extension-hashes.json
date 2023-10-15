@@ -938,5 +938,9 @@
     {
         "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.26.tgz",
         "sha256": "de05885cdac17c25405e756317128b8f60a5aa56"
+    },
+    {
+        "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.29.tgz",
+        "sha256": "0d551f4efa5265481f660695d2154e28ba5b42f1"
     }
 ]
