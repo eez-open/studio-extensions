@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>tinySA USB Interface</title>
+
+        <style>
+            dt {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wikitext">
+            <p>
+                After connecting the tinySA to a PC using the a USB cable a
+                serial interface will become available on the PC. Drivers for
+                the serial interface over USB will be automatically installed on
+                Windows and are already builtin in most Linux kernels The serial
+                interface supports a large set of commands. You can always use
+                the
+                <strong>help</strong> command to get a list of the available
+                commands
+            </p>
+            <p>
+                There is limited error checking against incorrect parameters of
+                incorrect mode
+            </p>
+
+            <ul>
+                <li>
+                    Frequencies can be specified using an integer optionally
+                    postfixed with a the letter 'k' for kilo 'M' for Mega or 'G'
+                    for Giga. E.g. 0.1M (100kHz), 500k (0.5MHz) or 12000000
+                    (12MHz)
+                </li>
+                <li>
+                    Levels are specified in dB(m) and can be specified using a
+                    floating point notation. E.g. 10 or 2.5
+                </li>
+                <li>
+                    Time is specified in seconds optionally postfixed with the
+                    letters 'm' for mili or 'u' for micro. E.g. 1 (1 second),
+                    2.5 (2.5 seconds), 120m (120 milliseconds)
+                </li>
+            </ul>
+            <h1>Commands:</h1>
+
+            <dl>
+                <dt><a name="_eez-iext-cmd_attenuate"></a>attenuate</dt>
+                <dd>
+                    sets the internal attenuation to automatic or a specific
+                    value<br />usage: attenuate [auto|0-31]
+                </dd>
+                <dt><a name="_eez-iext-cmd_bulk"></a>bulk</dt>
+                <dd>
+                    send by tinySA when in auto refresh mode<br />format:
+                    "bulk\r\n{X}{Y}{Width}{Height}{Pixeldata}\r\n"<br />where
+                    all numbers are binary coded 2 bytes little endian. The
+                    Pixeldata is encoded as 2 bytes per pixel
+                </dd>
+                <dt><a name="_eez-iext-cmd_calc"></a>calc</dt>
+                <dd>
+                    sets or cancels one of the measurement modes<br />usage:
+                    calc off|minh|maxh|maxd|aver4|aver16|quasip<br />the
+                    commands are the same as those listed in the MEASURE menu
+                </dd>
+                <dt><a name="_eez-iext-cmd_caloutput"></a>caloutput</dt>
+                <dd>
+                    disables or sets the caloutput to a specified frequency in
+                    MHz<br />usage: caloutput off|30|15|10|4|3|2|1
+                </dd>
+                <dt><a name="_eez-iext-cmd_capture"></a>capture</dt>
+                <dd>
+                    requests a screen dump to be send in binary format of
+                    320x240 pixels of each 2 bytes
+                </dd>
+                <dt><a name="_eez-iext-cmd_clearconfig"></a>clearconfig</dt>
+                <dd>
+                    resets the configuration data to factory defaults<br />usage:
+                    clearconfig 1234
+                </dd>
+                <dt><a name="_eez-iext-cmd_color"></a>color</dt>
+                <dd>
+                    sets or dumps the colors used<br />usage: color [{id}
+                    {rgb24}]
+                </dd>
+                <dt><a name="_eez-iext-cmd_correction"></a>correction</dt>
+                <dd>
+                    sets or dumps the frequency level correction table<br />usage:
+                    correction [0..9 {frequency} {level}]
+                </dd>
+                <dt><a name="_eez-iext-cmd_dac"></a>dac</dt>
+                <dd>sets or dumps the dac value<br />usage: dac [0..4095]</dd>
+                <dt><a name="_eez-iext-cmd_data"></a>data</dt>
+                <dd>
+                    dumps the trace data<br />usage: data 0..2<br />0=temp
+                    value, 1=stored trace, 2=measurement
+                </dd>
+                <dt><a name="_eez-iext-cmd_deviceid"></a>deviceid</dt>
+                <dd>
+                    sets of dumps a user settable number that can be use to
+                    identify a specific tinySA<br />usage: deviceid [{number}]
+                </dd>
+                <dt><a name="_eez-iext-cmd_fill"></a>fill</dt>
+                <dd>
+                    send by tinySA when in auto refresh mode<br />format:
+                    "fill\r\n{X}{Y}{Width}{Height}{Color}\r\n"<br />where all
+                    numbers are binary coded 2 bytes little endian.
+                </dd>
+                <dt><a name="_eez-iext-cmd_freq"></a>freq</dt>
+                <dd>
+                    pauses the sweep and sets the measurement frequency<br />usage:
+                    freq {frequency}
+                </dd>
+                <dt><a name="_eez-iext-cmd_frequencies"></a>frequencies</dt>
+                <dd>
+                    dumps the frequencies used by the last sweep<br />usage:
+                    frequencies
+                </dd>
+                <dt><a name="_eez-iext-cmd_if"></a>if</dt>
+                <dd>
+                    sets the IF to automatic or a specific value<br />usage: if
+                    ( 0 | 433M..435M )<br />where 0 means automatic
+                </dd>
+                <dt><a name="_eez-iext-cmd_info"></a>info</dt>
+                <dd>displays various SW and HW information</dd>
+                <dt><a name="_eez-iext-cmd_help"></a>help</dt>
+                <dd>dumps a list of the available commands<br />usage: help</dd>
+                <dt><a name="_eez-iext-cmd_hop"></a>hop</dt>
+                <dd>
+                    <bold>Ultra only</bold>
+                    measures the input level at each of the requested
+                    frequencies<br />usage: hop {start(Hz)} {stop(Hz)} {step(Hz)
+                    | points} [outmask]<br />If the 3rd parameter is below 450
+                    it is assumed to be points, otherwise as step frequency<br />Outmask
+                    selects if the frequency (1) or level (2) is output.
+                </dd>
+                <dt><a name="_eez-iext-cmd_level"></a>level</dt>
+                <dd>
+                    sets the output level<br />usage: level -76..13<br />Not all
+                    values in the range are available
+                </dd>
+                <dt><a name="_eez-iext-cmd_levelchange"></a>levelchange</dt>
+                <dd>
+                    sets the output level delta for low output mode level
+                    sweep<br />usage: levelchange -70..+70
+                </dd>
+                <dt><a name="_eez-iext-cmd_leveloffset"></a>leveloffset</dt>
+                <dd>
+                    sets or dumps the level calibration data<br />usage:
+                    leveloffset low|high|switch [output] {error}<br />For the
+                    output corrections first ensure correct output levels at
+                    maximum output level. For the low output set the output to
+                    -50dBm and measure and correct the level with "leveloffset
+                    switch error" where<br />For all output leveloffset commands
+                    measure the level with the leveloffset to zero and
+                    calculate<br />error = measured level - specified level
+                </dd>
+                <dt><a name="_eez-iext-cmd_load"></a>load</dt>
+                <dd>
+                    loads a previously stored preset<br />usage: load 0..4<br />where
+                    0 is the startup preset
+                </dd>
+                <dt><a name="_eez-iext-cmd_marker"></a>marker</dt>
+                <dd>
+                    sets or dumps marker info<br />usage: marker {id}
+                    on|off|peak|{freq}|{index}<br />where id=1..4
+                    index=0..num_points-1<br />Merker levels will use the
+                    selected unit<br />Marker peak will activate the marker (if
+                    not done already), position the marker on the strongest
+                    signal and display the marker info<br />The frequency must
+                    be within the selected sweep range
+                </dd>
+                <dt><a name="_eez-iext-cmd_menu"></a>menu</dt>
+                <dd>
+                    The menu command can be used to activate any menu item.<br />usage:
+                    menu {#} [{#} [{#} [{#}]]]<br />where # is the menu entry
+                    number starting with 1 at the top. <br />Example: menu 6 2
+                    will toggle the waterfall option
+                </dd>
+                <dt><a name="_eez-iext-cmd_mode"></a>mode</dt>
+                <dd>
+                    sets the mode of the tinySA<br />usage: mode low|high
+                    input|output
+                </dd>
+                <dt><a name="_eez-iext-cmd_modulation"></a>modulation</dt>
+                <dd>
+                    sets the modulation in output mode<br />usage: modulation
+                    off|AM_1kHz|AM_10Hz|NFM|WFM|extern
+                </dd>
+                <dt><a name="_eez-iext-cmd_ext_gain"></a>ext_gain</dt>
+                <dd>
+                    sets the external attenuation/amplification<br />usage:
+                    ext_gain -100..100<br />Works in both input and output mode
+                </dd>
+                <dt><a name="_eez-iext-cmd_output"></a>output</dt>
+                <dd>sets the output on or off<br />usage: output on|off</dd>
+                <dt><a name="_eez-iext-cmd_pause"></a>pause</dt>
+                <dd>
+                    pauses the sweeping in either input or output mode<br />usage:
+                    pause
+                </dd>
+                <dt><a name="_eez-iext-cmd_rbw"></a>rbw</dt>
+                <dd>
+                    sets the rbw to either automatic or a specific value<br />usage:
+                    rbw auto|3..600<br />the number specifies the target rbw in
+                    kHz
+                </dd>
+                <dt><a name="_eez-iext-cmd_recall"></a>recall</dt>
+                <dd>same as load</dd>
+                <dt><a name="_eez-iext-cmd_refresh"></a>refresh</dt>
+                <dd>
+                    enables/disables the auto refresh mode<br />Usage refresh
+                    on|off
+                </dd>
+                <dt><a name="_eez-iext-cmd_release"></a>release</dt>
+                <dd>signals a removal of the touch<br />usage: release</dd>
+                <dt><a name="_eez-iext-cmd_remark"></a>remark</dt>
+                <dd>does nothing<br />usage: remark use any text</dd>
+                <dt><a name="_eez-iext-cmd_reset"></a>reset</dt>
+                <dd>resets the tinySA<br />usage: reset</dd>
+                <dt><a name="_eez-iext-cmd_resume"></a>resume</dt>
+                <dd>
+                    resumes the sweeping in either input or output mode<br />usage:
+                    resume
+                </dd>
+                <dt><a name="_eez-iext-cmd_save"></a>save</dt>
+                <dd>
+                    saves the current setting to a preset<br />usage: save
+                    0..4<br />where 0 is the startup preset
+                </dd>
+                <dt><a name="_eez-iext-cmd_saveconfig"></a>saveconfig</dt>
+                <dd>
+                    saves the device configuration data<br />usage: saveconfig
+                </dd>
+                <dt><a name="_eez-iext-cmd_scan"></a>scan</dt>
+                <dd>
+                    performs a scan and optionally outputs the measured data<br />usage:
+                    scan {start(Hz)} {stop(Hz)} [points] [outmask]<br />where
+                    the outmask is a binary OR of 1=frequencies, 2=measured
+                    data, 4=stored data and points is maximum 290
+                </dd>
+                <dt><a name="_eez-iext-cmd_scanraw"></a>scanraw</dt>
+                <dd>
+                    performs a scan of unlimited amount of points and send the
+                    data in binary form<br />usage: scanraw {start(Hz)}
+                    {stop(Hz)} [points]<br />The measured data is the level in
+                    dBm and is send as '{' ('x' MSB LSB)*points '}'. To get the
+                    dBm level from the 16 bit data, divide by 32 and subtract
+                    128.
+                </dd>
+                <dt><a name="_eez-iext-cmd_selftest"></a>selftest</dt>
+                <dd>
+                    performs one or all selftests<br />usage: selftest 0 0..9
+                </dd>
+                <dt><a name="_eez-iext-cmd_spur"></a>spur</dt>
+                <dd>
+                    enables or disables spur reduction<br />usage: spur on|off
+                </dd>
+                <dt><a name="_eez-iext-cmd_sweep"></a>sweep</dt>
+                <dd>
+                    set sweep boundaries or execute a sweep<br />usage: sweep [
+                    ( start|stop|center|span|cw {frequency} ) | ( {start(Hz)}
+                    {stop(Hz)} [0..290] ) ]<br />sweep without arguments lists
+                    the current sweep settings, the frequencies specified should
+                    be within the permissible range. The sweep commands apply
+                    both to input and output modes
+                </dd>
+                <dt><a name="_eez-iext-cmd_sweeptime"></a>sweeptime</dt>
+                <dd>
+                    sets the sweeptime<br />usage: sweep {time(Seconds)}the time
+                    specified may end in a letter where m=mili and u=micro
+                </dd>
+                <dt><a name="_eez-iext-cmd_text"></a>text</dt>
+                <dd>
+                    specifies the text entry for the active keypad <br />usage:
+                    text keypadtext <br />where keypadtext is the text used<br />Example:
+                    text 12M<br />Currently does not work for entering file
+                    names
+                </dd>
+                <dt><a name="_eez-iext-cmd_threads"></a>threads</dt>
+                <dd>lists information of the threads in the tinySA</dd>
+                <dt><a name="_eez-iext-cmd_touch"></a>touch</dt>
+                <dd>
+                    sends the coordinates of a touchusage: touch {X coordinate}
+                    {Y coordinate}<br />The upper left corner of the screen is
+                    "0 0"
+                </dd>
+                <dt><a name="_eez-iext-cmd_touchcal"></a>touchcal</dt>
+                <dd>starts the touch calibration</dd>
+                <dt><a name="_eez-iext-cmd_touchtest"></a>touchtest</dt>
+                <dd>starts the touch test</dd>
+                <dt><a name="_eez-iext-cmd_trace"></a>trace</dt>
+                <dd>
+                    displays all or one trace information or sets trace related
+                    information<br />usage: trace [ {0..2} | dBm|dBmV|dBuV|V|W
+                    |store|clear|subtract | (scale|reflevel) auto|{level}
+                </dd>
+                <dt><a name="_eez-iext-cmd_trigger"></a>trigger</dt>
+                <dd>
+                    sets the trigger type or level<br />usage: trigger
+                    auto|normal|single|{level(dBm)}<br />the trigger level is
+                    always set in dBm
+                </dd>
+                <dt><a name="_eez-iext-cmd_vbat"></a>vbat</dt>
+                <dd>displays the battery voltage</dd>
+                <dt><a name="_eez-iext-cmd_vbat_offset"></a>vbat_offset</dt>
+                <dd>
+                    displays or sets the battery offset value<br />usage:
+                    vbat_offset [{0..4095}]
+                </dd>
+                <dt><a name="_eez-iext-cmd_version"></a>version</dt>
+                <dd>displays the version text</dd>
+            </dl>
+        </div>
+    </body>
+</html>
