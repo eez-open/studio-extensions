@@ -152,3 +152,9 @@ https://github.com/lexbrugman/my-eez-studio-extensions/raw/master/siglent-spd100
 ./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2014A-1.0.1.zip
 ./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2022A-1.0.1.zip
 ./org/keysight/InfiniiVision_2000_X-Series_Oscilloscopes_EEZ_Project/Keysight-MSOX2024A-1.0.1.zip
+
+# Generic Serial
+./org/eez/generic_serial/generic_serial-1.0.0.zip
+
+# tinySA
+./org/tinysa/tinySA/tinySA-1.0.0.zip

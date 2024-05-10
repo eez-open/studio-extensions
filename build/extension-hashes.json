@@ -942,5 +942,13 @@
     {
         "downloadUrl": "https://registry.npmjs.org/eez-flow-ext-postgres/-/eez-flow-ext-postgres-0.1.29.tgz",
         "sha256": "0d551f4efa5265481f660695d2154e28ba5b42f1"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/eez/generic_serial/generic_serial-1.0.0.zip",
+        "sha256": "17b651015f8fa4171a2d464811d31dc80930e3456eb1eec3cdcfbbe34426bf16"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/tinysa/tinySA/tinySA-1.0.0.zip",
+        "sha256": "7d9a6e3aac521ae0378ac4ec7a1217cf1e0bc1b82a1c7eae9a6fea8e6bd0ceb6"
     }
 ]
