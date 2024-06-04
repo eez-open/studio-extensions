@@ -107,6 +107,14 @@
         "type": "boolean",
         "defaultValue": "false",
         "persistent": false
+      },
+      {
+        "objID": "536186c3-f415-42c5-fd7f-7f42459eee41",
+        "name": "get_freq",
+        "type": "boolean",
+        "defaultValue": "false",
+        "persistent": false,
+        "native": false
       }
     ],
     "structures": [
@@ -1700,8 +1708,8 @@
               "type": "UserWidgetWidget",
               "left": 0,
               "top": 0,
-              "width": 656,
-              "height": 741,
+              "width": 1644,
+              "height": 1238,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -1720,8 +1728,8 @@
               "type": "InstrumentTerminalWidget",
               "left": 0,
               "top": 0,
-              "width": 364,
-              "height": 741,
+              "width": 912,
+              "height": 1238,
               "customInputs": [],
               "customOutputs": [],
               "style": {
@@ -1819,10 +1827,7 @@
       "top": 0,
       "width": 1024,
       "height": 768,
-      "scaleToFit": true,
-      "lvglLocalStyles": {
-        "objID": "884fb5b8-1c0a-4a21-873f-75978cb46ef3"
-      }
+      "scaleToFit": true
     }
   ],
   "userWidgets": [
@@ -2456,7 +2461,7 @@
           "left": 1136,
           "top": 56,
           "width": 146,
-          "height": 55,
+          "height": 57,
           "customInputs": [],
           "customOutputs": [],
           "entries": [
@@ -2473,7 +2478,7 @@
           "left": 1136,
           "top": 158,
           "width": 146,
-          "height": 55,
+          "height": 57,
           "customInputs": [],
           "customOutputs": [],
           "entries": [
@@ -2490,7 +2495,7 @@
           "left": 1136,
           "top": 261,
           "width": 146,
-          "height": 55,
+          "height": 57,
           "customInputs": [],
           "customOutputs": [],
           "entries": [
@@ -2507,7 +2512,7 @@
           "left": 1136,
           "top": 363,
           "width": 146,
-          "height": 55,
+          "height": 57,
           "customInputs": [],
           "customOutputs": [],
           "entries": [
@@ -2524,7 +2529,7 @@
           "left": 1845,
           "top": 206,
           "width": 152,
-          "height": 55,
+          "height": 57,
           "customInputs": [],
           "customOutputs": [],
           "entries": [
@@ -2612,8 +2617,8 @@
         {
           "objID": "b669bc0d-6129-446c-be4d-814482f8e019",
           "type": "DelayActionComponent",
-          "left": -415,
-          "top": -436,
+          "left": -248,
+          "top": -393,
           "width": 87,
           "height": 54,
           "customInputs": [],
@@ -2623,8 +2628,8 @@
         {
           "objID": "8a70ee47-f5d0-43d4-8223-134e426018c7",
           "type": "CallActionActionComponent",
-          "left": -428,
-          "top": -549,
+          "left": 73,
+          "top": -558,
           "width": 112,
           "height": 52,
           "customInputs": [],
@@ -2763,7 +2768,7 @@
           "left": 1136,
           "top": 465,
           "width": 146,
-          "height": 55,
+          "height": 57,
           "customInputs": [],
           "customOutputs": [],
           "entries": [
@@ -2780,7 +2785,7 @@
           "left": 1136,
           "top": -157,
           "width": 146,
-          "height": 55,
+          "height": 57,
           "customInputs": [],
           "customOutputs": [],
           "entries": [
@@ -2797,7 +2802,7 @@
           "left": 1995,
           "top": -55,
           "width": 152,
-          "height": 55,
+          "height": 57,
           "customInputs": [],
           "customOutputs": [],
           "entries": [
@@ -2867,8 +2872,8 @@
         {
           "objID": "6faa6fbe-7ac2-474c-8e9e-855069635978",
           "type": "LabelOutActionComponent",
-          "left": -242,
-          "top": -522,
+          "left": 258,
+          "top": -531,
           "width": 99,
           "height": 24,
           "customInputs": [],
@@ -2904,7 +2909,7 @@
           "instrument": "instrument",
           "itemType": "plotly",
           "chartDescription": "\"Ovo je description\"",
-          "plotlyWidget": "widget"
+          "widget": "widget"
         },
         {
           "objID": "19fd3921-9bc1-469d-fd51-788243004438",
@@ -2923,7 +2928,7 @@
           "left": -583,
           "top": -120,
           "width": 288,
-          "height": 55,
+          "height": 57,
           "customInputs": [],
           "customOutputs": [],
           "entries": [
@@ -2933,6 +2938,62 @@
               "value": "num_points_arr[sa_version]"
             }
           ]
+        },
+        {
+          "objID": "830c6a4c-0f2a-4552-d4b8-e988a19fe94e",
+          "type": "SetVariableActionComponent",
+          "left": -428,
+          "top": -393,
+          "width": 140,
+          "height": 57,
+          "customInputs": [],
+          "customOutputs": [],
+          "entries": [
+            {
+              "objID": "6037ed6b-4e7a-41d6-87e9-3a07534a74b3",
+              "variable": "get_freq",
+              "value": "true"
+            }
+          ]
+        },
+        {
+          "objID": "11411c3b-c8c5-4c30-f26a-3bfde384d8a6",
+          "type": "IsTrueActionComponent",
+          "left": -414,
+          "top": -558,
+          "width": 104,
+          "height": 70,
+          "customInputs": [],
+          "customOutputs": [],
+          "value": "!get_freq"
+        },
+        {
+          "objID": "8260d7d4-5463-470a-dd81-7b92e1372f3a",
+          "type": "SetVariableActionComponent",
+          "left": -110,
+          "top": -507,
+          "width": 146,
+          "height": 57,
+          "customInputs": [],
+          "customOutputs": [],
+          "entries": [
+            {
+              "objID": "172fe87f-0a80-4624-9351-037b5249c00c",
+              "variable": "get_freq",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "objID": "125eaf75-af23-4c83-8ac1-b62686b4e88c",
+          "type": "CallActionActionComponent",
+          "left": -236,
+          "top": -507,
+          "width": 87,
+          "height": 24,
+          "customInputs": [],
+          "customOutputs": [],
+          "action": "get_freq"
         }
       ],
       "connectionLines": [
@@ -3122,7 +3183,7 @@
           "objID": "bfd2064f-1a6f-4c0e-b75f-242cb4208449",
           "source": "8ece849a-2e48-4876-b1b9-2646bea3adec",
           "output": "False",
-          "target": "b669bc0d-6129-446c-be4d-814482f8e019",
+          "target": "830c6a4c-0f2a-4552-d4b8-e988a19fe94e",
           "input": "@seqin"
         },
         {
@@ -3136,7 +3197,7 @@
           "objID": "e18f409f-9ec9-40ba-ae38-e37d1b15f18f",
           "source": "8ece849a-2e48-4876-b1b9-2646bea3adec",
           "output": "True",
-          "target": "8a70ee47-f5d0-43d4-8223-134e426018c7",
+          "target": "11411c3b-c8c5-4c30-f26a-3bfde384d8a6",
           "input": "@seqin"
         },
         {
@@ -3327,6 +3388,41 @@
           "output": "@seqout",
           "target": "1103e800-39f3-4625-a15f-e8756097e949",
           "input": "@seqin"
+        },
+        {
+          "objID": "00789712-5239-414a-84b9-fae894184524",
+          "source": "830c6a4c-0f2a-4552-d4b8-e988a19fe94e",
+          "output": "@seqout",
+          "target": "b669bc0d-6129-446c-be4d-814482f8e019",
+          "input": "@seqin"
+        },
+        {
+          "objID": "d19747b7-99f2-451e-97ec-f08618c579e2",
+          "source": "11411c3b-c8c5-4c30-f26a-3bfde384d8a6",
+          "output": "True",
+          "target": "8a70ee47-f5d0-43d4-8223-134e426018c7",
+          "input": "@seqin"
+        },
+        {
+          "objID": "00e5b82a-43a8-4373-97f6-b7395070f179",
+          "source": "11411c3b-c8c5-4c30-f26a-3bfde384d8a6",
+          "output": "False",
+          "target": "125eaf75-af23-4c83-8ac1-b62686b4e88c",
+          "input": "@seqin"
+        },
+        {
+          "objID": "52b7e31e-8419-4675-8a99-4815d5aa52f8",
+          "source": "125eaf75-af23-4c83-8ac1-b62686b4e88c",
+          "output": "@seqout",
+          "target": "8260d7d4-5463-470a-dd81-7b92e1372f3a",
+          "input": "@seqin"
+        },
+        {
+          "objID": "80aaca43-64a3-4577-9ab1-8a96246681f9",
+          "source": "8260d7d4-5463-470a-dd81-7b92e1372f3a",
+          "output": "@seqout",
+          "target": "8a70ee47-f5d0-43d4-8223-134e426018c7",
+          "input": "@seqin"
         }
       ],
       "localVariables": [
@@ -3345,10 +3441,7 @@
       "width": 1024,
       "height": 768,
       "scaleToFit": false,
-      "isUsedAsUserWidget": true,
-      "lvglLocalStyles": {
-        "objID": "825ecf69-fbf1-436a-fc8d-68e44e960f9a"
-      }
+      "isUsedAsUserWidget": true
     }
   ],
   "styles": [
