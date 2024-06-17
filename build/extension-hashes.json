@@ -954,5 +954,9 @@
     {
         "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/tinysa/tinySA/tinySA-1.0.1.zip",
         "sha256": "0930e7c2c298c7d2b9cbacc9e6faf67f36accaca0dcf2c80562340a4d720f990"
+    },
+    {
+        "downloadUrl": "https://github.com/eez-open/studio-extensions/raw/master/org/tinysa/tinySA/tinySA-1.0.2.zip",
+        "sha256": "277382d4c873eaae589db93361d22873fedc1faddc0dca24a07d516d45b20572"
     }
 ]

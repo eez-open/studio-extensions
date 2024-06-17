@@ -159,3 +159,4 @@ https://github.com/lexbrugman/my-eez-studio-extensions/raw/master/siglent-spd100
 # tinySA
 ./org/tinysa/tinySA/tinySA-1.0.0.zip
 ./org/tinysa/tinySA/tinySA-1.0.1.zip
+./org/tinysa/tinySA/tinySA-1.0.2.zip

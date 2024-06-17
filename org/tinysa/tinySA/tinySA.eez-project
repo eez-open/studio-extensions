@@ -25,7 +25,11 @@
         }
       ],
       "files": [],
-      "lvglInclude": "lvgl/lvgl.h"
+      "lvglInclude": "lvgl/lvgl.h",
+      "generateSourceCodeForEezFramework": false,
+      "compressFlowDefinition": false,
+      "executionQueueSize": 1000,
+      "expressionEvaluatorStackSize": 20
     }
   },
   "variables": {
@@ -406,7 +410,7 @@
       "idfShortName": "",
       "idfFirmwareVersion": "(unknown)",
       "idfGuid": "25556ee5-b8bb-428d-c3a4-4277d455c134",
-      "idfRevisionNumber": "1.0.1",
+      "idfRevisionNumber": "1.0.2",
       "idfDescription": "",
       "idfSupportedModels": "",
       "idfRevisionComments": "No comment",

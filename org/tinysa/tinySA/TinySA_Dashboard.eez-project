@@ -26,7 +26,11 @@
         }
       ],
       "files": [],
-      "lvglInclude": "lvgl/lvgl.h"
+      "lvglInclude": "lvgl/lvgl.h",
+      "generateSourceCodeForEezFramework": false,
+      "compressFlowDefinition": false,
+      "executionQueueSize": 1000,
+      "expressionEvaluatorStackSize": 20
     }
   },
   "variables": {
@@ -169,7 +173,7 @@
             {
               "objID": "4e6a8988-a7bf-445a-c6d8-b61d0eaebfe9",
               "variable": "trace_values[i]",
-              "value": "Flow.makeValue(\"struct:TraceValue\", {\n  freq: i,\n  trace: [1E-12, 1E-12, 1E-12, 1E-12]\n})"
+              "value": "Flow.makeValue(\"struct:TraceValue\", {\n  freq: i * 1.0,\n  trace: [1E-12, 1E-12, 1E-12, 1E-12]\n})"
             }
           ]
         },
@@ -2907,7 +2911,7 @@
           ],
           "customOutputs": [],
           "instrument": "instrument",
-          "itemType": "plotly",
+          "itemType": "widget",
           "chartDescription": "\"Ovo je description\"",
           "widget": "widget"
         },
